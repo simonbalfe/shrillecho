@@ -1,0 +1,43 @@
+{
+  "name": "shadcn-next-template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "knip": "knip",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@radix-ui/react-checkbox": "^1.1.4",
+    "@radix-ui/react-slot": "^1.1.2",
+    "@supabase/supabase-js": "^2.47.16",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.456.0",
+    "next": "14.2.16",
+    "next-themes": "^0.4.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "sonner": "^2.0.1",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^5.0.9"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.24",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^9.22.0",
+    "eslint-config-next": "14.2.16",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "knip": "^5.45.0",
+    "postcss": "^8",
+    "postcss-load-config": "^6.0.1",
+    "prettier": "^3.5.3",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.8.2"
+  }
+}

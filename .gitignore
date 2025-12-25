@@ -1,0 +1,84 @@
+# Environment Variables
+.env
+.env.*
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+.env.dev
+
+# Secrets and Keys
+*.pem
+*.key
+*.cert
+*.pfx
+*.p12
+id_rsa*
+*.keystore
+*.jks
+google-services.json
+google-cloud-credentials.json
+firebase-admin.json
+
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+.yarn/install-state.gz
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+coverage/
+
+# CI/CD specific
+.gitlab-ci-local/
+.github/secrets/
+.circleci/
+kubernetes/secrets/
+helm/secrets/
+.terraform/
+*.tfvars
+*.tfstate*
+.terraformrc
+terraform.rc
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+.env.local
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing
+test/
+__tests__/
+*.test.*
+coverage/
+.nyc_output/
+
+# SSL/TLS
+**/etc/letsencrypt/** 
+ssl/
+certificates/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cloud Platform Specific
+.aws/
+.azure/
+gcloud/
+.digitalocean/
+.kube/config

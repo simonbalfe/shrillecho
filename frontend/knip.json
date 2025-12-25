@@ -1,0 +1,4 @@
+{
+  "project": ["src/**/*.{js,jsx,ts,tsx}"],
+  "ignore": ["src/lib/components/ui/**"]
+}

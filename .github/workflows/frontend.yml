@@ -1,0 +1,59 @@
+name: Frontend Build
+on:
+  push:
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend.yml'
+  pull_request:
+    paths:
+      - 'frontend/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: shrillecho
+    defaults:
+      run:
+        working-directory: ./frontend
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+     
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          cache-dependency-path: ./frontend/yarn.lock
+         
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+       
+      # - name: Build
+      #   env:
+      #     NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+      #     NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      #     NEXT_PUBLIC_WEBSOCKET_API: ${{ vars.NEXT_PUBLIC_WEBSOCKET_API }}
+      #   run: yarn build
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+     
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/frontend:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/frontend:latest
+          build-args: |
+            NEXT_PUBLIC_SUPABASE_URL=${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+            NEXT_PUBLIC_WEBSOCKET_API=${{ vars.NEXT_PUBLIC_WEBSOCKET_API }}
+            NEXT_PUBLIC_GO_API=${{ vars.NEXT_PUBLIC_GO_API }}
