@@ -1,0 +1,25 @@
+{
+  "name": "shrillecho",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "node --import tsx server.ts",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "db:generate": "pnpm --filter @repo/api db:generate",
+    "db:push": "pnpm --filter @repo/api db:push"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.3",
+    "@repo/api": "workspace:*",
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "tsx": "^4.21.0",
+    "turbo": "^2.5.0",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

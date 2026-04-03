@@ -1,60 +1,60 @@
 # Shrillecho
 
-Distributed Spotify playlist discovery tool. Input a seed artist, set a crawl depth, and the system traverses Spotify's related artists API using parallel Go workers to build curated artist pools and playlists.
+Distributed Spotify artist discovery tool. Input a seed artist, set a crawl depth, and the system traverses Spotify's related artists API using parallel Go workers to build curated artist pools.
 
 ## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | Next.js 14, Tailwind CSS, Zustand, Radix UI |
-| Backend | Go 1.23, Chi router, Gorilla WebSocket |
-| Database | PostgreSQL (Supabase) |
-| Queue/Cache | Redis |
-| Auth | Supabase (JWT) |
-| Infra | Docker, Terraform, GitHub Actions, Digital Ocean |
+| Frontend | React 19, Vite, TanStack Router + Query, Tailwind CSS v4, Radix UI |
+| API | Hono, Better Auth, Drizzle ORM |
+| Database | PostgreSQL (Neon) |
+| Queue | Redis (self-hosted) |
+| Worker | Go 1.23 |
+| Infra | Docker Compose, pnpm workspaces, Turborepo |
 
 ## Architecture
 
 ```mermaid
 flowchart TD
-    subgraph Frontend
-        UI[Next.js App]
+    subgraph Frontend["apps/web (React + Vite)"]
+        UI[TanStack Router SPA]
     end
 
-    subgraph Auth
-        Supa[Supabase Auth]
+    subgraph API["apps/api (Hono)"]
+        Auth[Better Auth]
+        Routes[REST Endpoints]
+        SSE[SSE Event Stream]
+        RP[Response Processor]
     end
 
-    subgraph Backend
-        API[Go API Server]
+    subgraph Worker["apps/worker (Go)"]
         W1[Worker 1]
         W2[Worker 2]
         W3[Worker 3]
         W4[Worker 4]
         W5[Worker 5]
-        RP[Response Processor]
     end
 
     subgraph Data
-        PG[(PostgreSQL)]
+        PG[(Neon PostgreSQL)]
         RD[(Redis)]
     end
 
     Spotify((Spotify API))
 
-    Supa -->|JWT| UI
-    UI -->|REST| API
-    UI <-.->|WebSocket| API
+    UI -->|REST + SSE| Routes
+    Auth -->|JWT sessions| UI
 
-    API -->|enqueue jobs| RD
-    RD -->|dequeue jobs| W1 & W2 & W3 & W4 & W5
-    W1 & W2 & W3 & W4 & W5 -->|fetch related artists| Spotify
+    Routes -->|enqueue jobs| RD
+    RD -->|dequeue| W1 & W2 & W3 & W4 & W5
+    W1 & W2 & W3 & W4 & W5 -->|related artists| Spotify
     W1 & W2 & W3 & W4 & W5 -->|push results| RD
     RD -->|poll results| RP
     RP -->|persist| PG
-    RP -->|notify client| API
+    RP -->|notify| SSE
 
-    API -->|read/write| PG
+    Routes -->|read/write| PG
 
     classDef default fill:#fff,stroke:#333
     classDef spotify fill:#1DB954,stroke:#333,color:#fff
@@ -63,77 +63,89 @@ flowchart TD
 
 ## How It Works
 
-1. User authenticates via Supabase and submits a seed artist with a crawl depth
-2. The API server enqueues a scrape job to a Redis request queue
-3. Five worker goroutines poll the queue, call Spotify's related artists endpoint, and traverse the artist graph to the specified depth
+1. User signs up via Better Auth (email/password) and submits a seed artist with a crawl depth
+2. The Hono API enqueues a scrape job to a Redis request queue
+3. Five Go worker goroutines poll the queue, call Spotify's related artists endpoint, and traverse the artist graph to the specified depth
 4. Workers push discovered artists to a Redis response queue
-5. A response processor persists results to PostgreSQL and sends a WebSocket notification to the frontend
-
-Playlists can also be used as seeds: the system extracts unique artists from a playlist and triggers scrapes for each.
+5. The API's response processor persists results to PostgreSQL (Neon) and pushes an SSE event to the frontend
 
 ## Project Structure
 
 ```
-frontend/
-  src/
-    app/             # Next.js pages
-    components/      # Shared UI components
-    features/        # Feature modules (auth, scraping, playlists, discovery)
-    services/        # API clients
-    store/           # Zustand state (slices per feature)
+shrillecho/
+  apps/
+    api/                 # Hono API server
+      src/
+        app.ts           # Main Hono app, route mounting
+        auth.ts          # Better Auth config (Drizzle adapter)
+        config.ts        # Zod-validated env vars
+        db/              # Drizzle schema + queries
+        middleware/       # requireAuth middleware
+        routes/          # auth, scrapes, users, SSE events
+        services/        # Redis queue, scrape logic, response processor
+      drizzle.config.ts
 
-backend/
-  cmd/main.go        # Entry point, starts workers + API
-  internal/
-    api/             # HTTP handlers, routes, middleware
-    domain/          # Domain models
-    repository/      # PostgreSQL + Redis data access
-    services/        # Business logic (scraper, queue, Spotify wrapper)
-    spotify/         # Spotify API client + endpoints
-    workers/         # Background job processors
-    transport/       # DTOs
-  sql/               # Schema + queries (sqlc)
+    web/                 # React SPA
+      src/
+        main.tsx         # React root + TanStack Query/Router
+        router.tsx       # Route tree with AuthGuard
+        pages/           # auth, dashboard, settings
+        modules/
+          shared/        # API client (Hono RPC), auth client, hooks
+          ui/            # Button, Card, Input, Label (shadcn-style)
+      vite.config.ts
+
+    worker/              # Go worker service
+      cmd/main.go        # Entry point, 5 worker goroutines
+      internal/
+        services/        # Artist scraper, Redis queue, Spotify ID parsing
+        spotify/         # Spotify API client + endpoints
+
+  server.ts              # Production entry (Hono serves API + SPA)
+  docker-compose.yml     # Redis + Worker + App
+  Dockerfile             # Multi-stage Node build
+  turbo.json             # Turborepo task config
+  biome.json             # Linting + formatting
 ```
 
-## CI/CD
-
-```mermaid
-flowchart LR
-    subgraph GitHub Actions
-        direction TB
-        BE[Backend Pipeline] -->|build + push| GHCR[(GHCR)]
-        FE[Frontend Pipeline] -->|build + push| GHCR
-    end
-
-    subgraph Digital Ocean VPS
-        direction TB
-        WT[Watchtower] -->|auto-pull| Stack
-        subgraph Stack[Docker Compose]
-            Nginx[Nginx :80/:443]
-            App[Backend :8000]
-            Web[Frontend :3000]
-            Redis[Redis]
-        end
-    end
-
-    GHCR -->|poll new images| WT
-
-    TF[Terraform] -->|provision| VPS
-    S3[(AWS S3)] -.->|state backend| TF
-
-    classDef default fill:#fff,stroke:#333
-```
-
-Terraform provisions the VPS, installs Docker, and starts the compose stack. Watchtower polls GHCR and auto-deploys new images on push to main.
-
-## Local Development
+## Development
 
 ```bash
-# Frontend
-cd frontend && npm install && npm run dev
+# Install dependencies
+pnpm install
 
-# Backend
-cd backend && go run cmd/main.go
+# Start Redis
+docker compose up redis -d
+
+# Start Go worker
+cd apps/worker && go run cmd/main.go
+
+# Start API + frontend (from root)
+pnpm dev
 ```
 
-Required environment variables: Spotify client credentials, Supabase URL/keys, PostgreSQL connection string, Redis URL, JWT secret.
+The Vite dev server proxies `/api` to the Hono API on port 3001. The frontend runs on port 3000.
+
+## Production
+
+```bash
+# Single container (API + SPA)
+docker compose up app
+
+# Full stack (Redis + Worker + App)
+docker compose up
+```
+
+The Hono production server serves the API at `/api` and the built SPA as a static fallback, all from a single container. The Go worker runs as a separate container.
+
+## Environment Variables
+
+```bash
+NODE_ENV=development
+DATABASE_URL=postgresql://...@neon.tech/dbname?sslmode=require
+BETTER_AUTH_SECRET=your-secret-key-at-least-32-chars
+APP_URL=http://localhost:3000
+REDIS_URL=redis://localhost:6379
+SPOTIFY_CLIENT_ID=...
+SPOTIFY_CLIENT_SECRET=...
+```
