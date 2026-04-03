@@ -1,148 +1,139 @@
-# shrillecho playlist archive
+# Shrillecho
 
-- Architected distributed web crawling system using Go microservices and Redis queues, enabling parallel Spotify API processing
-- Implemented real-time updates using WebSocket protocol and event-driven architecture for live crawl status
-- Designed CI/CD pipeline using GitHub Actions, Docker, and Terraform for automated deployment to Digital Ocean
-- Built responsive Next.js frontend with Supabase authentication and PostgreSQL database integration
+Distributed Spotify playlist discovery tool. Input a seed artist, set a crawl depth, and the system traverses Spotify's related artists API using parallel Go workers to build curated artist pools and playlists.
 
-### System
+## Tech Stack
 
-- The App is comprised of various components
-  - **Frontend** - Next.JS 
-  - **Database** - Supabase (PostgreSQL)
-  - **Auth** - Supabase
-  - **Caching / Queues** - Redis
-  - **Backend** - Go
-- The core component is the ability to scrape spotify using a distributed architecture of worker nodes that communicate via Redis.
-  1. The user inputs a *seed* and a specified *depth* and then the API will crawl the spotify API from that point and retrieve data similar to the seed. For example this would be some *artist* and *depth* and it uses the related artists API to collect a pool of artists.
-  2. To enable this scrape we simply utilise a queueing system via Redis, where the user submits a request to `/api/scrape` and this pushes a scrape task to the backend workers.
-  3. The workers which are little Golang image can be deployed in various places and can read this global queue to process the scrape and then return the response to the user.
-  4. The main backend app will be listening to the workers response and will write the results to Supabase & submit a Websocket response to the frontend to signal the operation was complete.
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 14, Tailwind CSS, Zustand, Radix UI |
+| Backend | Go 1.23, Chi router, Gorilla WebSocket |
+| Database | PostgreSQL (Supabase) |
+| Queue/Cache | Redis |
+| Auth | Supabase (JWT) |
+| Infra | Docker, Terraform, GitHub Actions, Digital Ocean |
+
+## Architecture
 
 ```mermaid
 flowchart TD
-    Next[Next.js]
-    DB[(Database)]
-    Redis[(Redis)]:::redis
-    Spotify((Spotify)):::spotify
-    Go1[Go Service 1]:::go
-    Go2[Go Service 2]:::go
-    Go3[Go Service 3]:::go
-    GoMain[Go Main Service]:::go
-    Auth[Authentication]:::auth
+    subgraph Frontend
+        UI[Next.js App]
+    end
 
-    Auth --> Next
-    Next --> GoMain
-    GoMain --> DB
-    DB --> Auth
-    
-    GoMain --> Redis
-    Redis --> GoMain
-    
-    Redis --> Go1
-    Redis --> Go2
-    Redis --> Go3
-    
-    Go1 --> Spotify
-    Go2 --> Spotify
-    Go3 --> Spotify
+    subgraph Auth
+        Supa[Supabase Auth]
+    end
 
-    Next -.->|Websocket Scrape Response| GoMain
-    GoMain -.->|Receive Scrape Responses| Redis
-    GoMain -.->|Post Scrapes| Redis
+    subgraph Backend
+        API[Go API Server]
+        W1[Worker 1]
+        W2[Worker 2]
+        W3[Worker 3]
+        W4[Worker 4]
+        W5[Worker 5]
+        RP[Response Processor]
+    end
+
+    subgraph Data
+        PG[(PostgreSQL)]
+        RD[(Redis)]
+    end
+
+    Spotify((Spotify API))
+
+    Supa -->|JWT| UI
+    UI -->|REST| API
+    UI <-.->|WebSocket| API
+
+    API -->|enqueue jobs| RD
+    RD -->|dequeue jobs| W1 & W2 & W3 & W4 & W5
+    W1 & W2 & W3 & W4 & W5 -->|fetch related artists| Spotify
+    W1 & W2 & W3 & W4 & W5 -->|push results| RD
+    RD -->|poll results| RP
+    RP -->|persist| PG
+    RP -->|notify client| API
+
+    API -->|read/write| PG
 
     classDef default fill:#fff,stroke:#333
-    classDef go fill:#7FD4E4,stroke:#333,color:#000
-    classDef auth fill:#50FA7B,stroke:#333,color:#000
-    classDef redis fill:#D42A2A,stroke:#333,color:#fff
     classDef spotify fill:#1DB954,stroke:#333,color:#fff
+    class Spotify spotify
 ```
 
+## How It Works
 
+1. User authenticates via Supabase and submits a seed artist with a crawl depth
+2. The API server enqueues a scrape job to a Redis request queue
+3. Five worker goroutines poll the queue, call Spotify's related artists endpoint, and traverse the artist graph to the specified depth
+4. Workers push discovered artists to a Redis response queue
+5. A response processor persists results to PostgreSQL and sends a WebSocket notification to the frontend
 
-### Devops
+Playlists can also be used as seeds: the system extracts unique artists from a playlist and triggers scrapes for each.
 
-- Hosting: VPS
-- Infrastructure: Terraform
-- Terraform state: AWS S3
-- Pipeline: Github Actions
+## Project Structure
 
+```
+frontend/
+  src/
+    app/             # Next.js pages
+    components/      # Shared UI components
+    features/        # Feature modules (auth, scraping, playlists, discovery)
+    services/        # API clients
+    store/           # Zustand state (slices per feature)
 
-1. `backend` builds and deploys an image to the Github registry
-2. `frontend` builds and deploys an image to the Github registry
-3. `infra` setups digital ocean VPS using terraform. It will SSH into this and setup Docker, SSH, clone the repo and start docker compose. It will use watchtower to poll for `frontend` and `backend` images as they are released.
+backend/
+  cmd/main.go        # Entry point, starts workers + API
+  internal/
+    api/             # HTTP handlers, routes, middleware
+    domain/          # Domain models
+    repository/      # PostgreSQL + Redis data access
+    services/        # Business logic (scraper, queue, Spotify wrapper)
+    spotify/         # Spotify API client + endpoints
+    workers/         # Background job processors
+    transport/       # DTOs
+  sql/               # Schema + queries (sqlc)
+```
+
+## CI/CD
 
 ```mermaid
-flowchart TD
-    %% Styling
-    classDef infrastructure fill:#f96,stroke:#333,color:#000
-    classDef backend fill:#9cf,stroke:#333,color:#000
-    classDef frontend fill:#9f9,stroke:#333,color:#000
-    classDef deploy fill:#f9f,stroke:#333,color:#000
-    classDef storage fill:#fc9,stroke:#333,color:#000
-    classDef container fill:#c9f,stroke:#333,color:#000
-    classDef nginx fill:#ff9,stroke:#333,color:#000
-    classDef watchtower fill:#f99,stroke:#333,color:#fff
-
-    %% Infrastructure Pipeline
-    subgraph infra[Infrastructure Pipeline]
+flowchart LR
+    subgraph GitHub Actions
         direction TB
-        A[Create State Bucket]:::infrastructure
-        B[Terraform Init/Plan/Apply]:::infrastructure
-        C[Configure VPS]:::infrastructure
-        D[Setup SSL & ENV]:::infrastructure
-        E[Deploy Compose Stack]:::infrastructure
-        A --> B --> C --> D --> E
+        BE[Backend Pipeline] -->|build + push| GHCR[(GHCR)]
+        FE[Frontend Pipeline] -->|build + push| GHCR
     end
 
-    %% Backend Pipeline
-    subgraph backend[Backend Pipeline]
+    subgraph Digital Ocean VPS
         direction TB
-        F[Setup Go]:::backend
-        G[Build Binary]:::backend
-        H[Build Docker Image]:::backend
-        I[Push to GHCR]:::backend
-        F --> G --> H --> I
+        WT[Watchtower] -->|auto-pull| Stack
+        subgraph Stack[Docker Compose]
+            Nginx[Nginx :80/:443]
+            App[Backend :8000]
+            Web[Frontend :3000]
+            Redis[Redis]
+        end
     end
 
-    %% Frontend Pipeline
-    subgraph frontend[Frontend Pipeline]
-        direction TB
-        J[Setup Node]:::frontend
-        K[Install Dependencies]:::frontend
-        L[Build Docker Image]:::frontend
-        M[Push to GHCR]:::frontend
-        J --> K --> L --> M
-    end
+    GHCR -->|poll new images| WT
 
-    %% Deployed Services
-    subgraph deployed[Deployed Stack]
-        direction TB
-        R[Redis:7-alpine]:::container
-        BE[Backend Service<br>:8000]:::container
-        FE[Frontend Service<br>:3000]:::container
-        NG[Nginx<br>:80,:443]:::nginx
-        WT[Watchtower]:::watchtower
-        
-        R <--> BE
-        BE <--> FE
-        FE <--> NG
-        BE <--> NG
-        WT --> BE
-        WT --> FE
-    end
+    TF[Terraform] -->|provision| VPS
+    S3[(AWS S3)] -.->|state backend| TF
 
-    %% External Services
-    S3[(AWS S3)]:::storage
-    GHCR[(GitHub Container Registry)]:::storage
-    VPS[Digital Ocean VPS]:::deploy
-
-    %% Connections
-    A --> S3
-    B --> VPS
-    I --> GHCR
-    M --> GHCR
-    GHCR --> WT
-    E --> deployed
+    classDef default fill:#fff,stroke:#333
 ```
 
+Terraform provisions the VPS, installs Docker, and starts the compose stack. Watchtower polls GHCR and auto-deploys new images on push to main.
+
+## Local Development
+
+```bash
+# Frontend
+cd frontend && npm install && npm run dev
+
+# Backend
+cd backend && go run cmd/main.go
+```
+
+Required environment variables: Spotify client credentials, Supabase URL/keys, PostgreSQL connection string, Redis URL, JWT secret.
