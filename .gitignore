@@ -38,3 +38,6 @@ out/
 
 # Drizzle
 apps/api/drizzle/
+
+# Spotify scrape outputs
+results/
