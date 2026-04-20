@@ -1,0 +1,1032 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - link "Skip to main content" [ref=e6] [cursor=pointer]:
+        - /url: "#main-view"
+        - generic [ref=e7]: Skip to main content
+      - link "Spotify" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "Spotify" [ref=e10]
+      - generic [ref=e13]:
+        - button "Home" [ref=e14] [cursor=pointer]:
+          - img [ref=e16]
+        - search [ref=e19]:
+          - button "Search" [ref=e21] [cursor=pointer]:
+            - img [ref=e23]
+          - generic [ref=e25]:
+            - combobox "What do you want to play?" [ref=e26]
+            - generic:
+              - generic: ⌘ShiftL
+          - button "Browse" [ref=e29] [cursor=pointer]:
+            - img [ref=e31]
+      - generic [ref=e35]:
+        - button "Upgrade to Premium" [ref=e36] [cursor=pointer]:
+          - generic [ref=e37]: Explore Premium
+        - link "Install App" [ref=e38] [cursor=pointer]:
+          - /url: /download
+          - img [ref=e40]
+          - generic [ref=e43]: Install App
+        - generic [ref=e44]:
+          - button "What’s New" [ref=e45] [cursor=pointer]:
+            - img [ref=e46]
+          - button "Friend Activity" [ref=e48] [cursor=pointer]:
+            - img [ref=e49]
+        - button "shrillify" [ref=e51] [cursor=pointer]:
+          - generic [ref=e52]: S
+    - generic [ref=e53]:
+      - navigation "Main" [ref=e54]:
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - generic [ref=e59]:
+              - button "Collapse Your Library" [ref=e62] [cursor=pointer]:
+                - img [ref=e64]
+                - heading "Your Library" [level=1] [ref=e67]
+              - generic [ref=e68]:
+                - button "Create" [ref=e69] [cursor=pointer]:
+                  - img [ref=e70]
+                - button "Expand Your Library" [ref=e72] [cursor=pointer]:
+                  - img [ref=e74]
+            - generic [ref=e77]:
+              - listbox "Filter options" [ref=e78]:
+                - option "Playlists" [ref=e79]:
+                  - generic "Playlists" [ref=e80] [cursor=pointer]:
+                    - generic [ref=e81]: Playlists
+              - generic:
+                - generic:
+                  - img
+                - generic:
+                  - img
+            - article [ref=e82]:
+              - generic [ref=e83]:
+                - button "Close" [ref=e84] [cursor=pointer]:
+                  - img [ref=e86]
+                - heading "Import your music from other apps" [level=2] [ref=e88]
+                - heading "Bring your playlists, songs and artists." [level=3] [ref=e89]
+                - link "Import library" [ref=e90] [cursor=pointer]:
+                  - /url: https://www.spotify.com/import-music
+                  - generic [ref=e91]: Import library
+          - generic [ref=e94]:
+            - generic [ref=e96]:
+              - search [ref=e97]:
+                - searchbox [ref=e98]
+                - generic:
+                  - generic:
+                    - img
+                - button "Search in Your Library" [ref=e99] [cursor=pointer]:
+                  - img [ref=e100]
+              - combobox "Recents, Default list view" [ref=e102] [cursor=pointer]:
+                - generic [ref=e103]: Recents
+                - img [ref=e105]
+            - grid "Your Library" [ref=e108]:
+              - row
+              - row "Liked Songs" [ref=e109]:
+                - gridcell "Liked Songs" [ref=e110]:
+                  - group "Liked Songs" [ref=e111] [cursor=pointer]:
+                    - button "Liked Songs Pinned Playlist • 1 song" [ref=e112]
+                    - generic [ref=e115]:
+                      - generic:
+                        - generic:
+                          - img
+                        - button "Play Liked Songs" [ref=e118]:
+                          - img [ref=e120]
+                    - generic [ref=e123]:
+                      - paragraph:
+                        - generic: Liked Songs
+                      - paragraph [ref=e125]:
+                        - img "Pinned" [ref=e127]
+                        - generic [ref=e129]: Playlist • 1 song
+              - row "Sonder" [ref=e130]:
+                - gridcell "Sonder" [ref=e131]:
+                  - group "Sonder" [ref=e132] [cursor=pointer]:
+                    - button "Sonder Playlist • shrillify" [ref=e133]
+                    - generic [ref=e136]:
+                      - generic:
+                        - generic:
+                          - img
+                        - button "Play Sonder" [ref=e139]:
+                          - img [ref=e141]
+                    - generic [ref=e144]:
+                      - paragraph:
+                        - generic: Sonder
+                      - paragraph [ref=e146]:
+                        - generic [ref=e147]: Playlist • shrillify
+              - row
+      - generic [ref=e149]:
+        - text: Resize main navigation
+        - slider "Resize main navigation" [ref=e150]: "282"
+    - complementary "Now playing bar" [ref=e152]:
+      - generic [ref=e153]:
+        - generic "Player controls" [ref=e155]:
+          - generic [ref=e156]:
+            - generic [ref=e157]:
+              - button "Enable shuffle" [disabled] [ref=e158]:
+                - img [ref=e160]
+              - button "Previous" [disabled] [ref=e163]:
+                - img [ref=e165]
+            - button "Pause" [disabled] [ref=e167]:
+              - img [ref=e170]
+            - generic [ref=e172]:
+              - button "Next" [disabled] [ref=e173]:
+                - img [ref=e175]
+              - checkbox "Disable repeat" [disabled] [ref=e177]:
+                - img [ref=e179]
+          - generic [ref=e181]:
+            - generic [ref=e182]: "-:--"
+            - generic [ref=e185]:
+              - text: Change progress
+              - slider "Change progress" [disabled] [ref=e186]: "0"
+            - generic [ref=e192]: "-:--"
+        - generic [ref=e194]:
+          - button "Queue" [ref=e196] [cursor=pointer]:
+            - img [ref=e198]
+          - button "Connect to a device" [ref=e200] [cursor=pointer]:
+            - img [ref=e202]
+          - generic [ref=e205]:
+            - button "Mute" [disabled] [ref=e206] [cursor=pointer]:
+              - img [ref=e208]
+            - generic:
+              - generic:
+                - generic:
+                  - text: Change volume
+                  - slider "Change volume": "1"
+          - button "Enter full screen" [disabled] [ref=e211]:
+            - img [ref=e213]
+    - generic [ref=e215]:
+      - banner "Top bar and user menu" [ref=e216]
+      - main "future_bass - playlist by sbmain | Spotify" [ref=e222]:
+        - generic [ref=e225]:
+          - img [ref=e229]
+          - generic [ref=e230]:
+            - generic [ref=e231]: Public Playlist
+            - heading "future_bass" [level=1] [ref=e234]
+            - generic [ref=e235]:
+              - generic [ref=e236]:
+                - figure "sbmain" [ref=e237]:
+                  - img "sbmain" [ref=e239]
+                - link "sbmain" [ref=e241] [cursor=pointer]:
+                  - /url: /user/alcct3q9gddtkpcyidgx1z9yf
+              - generic [ref=e242]: •
+              - generic [ref=e243]: 1 save
+              - generic [ref=e244]: •
+              - generic [ref=e245]:
+                - generic [ref=e246]: 703 songs
+                - generic [ref=e247]: ","
+                - generic [ref=e248]: over 24 hr
+        - generic [ref=e249]:
+          - generic [ref=e254]:
+            - button "Play future_bass" [ref=e256] [cursor=pointer]:
+              - img [ref=e259]
+            - button "Explore future_bass" [ref=e261] [cursor=pointer]:
+              - img [ref=e264]
+              - generic [ref=e272]:
+                - img [ref=e273]
+                - img [ref=e275]
+            - button "Shuffle" [disabled] [ref=e277]:
+              - img [ref=e279]
+            - button "Save to Your Library" [ref=e282] [cursor=pointer]:
+              - img [ref=e284]
+            - button "Download" [ref=e287] [cursor=pointer]:
+              - img [ref=e289]
+            - button "More options for future_bass" [ref=e292] [cursor=pointer]:
+              - img [ref=e294]
+            - combobox [ref=e297]:
+              - generic [ref=e298]: List
+              - img [ref=e299]
+          - generic [ref=e302]:
+            - grid "future_bass" [ref=e304]:
+              - row "# Title Resize columns Album Resize columns Date added Resize columns Duration" [ref=e305]:
+                - columnheader "#" [ref=e306]:
+                  - generic [ref=e307]: "#"
+                - columnheader "Title Resize columns" [ref=e308]:
+                  - generic [ref=e311]: Title
+                  - separator "Resize columns" [ref=e312]
+                - columnheader "Album Resize columns" [ref=e313]:
+                  - generic [ref=e316]: Album
+                  - separator "Resize columns" [ref=e317]
+                - columnheader "Date added Resize columns" [ref=e318]:
+                  - generic [ref=e321]: Date added
+                  - separator "Resize columns" [ref=e322]
+                - columnheader "Duration" [ref=e323]:
+                  - generic "Duration" [ref=e325]:
+                    - img [ref=e326]
+              - button "Change visible columns" [ref=e329] [cursor=pointer]:
+                - img [ref=e331]
+              - row "1 Play Through The Surface by Silou, Nerai Through The Surface Silou, Nerai A Reason For Being 26 Jan 2023 Add to Liked Songs 4:21 More options for Through The Surface by Silou, Nerai" [ref=e333]:
+                - gridcell "1 Play Through The Surface by Silou, Nerai" [ref=e334]:
+                  - generic [ref=e335]:
+                    - generic: "1"
+                    - button "Play Through The Surface by Silou, Nerai":
+                      - img
+                - gridcell "Through The Surface Silou, Nerai" [ref=e336]:
+                  - img [ref=e337]
+                  - generic [ref=e338]:
+                    - link "Through The Surface" [ref=e339] [cursor=pointer]:
+                      - /url: /track/4ZLUIPPnEQpo9APIVDt5Mk
+                      - generic [ref=e340]: Through The Surface
+                    - generic [ref=e342]:
+                      - link "Silou" [ref=e343] [cursor=pointer]:
+                        - /url: /artist/2iXKmvMIBbK5BciIkIFyjB
+                      - text: ","
+                      - link "Nerai" [ref=e344] [cursor=pointer]:
+                        - /url: /artist/2CAzdPCjFTm9iB4n4uB45l
+                - gridcell "A Reason For Being" [ref=e345]:
+                  - link "A Reason For Being" [ref=e347] [cursor=pointer]:
+                    - /url: /album/4zBDxCKKs1gI8Mqlevgf3C
+                - gridcell "26 Jan 2023" [ref=e348]:
+                  - generic [ref=e349]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 4:21 More options for Through The Surface by Silou, Nerai" [ref=e350]:
+                  - button "Add to Liked Songs" [ref=e351] [cursor=pointer]:
+                    - img [ref=e353]
+                  - generic [ref=e356]: 4:21
+                  - button "More options for Through The Surface by Silou, Nerai" [ref=e357] [cursor=pointer]:
+                    - img [ref=e359]
+              - row "2 Play Satin Cash Pt. II by Wavedash Satin Cash Pt. II Wavedash Satin Cash Pt. II 26 Jan 2023 Add to Liked Songs 3:53 More options for Satin Cash Pt. II by Wavedash" [ref=e361]:
+                - gridcell "2 Play Satin Cash Pt. II by Wavedash" [ref=e362]:
+                  - generic [ref=e363]:
+                    - generic: "2"
+                    - button "Play Satin Cash Pt. II by Wavedash":
+                      - img
+                - gridcell "Satin Cash Pt. II Wavedash" [ref=e364]:
+                  - img [ref=e365]
+                  - generic [ref=e366]:
+                    - link "Satin Cash Pt. II" [ref=e367] [cursor=pointer]:
+                      - /url: /track/3n2weVIDEc5Z4YOTaDqsww
+                      - generic [ref=e368]: Satin Cash Pt. II
+                    - link "Wavedash" [ref=e371] [cursor=pointer]:
+                      - /url: /artist/1SlTeYo2NYg93bGqlQYkwE
+                - gridcell "Satin Cash Pt. II" [ref=e372]:
+                  - link "Satin Cash Pt. II" [ref=e374] [cursor=pointer]:
+                    - /url: /album/6TVX0FNhrDzAp1LIvNT4sU
+                - gridcell "26 Jan 2023" [ref=e375]:
+                  - generic [ref=e376]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:53 More options for Satin Cash Pt. II by Wavedash" [ref=e377]:
+                  - button "Add to Liked Songs" [ref=e378] [cursor=pointer]:
+                    - img [ref=e380]
+                  - generic [ref=e383]: 3:53
+                  - button "More options for Satin Cash Pt. II by Wavedash" [ref=e384] [cursor=pointer]:
+                    - img [ref=e386]
+              - row "3 Play These Thoughts in My Head by Jaron These Thoughts in My Head Jaron Everything in Between 26 Jan 2023 Add to playlist 4:52 More options for These Thoughts in My Head by Jaron" [ref=e388]:
+                - gridcell "3 Play These Thoughts in My Head by Jaron" [ref=e389]:
+                  - generic [ref=e390]:
+                    - generic: "3"
+                    - button "Play These Thoughts in My Head by Jaron":
+                      - img
+                - gridcell "These Thoughts in My Head Jaron" [ref=e391]:
+                  - img [ref=e392]
+                  - generic [ref=e393]:
+                    - link "These Thoughts in My Head" [ref=e394] [cursor=pointer]:
+                      - /url: /track/61MU4kc0kH502Lw78lDNP0
+                      - generic [ref=e395]: These Thoughts in My Head
+                    - link "Jaron" [ref=e398] [cursor=pointer]:
+                      - /url: /artist/4kerBatvaELCGJDnDqW5oq
+                - gridcell "Everything in Between" [ref=e399]:
+                  - link "Everything in Between" [ref=e401] [cursor=pointer]:
+                    - /url: /album/1l1lqW76RGzhOu3S0TnMAR
+                - gridcell "26 Jan 2023" [ref=e402]:
+                  - generic [ref=e403]: 26 Jan 2023
+                - gridcell "Add to playlist 4:52 More options for These Thoughts in My Head by Jaron" [ref=e404]:
+                  - button "Add to playlist" [ref=e405] [cursor=pointer]:
+                    - img [ref=e407]
+                  - generic [ref=e409]: 4:52
+                  - button "More options for These Thoughts in My Head by Jaron" [ref=e410] [cursor=pointer]:
+                    - img [ref=e412]
+              - row "4 Play ily. by OVRTHINKR ily. OVRTHINKR ily. 26 Jan 2023 Add to Liked Songs 3:21 More options for ily. by OVRTHINKR" [ref=e414]:
+                - gridcell "4 Play ily. by OVRTHINKR" [ref=e415]:
+                  - generic [ref=e416]:
+                    - generic: "4"
+                    - button "Play ily. by OVRTHINKR":
+                      - img
+                - gridcell "ily. OVRTHINKR" [ref=e417]:
+                  - img [ref=e418]
+                  - generic [ref=e419]:
+                    - link "ily." [ref=e420] [cursor=pointer]:
+                      - /url: /track/4AACXEAnBhU3VDzwjJFWtr
+                      - generic [ref=e421]: ily.
+                    - link "OVRTHINKR" [ref=e424] [cursor=pointer]:
+                      - /url: /artist/5uLH1vkOX9NA4BhIS3LAHh
+                - gridcell "ily." [ref=e425]:
+                  - link "ily." [ref=e427] [cursor=pointer]:
+                    - /url: /album/6pcZ1jHGZ9v9KVcXOwtfJE
+                - gridcell "26 Jan 2023" [ref=e428]:
+                  - generic [ref=e429]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:21 More options for ily. by OVRTHINKR" [ref=e430]:
+                  - button "Add to Liked Songs" [ref=e431] [cursor=pointer]:
+                    - img [ref=e433]
+                  - generic [ref=e436]: 3:21
+                  - button "More options for ily. by OVRTHINKR" [ref=e437] [cursor=pointer]:
+                    - img [ref=e439]
+              - row "5 Play recovery by Shameless. recovery Shameless. recovery 26 Jan 2023 Add to playlist 2:48 More options for recovery by Shameless." [ref=e441]:
+                - gridcell "5 Play recovery by Shameless." [ref=e442]:
+                  - generic [ref=e443]:
+                    - generic: "5"
+                    - button "Play recovery by Shameless.":
+                      - img
+                - gridcell "recovery Shameless." [ref=e444]:
+                  - img [ref=e445]
+                  - generic [ref=e446]:
+                    - link "recovery" [ref=e447] [cursor=pointer]:
+                      - /url: /track/1xQzEOhV1oecBlGVOOWZz6
+                      - generic [ref=e448]: recovery
+                    - link "Shameless." [ref=e451] [cursor=pointer]:
+                      - /url: /artist/5OsRBZmXFhAo0iZDrdA80x
+                - gridcell "recovery" [ref=e452]:
+                  - link "recovery" [ref=e454] [cursor=pointer]:
+                    - /url: /album/6gbWxXFm7QfHs2JCeCMXQb
+                - gridcell "26 Jan 2023" [ref=e455]:
+                  - generic [ref=e456]: 26 Jan 2023
+                - gridcell "Add to playlist 2:48 More options for recovery by Shameless." [ref=e457]:
+                  - button "Add to playlist" [ref=e458] [cursor=pointer]:
+                    - img [ref=e460]
+                  - generic [ref=e462]: 2:48
+                  - button "More options for recovery by Shameless." [ref=e463] [cursor=pointer]:
+                    - img [ref=e465]
+              - row "6 Play Life in Grey by Point Point Life in Grey Music video Point Point Contrastive Focus Reduplication 26 Jan 2023 Add to Liked Songs 3:44 More options for Life in Grey by Point Point" [ref=e467]:
+                - gridcell "6 Play Life in Grey by Point Point" [ref=e468]:
+                  - generic [ref=e469]:
+                    - generic: "6"
+                    - button "Play Life in Grey by Point Point":
+                      - img
+                - gridcell "Life in Grey Music video Point Point" [ref=e470]:
+                  - img [ref=e471]
+                  - generic [ref=e472]:
+                    - link "Life in Grey" [ref=e473] [cursor=pointer]:
+                      - /url: /track/51586Bk1HCTnlb2qi1k8g1
+                      - generic [ref=e474]: Life in Grey
+                    - generic "Music video" [ref=e476]:
+                      - img [ref=e477]
+                    - link "Point Point" [ref=e482] [cursor=pointer]:
+                      - /url: /artist/5L67d6oZKOOmXcBcMMJdZZ
+                - gridcell "Contrastive Focus Reduplication" [ref=e483]:
+                  - link "Contrastive Focus Reduplication" [ref=e485] [cursor=pointer]:
+                    - /url: /album/3mYPAGcVfvAsZyQQs1xZvP
+                - gridcell "26 Jan 2023" [ref=e486]:
+                  - generic [ref=e487]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:44 More options for Life in Grey by Point Point" [ref=e488]:
+                  - button "Add to Liked Songs" [ref=e489] [cursor=pointer]:
+                    - img [ref=e491]
+                  - generic [ref=e494]: 3:44
+                  - button "More options for Life in Grey by Point Point" [ref=e495] [cursor=pointer]:
+                    - img [ref=e497]
+              - row "7 Play lose hope (it's all in my head) by JB Hain lose hope (it's all in my head) JB Hain lose hope (it's all in my head) 26 Jan 2023 Add to playlist 4:15 More options for lose hope (it's all in my head) by JB Hain" [ref=e499]:
+                - gridcell "7 Play lose hope (it's all in my head) by JB Hain" [ref=e500]:
+                  - generic [ref=e501]:
+                    - generic: "7"
+                    - button "Play lose hope (it's all in my head) by JB Hain":
+                      - img
+                - gridcell "lose hope (it's all in my head) JB Hain" [ref=e502]:
+                  - img [ref=e503]
+                  - generic [ref=e504]:
+                    - link "lose hope (it's all in my head)" [ref=e505] [cursor=pointer]:
+                      - /url: /track/0nxsQa7UbOQP9abYcpE7dk
+                      - generic [ref=e506]: lose hope (it's all in my head)
+                    - link "JB Hain" [ref=e509] [cursor=pointer]:
+                      - /url: /artist/7iJUjgKf5EfgLRlczakDtA
+                - gridcell "lose hope (it's all in my head)" [ref=e510]:
+                  - link "lose hope (it's all in my head)" [ref=e512] [cursor=pointer]:
+                    - /url: /album/1xdKnUAtntPFGJd0Y7aRiH
+                - gridcell "26 Jan 2023" [ref=e513]:
+                  - generic [ref=e514]: 26 Jan 2023
+                - gridcell "Add to playlist 4:15 More options for lose hope (it's all in my head) by JB Hain" [ref=e515]:
+                  - button "Add to playlist" [ref=e516] [cursor=pointer]:
+                    - img [ref=e518]
+                  - generic [ref=e520]: 4:15
+                  - button "More options for lose hope (it's all in my head) by JB Hain" [ref=e521] [cursor=pointer]:
+                    - img [ref=e523]
+              - row "8 Play You Know by Infuze You Know Explicit Infuze You Know 26 Jan 2023 Add to Liked Songs 2:35 More options for You Know by Infuze" [ref=e525]:
+                - gridcell "8 Play You Know by Infuze" [ref=e526]:
+                  - generic [ref=e527]:
+                    - generic: "8"
+                    - button "Play You Know by Infuze":
+                      - img
+                - gridcell "You Know Explicit Infuze" [ref=e528]:
+                  - img [ref=e529]
+                  - generic [ref=e530]:
+                    - link "You Know" [ref=e531] [cursor=pointer]:
+                      - /url: /track/4q8155XCotrAohKLuptIUr
+                      - generic [ref=e532]: You Know
+                    - generic "Explicit" [ref=e534]:
+                      - generic [ref=e535]: E
+                    - link "Infuze" [ref=e538] [cursor=pointer]:
+                      - /url: /artist/3m0nlOTs9bT1TgM5UyPKXY
+                - gridcell "You Know" [ref=e539]:
+                  - link "You Know" [ref=e541] [cursor=pointer]:
+                    - /url: /album/2eivAODyFTonYyczTia27r
+                - gridcell "26 Jan 2023" [ref=e542]:
+                  - generic [ref=e543]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 2:35 More options for You Know by Infuze" [ref=e544]:
+                  - button "Add to Liked Songs" [ref=e545] [cursor=pointer]:
+                    - img [ref=e547]
+                  - generic [ref=e550]: 2:35
+                  - button "More options for You Know by Infuze" [ref=e551] [cursor=pointer]:
+                    - img [ref=e553]
+              - row "9 Play forevermore by Revenant, zer0 skies, Ali Alkhazraji, Jay Parmesan, Crosswise forevermore Revenant, zer0 skies, Ali Alkhazraji, Jay Parmesan, Crosswise unspoken, forevermore 26 Jan 2023 Add to Liked Songs 4:10 More options for forevermore by Revenant, zer0 skies, Ali Alkhazraji, Jay Parmesan, Crosswise" [ref=e555]:
+                - gridcell "9 Play forevermore by Revenant, zer0 skies, Ali Alkhazraji, Jay Parmesan, Crosswise" [ref=e556]:
+                  - generic [ref=e557]:
+                    - generic: "9"
+                    - button "Play forevermore by Revenant, zer0 skies, Ali Alkhazraji, Jay Parmesan, Crosswise":
+                      - img
+                - gridcell "forevermore Revenant, zer0 skies, Ali Alkhazraji, Jay Parmesan, Crosswise" [ref=e558]:
+                  - img [ref=e559]
+                  - generic [ref=e560]:
+                    - link "forevermore" [ref=e561] [cursor=pointer]:
+                      - /url: /track/1mfHY4esWFYeZHJlweXIA3
+                      - generic [ref=e562]: forevermore
+                    - generic [ref=e564]:
+                      - link "Revenant" [ref=e565] [cursor=pointer]:
+                        - /url: /artist/48Icw89LgB8t7C7AnUIT0Q
+                      - text: ","
+                      - link "zer0 skies" [ref=e566] [cursor=pointer]:
+                        - /url: /artist/780XcN9O8oVlI4HFNuUwA4
+                      - text: ","
+                      - link "Ali Alkhazraji" [ref=e567] [cursor=pointer]:
+                        - /url: /artist/2p6NsR6YwNYPI7Wf2ll4d0
+                      - text: ","
+                      - link "Jay Parmesan" [ref=e568] [cursor=pointer]:
+                        - /url: /artist/1uFVLOUYWXBlRdegmNPvCT
+                      - text: ","
+                      - link "Crosswise" [ref=e569] [cursor=pointer]:
+                        - /url: /artist/4PTlQHpacmhSy49HAbWW7V
+                - gridcell "unspoken, forevermore" [ref=e570]:
+                  - link "unspoken, forevermore" [ref=e572] [cursor=pointer]:
+                    - /url: /album/5lYqLjVpfkV8b3PnjRclws
+                - gridcell "26 Jan 2023" [ref=e573]:
+                  - generic [ref=e574]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 4:10 More options for forevermore by Revenant, zer0 skies, Ali Alkhazraji, Jay Parmesan, Crosswise" [ref=e575]:
+                  - button "Add to Liked Songs" [ref=e576] [cursor=pointer]:
+                    - img [ref=e578]
+                  - generic [ref=e581]: 4:10
+                  - button "More options for forevermore by Revenant, zer0 skies, Ali Alkhazraji, Jay Parmesan, Crosswise" [ref=e582] [cursor=pointer]:
+                    - img [ref=e584]
+              - row "10 Play Gazing by Jimorrow Gazing Jimorrow Violet 26 Jan 2023 Add to playlist 2:58 More options for Gazing by Jimorrow" [ref=e586]:
+                - gridcell "10 Play Gazing by Jimorrow" [ref=e587]:
+                  - generic [ref=e588]:
+                    - generic: "10"
+                    - button "Play Gazing by Jimorrow":
+                      - img
+                - gridcell "Gazing Jimorrow" [ref=e589]:
+                  - img [ref=e590]
+                  - generic [ref=e591]:
+                    - link "Gazing" [ref=e592] [cursor=pointer]:
+                      - /url: /track/3OmwrNQyvl73vdNjr5Hut9
+                      - generic [ref=e593]: Gazing
+                    - link "Jimorrow" [ref=e596] [cursor=pointer]:
+                      - /url: /artist/06qfSjDnOB1ZMdkynif9lv
+                - gridcell "Violet" [ref=e597]:
+                  - link "Violet" [ref=e599] [cursor=pointer]:
+                    - /url: /album/1NETN4HYkQghSh6OFpbJJA
+                - gridcell "26 Jan 2023" [ref=e600]:
+                  - generic [ref=e601]: 26 Jan 2023
+                - gridcell "Add to playlist 2:58 More options for Gazing by Jimorrow" [ref=e602]:
+                  - button "Add to playlist" [ref=e603] [cursor=pointer]:
+                    - img [ref=e605]
+                  - generic [ref=e607]: 2:58
+                  - button "More options for Gazing by Jimorrow" [ref=e608] [cursor=pointer]:
+                    - img [ref=e610]
+              - row "11 Play Get Here by Cloudsz Get Here Cloudsz Get Here - Single 26 Jan 2023 Add to Liked Songs 3:54 More options for Get Here by Cloudsz" [ref=e612]:
+                - gridcell "11 Play Get Here by Cloudsz" [ref=e613]:
+                  - generic [ref=e614]:
+                    - generic: "11"
+                    - button "Play Get Here by Cloudsz":
+                      - img
+                - gridcell "Get Here Cloudsz" [ref=e615]:
+                  - img [ref=e616]
+                  - generic [ref=e617]:
+                    - link "Get Here" [ref=e618] [cursor=pointer]:
+                      - /url: /track/0vaaxWoO2ouhTBo9sFRZIX
+                      - generic [ref=e619]: Get Here
+                    - link "Cloudsz" [ref=e622] [cursor=pointer]:
+                      - /url: /artist/2Ce4SPHPek1LJsgHszu9KL
+                - gridcell "Get Here - Single" [ref=e623]:
+                  - link "Get Here - Single" [ref=e625] [cursor=pointer]:
+                    - /url: /album/1PXIYKtueR1MUsplzadohH
+                - gridcell "26 Jan 2023" [ref=e626]:
+                  - generic [ref=e627]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:54 More options for Get Here by Cloudsz" [ref=e628]:
+                  - button "Add to Liked Songs" [ref=e629] [cursor=pointer]:
+                    - img [ref=e631]
+                  - generic [ref=e634]: 3:54
+                  - button "More options for Get Here by Cloudsz" [ref=e635] [cursor=pointer]:
+                    - img [ref=e637]
+              - row "12 Play You by TwentyTwo5 You TwentyTwo5 You 26 Jan 2023 Add to playlist 5:40 More options for You by TwentyTwo5" [ref=e639]:
+                - gridcell "12 Play You by TwentyTwo5" [ref=e640]:
+                  - generic [ref=e641]:
+                    - generic: "12"
+                    - button "Play You by TwentyTwo5":
+                      - img
+                - gridcell "You TwentyTwo5" [ref=e642]:
+                  - img [ref=e643]
+                  - generic [ref=e644]:
+                    - link "You" [ref=e645] [cursor=pointer]:
+                      - /url: /track/3VipfRGurZXKjj3WqX7ERv
+                      - generic [ref=e646]: You
+                    - link "TwentyTwo5" [ref=e649] [cursor=pointer]:
+                      - /url: /artist/40ufARxXIEVFC57ofd0elU
+                - gridcell "You" [ref=e650]:
+                  - link "You" [ref=e652] [cursor=pointer]:
+                    - /url: /album/4AzUOJ800Uv67HiEY8dc1o
+                - gridcell "26 Jan 2023" [ref=e653]:
+                  - generic [ref=e654]: 26 Jan 2023
+                - gridcell "Add to playlist 5:40 More options for You by TwentyTwo5" [ref=e655]:
+                  - button "Add to playlist" [ref=e656] [cursor=pointer]:
+                    - img [ref=e658]
+                  - generic [ref=e660]: 5:40
+                  - button "More options for You by TwentyTwo5" [ref=e661] [cursor=pointer]:
+                    - img [ref=e663]
+              - row "13 Play Lovers - AIRWAV Remix by StayLoose, Brave, AIRWAV Lovers - AIRWAV Remix StayLoose, Brave, AIRWAV Lovers (Remixes) 26 Jan 2023 Add to Liked Songs 3:14 More options for Lovers - AIRWAV Remix by StayLoose, Brave, AIRWAV" [ref=e665]:
+                - gridcell "13 Play Lovers - AIRWAV Remix by StayLoose, Brave, AIRWAV" [ref=e666]:
+                  - generic [ref=e667]:
+                    - generic: "13"
+                    - button "Play Lovers - AIRWAV Remix by StayLoose, Brave, AIRWAV":
+                      - img
+                - gridcell "Lovers - AIRWAV Remix StayLoose, Brave, AIRWAV" [ref=e668]:
+                  - img [ref=e669]
+                  - generic [ref=e670]:
+                    - link "Lovers - AIRWAV Remix" [ref=e671] [cursor=pointer]:
+                      - /url: /track/6hcaJ2WbQoHmGZ3HSFrSt4
+                      - generic [ref=e672]: Lovers - AIRWAV Remix
+                    - generic [ref=e674]:
+                      - link "StayLoose" [ref=e675] [cursor=pointer]:
+                        - /url: /artist/6kyUfziWP8ydAsKzyXsC83
+                      - text: ","
+                      - link "Brave" [ref=e676] [cursor=pointer]:
+                        - /url: /artist/42uIeHM8Rgtt1HJmqVWLuO
+                      - text: ","
+                      - link "AIRWAV" [ref=e677] [cursor=pointer]:
+                        - /url: /artist/21celue8quoRD6Bz5v6HRK
+                - gridcell "Lovers (Remixes)" [ref=e678]:
+                  - link "Lovers (Remixes)" [ref=e680] [cursor=pointer]:
+                    - /url: /album/5ca9toYsMpCy1IuoPQw2yY
+                - gridcell "26 Jan 2023" [ref=e681]:
+                  - generic [ref=e682]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:14 More options for Lovers - AIRWAV Remix by StayLoose, Brave, AIRWAV" [ref=e683]:
+                  - button "Add to Liked Songs" [ref=e684] [cursor=pointer]:
+                    - img [ref=e686]
+                  - generic [ref=e689]: 3:14
+                  - button "More options for Lovers - AIRWAV Remix by StayLoose, Brave, AIRWAV" [ref=e690] [cursor=pointer]:
+                    - img [ref=e692]
+              - row "14 Play Heliov by acloudyskye Heliov acloudyskye Blood Rushing Like Current Through a Powerline 26 Jan 2023 Add to playlist 4:54 More options for Heliov by acloudyskye" [ref=e694]:
+                - gridcell "14 Play Heliov by acloudyskye" [ref=e695]:
+                  - generic [ref=e696]:
+                    - generic: "14"
+                    - button "Play Heliov by acloudyskye":
+                      - img
+                - gridcell "Heliov acloudyskye" [ref=e697]:
+                  - img [ref=e698]
+                  - generic [ref=e699]:
+                    - link "Heliov" [ref=e700] [cursor=pointer]:
+                      - /url: /track/7BBanBnfvtSGBxkPOxTLUW
+                      - generic [ref=e701]: Heliov
+                    - link "acloudyskye" [ref=e704] [cursor=pointer]:
+                      - /url: /artist/5OeSHuvHTS9qUgAUTt3GIR
+                - gridcell "Blood Rushing Like Current Through a Powerline" [ref=e705]:
+                  - link "Blood Rushing Like Current Through a Powerline" [ref=e707] [cursor=pointer]:
+                    - /url: /album/2w4iVCzJ60rW25zj5phRJ2
+                - gridcell "26 Jan 2023" [ref=e708]:
+                  - generic [ref=e709]: 26 Jan 2023
+                - gridcell "Add to playlist 4:54 More options for Heliov by acloudyskye" [ref=e710]:
+                  - button "Add to playlist" [ref=e711] [cursor=pointer]:
+                    - img [ref=e713]
+                  - generic [ref=e715]: 4:54
+                  - button "More options for Heliov by acloudyskye" [ref=e716] [cursor=pointer]:
+                    - img [ref=e718]
+              - row "15 Play Golden Cave by Alkyn Golden Cave Alkyn Golden Cave 26 Jan 2023 Add to Liked Songs 2:57 More options for Golden Cave by Alkyn" [ref=e720]:
+                - gridcell "15 Play Golden Cave by Alkyn" [ref=e721]:
+                  - generic [ref=e722]:
+                    - generic: "15"
+                    - button "Play Golden Cave by Alkyn":
+                      - img
+                - gridcell "Golden Cave Alkyn" [ref=e723]:
+                  - img [ref=e724]
+                  - generic [ref=e725]:
+                    - link "Golden Cave" [ref=e726] [cursor=pointer]:
+                      - /url: /track/1THoeso57mIYbbRxEd437Q
+                      - generic [ref=e727]: Golden Cave
+                    - link "Alkyn" [ref=e730] [cursor=pointer]:
+                      - /url: /artist/26WhfuY1AlbaDtGueXJJXN
+                - gridcell "Golden Cave" [ref=e731]:
+                  - link "Golden Cave" [ref=e733] [cursor=pointer]:
+                    - /url: /album/00O3yDTewX4VwxzFfizysn
+                - gridcell "26 Jan 2023" [ref=e734]:
+                  - generic [ref=e735]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 2:57 More options for Golden Cave by Alkyn" [ref=e736]:
+                  - button "Add to Liked Songs" [ref=e737] [cursor=pointer]:
+                    - img [ref=e739]
+                  - generic [ref=e742]: 2:57
+                  - button "More options for Golden Cave by Alkyn" [ref=e743] [cursor=pointer]:
+                    - img [ref=e745]
+              - row "16 Play WHEN? by BROKEN KID CLUB WHEN? BROKEN KID CLUB SONDER 26 Jan 2023 Add to Liked Songs 3:34 More options for WHEN? by BROKEN KID CLUB" [ref=e747]:
+                - gridcell "16 Play WHEN? by BROKEN KID CLUB" [ref=e748]:
+                  - generic [ref=e749]:
+                    - generic: "16"
+                    - button "Play WHEN? by BROKEN KID CLUB":
+                      - img
+                - gridcell "WHEN? BROKEN KID CLUB" [ref=e750]:
+                  - img [ref=e751]
+                  - generic [ref=e752]:
+                    - link "WHEN?" [ref=e753] [cursor=pointer]:
+                      - /url: /track/4MphHvMWBoTctdYeGQ6WxH
+                      - generic [ref=e754]: WHEN?
+                    - link "BROKEN KID CLUB" [ref=e757] [cursor=pointer]:
+                      - /url: /artist/64pRjelys6BNkiLbA1B8pV
+                - gridcell "SONDER" [ref=e758]:
+                  - link "SONDER" [ref=e760] [cursor=pointer]:
+                    - /url: /album/05mW56QC0SxH6aQqZT7A70
+                - gridcell "26 Jan 2023" [ref=e761]:
+                  - generic [ref=e762]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:34 More options for WHEN? by BROKEN KID CLUB" [ref=e763]:
+                  - button "Add to Liked Songs" [ref=e764] [cursor=pointer]:
+                    - img [ref=e766]
+                  - generic [ref=e769]: 3:34
+                  - button "More options for WHEN? by BROKEN KID CLUB" [ref=e770] [cursor=pointer]:
+                    - img [ref=e772]
+              - row "17 Play Angst by INZO Angst INZO Angst 26 Jan 2023 Add to Liked Songs 3:22 More options for Angst by INZO" [ref=e774]:
+                - gridcell "17 Play Angst by INZO" [ref=e775]:
+                  - generic [ref=e776]:
+                    - generic: "17"
+                    - button "Play Angst by INZO":
+                      - img
+                - gridcell "Angst INZO" [ref=e777]:
+                  - img [ref=e778]
+                  - generic [ref=e779]:
+                    - link "Angst" [ref=e780] [cursor=pointer]:
+                      - /url: /track/3NivHilTTTs8SQwp51yG0X
+                      - generic [ref=e781]: Angst
+                    - link "INZO" [ref=e784] [cursor=pointer]:
+                      - /url: /artist/18Eu7uJEMPWwwt1QUdCglQ
+                - gridcell "Angst" [ref=e785]:
+                  - link "Angst" [ref=e787] [cursor=pointer]:
+                    - /url: /album/34yT8o727Ynu63TeOVZcIY
+                - gridcell "26 Jan 2023" [ref=e788]:
+                  - generic [ref=e789]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:22 More options for Angst by INZO" [ref=e790]:
+                  - button "Add to Liked Songs" [ref=e791] [cursor=pointer]:
+                    - img [ref=e793]
+                  - generic [ref=e796]: 3:22
+                  - button "More options for Angst by INZO" [ref=e797] [cursor=pointer]:
+                    - img [ref=e799]
+              - row "18 Play Everything's Gonna Be Okay by LON3SKY Everything's Gonna Be Okay LON3SKY Everything's Gonna Be Okay 26 Jan 2023 Add to playlist 4:27 More options for Everything's Gonna Be Okay by LON3SKY" [ref=e801]:
+                - gridcell "18 Play Everything's Gonna Be Okay by LON3SKY" [ref=e802]:
+                  - generic [ref=e803]:
+                    - generic: "18"
+                    - button "Play Everything's Gonna Be Okay by LON3SKY":
+                      - img
+                - gridcell "Everything's Gonna Be Okay LON3SKY" [ref=e804]:
+                  - img [ref=e805]
+                  - generic [ref=e806]:
+                    - link "Everything's Gonna Be Okay" [ref=e807] [cursor=pointer]:
+                      - /url: /track/4PTEhMYYcoZLaXVJv21G41
+                      - generic [ref=e808]: Everything's Gonna Be Okay
+                    - link "LON3SKY" [ref=e811] [cursor=pointer]:
+                      - /url: /artist/66JjYvak9VHTWQsshCgyae
+                - gridcell "Everything's Gonna Be Okay" [ref=e812]:
+                  - link "Everything's Gonna Be Okay" [ref=e814] [cursor=pointer]:
+                    - /url: /album/4vy5WCEgfVcVCj163bgCao
+                - gridcell "26 Jan 2023" [ref=e815]:
+                  - generic [ref=e816]: 26 Jan 2023
+                - gridcell "Add to playlist 4:27 More options for Everything's Gonna Be Okay by LON3SKY" [ref=e817]:
+                  - button "Add to playlist" [ref=e818] [cursor=pointer]:
+                    - img [ref=e820]
+                  - generic [ref=e822]: 4:27
+                  - button "More options for Everything's Gonna Be Okay by LON3SKY" [ref=e823] [cursor=pointer]:
+                    - img [ref=e825]
+              - row "19 Play grace by sxth sns grace sxth sns grace 1 Feb 2023 Add to Liked Songs 4:17 More options for grace by sxth sns" [ref=e827]:
+                - gridcell "19 Play grace by sxth sns" [ref=e828]:
+                  - generic [ref=e829]:
+                    - generic: "19"
+                    - button "Play grace by sxth sns":
+                      - img
+                - gridcell "grace sxth sns" [ref=e830]:
+                  - img [ref=e831]
+                  - generic [ref=e832]:
+                    - link "grace" [ref=e833] [cursor=pointer]:
+                      - /url: /track/506Gu1ClrFjto9UU96TpIx
+                      - generic [ref=e834]: grace
+                    - link "sxth sns" [ref=e837] [cursor=pointer]:
+                      - /url: /artist/1hqIMoxyWo2sx2IWeeDg50
+                - gridcell "grace" [ref=e838]:
+                  - link "grace" [ref=e840] [cursor=pointer]:
+                    - /url: /album/4qsJbdUz9OzWphbFPTpADv
+                - gridcell "1 Feb 2023" [ref=e841]:
+                  - generic [ref=e842]: 1 Feb 2023
+                - gridcell "Add to Liked Songs 4:17 More options for grace by sxth sns" [ref=e843]:
+                  - button "Add to Liked Songs" [ref=e844] [cursor=pointer]:
+                    - img [ref=e846]
+                  - generic [ref=e849]: 4:17
+                  - button "More options for grace by sxth sns" [ref=e850] [cursor=pointer]:
+                    - img [ref=e852]
+              - row "20 Play different me by enesai, Kira Noelle different me enesai, Kira Noelle changing 26 Jan 2023 Add to Liked Songs 3:33 More options for different me by enesai, Kira Noelle" [ref=e854]:
+                - gridcell "20 Play different me by enesai, Kira Noelle" [ref=e855]:
+                  - generic [ref=e856]:
+                    - generic: "20"
+                    - button "Play different me by enesai, Kira Noelle":
+                      - img
+                - gridcell "different me enesai, Kira Noelle" [ref=e857]:
+                  - img [ref=e858]
+                  - generic [ref=e859]:
+                    - link "different me" [ref=e860] [cursor=pointer]:
+                      - /url: /track/4s3KbJqQYjb4Irv8eahMUq
+                      - generic [ref=e861]: different me
+                    - generic [ref=e863]:
+                      - link "enesai" [ref=e864] [cursor=pointer]:
+                        - /url: /artist/5TTXqhfwqLCj8hF7mAX19o
+                      - text: ","
+                      - link "Kira Noelle" [ref=e865] [cursor=pointer]:
+                        - /url: /artist/0aioDekhNVRbGwX0CKyYxc
+                - gridcell "changing" [ref=e866]:
+                  - link "changing" [ref=e868] [cursor=pointer]:
+                    - /url: /album/4Ln6oMagbea8bxfDSmUgli
+                - gridcell "26 Jan 2023" [ref=e869]:
+                  - generic [ref=e870]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:33 More options for different me by enesai, Kira Noelle" [ref=e871]:
+                  - button "Add to Liked Songs" [ref=e872] [cursor=pointer]:
+                    - img [ref=e874]
+                  - generic [ref=e877]: 3:33
+                  - button "More options for different me by enesai, Kira Noelle" [ref=e878] [cursor=pointer]:
+                    - img [ref=e880]
+              - row "21 Play Hold on (feat. Lolaby) by Eclipse, Lolaby Hold on (feat. Lolaby) Eclipse, Lolaby Lunar 26 Jan 2023 Add to Liked Songs 4:58 More options for Hold on (feat. Lolaby) by Eclipse, Lolaby" [ref=e882]:
+                - gridcell "21 Play Hold on (feat. Lolaby) by Eclipse, Lolaby" [ref=e883]:
+                  - generic [ref=e884]:
+                    - generic: "21"
+                    - button "Play Hold on (feat. Lolaby) by Eclipse, Lolaby":
+                      - img
+                - gridcell "Hold on (feat. Lolaby) Eclipse, Lolaby" [ref=e885]:
+                  - img [ref=e886]
+                  - generic [ref=e887]:
+                    - link "Hold on (feat. Lolaby)" [ref=e888] [cursor=pointer]:
+                      - /url: /track/20WcIyUaO0IzrchvxiYow6
+                      - generic [ref=e889]: Hold on (feat. Lolaby)
+                    - generic [ref=e891]:
+                      - link "Eclipse" [ref=e892] [cursor=pointer]:
+                        - /url: /artist/1QHMzIGX1UNxZKosaGuALY
+                      - text: ","
+                      - link "Lolaby" [ref=e893] [cursor=pointer]:
+                        - /url: /artist/2bJ1Od9O4eVt9Uv0BOBJIm
+                - gridcell "Lunar" [ref=e894]:
+                  - link "Lunar" [ref=e896] [cursor=pointer]:
+                    - /url: /album/5OPVukj6kLY11wGxbhmKFG
+                - gridcell "26 Jan 2023" [ref=e897]:
+                  - generic [ref=e898]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 4:58 More options for Hold on (feat. Lolaby) by Eclipse, Lolaby" [ref=e899]:
+                  - button "Add to Liked Songs" [ref=e900] [cursor=pointer]:
+                    - img [ref=e902]
+                  - generic [ref=e905]: 4:58
+                  - button "More options for Hold on (feat. Lolaby) by Eclipse, Lolaby" [ref=e906] [cursor=pointer]:
+                    - img [ref=e908]
+              - row "22 Play Little Things by Shameless. Little Things Shameless. Not a Dream 26 Jan 2023 Add to playlist 3:28 More options for Little Things by Shameless." [ref=e910]:
+                - gridcell "22 Play Little Things by Shameless." [ref=e911]:
+                  - generic [ref=e912]:
+                    - generic: "22"
+                    - button "Play Little Things by Shameless.":
+                      - img
+                - gridcell "Little Things Shameless." [ref=e913]:
+                  - img [ref=e914]
+                  - generic [ref=e915]:
+                    - link "Little Things" [ref=e916] [cursor=pointer]:
+                      - /url: /track/28YU7TV7n4CRVt0CyN5c4L
+                      - generic [ref=e917]: Little Things
+                    - link "Shameless." [ref=e920] [cursor=pointer]:
+                      - /url: /artist/5OsRBZmXFhAo0iZDrdA80x
+                - gridcell "Not a Dream" [ref=e921]:
+                  - link "Not a Dream" [ref=e923] [cursor=pointer]:
+                    - /url: /album/5WyADMN6gcBqHho7UcvxUg
+                - gridcell "26 Jan 2023" [ref=e924]:
+                  - generic [ref=e925]: 26 Jan 2023
+                - gridcell "Add to playlist 3:28 More options for Little Things by Shameless." [ref=e926]:
+                  - button "Add to playlist" [ref=e927] [cursor=pointer]:
+                    - img [ref=e929]
+                  - generic [ref=e931]: 3:28
+                  - button "More options for Little Things by Shameless." [ref=e932] [cursor=pointer]:
+                    - img [ref=e934]
+              - row "23 Play Local Void by INZO Local Void INZO Local Void 29 Jan 2023 Add to Liked Songs 3:39 More options for Local Void by INZO" [ref=e936]:
+                - gridcell "23 Play Local Void by INZO" [ref=e937]:
+                  - generic [ref=e938]:
+                    - generic: "23"
+                    - button "Play Local Void by INZO":
+                      - img
+                - gridcell "Local Void INZO" [ref=e939]:
+                  - img [ref=e940]
+                  - generic [ref=e941]:
+                    - link "Local Void" [ref=e942] [cursor=pointer]:
+                      - /url: /track/3Qgf9x6O1MTvCTl0Wy6ibh
+                      - generic [ref=e943]: Local Void
+                    - link "INZO" [ref=e946] [cursor=pointer]:
+                      - /url: /artist/18Eu7uJEMPWwwt1QUdCglQ
+                - gridcell "Local Void" [ref=e947]:
+                  - link "Local Void" [ref=e949] [cursor=pointer]:
+                    - /url: /album/47Sz2iGhaRNkj6yIZgIgqF
+                - gridcell "29 Jan 2023" [ref=e950]:
+                  - generic [ref=e951]: 29 Jan 2023
+                - gridcell "Add to Liked Songs 3:39 More options for Local Void by INZO" [ref=e952]:
+                  - button "Add to Liked Songs" [ref=e953] [cursor=pointer]:
+                    - img [ref=e955]
+                  - generic [ref=e958]: 3:39
+                  - button "More options for Local Void by INZO" [ref=e959] [cursor=pointer]:
+                    - img [ref=e961]
+              - row "24 Play Suffocating by Bendel, Lizdek, FETH Suffocating Bendel, Lizdek, FETH GRADIENCE 26 Jan 2023 Add to playlist 5:01 More options for Suffocating by Bendel, Lizdek, FETH" [ref=e963]:
+                - gridcell "24 Play Suffocating by Bendel, Lizdek, FETH" [ref=e964]:
+                  - generic [ref=e965]:
+                    - generic: "24"
+                    - button "Play Suffocating by Bendel, Lizdek, FETH":
+                      - img
+                - gridcell "Suffocating Bendel, Lizdek, FETH" [ref=e966]:
+                  - img [ref=e967]
+                  - generic [ref=e968]:
+                    - link "Suffocating" [ref=e969] [cursor=pointer]:
+                      - /url: /track/3RxXHdguDkPS7ZtLhpUqYQ
+                      - generic [ref=e970]: Suffocating
+                    - generic [ref=e972]:
+                      - link "Bendel" [ref=e973] [cursor=pointer]:
+                        - /url: /artist/0HL4qKV9a8hvcIiZgW3pXP
+                      - text: ","
+                      - link "Lizdek" [ref=e974] [cursor=pointer]:
+                        - /url: /artist/65Kq02oh0g3gRqfZ0fo8eG
+                      - text: ","
+                      - link "FETH" [ref=e975] [cursor=pointer]:
+                        - /url: /artist/7yLlKCpGryCAb27MLzEm2A
+                - gridcell "GRADIENCE" [ref=e976]:
+                  - link "GRADIENCE" [ref=e978] [cursor=pointer]:
+                    - /url: /album/1NM6uqrlh1oftPCbKRQJap
+                - gridcell "26 Jan 2023" [ref=e979]:
+                  - generic [ref=e980]: 26 Jan 2023
+                - gridcell "Add to playlist 5:01 More options for Suffocating by Bendel, Lizdek, FETH" [ref=e981]:
+                  - button "Add to playlist" [ref=e982] [cursor=pointer]:
+                    - img [ref=e984]
+                  - generic [ref=e986]: 5:01
+                  - button "More options for Suffocating by Bendel, Lizdek, FETH" [ref=e987] [cursor=pointer]:
+                    - img [ref=e989]
+              - row "25 Play Mirage by Bendel Mirage Bendel Mirage 26 Jan 2023 Add to Liked Songs 3:24 More options for Mirage by Bendel" [ref=e991]:
+                - gridcell "25 Play Mirage by Bendel" [ref=e992]:
+                  - generic [ref=e993]:
+                    - generic: "25"
+                    - button "Play Mirage by Bendel":
+                      - img
+                - gridcell "Mirage Bendel" [ref=e994]:
+                  - img [ref=e995]
+                  - generic [ref=e996]:
+                    - link "Mirage" [ref=e997] [cursor=pointer]:
+                      - /url: /track/1QPWdN0BiS48PUSHznFeVp
+                      - generic [ref=e998]: Mirage
+                    - link "Bendel" [ref=e1001] [cursor=pointer]:
+                      - /url: /artist/0HL4qKV9a8hvcIiZgW3pXP
+                - gridcell "Mirage" [ref=e1002]:
+                  - link "Mirage" [ref=e1004] [cursor=pointer]:
+                    - /url: /album/362e8KSGCINAgvDgpGYD7M
+                - gridcell "26 Jan 2023" [ref=e1005]:
+                  - generic [ref=e1006]: 26 Jan 2023
+                - gridcell "Add to Liked Songs 3:24 More options for Mirage by Bendel" [ref=e1007]:
+                  - button "Add to Liked Songs" [ref=e1008] [cursor=pointer]:
+                    - img [ref=e1010]
+                  - generic [ref=e1013]: 3:24
+                  - button "More options for Mirage by Bendel" [ref=e1014] [cursor=pointer]:
+                    - img [ref=e1016]
+              - row "26 Play Hold me close by TwentyTwo5, REALIXE Hold me close TwentyTwo5, REALIXE Hold me close 26 Jan 2023 Add to playlist 4:38 More options for Hold me close by TwentyTwo5, REALIXE" [ref=e1018]:
+                - gridcell "26 Play Hold me close by TwentyTwo5, REALIXE" [ref=e1019]:
+                  - generic [ref=e1020]:
+                    - generic: "26"
+                    - button "Play Hold me close by TwentyTwo5, REALIXE":
+                      - img
+                - gridcell "Hold me close TwentyTwo5, REALIXE" [ref=e1021]:
+                  - img [ref=e1022]
+                  - generic [ref=e1023]:
+                    - link "Hold me close" [ref=e1024] [cursor=pointer]:
+                      - /url: /track/0LQ3UxSHRKocMKok3FNQmC
+                      - generic [ref=e1025]: Hold me close
+                    - generic [ref=e1027]:
+                      - link "TwentyTwo5" [ref=e1028] [cursor=pointer]:
+                        - /url: /artist/40ufARxXIEVFC57ofd0elU
+                      - text: ","
+                      - link "REALIXE" [ref=e1029] [cursor=pointer]:
+                        - /url: /artist/1zlAOOstRv0mXlwhsi2FVF
+                - gridcell "Hold me close" [ref=e1030]:
+                  - link "Hold me close" [ref=e1032] [cursor=pointer]:
+                    - /url: /album/2gQdsU9MDYVBMo3ASSD9SR
+                - gridcell "26 Jan 2023" [ref=e1033]:
+                  - generic [ref=e1034]: 26 Jan 2023
+                - gridcell "Add to playlist 4:38 More options for Hold me close by TwentyTwo5, REALIXE" [ref=e1035]:
+                  - button "Add to playlist" [ref=e1036] [cursor=pointer]:
+                    - img [ref=e1038]
+                  - generic [ref=e1040]: 4:38
+                  - button "More options for Hold me close by TwentyTwo5, REALIXE" [ref=e1041] [cursor=pointer]:
+                    - img [ref=e1043]
+            - generic [ref=e1046]:
+              - generic [ref=e1048]:
+                - generic [ref=e1049]: Recommended
+                - generic [ref=e1050]: Based on what's in this playlist
+              - grid "Recommended based on what’s in this playlist" [ref=e1052]
+              - button "Refresh" [ref=e1053] [cursor=pointer]
+        - generic [ref=e1054]:
+          - separator [ref=e1055]
+          - navigation [ref=e1057]:
+            - generic [ref=e1058]:
+              - generic [ref=e1059]:
+                - list [ref=e1061]:
+                  - paragraph [ref=e1062]: Company
+                  - link "About" [ref=e1063] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/about-us/contact/
+                  - link "Jobs" [ref=e1064] [cursor=pointer]:
+                    - /url: https://www.lifeatspotify.com/
+                  - link "For the Record" [ref=e1065] [cursor=pointer]:
+                    - /url: https://newsroom.spotify.com/
+                - list [ref=e1067]:
+                  - paragraph [ref=e1068]: Communities
+                  - link "For Artists" [ref=e1069] [cursor=pointer]:
+                    - /url: https://artists.spotify.com/
+                  - link "Developers" [ref=e1070] [cursor=pointer]:
+                    - /url: https://developer.spotify.com/
+                  - link "Advertising" [ref=e1071] [cursor=pointer]:
+                    - /url: https://ads.spotify.com/
+                  - link "Investors" [ref=e1072] [cursor=pointer]:
+                    - /url: https://investors.spotify.com/
+                  - link "Vendors" [ref=e1073] [cursor=pointer]:
+                    - /url: https://spotifyforvendors.com/
+                - list [ref=e1075]:
+                  - paragraph [ref=e1076]: Useful links
+                  - link "Support" [ref=e1077] [cursor=pointer]:
+                    - /url: https://support.spotify.com/
+                  - link "Free Mobile App" [ref=e1078] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/download/
+                  - link "Popular by Country" [ref=e1079] [cursor=pointer]:
+                    - /url: /popular-in/uk
+                  - link "Import your music" [ref=e1080] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/import-music/
+                - list [ref=e1082]:
+                  - paragraph [ref=e1083]: Spotify Plans
+                  - link "Premium Individual" [ref=e1084] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/premium/#ref=spotifycom_footer_premium_individual
+                  - link "Premium Duo" [ref=e1085] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/duo/#ref=spotifycom_footer_premium_duo
+                  - link "Premium Family" [ref=e1086] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/family/#ref=spotifycom_footer_premium_family
+                  - link "Premium Student" [ref=e1087] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/student/#ref=spotifycom_footer_premium_student
+                  - link "Spotify Free" [ref=e1088] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/free/#ref=spotifycom_footer_free
+              - generic [ref=e1089]:
+                - link "Instagram" [ref=e1091] [cursor=pointer]:
+                  - /url: https://instagram.com/spotify
+                  - img [ref=e1093]
+                - link "Twitter" [ref=e1097] [cursor=pointer]:
+                  - /url: https://twitter.com/spotify
+                  - img [ref=e1099]
+                - link "Facebook" [ref=e1102] [cursor=pointer]:
+                  - /url: https://www.facebook.com/Spotify
+                  - img [ref=e1104]
+            - separator [ref=e1106]
+            - generic [ref=e1107]:
+              - generic [ref=e1109]:
+                - link "Legal" [ref=e1111] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/
+                  - generic [ref=e1112]: Legal
+                - link "Safety & Privacy Center" [ref=e1114] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/safetyandprivacy/
+                  - generic [ref=e1115]: Safety & Privacy Center
+                - link "Privacy Policy" [ref=e1117] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/
+                  - generic [ref=e1118]: Privacy Policy
+                - button "Cookie Settings" [ref=e1120] [cursor=pointer]:
+                  - generic [ref=e1121]: Cookie Settings
+                - link "About Ads" [ref=e1123] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/#s3
+                  - generic [ref=e1124]: About Ads
+                - link "Accessibility" [ref=e1126] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/accessibility/
+                  - generic [ref=e1127]: Accessibility
+                - link "Modern Slavery Act" [ref=e1129] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20Modern%20Slavery%20Statement%202023.pdf
+                  - generic [ref=e1130]: Modern Slavery Act
+                - link "UK Tax Policy" [ref=e1132] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/UK%20Tax%20Strategy%20Statement%202025.pdf
+                  - generic [ref=e1133]: UK Tax Policy
+                - link "UK Gender Pay Report" [ref=e1135] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20UK%20Gender%20Pay%20Report%202025.pdf
+                  - generic [ref=e1136]: UK Gender Pay Report
+                - link "UK S172 Statement" [ref=e1138] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify-UK-S172-Statement.pdf
+                  - generic [ref=e1139]: UK S172 Statement
+              - generic [ref=e1141]: © 2026 Spotify AB
+    - generic [ref=e1144]:
+      - complementary [ref=e1147]:
+        - generic [ref=e1148]:
+          - button [disabled] [ref=e1153]:
+            - img [ref=e1155]
+          - generic [ref=e1162]:
+            - generic [ref=e1163]: Download Spotify for Mac
+            - generic [ref=e1164]: Enjoy high-quality audio, offline playback and a lively friend feed to stay in tune with your friends’ favourites.
+            - button [ref=e1165] [cursor=pointer]:
+              - generic [ref=e1166]: Download the free app
+      - button "Show Now Playing view" [ref=e1168] [cursor=pointer]:
+        - img [ref=e1170]
+  - dialog "We Care About Your Privacy" [ref=e1173]:
+    - generic [ref=e1175]:
+      - generic [ref=e1177]:
+        - heading "We Care About Your Privacy" [level=2] [ref=e1178]
+        - generic [ref=e1179]: We and our 90 partners store and/or access information on a device, such as unique IDs in cookies to process personal data. You may accept or manage your choices by clicking below, including your right to object where legitimate interest is used, or at any time in the privacy policy page. These choices will be signaled to our partners and will not affect browsing data.
+        - generic [ref=e1180]:
+          - heading "We and our partners process data to provide:" [level=3] [ref=e1181]
+          - paragraph [ref=e1183]:
+            - text: Store and/or access information on a device. Personalised advertising. Personalised content. Advertising and content measurement, audience research, and services development.
+            - button "List of Partners (vendors)" [ref=e1184] [cursor=pointer]
+      - generic [ref=e1186]:
+        - button "Accept Cookies" [ref=e1187] [cursor=pointer]
+        - button "Reject All" [ref=e1188] [cursor=pointer]
+        - button "Cookie Settings, Opens the preference center dialog" [ref=e1189] [cursor=pointer]: Cookie Settings

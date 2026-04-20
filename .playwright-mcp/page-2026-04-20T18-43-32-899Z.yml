@@ -1,0 +1,868 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - link "Skip to main content" [ref=e6] [cursor=pointer]:
+        - /url: "#main-view"
+        - generic [ref=e7]: Skip to main content
+      - link "Spotify" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "Spotify" [ref=e10]
+      - generic [ref=e13]:
+        - button "Home" [ref=e14] [cursor=pointer]:
+          - img [ref=e16]
+        - search [ref=e19]:
+          - button "Search" [ref=e21] [cursor=pointer]:
+            - img [ref=e23]
+          - generic [ref=e25]:
+            - combobox "What do you want to play?" [ref=e26]
+            - generic:
+              - generic: ⌘ShiftL
+          - button "Browse" [ref=e29] [cursor=pointer]:
+            - img [ref=e31]
+      - generic [ref=e35]:
+        - button "Premium" [ref=e36] [cursor=pointer]
+        - button "Support" [ref=e37] [cursor=pointer]
+        - button "Download" [ref=e38] [cursor=pointer]
+        - link "Install App" [ref=e40] [cursor=pointer]:
+          - /url: /download
+          - img [ref=e42]
+          - generic [ref=e45]: Install App
+        - generic [ref=e46]:
+          - button "Sign up" [ref=e47] [cursor=pointer]
+          - button "Log in" [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]: Log in
+    - generic [ref=e50]:
+      - navigation "Main" [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e56]:
+              - heading "Your Library" [level=1] [ref=e58]
+              - button "Create" [ref=e60] [cursor=pointer]:
+                - img [ref=e61]
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - generic [ref=e67]:
+                  - generic [ref=e68]: Create your first playlist
+                  - generic [ref=e69]: It’s easy, we’ll help you
+                - button "Create playlist" [ref=e71] [cursor=pointer]:
+                  - generic [ref=e72]: Create playlist
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - generic [ref=e75]: Let’s find some podcasts to follow
+                  - generic [ref=e76]: We’ll keep you updated on new episodes
+                - link "Browse podcasts" [ref=e78] [cursor=pointer]:
+                  - /url: /genre/podcasts-web
+                  - generic [ref=e79]: Browse podcasts
+              - generic:
+                - grid "Your Library":
+                  - generic:
+                    - row
+                    - row
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - generic [ref=e82]:
+                - link "Legal" [ref=e84] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/
+                  - generic [ref=e85]: Legal
+                - link "Safety & Privacy Center" [ref=e87] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/safetyandprivacy/
+                  - generic [ref=e88]: Safety & Privacy Center
+                - link "Privacy Policy" [ref=e90] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/
+                  - generic [ref=e91]: Privacy Policy
+                - button "Cookie Settings" [ref=e93] [cursor=pointer]:
+                  - generic [ref=e94]: Cookie Settings
+                - link "About Ads" [ref=e96] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/#s3
+                  - generic [ref=e97]: About Ads
+                - link "Accessibility" [ref=e99] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/accessibility/
+                  - generic [ref=e100]: Accessibility
+                - link "Modern Slavery Act" [ref=e102] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20Modern%20Slavery%20Statement%202023.pdf
+                  - generic [ref=e103]: Modern Slavery Act
+                - link "UK Tax Policy" [ref=e105] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/UK%20Tax%20Strategy%20Statement%202025.pdf
+                  - generic [ref=e106]: UK Tax Policy
+                - link "UK Gender Pay Report" [ref=e108] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20UK%20Gender%20Pay%20Report%202025.pdf
+                  - generic [ref=e109]: UK Gender Pay Report
+                - link "UK S172 Statement" [ref=e111] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify-UK-S172-Statement.pdf
+                  - generic [ref=e112]: UK S172 Statement
+              - link "Cookies" [ref=e113] [cursor=pointer]:
+                - /url: https://www.spotify.com/legal/cookies-policy/
+            - button "English" [ref=e115] [cursor=pointer]:
+              - img [ref=e117]
+              - text: English
+      - generic [ref=e120]:
+        - text: Resize main navigation
+        - slider "Resize main navigation" [ref=e121]: "280"
+    - complementary "Now playing bar" [ref=e123]:
+      - generic [ref=e124] [cursor=pointer]:
+        - generic [ref=e125]:
+          - paragraph [ref=e126]: Preview of Spotify
+          - paragraph [ref=e127]: Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.
+        - button "Sign up for free" [ref=e128]:
+          - generic [ref=e129]: Sign up for free
+      - generic:
+        - generic "Player controls" [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - switch "Enable shuffle" [disabled] [ref=e134]:
+                - img [ref=e136]
+              - button "Previous" [disabled] [ref=e139]:
+                - img [ref=e141]
+            - button "Pause" [disabled] [ref=e143]:
+              - img [ref=e146]
+            - generic [ref=e148]:
+              - button "Next" [disabled] [ref=e149]:
+                - img [ref=e151]
+              - checkbox "Disable repeat" [disabled] [ref=e153]:
+                - img [ref=e155]
+          - generic [ref=e157]:
+            - generic [ref=e158]: "-:--"
+            - generic [ref=e161]:
+              - text: Change progress
+              - slider "Change progress" [disabled] [ref=e162]: "0"
+            - generic [ref=e168]: "-:--"
+        - generic [ref=e170]:
+          - button "Now playing view" [disabled] [ref=e171]:
+            - img [ref=e173]
+          - generic [ref=e176]:
+            - button "Mute" [ref=e177] [cursor=pointer]:
+              - img [ref=e179]
+            - generic [ref=e184]:
+              - text: Change volume
+              - slider "Change volume" [ref=e185]: "1"
+    - generic [ref=e191]:
+      - banner "Top bar and user menu" [ref=e192]
+      - main "Taylor Swift | Spotify" [ref=e200]:
+        - generic [ref=e202]:
+          - generic [ref=e205]:
+            - heading "Taylor Swift" [level=1] [ref=e208]
+            - generic [ref=e209]: 101,743,897 monthly listeners
+          - generic [ref=e210]:
+            - generic [ref=e215]:
+              - button "Play" [ref=e217] [cursor=pointer]:
+                - img [ref=e220]
+              - button "Follow" [ref=e222] [cursor=pointer]
+              - button "More options for Taylor Swift" [ref=e223] [cursor=pointer]:
+                - img [ref=e225]
+            - generic [ref=e227]:
+              - generic [ref=e228]:
+                - generic [ref=e229]:
+                  - heading "Popular" [level=2] [ref=e230]
+                  - grid "popular tracks" [ref=e232]:
+                    - row "1 Play The Fate of Ophelia by Taylor Swift The Fate of Ophelia 1,280,865,513 Add to Liked Songs 3:46 More options for The Fate of Ophelia by Taylor Swift" [ref=e233]:
+                      - gridcell "1 Play The Fate of Ophelia by Taylor Swift" [ref=e234]:
+                        - generic [ref=e235]:
+                          - generic: "1"
+                          - button "Play The Fate of Ophelia by Taylor Swift":
+                            - img
+                      - gridcell "The Fate of Ophelia" [ref=e236]:
+                        - img [ref=e237]
+                        - link "The Fate of Ophelia" [ref=e239] [cursor=pointer]:
+                          - /url: /track/53iuhJlwXhSER5J2IYYv1W
+                          - generic [ref=e240]: The Fate of Ophelia
+                      - gridcell "1,280,865,513" [ref=e241]:
+                        - generic [ref=e242]: 1,280,865,513
+                      - gridcell "Add to Liked Songs 3:46 More options for The Fate of Ophelia by Taylor Swift" [ref=e243]:
+                        - button "Add to Liked Songs" [ref=e244] [cursor=pointer]:
+                          - img [ref=e246]
+                        - generic [ref=e249]: 3:46
+                        - button "More options for The Fate of Ophelia by Taylor Swift" [ref=e250] [cursor=pointer]:
+                          - img [ref=e252]
+                    - row "2 Play Opalite by Taylor Swift Opalite 679,461,071 Add to Liked Songs 3:55 More options for Opalite by Taylor Swift" [ref=e254]:
+                      - gridcell "2 Play Opalite by Taylor Swift" [ref=e255]:
+                        - generic [ref=e256]:
+                          - generic: "2"
+                          - button "Play Opalite by Taylor Swift":
+                            - img
+                      - gridcell "Opalite" [ref=e257]:
+                        - img [ref=e258]
+                        - link "Opalite" [ref=e260] [cursor=pointer]:
+                          - /url: /track/3yWuTOYDztXjZxdE2cIRUa
+                          - generic [ref=e261]: Opalite
+                      - gridcell "679,461,071" [ref=e262]:
+                        - generic [ref=e263]: 679,461,071
+                      - gridcell "Add to Liked Songs 3:55 More options for Opalite by Taylor Swift" [ref=e264]:
+                        - button "Add to Liked Songs" [ref=e265] [cursor=pointer]:
+                          - img [ref=e267]
+                        - generic [ref=e270]: 3:55
+                        - button "More options for Opalite by Taylor Swift" [ref=e271] [cursor=pointer]:
+                          - img [ref=e273]
+                    - row "3 Play Cruel Summer by Taylor Swift Cruel Summer 3,321,057,103 Add to Liked Songs 2:58 More options for Cruel Summer by Taylor Swift" [ref=e275]:
+                      - gridcell "3 Play Cruel Summer by Taylor Swift" [ref=e276]:
+                        - generic [ref=e277]:
+                          - generic: "3"
+                          - button "Play Cruel Summer by Taylor Swift":
+                            - img
+                      - gridcell "Cruel Summer" [ref=e278]:
+                        - img [ref=e279]
+                        - link "Cruel Summer" [ref=e281] [cursor=pointer]:
+                          - /url: /track/1BxfuPKGuaTgP7aM0Bbdwr
+                          - generic [ref=e282]: Cruel Summer
+                      - gridcell "3,321,057,103" [ref=e283]:
+                        - generic [ref=e284]: 3,321,057,103
+                      - gridcell "Add to Liked Songs 2:58 More options for Cruel Summer by Taylor Swift" [ref=e285]:
+                        - button "Add to Liked Songs" [ref=e286] [cursor=pointer]:
+                          - img [ref=e288]
+                        - generic [ref=e291]: 2:58
+                        - button "More options for Cruel Summer by Taylor Swift" [ref=e292] [cursor=pointer]:
+                          - img [ref=e294]
+                    - row "4 Play Style by Taylor Swift Style 1,741,390,650 Add to Liked Songs 3:51 More options for Style by Taylor Swift" [ref=e296]:
+                      - gridcell "4 Play Style by Taylor Swift" [ref=e297]:
+                        - generic [ref=e298]:
+                          - generic: "4"
+                          - button "Play Style by Taylor Swift":
+                            - img
+                      - gridcell "Style" [ref=e299]:
+                        - img [ref=e300]
+                        - link "Style" [ref=e302] [cursor=pointer]:
+                          - /url: /track/4D7kxLhSz7siCOw7KA5rQn
+                          - generic [ref=e303]: Style
+                      - gridcell "1,741,390,650" [ref=e304]:
+                        - generic [ref=e305]: 1,741,390,650
+                      - gridcell "Add to Liked Songs 3:51 More options for Style by Taylor Swift" [ref=e306]:
+                        - button "Add to Liked Songs" [ref=e307] [cursor=pointer]:
+                          - img [ref=e309]
+                        - generic [ref=e312]: 3:51
+                        - button "More options for Style by Taylor Swift" [ref=e313] [cursor=pointer]:
+                          - img [ref=e315]
+                    - row "5 Play Blank Space by Taylor Swift Blank Space 2,415,237,509 Add to Liked Songs 3:51 More options for Blank Space by Taylor Swift" [ref=e317]:
+                      - gridcell "5 Play Blank Space by Taylor Swift" [ref=e318]:
+                        - generic [ref=e319]:
+                          - generic: "5"
+                          - button "Play Blank Space by Taylor Swift":
+                            - img
+                      - gridcell "Blank Space" [ref=e320]:
+                        - img [ref=e321]
+                        - link "Blank Space" [ref=e323] [cursor=pointer]:
+                          - /url: /track/1kHEuJRasudLhjvnbfc4yS
+                          - generic [ref=e324]: Blank Space
+                      - gridcell "2,415,237,509" [ref=e325]:
+                        - generic [ref=e326]: 2,415,237,509
+                      - gridcell "Add to Liked Songs 3:51 More options for Blank Space by Taylor Swift" [ref=e327]:
+                        - button "Add to Liked Songs" [ref=e328] [cursor=pointer]:
+                          - img [ref=e330]
+                        - generic [ref=e333]: 3:51
+                        - button "More options for Blank Space by Taylor Swift" [ref=e334] [cursor=pointer]:
+                          - img [ref=e336]
+                  - button "See more" [ref=e338]:
+                    - generic [ref=e339]: See more
+                - generic [ref=e341]:
+                  - heading "Artist pick" [level=2] [ref=e342]
+                  - generic [ref=e343]:
+                    - img [ref=e345]
+                    - generic [ref=e346]:
+                      - generic [ref=e347]:
+                        - figure "Taylor Swift" [ref=e348]:
+                          - img "Taylor Swift" [ref=e350]
+                        - generic "Watch Music Video Now 💎" [ref=e351]
+                      - link "Elizabeth Taylor" [ref=e353] [cursor=pointer]:
+                        - /url: /album/71GTik4z9bbKKY2EmUvkDI
+                      - generic [ref=e354]: Single
+              - region "Discography" [ref=e355]:
+                - group [ref=e357]:
+                  - generic [ref=e358]:
+                    - heading [level=2] [ref=e360]:
+                      - link [ref=e362] [cursor=pointer]:
+                        - /url: /artist/06HL4z0CvFAxyc27GXpf02/discography/all
+                        - text: Discography
+                    - link "Show all" [ref=e364] [cursor=pointer]:
+                      - /url: /artist/06HL4z0CvFAxyc27GXpf02/discography/all
+                      - generic [ref=e365]: Show all
+                - generic [ref=e367]:
+                  - checkbox "Popular releases" [checked] [ref=e368] [cursor=pointer]:
+                    - generic [ref=e369]: Popular releases
+                  - checkbox "Albums" [ref=e370] [cursor=pointer]:
+                    - generic [ref=e371]: Albums
+                  - checkbox "Singles and EPs" [ref=e372] [cursor=pointer]:
+                    - generic [ref=e373]: Singles and EPs
+                  - checkbox "Compilations" [ref=e374] [cursor=pointer]:
+                    - generic [ref=e375]: Compilations
+                - generic "Elizabeth Taylor" [ref=e376] [cursor=pointer]:
+                  - button "Elizabeth Taylor Latest Release • Single" [ref=e377]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Elizabeth Taylor":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e380]:
+                    - link "Elizabeth Taylor" [ref=e381]:
+                      - /url: /album/71GTik4z9bbKKY2EmUvkDI
+                      - paragraph [ref=e382]:
+                        - generic [ref=e383]: Elizabeth Taylor
+                    - generic [ref=e386]:
+                      - time [ref=e387]: Latest Release •
+                      - text: Single
+                - generic "The Life of a Showgirl" [ref=e388] [cursor=pointer]:
+                  - button "The Life of a Showgirl 2025 • Album" [ref=e389]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play The Life of a Showgirl":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e392]:
+                    - link "The Life of a Showgirl" [ref=e393]:
+                      - /url: /album/4a6NzYL1YHRUgx9e3YZI6I
+                      - paragraph [ref=e394]:
+                        - generic [ref=e395]: The Life of a Showgirl
+                    - generic [ref=e398]:
+                      - time [ref=e399]: 2025 •
+                      - text: Album
+                - generic "Lover" [ref=e400] [cursor=pointer]:
+                  - button "Lover 2019 • Album" [ref=e401]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Lover":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e404]:
+                    - link "Lover" [ref=e405]:
+                      - /url: /album/1NAmidJlEaVgA3MpcPFYGq
+                      - paragraph [ref=e406]:
+                        - generic [ref=e407]: Lover
+                    - generic [ref=e410]:
+                      - time [ref=e411]: 2019 •
+                      - text: Album
+                - 'generic "THE TORTURED POETS DEPARTMENT: THE ANTHOLOGY" [ref=e412] [cursor=pointer]':
+                  - 'button "THE TORTURED POETS DEPARTMENT: THE ANTHOLOGY 2024 • Album" [ref=e413]'
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - 'button "Play THE TORTURED POETS DEPARTMENT: THE ANTHOLOGY"':
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e416]:
+                    - 'link "THE TORTURED POETS DEPARTMENT: THE ANTHOLOGY" [ref=e417]':
+                      - /url: /album/5H7ixXZfsNMGbIE5OBSpcb
+                      - paragraph [ref=e418]:
+                        - generic [ref=e419]: "THE TORTURED POETS DEPARTMENT: THE ANTHOLOGY"
+                    - generic [ref=e422]:
+                      - time [ref=e423]: 2024 •
+                      - text: Album
+              - region "Featuring Taylor Swift" [ref=e424]:
+                - group [ref=e426]:
+                  - generic [ref=e427]:
+                    - heading [level=2] [ref=e429]:
+                      - link [ref=e431] [cursor=pointer]:
+                        - /url: /artist/06HL4z0CvFAxyc27GXpf02/featuring
+                        - text: Featuring Taylor Swift
+                    - link "Show all" [ref=e433] [cursor=pointer]:
+                      - /url: /artist/06HL4z0CvFAxyc27GXpf02/featuring
+                      - generic [ref=e434]: Show all
+                - generic "This Is Taylor Swift" [ref=e435] [cursor=pointer]:
+                  - button "This Is Taylor Swift The essential tracks, all in one playlist." [ref=e436]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play This Is Taylor Swift":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e439]:
+                    - link "This Is Taylor Swift" [ref=e440]:
+                      - /url: /playlist/37i9dQZF1DX5KpP2LN299J
+                      - paragraph [ref=e441]:
+                        - generic [ref=e442]: This Is Taylor Swift
+                    - generic [ref=e446]: The essential tracks, all in one playlist.
+                - generic "Taylor Swift Radio" [ref=e447] [cursor=pointer]:
+                  - button "Taylor Swift Radio By Spotify" [ref=e448]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Taylor Swift Radio":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e451]:
+                    - link "Taylor Swift Radio" [ref=e452]:
+                      - /url: /playlist/37i9dQZF1E4AfEUiirXPyP
+                      - paragraph [ref=e453]:
+                        - generic [ref=e454]: Taylor Swift Radio
+                    - generic [ref=e458]: By Spotify
+                - generic "Hot Hits UK" [ref=e459] [cursor=pointer]:
+                  - 'button "Hot Hits UK The UK''s biggest playlist. Cover: Tame Impala & JENNIE" [ref=e460]'
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Hot Hits UK":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e463]:
+                    - link "Hot Hits UK" [ref=e464]:
+                      - /url: /playlist/37i9dQZF1DWY4lFlS4Pnso
+                      - paragraph [ref=e465]:
+                        - generic [ref=e466]: Hot Hits UK
+                    - generic [ref=e470]: "The UK's biggest playlist. Cover: Tame Impala & JENNIE"
+                - generic "Today’s Top Hits" [ref=e471] [cursor=pointer]:
+                  - 'button "Today’s Top Hits The hottest 50. Cover: Justin Bieber" [ref=e472]'
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Today’s Top Hits":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e475]:
+                    - link "Today’s Top Hits" [ref=e476]:
+                      - /url: /playlist/37i9dQZF1DXcBWIGoYBM5M
+                      - paragraph [ref=e477]:
+                        - generic [ref=e478]: Today’s Top Hits
+                    - generic [ref=e482]: "The hottest 50. Cover: Justin Bieber"
+              - generic [ref=e483]:
+                - heading "About" [level=2] [ref=e484]
+                - button "Taylor Swift" [ref=e486]:
+                  - generic [ref=e487]:
+                    - generic [ref=e488]: "#6"
+                    - generic [ref=e489]: in the world
+                  - generic [ref=e490]:
+                    - generic [ref=e491]: 101,743,897 monthly listeners
+                    - generic [ref=e492]: And, baby, that’s show business for you. New album The Life of a Showgirl. Available now ❤️‍🔥
+              - region "Discovered on" [ref=e493]:
+                - group [ref=e495]:
+                  - generic [ref=e496]:
+                    - heading [level=2] [ref=e498]:
+                      - link [ref=e500] [cursor=pointer]:
+                        - /url: /artist/06HL4z0CvFAxyc27GXpf02/discovered-on
+                        - text: Discovered on
+                    - link "Show all" [ref=e502] [cursor=pointer]:
+                      - /url: /artist/06HL4z0CvFAxyc27GXpf02/discovered-on
+                      - generic [ref=e503]: Show all
+                - generic "This Is Taylor Swift" [ref=e504] [cursor=pointer]:
+                  - button "This Is Taylor Swift The essential tracks, all in one playlist." [ref=e505]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play This Is Taylor Swift":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e508]:
+                    - link "This Is Taylor Swift" [ref=e509]:
+                      - /url: /playlist/37i9dQZF1DX5KpP2LN299J
+                      - paragraph [ref=e510]:
+                        - generic [ref=e511]: This Is Taylor Swift
+                    - generic [ref=e515]: The essential tracks, all in one playlist.
+                - generic "All Taylor Swift Songs" [ref=e516] [cursor=pointer]:
+                  - button "All Taylor Swift Songs ALL TAYLOR SWIFT SONGS in order plus a few extras. All taylors versions included. 🤍" [ref=e517]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play All Taylor Swift Songs":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e520]:
+                    - link "All Taylor Swift Songs" [ref=e521]:
+                      - /url: /playlist/1mwIluT6YC7UOrVfMNoowr
+                      - paragraph [ref=e522]:
+                        - generic [ref=e523]: All Taylor Swift Songs
+                    - generic [ref=e527]: ALL TAYLOR SWIFT SONGS in order plus a few extras. All taylors versions included. 🤍
+                - generic "Taylor Swift Complete Collection" [ref=e528] [cursor=pointer]:
+                  - button "Taylor Swift Complete Collection Everything Taylor Swift Right Here" [ref=e529]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Taylor Swift Complete Collection":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e532]:
+                    - link "Taylor Swift Complete Collection" [ref=e533]:
+                      - /url: /playlist/4GtQVhGjAwcHFz82UKy3Ca
+                      - paragraph [ref=e534]:
+                        - generic [ref=e535]: Taylor Swift Complete Collection
+                    - generic [ref=e539]:
+                      - text: Everything
+                      - link "Taylor Swift" [ref=e540]:
+                        - /url: https://www.taylorswift.com/
+                      - text: Right Here
+                - 'generic "Taylor Swift: Hits and Best of" [ref=e541] [cursor=pointer]':
+                  - 'button "Taylor Swift: Hits and Best of *Not offical playlist or album* greatest songs of Taylor’s version & original songs" [ref=e542]'
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - 'button "Play Taylor Swift: Hits and Best of"':
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e545]:
+                    - 'link "Taylor Swift: Hits and Best of" [ref=e546]':
+                      - /url: /playlist/0Y44bc2Fd2IfbhqSPnNlTC
+                      - paragraph [ref=e547]:
+                        - generic [ref=e548]: "Taylor Swift: Hits and Best of"
+                    - generic [ref=e552]: "*Not offical playlist or album* greatest songs of Taylor’s version & original songs"
+              - region "Artist Playlists" [ref=e553]:
+                - group [ref=e555]:
+                  - heading [level=2] [ref=e558]:
+                    - link [ref=e560] [cursor=pointer]:
+                      - /url: /artist/06HL4z0CvFAxyc27GXpf02/playlists
+                      - text: Artist Playlists
+                - generic "rep Tour and Friends" [ref=e561] [cursor=pointer]:
+                  - button "rep Tour and Friends The complete setlist from the Taylor Swift reputation Stadium Tour including special guests" [ref=e562]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play rep Tour and Friends":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e565]:
+                    - link "rep Tour and Friends" [ref=e566]:
+                      - /url: /playlist/074AoVXFnnlKmSpz28uqe0
+                      - paragraph [ref=e567]:
+                        - generic [ref=e568]: rep Tour and Friends
+                    - generic [ref=e572]: The complete setlist from the Taylor Swift reputation Stadium Tour including special guests
+                - generic "Live From Paris" [ref=e573] [cursor=pointer]:
+                  - button "Live From Paris Songs From Lover Performed Live In Paris" [ref=e574]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Live From Paris":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e577]:
+                    - link "Live From Paris" [ref=e578]:
+                      - /url: /playlist/1Ew1IbrHjmNedkANLw1jdr
+                      - paragraph [ref=e579]:
+                        - generic [ref=e580]: Live From Paris
+                    - generic [ref=e584]: Songs From Lover Performed Live In Paris
+                - generic "And, baby, that’s show business for you ❤️‍🔥" [ref=e585] [cursor=pointer]:
+                  - button "And, baby, that’s show business for you ❤️‍🔥 By Taylor Swift" [ref=e586]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play And, baby, that’s show business for you ❤️‍🔥":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e589]:
+                    - link "And, baby, that’s show business for you ❤️‍🔥" [ref=e590]:
+                      - /url: /playlist/65uAjFTt4N8sEJeonhNOBL
+                      - paragraph [ref=e591]:
+                        - generic [ref=e592]: And, baby, that’s show business for you ❤️‍🔥
+                    - generic [ref=e596]: By Taylor Swift
+                - generic "Taylor Swift Complete Collection" [ref=e597] [cursor=pointer]:
+                  - button "Taylor Swift Complete Collection Everything Taylor Swift Right Here" [ref=e598]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Taylor Swift Complete Collection":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e601]:
+                    - link "Taylor Swift Complete Collection" [ref=e602]:
+                      - /url: /playlist/4GtQVhGjAwcHFz82UKy3Ca
+                      - paragraph [ref=e603]:
+                        - generic [ref=e604]: Taylor Swift Complete Collection
+                    - generic [ref=e608]:
+                      - text: Everything
+                      - link "Taylor Swift" [ref=e609]:
+                        - /url: https://www.taylorswift.com/
+                      - text: Right Here
+              - region "Fans also like" [ref=e610]:
+                - group [ref=e612]:
+                  - generic [ref=e613]:
+                    - heading [level=2] [ref=e615]:
+                      - link [ref=e617] [cursor=pointer]:
+                        - /url: /artist/06HL4z0CvFAxyc27GXpf02/related
+                        - text: Fans also like
+                    - link "Show all" [ref=e619] [cursor=pointer]:
+                      - /url: /artist/06HL4z0CvFAxyc27GXpf02/related
+                      - generic [ref=e620]: Show all
+                - generic "Olivia Rodrigo" [ref=e621] [cursor=pointer]:
+                  - button "Olivia Rodrigo Artist" [ref=e622]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Olivia Rodrigo":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e625]:
+                    - link "Olivia Rodrigo" [ref=e626]:
+                      - /url: /artist/1McMsnEElThX1knmY4oliG
+                      - paragraph [ref=e627]:
+                        - generic [ref=e628]: Olivia Rodrigo
+                    - generic [ref=e631]: Artist
+                - generic "Sabrina Carpenter" [ref=e632] [cursor=pointer]:
+                  - button "Sabrina Carpenter Artist" [ref=e633]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Sabrina Carpenter":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e636]:
+                    - link "Sabrina Carpenter" [ref=e637]:
+                      - /url: /artist/74KM79TiuVKeVCqs8QtB0B
+                      - paragraph [ref=e638]:
+                        - generic [ref=e639]: Sabrina Carpenter
+                    - generic [ref=e642]: Artist
+                - generic "Gracie Abrams" [ref=e643] [cursor=pointer]:
+                  - button "Gracie Abrams Artist" [ref=e644]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Gracie Abrams":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e647]:
+                    - link "Gracie Abrams" [ref=e648]:
+                      - /url: /artist/4tuJ0bMpJh08umKkEXKUI5
+                      - paragraph [ref=e649]:
+                        - generic [ref=e650]: Gracie Abrams
+                    - generic [ref=e653]: Artist
+                - generic "Ariana Grande" [ref=e654] [cursor=pointer]:
+                  - button "Ariana Grande Artist" [ref=e655]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Ariana Grande":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e658]:
+                    - link "Ariana Grande" [ref=e659]:
+                      - /url: /artist/66CXWjxzNUsdJxJ2JdwvnR
+                      - paragraph [ref=e660]:
+                        - generic [ref=e661]: Ariana Grande
+                    - generic [ref=e664]: Artist
+              - region "Appears On" [ref=e665]:
+                - group [ref=e667]:
+                  - generic [ref=e668]:
+                    - heading [level=2] [ref=e670]:
+                      - link [ref=e672] [cursor=pointer]:
+                        - /url: /artist/06HL4z0CvFAxyc27GXpf02/appears-on
+                        - text: Appears On
+                    - link "Show all" [ref=e674] [cursor=pointer]:
+                      - /url: /artist/06HL4z0CvFAxyc27GXpf02/appears-on
+                      - generic [ref=e675]: Show all
+                - generic "The Secret of Us (Deluxe)" [ref=e676] [cursor=pointer]:
+                  - button "The Secret of Us (Deluxe) 2024 • Album" [ref=e677]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play The Secret of Us (Deluxe)":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e680]:
+                    - link "The Secret of Us (Deluxe)" [ref=e681]:
+                      - /url: /album/0hBRqPYPXhr1RkTDG3n4Mk
+                      - paragraph [ref=e682]:
+                        - generic [ref=e683]: The Secret of Us (Deluxe)
+                    - generic [ref=e686]:
+                      - time [ref=e687]: 2024 •
+                      - text: Album
+                - generic "The Secret of Us" [ref=e688] [cursor=pointer]:
+                  - button "The Secret of Us 2024 • Album" [ref=e689]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play The Secret of Us":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e692]:
+                    - link "The Secret of Us" [ref=e693]:
+                      - /url: /album/56bdWeO40o3WfAD2Lja4dl
+                      - paragraph [ref=e694]:
+                        - generic [ref=e695]: The Secret of Us
+                    - generic [ref=e698]:
+                      - time [ref=e699]: 2024 •
+                      - text: Album
+                - generic "Hannah Montana The Movie" [ref=e700] [cursor=pointer]:
+                  - button "Hannah Montana The Movie 2009 • Compilation" [ref=e701]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Hannah Montana The Movie":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e704]:
+                    - link "Hannah Montana The Movie" [ref=e705]:
+                      - /url: /album/1fc8tPf36cZhNYpNFrWh7o
+                      - paragraph [ref=e706]:
+                        - generic [ref=e707]: Hannah Montana The Movie
+                    - generic [ref=e710]:
+                      - time [ref=e711]: 2009 •
+                      - text: Compilation
+                - generic "Fifty Shades Darker (Original Motion Picture Soundtrack)" [ref=e712] [cursor=pointer]:
+                  - button "Fifty Shades Darker (Original Motion Picture Soundtrack) 2017 • Compilation" [ref=e713]
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                    - generic:
+                      - generic:
+                        - button "Play Fifty Shades Darker (Original Motion Picture Soundtrack)":
+                          - generic:
+                            - generic:
+                              - img
+                  - generic [ref=e716]:
+                    - link "Fifty Shades Darker (Original Motion Picture Soundtrack)" [ref=e717]:
+                      - /url: /album/5VML6S956h4YfoYPooqLEi
+                      - paragraph [ref=e718]:
+                        - generic [ref=e719]: Fifty Shades Darker (Original Motion Picture Soundtrack)
+                    - generic [ref=e722]:
+                      - time [ref=e723]: 2017 •
+                      - text: Compilation
+        - generic [ref=e724]:
+          - separator [ref=e725]
+          - navigation [ref=e727]:
+            - generic [ref=e728]:
+              - generic [ref=e729]:
+                - list [ref=e731]:
+                  - paragraph [ref=e732]: Company
+                  - link "About" [ref=e733] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/about-us/contact/
+                  - link "Jobs" [ref=e734] [cursor=pointer]:
+                    - /url: https://www.lifeatspotify.com/
+                  - link "For the Record" [ref=e735] [cursor=pointer]:
+                    - /url: https://newsroom.spotify.com/
+                - list [ref=e737]:
+                  - paragraph [ref=e738]: Communities
+                  - link "For Artists" [ref=e739] [cursor=pointer]:
+                    - /url: https://artists.spotify.com/
+                  - link "Developers" [ref=e740] [cursor=pointer]:
+                    - /url: https://developer.spotify.com/
+                  - link "Advertising" [ref=e741] [cursor=pointer]:
+                    - /url: https://ads.spotify.com/
+                  - link "Investors" [ref=e742] [cursor=pointer]:
+                    - /url: https://investors.spotify.com/
+                  - link "Vendors" [ref=e743] [cursor=pointer]:
+                    - /url: https://spotifyforvendors.com/
+                - list [ref=e745]:
+                  - paragraph [ref=e746]: Useful links
+                  - link "Support" [ref=e747] [cursor=pointer]:
+                    - /url: https://support.spotify.com/
+                  - link "Free Mobile App" [ref=e748] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/free/
+                  - link "Popular by Country" [ref=e749] [cursor=pointer]:
+                    - /url: /popular-in/uk
+                  - link "Import your music" [ref=e750] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/import-music/
+                - list [ref=e752]:
+                  - paragraph [ref=e753]: Spotify Plans
+                  - link "Premium Individual" [ref=e754] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/premium/#ref=spotifycom_footer_premium_individual
+                  - link "Premium Duo" [ref=e755] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/duo/#ref=spotifycom_footer_premium_duo
+                  - link "Premium Family" [ref=e756] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/family/#ref=spotifycom_footer_premium_family
+                  - link "Premium Student" [ref=e757] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/student/#ref=spotifycom_footer_premium_student
+                  - link "Spotify Free" [ref=e758] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/free/#ref=spotifycom_footer_free
+              - generic [ref=e759]:
+                - link "Instagram" [ref=e761] [cursor=pointer]:
+                  - /url: https://instagram.com/spotify
+                  - img [ref=e763]
+                - link "Twitter" [ref=e767] [cursor=pointer]:
+                  - /url: https://twitter.com/spotify
+                  - img [ref=e769]
+                - link "Facebook" [ref=e772] [cursor=pointer]:
+                  - /url: https://www.facebook.com/Spotify
+                  - img [ref=e774]
+            - separator [ref=e776]
+            - generic [ref=e779]: © 2026 Spotify AB
+  - dialog "We Care About Your Privacy" [ref=e781]:
+    - generic [ref=e783]:
+      - generic [ref=e785]:
+        - heading "We Care About Your Privacy" [level=2] [ref=e786]
+        - generic [ref=e787]: We and our 90 partners store and/or access information on a device, such as unique IDs in cookies to process personal data. You may accept or manage your choices by clicking below, including your right to object where legitimate interest is used, or at any time in the privacy policy page. These choices will be signaled to our partners and will not affect browsing data.
+        - generic [ref=e788]:
+          - heading "We and our partners process data to provide:" [level=3] [ref=e789]
+          - paragraph [ref=e791]:
+            - text: Store and/or access information on a device. Personalised advertising. Personalised content. Advertising and content measurement, audience research, and services development.
+            - button "List of Partners (vendors)" [ref=e792] [cursor=pointer]
+      - generic [ref=e794]:
+        - button "Accept Cookies" [ref=e795] [cursor=pointer]
+        - button "Reject All" [ref=e796] [cursor=pointer]
+        - button "Cookie Settings, Opens the preference center dialog" [ref=e797] [cursor=pointer]: Cookie Settings

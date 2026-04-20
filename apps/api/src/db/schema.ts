@@ -78,6 +78,8 @@ export const verification = pgTable(
 export const artist = pgTable('artist', {
   id: bigserial('id', { mode: 'number' }).primaryKey(),
   artistId: varchar('artist_id', { length: 22 }).notNull().unique(),
+  name: text('name'),
+  imageUrl: text('image_url'),
 })
 
 export const scrape = pgTable(

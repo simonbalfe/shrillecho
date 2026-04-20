@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-router'
 import { AuthGuard } from '@shared/components/auth-guard'
 import { DashboardLayout } from '@shared/components/layout/dashboard-layout'
+import { ArtistsPage } from '@/pages/artists'
 import { AuthPage } from '@/pages/auth'
 import { DashboardPage } from '@/pages/dashboard'
 import { SettingsPage } from '@/pages/settings'
@@ -37,6 +38,12 @@ const dashboardRoute = createRoute({
   component: DashboardPage,
 })
 
+const artistsRoute = createRoute({
+  getParentRoute: () => authenticatedRoute,
+  path: '/artists',
+  component: ArtistsPage,
+})
+
 const settingsRoute = createRoute({
   getParentRoute: () => authenticatedRoute,
   path: '/settings',
@@ -51,7 +58,7 @@ const catchAllRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   authRoute,
-  authenticatedRoute.addChildren([dashboardRoute, settingsRoute]),
+  authenticatedRoute.addChildren([dashboardRoute, artistsRoute, settingsRoute]),
   catchAllRoute,
 ])
 

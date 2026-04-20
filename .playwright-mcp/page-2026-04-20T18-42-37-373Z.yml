@@ -1,0 +1,312 @@
+- generic [ref=e4]:
+  - generic [ref=e5]:
+    - link "Skip to main content" [ref=e6] [cursor=pointer]:
+      - /url: "#main-view"
+      - generic [ref=e7]: Skip to main content
+    - link "Spotify" [ref=e9] [cursor=pointer]:
+      - /url: /
+      - img "Spotify" [ref=e10]
+    - generic [ref=e13]:
+      - button "Home" [ref=e14] [cursor=pointer]:
+        - img [ref=e16]
+      - search [ref=e19]:
+        - button "Search" [ref=e21] [cursor=pointer]:
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - combobox "What do you want to play?" [ref=e26]
+          - generic:
+            - generic: ⌘ShiftL
+        - button "Browse" [ref=e29] [cursor=pointer]:
+          - img [ref=e31]
+    - generic [ref=e35]:
+      - button "Premium" [ref=e36] [cursor=pointer]
+      - button "Support" [ref=e37] [cursor=pointer]
+      - button "Download" [ref=e38] [cursor=pointer]
+      - link "Install App" [ref=e40] [cursor=pointer]:
+        - /url: /download
+        - img [ref=e42]
+        - generic [ref=e45]: Install App
+      - generic [ref=e46]:
+        - button "Sign up" [ref=e47] [cursor=pointer]
+        - button "Log in" [ref=e48] [cursor=pointer]:
+          - generic [ref=e49]: Log in
+  - generic [ref=e50]:
+    - navigation "Main" [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - generic [ref=e56]:
+            - heading "Your Library" [level=1] [ref=e58]
+            - button "Create" [ref=e60] [cursor=pointer]:
+              - img [ref=e61]
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - generic [ref=e68]: Create your first playlist
+                - generic [ref=e69]: It’s easy, we’ll help you
+              - button "Create playlist" [ref=e71] [cursor=pointer]:
+                - generic [ref=e72]: Create playlist
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - generic [ref=e75]: Let’s find some podcasts to follow
+                - generic [ref=e76]: We’ll keep you updated on new episodes
+              - link "Browse podcasts" [ref=e78] [cursor=pointer]:
+                - /url: /genre/podcasts-web
+                - generic [ref=e79]: Browse podcasts
+            - generic:
+              - grid "Your Library":
+                - generic:
+                  - row
+                  - row
+        - button "English" [ref=e82] [cursor=pointer]:
+          - img [ref=e84]
+          - text: English
+    - generic [ref=e87]:
+      - text: Resize main navigation
+      - slider "Resize main navigation" [ref=e88]: "280"
+  - complementary "Now playing bar" [ref=e90]:
+    - generic [ref=e91] [cursor=pointer]:
+      - generic [ref=e92]:
+        - paragraph [ref=e93]: Preview of Spotify
+        - paragraph [ref=e94]: Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.
+      - button "Sign up for free" [ref=e95]:
+        - generic [ref=e96]: Sign up for free
+    - generic:
+      - generic "Player controls" [ref=e98]:
+        - generic [ref=e99]:
+          - generic [ref=e100]:
+            - switch "Enable shuffle" [disabled] [ref=e101]:
+              - img [ref=e103]
+            - button "Previous" [disabled] [ref=e106]:
+              - img [ref=e108]
+          - button "Pause" [disabled] [ref=e110]:
+            - img [ref=e113]
+          - generic [ref=e115]:
+            - button "Next" [disabled] [ref=e116]:
+              - img [ref=e118]
+            - checkbox "Disable repeat" [disabled] [ref=e120]:
+              - img [ref=e122]
+        - generic [ref=e124]:
+          - generic [ref=e125]: "-:--"
+          - generic [ref=e128]:
+            - text: Change progress
+            - slider "Change progress" [disabled] [ref=e129]: "0"
+          - generic [ref=e135]: "-:--"
+      - generic [ref=e137]:
+        - button "Now playing view" [disabled] [ref=e138]:
+          - img [ref=e140]
+        - generic [ref=e143]:
+          - button "Mute" [ref=e144] [cursor=pointer]:
+            - img [ref=e146]
+          - generic [ref=e151]:
+            - text: Change volume
+            - slider "Change volume" [ref=e152]: "1"
+  - generic [ref=e158]:
+    - banner "Top bar and user menu" [ref=e159]
+    - main "Today’s Top Hits | Spotify Playlist" [ref=e167]:
+      - generic [ref=e170]:
+        - generic [ref=e171]: Public Playlist
+        - heading "Today’s Top Hits" [level=1] [ref=e174]
+        - generic [ref=e177]: "The hottest 50. Cover: Justin Bieber"
+        - generic [ref=e178]:
+          - generic [ref=e179]:
+            - figure "Spotify" [ref=e180]:
+              - img "Spotify" [ref=e182]
+            - link "Spotify" [ref=e184] [cursor=pointer]:
+              - /url: /user/spotify
+          - generic [ref=e185]: •
+          - generic [ref=e186]: 34,366,717 saves
+          - generic [ref=e187]: •
+          - generic [ref=e188]:
+            - generic [ref=e189]: 50 songs
+            - generic [ref=e190]: ","
+            - generic [ref=e191]: about 2 hr 30 min
+      - generic [ref=e192]:
+        - generic [ref=e197]:
+          - button "Play Today’s Top Hits" [ref=e199] [cursor=pointer]:
+            - img [ref=e202]
+          - button "Save to Your Library" [ref=e204] [cursor=pointer]:
+            - img [ref=e206]
+          - button "More options for Today’s Top Hits" [ref=e209] [cursor=pointer]:
+            - img [ref=e211]
+          - combobox [ref=e214]:
+            - generic [ref=e215]: List
+            - img [ref=e216]
+        - grid "Today’s Top Hits" [ref=e221]:
+          - row "# Title Resize columns Album Resize columns Date added Resize columns Duration" [ref=e222]:
+            - columnheader "#" [ref=e223]:
+              - generic [ref=e224]: "#"
+            - columnheader "Title Resize columns" [ref=e225]:
+              - generic [ref=e228]: Title
+              - separator "Resize columns" [ref=e229]
+            - columnheader "Album Resize columns" [ref=e230]:
+              - generic [ref=e233]: Album
+              - separator "Resize columns" [ref=e234]
+            - columnheader "Date added Resize columns" [ref=e235]:
+              - generic [ref=e238]: Date added
+              - separator "Resize columns" [ref=e239]
+            - columnheader "Duration" [ref=e240]:
+              - generic "Duration" [ref=e242]:
+                - img [ref=e243]
+          - button "Change visible columns" [ref=e246] [cursor=pointer]:
+            - img [ref=e248]
+          - row "1 Play DAISIES by Justin Bieber DAISIES Justin Bieber SWAG 11 Jul 2025 Add to Liked Songs 2:56 More options for DAISIES by Justin Bieber" [ref=e250]:
+            - gridcell "1 Play DAISIES by Justin Bieber" [ref=e251]:
+              - generic [ref=e252]:
+                - generic: "1"
+                - button "Play DAISIES by Justin Bieber":
+                  - img
+            - gridcell "DAISIES Justin Bieber" [ref=e253]:
+              - img [ref=e254]
+              - generic [ref=e255]:
+                - link "DAISIES" [ref=e256] [cursor=pointer]:
+                  - /url: /track/5BZsQlgw21vDOAjoqkNgKb
+                  - generic [ref=e257]: DAISIES
+                - link "Justin Bieber" [ref=e260] [cursor=pointer]:
+                  - /url: /artist/1uNFoZAHBGtllmzznpCI3s
+            - gridcell "SWAG" [ref=e261]:
+              - link "SWAG" [ref=e263] [cursor=pointer]:
+                - /url: /album/5vD5M5VW62LL78Ko8x0CVZ
+            - gridcell "11 Jul 2025" [ref=e264]:
+              - generic [ref=e265]: 11 Jul 2025
+            - gridcell "Add to Liked Songs 2:56 More options for DAISIES by Justin Bieber" [ref=e266]:
+              - button "Add to Liked Songs" [ref=e267] [cursor=pointer]:
+                - img [ref=e269]
+              - generic [ref=e272]: 2:56
+              - button "More options for DAISIES by Justin Bieber" [ref=e273] [cursor=pointer]:
+                - img [ref=e275]
+          - row "2 Play Babydoll by Dominic Fike Babydoll Dominic Fike Don't Forget About Me, Demos 13 Mar 2026 Add to Liked Songs 1:37 More options for Babydoll by Dominic Fike" [ref=e277]:
+            - gridcell "2 Play Babydoll by Dominic Fike" [ref=e278]:
+              - generic [ref=e279]:
+                - generic: "2"
+                - button "Play Babydoll by Dominic Fike":
+                  - img
+            - gridcell "Babydoll Dominic Fike" [ref=e280]:
+              - img [ref=e281]
+              - generic [ref=e282]:
+                - link "Babydoll" [ref=e283] [cursor=pointer]:
+                  - /url: /track/7yNf9YjeO5JXUE3JEBgnYc
+                  - generic [ref=e284]: Babydoll
+                - link "Dominic Fike" [ref=e287] [cursor=pointer]:
+                  - /url: /artist/6USv9qhCn6zfxlBQIYJ9qs
+            - gridcell "Don't Forget About Me, Demos" [ref=e288]:
+              - link "Don't Forget About Me, Demos" [ref=e290] [cursor=pointer]:
+                - /url: /album/05jbNkYoEQdjVDHEHtg1gY
+            - gridcell "13 Mar 2026" [ref=e291]:
+              - generic [ref=e292]: 13 Mar 2026
+            - gridcell "Add to Liked Songs 1:37 More options for Babydoll by Dominic Fike" [ref=e293]:
+              - button "Add to Liked Songs" [ref=e294] [cursor=pointer]:
+                - img [ref=e296]
+              - generic [ref=e299]: 1:37
+              - button "More options for Babydoll by Dominic Fike" [ref=e300] [cursor=pointer]:
+                - img [ref=e302]
+          - row "3 Play Dracula - JENNIE Remix by Tame Impala, JENNIE Dracula - JENNIE Remix Explicit Tame Impala, JENNIE Dracula (Remix) 20 Feb 2026 Add to Liked Songs 3:29 More options for Dracula - JENNIE Remix by Tame Impala, JENNIE" [ref=e304]:
+            - gridcell "3 Play Dracula - JENNIE Remix by Tame Impala, JENNIE" [ref=e305]:
+              - generic [ref=e306]:
+                - generic: "3"
+                - button "Play Dracula - JENNIE Remix by Tame Impala, JENNIE":
+                  - img
+            - gridcell "Dracula - JENNIE Remix Explicit Tame Impala, JENNIE" [ref=e307]:
+              - img [ref=e308]
+              - generic [ref=e309]:
+                - link "Dracula - JENNIE Remix" [ref=e310] [cursor=pointer]:
+                  - /url: /track/5yvVYFDUpbnjcnRBgjwTzM
+                  - generic [ref=e311]: Dracula - JENNIE Remix
+                - generic "Explicit" [ref=e313]:
+                  - generic [ref=e314]: E
+                - generic [ref=e316]:
+                  - link "Tame Impala" [ref=e317] [cursor=pointer]:
+                    - /url: /artist/5INjqkS1o8h1imAzPqGZBb
+                  - text: ","
+                  - link "JENNIE" [ref=e318] [cursor=pointer]:
+                    - /url: /artist/250b0Wlc5Vk0CoUsaCY84M
+            - gridcell "Dracula (Remix)" [ref=e319]:
+              - link "Dracula (Remix)" [ref=e321] [cursor=pointer]:
+                - /url: /album/6KFq3hJB6JnNvDbEHRvPoK
+            - gridcell "20 Feb 2026" [ref=e322]:
+              - generic [ref=e323]: 20 Feb 2026
+            - gridcell "Add to Liked Songs 3:29 More options for Dracula - JENNIE Remix by Tame Impala, JENNIE" [ref=e324]:
+              - button "Add to Liked Songs" [ref=e325] [cursor=pointer]:
+                - img [ref=e327]
+              - generic [ref=e330]: 3:29
+              - button "More options for Dracula - JENNIE Remix by Tame Impala, JENNIE" [ref=e331] [cursor=pointer]:
+                - img [ref=e333]
+          - row "4 Play Stateside + Zara Larsson by PinkPantheress, Zara Larsson Stateside + Zara Larsson PinkPantheress, Zara Larsson Fancy Some More? 2 Jan 2026 Add to Liked Songs 3:04 More options for Stateside + Zara Larsson by PinkPantheress, Zara Larsson" [ref=e335]:
+            - gridcell "4 Play Stateside + Zara Larsson by PinkPantheress, Zara Larsson" [ref=e336]:
+              - generic [ref=e337]:
+                - generic: "4"
+                - button "Play Stateside + Zara Larsson by PinkPantheress, Zara Larsson":
+                  - img
+            - gridcell "Stateside + Zara Larsson PinkPantheress, Zara Larsson" [ref=e338]:
+              - img [ref=e339]
+              - generic [ref=e340]:
+                - link "Stateside + Zara Larsson" [ref=e341] [cursor=pointer]:
+                  - /url: /track/1DwscornXpj8fmOmYVlqZt
+                  - generic [ref=e342]: Stateside + Zara Larsson
+                - generic [ref=e344]:
+                  - link "PinkPantheress" [ref=e345] [cursor=pointer]:
+                    - /url: /artist/78rUTD7y6Cy67W1RVzYs7t
+                  - text: ","
+                  - link "Zara Larsson" [ref=e346] [cursor=pointer]:
+                    - /url: /artist/1Xylc3o4UrD53lo9CvFvVg
+            - gridcell "Fancy Some More?" [ref=e347]:
+              - link "Fancy Some More?" [ref=e349] [cursor=pointer]:
+                - /url: /album/12Lig9oAX9nvpWHft5cHgF
+            - gridcell "2 Jan 2026" [ref=e350]:
+              - generic [ref=e351]: 2 Jan 2026
+            - gridcell "Add to Liked Songs 3:04 More options for Stateside + Zara Larsson by PinkPantheress, Zara Larsson" [ref=e352]:
+              - button "Add to Liked Songs" [ref=e353] [cursor=pointer]:
+                - img [ref=e355]
+              - generic [ref=e358]: 3:04
+              - button "More options for Stateside + Zara Larsson by PinkPantheress, Zara Larsson" [ref=e359] [cursor=pointer]:
+                - img [ref=e361]
+          - row "5 Play Risk It All by Bruno Mars Risk It All Bruno Mars The Romantic 27 Feb 2026 Add to Liked Songs 3:24 More options for Risk It All by Bruno Mars" [ref=e363]:
+            - gridcell "5 Play Risk It All by Bruno Mars" [ref=e364]:
+              - generic [ref=e365]:
+                - generic: "5"
+                - button "Play Risk It All by Bruno Mars":
+                  - img
+            - gridcell "Risk It All Bruno Mars" [ref=e366]:
+              - img [ref=e367]
+              - generic [ref=e368]:
+                - link "Risk It All" [ref=e369] [cursor=pointer]:
+                  - /url: /track/5y2ijHECwFYWqcAHKTZgzD
+                  - generic [ref=e370]: Risk It All
+                - link "Bruno Mars" [ref=e373] [cursor=pointer]:
+                  - /url: /artist/0du5cEVh5yTK9QJze8zA0C
+            - gridcell "The Romantic" [ref=e374]:
+              - link "The Romantic" [ref=e376] [cursor=pointer]:
+                - /url: /album/7vI4iTxDmgEN63liQHPEX1
+            - gridcell "27 Feb 2026" [ref=e377]:
+              - generic [ref=e378]: 27 Feb 2026
+            - gridcell "Add to Liked Songs 3:24 More options for Risk It All by Bruno Mars" [ref=e379]:
+              - button "Add to Liked Songs" [ref=e380] [cursor=pointer]:
+                - img [ref=e382]
+              - generic [ref=e385]: 3:24
+              - button "More options for Risk It All by Bruno Mars" [ref=e386] [cursor=pointer]:
+                - img [ref=e388]
+          - row "6 Play Man I Need by Olivia Dean Man I Need Olivia Dean Man I Need 22 Aug 2025 Add to Liked Songs 3:04 More options for Man I Need by Olivia Dean" [ref=e390]:
+            - gridcell "6 Play Man I Need by Olivia Dean" [ref=e391]:
+              - generic [ref=e392]:
+                - generic: "6"
+                - button "Play Man I Need by Olivia Dean":
+                  - img
+            - gridcell "Man I Need Olivia Dean" [ref=e393]:
+              - img [ref=e394]
+              - generic [ref=e395]:
+                - link "Man I Need" [ref=e396] [cursor=pointer]:
+                  - /url: /track/1qbmS6ep2hbBRaEZFpn7BX
+                  - generic [ref=e397]: Man I Need
+                - link "Olivia Dean" [ref=e400] [cursor=pointer]:
+                  - /url: /artist/00x1fYSGhdqScXBRpSj3DW
+            - gridcell "Man I Need" [ref=e401]:
+              - link "Man I Need" [ref=e403] [cursor=pointer]:
+                - /url: /album/0Bv6OJO0L5gcf20DMww54a
+            - gridcell "22 Aug 2025" [ref=e404]:
+              - generic [ref=e405]: 22 Aug 2025
+            - gridcell "Add to Liked Songs 3:04 More options for Man I Need by Olivia Dean" [ref=e406]:
+              - button "Add to Liked Songs" [ref=e407] [cursor=pointer]:
+                - img [ref=e409]
+              - generic [ref=e412]: 3:04
+              - button "More options for Man I Need by Olivia Dean" [ref=e413] [cursor=pointer]:
+                - img [ref=e415]
+      - separator [ref=e419]

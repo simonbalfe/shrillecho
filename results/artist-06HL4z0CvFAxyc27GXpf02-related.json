@@ -1,0 +1,85 @@
+{
+  "artist": "Taylor Swift",
+  "relatedArtists": [
+    {
+      "name": "Olivia Rodrigo",
+      "uri": "spotify:artist:1McMsnEElThX1knmY4oliG"
+    },
+    {
+      "name": "Sabrina Carpenter",
+      "uri": "spotify:artist:74KM79TiuVKeVCqs8QtB0B"
+    },
+    {
+      "name": "Gracie Abrams",
+      "uri": "spotify:artist:4tuJ0bMpJh08umKkEXKUI5"
+    },
+    {
+      "name": "Ariana Grande",
+      "uri": "spotify:artist:66CXWjxzNUsdJxJ2JdwvnR"
+    },
+    {
+      "name": "Miley Cyrus",
+      "uri": "spotify:artist:5YGY8feqx7naU7z4HrwZM6"
+    },
+    {
+      "name": "Harry Styles",
+      "uri": "spotify:artist:6KImCVD70vtIoJWnq6nGn3"
+    },
+    {
+      "name": "Justin Bieber",
+      "uri": "spotify:artist:1uNFoZAHBGtllmzznpCI3s"
+    },
+    {
+      "name": "One Direction",
+      "uri": "spotify:artist:4AK6F7OLvEQ5QYCBNiQWHq"
+    },
+    {
+      "name": "Tate McRae",
+      "uri": "spotify:artist:45dkTj5sMRSjrmBSBeiHym"
+    },
+    {
+      "name": "Selena Gomez",
+      "uri": "spotify:artist:0C8ZW7ezQVs4URX5aX7Kqx"
+    },
+    {
+      "name": "Lana Del Rey",
+      "uri": "spotify:artist:00FQb4jTyendYWaN8pK0wa"
+    },
+    {
+      "name": "Katy Perry",
+      "uri": "spotify:artist:6jJ0s89eD6GaHleKKya26X"
+    },
+    {
+      "name": "Conan Gray",
+      "uri": "spotify:artist:4Uc8Dsxct0oMqx0P6i60ea"
+    },
+    {
+      "name": "Billie Eilish",
+      "uri": "spotify:artist:6qqNVTkY8uBg9cP3Jd7DAH"
+    },
+    {
+      "name": "Chappell Roan",
+      "uri": "spotify:artist:7GlBOeep6PqTfFi59PTUUN"
+    },
+    {
+      "name": "Lady Gaga",
+      "uri": "spotify:artist:1HY2Jd0NmPuamShAr6KMms"
+    },
+    {
+      "name": "sombr",
+      "uri": "spotify:artist:4G9NDjRyZFDlJKMRL8hx3S"
+    },
+    {
+      "name": "Madison Beer",
+      "uri": "spotify:artist:2kRfqPViCqYdSGhYSM9R0Q"
+    },
+    {
+      "name": "Dua Lipa",
+      "uri": "spotify:artist:6M2wZ9GZgrQXHCFfjv46we"
+    },
+    {
+      "name": "Troye Sivan",
+      "uri": "spotify:artist:3WGpXCj9YhhfX11TToZcXP"
+    }
+  ]
+}

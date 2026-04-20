@@ -1,6 +1,11 @@
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { db } from '../index'
 import { artist, scrape, scrapeArtist } from '../schema'
+
+export interface ArtistMeta {
+  name?: string | null
+  imageUrl?: string | null
+}
 
 export async function createScrape(userId: string, seedArtist: string, depth: number) {
   const [row] = await db
@@ -17,19 +22,26 @@ export async function getScrapesByUser(userId: string) {
   })
 }
 
-export async function createArtist(artistId: string) {
+export async function updateScrapeStatus(scrapeId: number, status: string) {
+  await db.update(scrape).set({ status }).where(eq(scrape.id, scrapeId))
+}
+
+export async function createArtist(artistId: string, meta?: ArtistMeta) {
+  const name = meta?.name ?? null
+  const imageUrl = meta?.imageUrl ?? null
+
   const [row] = await db
     .insert(artist)
-    .values({ artistId })
-    .onConflictDoNothing({ target: artist.artistId })
+    .values({ artistId, name, imageUrl })
+    .onConflictDoUpdate({
+      target: artist.artistId,
+      set: {
+        name: sql`COALESCE(EXCLUDED.name, ${artist.name})`,
+        imageUrl: sql`COALESCE(EXCLUDED.image_url, ${artist.imageUrl})`,
+      },
+    })
     .returning({ id: artist.id })
-
-  if (row) return row.id
-
-  const existing = await db.query.artist.findFirst({
-    where: eq(artist.artistId, artistId),
-  })
-  return existing!.id
+  return row.id
 }
 
 export async function linkScrapeArtist(scrapeId: number, artistDbId: number) {
@@ -41,4 +53,19 @@ export async function getArtistsByScrape(scrapeId: number) {
     where: eq(scrapeArtist.scrapeId, scrapeId),
     with: { artist: true },
   })
+}
+
+export async function getAllArtistsByUser(userId: string) {
+  return db
+    .selectDistinct({
+      id: artist.id,
+      artistId: artist.artistId,
+      name: artist.name,
+      imageUrl: artist.imageUrl,
+    })
+    .from(artist)
+    .innerJoin(scrapeArtist, eq(scrapeArtist.artistId, artist.id))
+    .innerJoin(scrape, eq(scrape.id, scrapeArtist.scrapeId))
+    .where(eq(scrape.userId, userId))
+    .orderBy(artist.name)
 }

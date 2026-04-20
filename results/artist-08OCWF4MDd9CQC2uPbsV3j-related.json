@@ -1,0 +1,85 @@
+{
+  "artist": "Xavi",
+  "relatedArtists": [
+    {
+      "name": "Former Hero",
+      "uri": "spotify:artist:77WqTzN8g3Wr9PeVFoG3Mm"
+    },
+    {
+      "name": "oneohkay",
+      "uri": "spotify:artist:0VeWlMDxZcMinxtSWUDYWY"
+    },
+    {
+      "name": "yitaku",
+      "uri": "spotify:artist:3hX5pgfpwHXYy4zeuJUWIS"
+    },
+    {
+      "name": "Jaron",
+      "uri": "spotify:artist:4kerBatvaELCGJDnDqW5oq"
+    },
+    {
+      "name": "skygate",
+      "uri": "spotify:artist:26rM5Nrv8o0NOOxwI6h8KG"
+    },
+    {
+      "name": "Sakuraburst",
+      "uri": "spotify:artist:4gW5XDeiXQJY7Lpdp8TXKv"
+    },
+    {
+      "name": "Sanjaux",
+      "uri": "spotify:artist:4lj5eWDUwJBenZ6FWEgGIt"
+    },
+    {
+      "name": "Auralen",
+      "uri": "spotify:artist:22lD96yYOJaQhIMgBqSilg"
+    },
+    {
+      "name": "Majent",
+      "uri": "spotify:artist:6pTVLPzvYW3SvwfyjDxtXX"
+    },
+    {
+      "name": "succducc",
+      "uri": "spotify:artist:2G9JMFq2Qy8EWXydQAR05t"
+    },
+    {
+      "name": "JKuch",
+      "uri": "spotify:artist:7oRWzmj2sdRKqbgwbEmODT"
+    },
+    {
+      "name": "Innerbloom",
+      "uri": "spotify:artist:4e2TGPDpIPqCfgDICTjItg"
+    },
+    {
+      "name": "Summet",
+      "uri": "spotify:artist:5OpU9iKnpYToRqptji8FO4"
+    },
+    {
+      "name": "kittito",
+      "uri": "spotify:artist:4eyVchx2EoP0MhAUX0Vj1X"
+    },
+    {
+      "name": "Duumu",
+      "uri": "spotify:artist:6q8cRPrSLahGAZSVnjIYjF"
+    },
+    {
+      "name": "JB Hain",
+      "uri": "spotify:artist:7iJUjgKf5EfgLRlczakDtA"
+    },
+    {
+      "name": "MRNX",
+      "uri": "spotify:artist:4983hwHUJkAu1mE5rjPubF"
+    },
+    {
+      "name": "Akira Flay",
+      "uri": "spotify:artist:4WJaVVVSmLvbX7SmE2mdnz"
+    },
+    {
+      "name": "helloworld",
+      "uri": "spotify:artist:01qG5pbsKe96w87ZMjphP4"
+    },
+    {
+      "name": "RefraQ",
+      "uri": "spotify:artist:5RaDXAZ99mBjGfoplomPlX"
+    }
+  ]
+}

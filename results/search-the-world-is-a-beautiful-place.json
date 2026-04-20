@@ -1,0 +1,328 @@
+{
+  "query": "the world is a beautiful place",
+  "topResult": {
+    "__typename": "Artist",
+    "onPlatformReputationTrait": {
+      "verification": {
+        "isVerified": true
+      }
+    },
+    "profile": {
+      "name": "The World Is A Beautiful Place & I Am No Longer Afraid To Die"
+    },
+    "uri": "spotify:artist:5bCNJ1ICzdnzK0yoCIP2Ip",
+    "visualIdentity": {
+      "squareCoverImage": {
+        "__typename": "VisualIdentityImage",
+        "extractedColorSet": {
+          "encoreBaseSetTextColor": {
+            "alpha": 255,
+            "blue": 216,
+            "green": 216,
+            "red": 208
+          },
+          "highContrast": {
+            "backgroundBase": {
+              "alpha": 255,
+              "blue": 85,
+              "green": 85,
+              "red": 78
+            },
+            "backgroundTintedBase": {
+              "alpha": 255,
+              "blue": 52,
+              "green": 52,
+              "red": 46
+            },
+            "textBase": {
+              "alpha": 255,
+              "blue": 255,
+              "green": 255,
+              "red": 255
+            },
+            "textBrightAccent": {
+              "alpha": 255,
+              "blue": 255,
+              "green": 255,
+              "red": 255
+            },
+            "textSubdued": {
+              "alpha": 255,
+              "blue": 207,
+              "green": 207,
+              "red": 199
+            }
+          },
+          "higherContrast": {
+            "backgroundBase": {
+              "alpha": 255,
+              "blue": 55,
+              "green": 55,
+              "red": 48
+            },
+            "backgroundTintedBase": {
+              "alpha": 255,
+              "blue": 87,
+              "green": 87,
+              "red": 81
+            },
+            "textBase": {
+              "alpha": 255,
+              "blue": 255,
+              "green": 255,
+              "red": 255
+            },
+            "textBrightAccent": {
+              "alpha": 255,
+              "blue": 96,
+              "green": 215,
+              "red": 30
+            },
+            "textSubdued": {
+              "alpha": 255,
+              "blue": 207,
+              "green": 207,
+              "red": 199
+            }
+          },
+          "minContrast": {
+            "backgroundBase": {
+              "alpha": 255,
+              "blue": 154,
+              "green": 154,
+              "red": 147
+            },
+            "backgroundTintedBase": {
+              "alpha": 255,
+              "blue": 130,
+              "green": 130,
+              "red": 123
+            },
+            "textBase": {
+              "alpha": 255,
+              "blue": 255,
+              "green": 255,
+              "red": 255
+            },
+            "textBrightAccent": {
+              "alpha": 255,
+              "blue": 255,
+              "green": 255,
+              "red": 255
+            },
+            "textSubdued": {
+              "alpha": 255,
+              "blue": 255,
+              "green": 255,
+              "red": 255
+            }
+          }
+        }
+      }
+    },
+    "visuals": {
+      "avatarImage": {
+        "extractedColors": {
+          "colorDark": {
+            "hex": "#737777",
+            "isFallback": false
+          }
+        },
+        "sources": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab6761610000e5ebf6a7979f4288ebf500cc96c2",
+            "width": 640
+          },
+          {
+            "height": 160,
+            "url": "https://i.scdn.co/image/ab6761610000f178f6a7979f4288ebf500cc96c2",
+            "width": 160
+          },
+          {
+            "height": 320,
+            "url": "https://i.scdn.co/image/ab67616100005174f6a7979f4288ebf500cc96c2",
+            "width": 320
+          }
+        ]
+      }
+    }
+  },
+  "artists": [
+    {
+      "name": "The World Is A Beautiful Place & I Am No Longer Afraid To Die",
+      "uri": "spotify:artist:5bCNJ1ICzdnzK0yoCIP2Ip"
+    },
+    {
+      "name": "The Beat",
+      "uri": "spotify:artist:4R90PNicCsCsEoRm8XwiMS"
+    },
+    {
+      "name": "James",
+      "uri": "spotify:artist:0qLNsNKm8bQcMoRFkR8Hmh"
+    },
+    {
+      "name": "Richard Ashcroft",
+      "uri": "spotify:artist:1HGTHrRQkw0BtevSo1jucU"
+    },
+    {
+      "name": "Womack & Womack",
+      "uri": "spotify:artist:7qShKycqNUP0GLEiTENDVZ"
+    },
+    {
+      "name": "Deacon Blue",
+      "uri": "spotify:artist:5jqKIZLB5WA5KquEihB3ND"
+    },
+    {
+      "name": "Happy Mondays",
+      "uri": "spotify:artist:339DNkQkuhHKEcHw6oK8f0"
+    },
+    {
+      "name": "The Wonder Stuff",
+      "uri": "spotify:artist:0Uo1d5A6BR1I155GlD9WYo"
+    },
+    {
+      "name": "Viola Beach",
+      "uri": "spotify:artist:7DruTvBV7owt1aSAZHsU58"
+    },
+    {
+      "name": "Fun Boy Three",
+      "uri": "spotify:artist:1dmEUAQBopYUrsMnQnScWL"
+    }
+  ],
+  "tracks": [
+    {
+      "name": "January 10th, 2014",
+      "uri": "spotify:track:0CZpruCAAoKC9DXB587jeN",
+      "artists": [
+        "The World Is A Beautiful Place & I Am No Longer Afraid To Die"
+      ],
+      "album": "Harmlessness"
+    },
+    {
+      "name": "Heartbeat in the Brain",
+      "uri": "spotify:track:6rCQnAXP0UKEGKPZF8u5iL",
+      "artists": [
+        "The World Is A Beautiful Place & I Am No Longer Afraid To Die"
+      ],
+      "album": "Whenever, If Ever"
+    },
+    {
+      "name": "The World Is Ugly",
+      "uri": "spotify:track:6VtcgrVYo2xfygcWAfRpd1",
+      "artists": [
+        "My Chemical Romance"
+      ],
+      "album": "Number Three"
+    },
+    {
+      "name": "High Enough",
+      "uri": "spotify:track:1D9HQactbJoUudf9B119Y5",
+      "artists": [
+        "K.Flay"
+      ],
+      "album": "Every Where Is Some Where"
+    },
+    {
+      "name": "The World Is a Beautiful Place",
+      "uri": "spotify:track:1ISfBazeZfV3WYPDoBtU7z",
+      "artists": [
+        "Mark Ferwalt"
+      ],
+      "album": "The World Is a Beautiful Place"
+    },
+    {
+      "name": "High Enough",
+      "uri": "spotify:track:1qwno7xb5mJe71xtMS6jl2",
+      "artists": [
+        "K.Flay"
+      ],
+      "album": "Every Where Is Some Where"
+    },
+    {
+      "name": "Celebrate",
+      "uri": "spotify:track:5K2jzTssD4jHjItBz15wyz",
+      "artists": [
+        "Pinknruby"
+      ],
+      "album": "Elation"
+    },
+    {
+      "name": "High Enough - RAC Remix",
+      "uri": "spotify:track:1cxttvflVlYD4QA34tR5Yj",
+      "artists": [
+        "K.Flay",
+        "RAC"
+      ],
+      "album": "High Enough (RAC Remix)"
+    },
+    {
+      "name": "Lola",
+      "uri": "spotify:track:3DGOat8Jba5orLYaVBy6zZ",
+      "artists": [
+        "The Kinks"
+      ],
+      "album": "Lola"
+    },
+    {
+      "name": "Wrote For Luck",
+      "uri": "spotify:track:1TF5tTP0JTDiQSELinf0ED",
+      "artists": [
+        "Happy Mondays"
+      ],
+      "album": "Wrote For Luck"
+    }
+  ],
+  "playlists": [
+    {
+      "name": "This Is The World Is A Beautiful Place & I Am No Longer Afraid To Die",
+      "uri": "spotify:playlist:37i9dQZF1DZ06evO333apj",
+      "owner": "Spotify"
+    },
+    {
+      "name": "IT GETS BETTER, IT ALWAYS GETS BETTER, THE WORLD IS A BEAUTIFUL PLACE",
+      "uri": "spotify:playlist:4JVDnx5uc8oyP4UbArtrms",
+      "owner": "!mmortal"
+    },
+    {
+      "name": "MIKASA ACKERMAN",
+      "uri": "spotify:playlist:0MQ9FVUTluDUI37hzHoEr8",
+      "owner": "espress0e"
+    },
+    {
+      "name": "morning optimism",
+      "uri": "spotify:playlist:20bv9kE8b0HCESF499WdUg",
+      "owner": "leela.keshav"
+    },
+    {
+      "name": "The Most Beautiful Songs in the World",
+      "uri": "spotify:playlist:37i9dQZF1DX9Z3vMB2b8im",
+      "owner": "Spotify"
+    },
+    {
+      "name": "Worlds most annoying songs",
+      "uri": "spotify:playlist:7Hsubhrb178OIF6nPVeWJW",
+      "owner": "Animelove121"
+    },
+    {
+      "name": "The World's Greatest – R. Kelly",
+      "uri": "spotify:playlist:5yncIs4Rj6tXZ8ThKGXy81",
+      "owner": "shada.ahrar"
+    },
+    {
+      "name": "The Beautiful South -Greatest Hits",
+      "uri": "spotify:playlist:2KBFT9WM49iQhl45mecIm5",
+      "owner": "Hannah Beal"
+    },
+    {
+      "name": "90s Rave Classics",
+      "uri": "spotify:playlist:2jBoXj5NxzT7HUf0YFIkFd",
+      "owner": "Tom Bantica"
+    },
+    {
+      "name": "Everything",
+      "uri": "spotify:playlist:6BCwHPt8SxK0PYwDPti8Kh",
+      "owner": "Will Gamet"
+    }
+  ]
+}

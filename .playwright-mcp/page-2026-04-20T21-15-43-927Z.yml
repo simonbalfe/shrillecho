@@ -1,0 +1,66 @@
+- generic [ref=e4]:
+  - generic [ref=e5]:
+    - link "Skip to main content" [ref=e6] [cursor=pointer]:
+      - /url: "#main-view"
+      - generic [ref=e7]: Skip to main content
+    - link "Spotify" [ref=e9] [cursor=pointer]:
+      - /url: /
+      - img "Spotify" [ref=e10]
+    - generic [ref=e13]:
+      - button "Home" [ref=e14] [cursor=pointer]:
+        - img [ref=e16]
+      - search [ref=e19]:
+        - button "Search" [ref=e21] [cursor=pointer]:
+          - img [ref=e23]
+        - generic [ref=e25]:
+          - combobox "What do you want to play?" [ref=e26]
+          - generic:
+            - generic: ⌘ShiftL
+        - button "Browse" [ref=e29] [cursor=pointer]:
+          - img [ref=e31]
+    - generic [ref=e35]:
+      - button "Premium" [ref=e36] [cursor=pointer]
+      - button "Support" [ref=e37] [cursor=pointer]
+      - button "Download" [ref=e38] [cursor=pointer]
+      - link "Install App" [ref=e40] [cursor=pointer]:
+        - /url: /download
+        - img [ref=e42]
+        - generic [ref=e45]: Install App
+      - generic [ref=e46]:
+        - button "Sign up" [ref=e47] [cursor=pointer]
+        - button "Log in" [ref=e48] [cursor=pointer]:
+          - generic [ref=e49]: Log in
+  - generic [ref=e50]:
+    - navigation "Main" [ref=e51]:
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - generic [ref=e56]:
+            - heading "Your Library" [level=1] [ref=e58]
+            - button "Create" [ref=e60] [cursor=pointer]:
+              - img [ref=e61]
+          - generic [ref=e65]:
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - generic [ref=e68]: Create your first playlist
+                - generic [ref=e69]: It’s easy, we’ll help you
+              - button "Create playlist" [ref=e71] [cursor=pointer]:
+                - generic [ref=e72]: Create playlist
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - generic [ref=e75]: Let’s find some podcasts to follow
+                - generic [ref=e76]: We’ll keep you updated on new episodes
+              - link "Browse podcasts" [ref=e78] [cursor=pointer]:
+                - /url: /genre/podcasts-web
+                - generic [ref=e79]: Browse podcasts
+            - grid "Your Library" [ref=e81]:
+              - generic [ref=e82]:
+                - row
+                - row
+        - button "English" [ref=e85] [cursor=pointer]:
+          - img [ref=e87]
+          - text: English
+    - generic [ref=e90]:
+      - text: Resize main navigation
+      - slider "Resize main navigation" [ref=e91]: "280"
+  - main [ref=e98]:
+    - separator [ref=e102]

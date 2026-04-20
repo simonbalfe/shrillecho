@@ -1,0 +1,906 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - link "Skip to main content" [ref=e6] [cursor=pointer]:
+        - /url: "#main-view"
+        - generic [ref=e7]: Skip to main content
+      - link "Spotify" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "Spotify" [ref=e10]
+      - generic [ref=e13]:
+        - button "Home" [ref=e14] [cursor=pointer]:
+          - img [ref=e16]
+        - search [ref=e19]:
+          - button "Search" [ref=e21] [cursor=pointer]:
+            - img [ref=e23]
+          - generic [ref=e25]:
+            - combobox "What do you want to play?" [ref=e26]
+            - generic:
+              - generic: ⌘ShiftL
+          - button "Browse" [ref=e29] [cursor=pointer]:
+            - img [ref=e31]
+      - generic [ref=e35]:
+        - button "Premium" [ref=e36] [cursor=pointer]
+        - button "Support" [ref=e37] [cursor=pointer]
+        - button "Download" [ref=e38] [cursor=pointer]
+        - link "Install App" [ref=e40] [cursor=pointer]:
+          - /url: /download
+          - img [ref=e42]
+          - generic [ref=e45]: Install App
+        - generic [ref=e46]:
+          - button "Sign up" [ref=e47] [cursor=pointer]
+          - button "Log in" [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]: Log in
+    - generic [ref=e50]:
+      - navigation "Main" [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e56]:
+              - heading "Your Library" [level=1] [ref=e58]
+              - button "Create" [ref=e60] [cursor=pointer]:
+                - img [ref=e61]
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - generic [ref=e67]:
+                  - generic [ref=e68]: Create your first playlist
+                  - generic [ref=e69]: It’s easy, we’ll help you
+                - button "Create playlist" [ref=e71] [cursor=pointer]:
+                  - generic [ref=e72]: Create playlist
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - generic [ref=e75]: Let’s find some podcasts to follow
+                  - generic [ref=e76]: We’ll keep you updated on new episodes
+                - link "Browse podcasts" [ref=e78] [cursor=pointer]:
+                  - /url: /genre/podcasts-web
+                  - generic [ref=e79]: Browse podcasts
+              - generic:
+                - grid "Your Library":
+                  - generic:
+                    - row
+                    - row
+          - generic [ref=e80]:
+            - generic [ref=e420]:
+              - generic [ref=e421]:
+                - link "Legal" [ref=e423] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/
+                  - generic [ref=e424]: Legal
+                - link "Safety & Privacy Center" [ref=e426] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/safetyandprivacy/
+                  - generic [ref=e427]: Safety & Privacy Center
+                - link "Privacy Policy" [ref=e429] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/
+                  - generic [ref=e430]: Privacy Policy
+                - button "Cookie Settings" [ref=e432] [cursor=pointer]:
+                  - generic [ref=e433]: Cookie Settings
+                - link "About Ads" [ref=e435] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/#s3
+                  - generic [ref=e436]: About Ads
+                - link "Accessibility" [ref=e438] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/accessibility/
+                  - generic [ref=e439]: Accessibility
+                - link "Modern Slavery Act" [ref=e441] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20Modern%20Slavery%20Statement%202023.pdf
+                  - generic [ref=e442]: Modern Slavery Act
+                - link "UK Tax Policy" [ref=e444] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/UK%20Tax%20Strategy%20Statement%202025.pdf
+                  - generic [ref=e445]: UK Tax Policy
+                - link "UK Gender Pay Report" [ref=e447] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20UK%20Gender%20Pay%20Report%202025.pdf
+                  - generic [ref=e448]: UK Gender Pay Report
+                - link "UK S172 Statement" [ref=e450] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify-UK-S172-Statement.pdf
+                  - generic [ref=e451]: UK S172 Statement
+              - link "Cookies" [ref=e452] [cursor=pointer]:
+                - /url: https://www.spotify.com/legal/cookies-policy/
+            - button "English" [ref=e82] [cursor=pointer]:
+              - img [ref=e84]
+              - text: English
+      - generic [ref=e87]:
+        - text: Resize main navigation
+        - slider "Resize main navigation" [ref=e88]: "280"
+    - complementary "Now playing bar" [ref=e90]:
+      - generic [ref=e91] [cursor=pointer]:
+        - generic [ref=e92]:
+          - paragraph [ref=e93]: Preview of Spotify
+          - paragraph [ref=e94]: Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.
+        - button "Sign up for free" [ref=e95]:
+          - generic [ref=e96]: Sign up for free
+      - generic:
+        - generic "Player controls" [ref=e98]:
+          - generic [ref=e99]:
+            - generic [ref=e100]:
+              - switch "Enable shuffle" [disabled] [ref=e101]:
+                - img [ref=e103]
+              - button "Previous" [disabled] [ref=e106]:
+                - img [ref=e108]
+            - button "Pause" [disabled] [ref=e110]:
+              - img [ref=e113]
+            - generic [ref=e115]:
+              - button "Next" [disabled] [ref=e116]:
+                - img [ref=e118]
+              - checkbox "Disable repeat" [disabled] [ref=e120]:
+                - img [ref=e122]
+          - generic [ref=e124]:
+            - generic [ref=e125]: "-:--"
+            - generic [ref=e128]:
+              - text: Change progress
+              - slider "Change progress" [disabled] [ref=e129]: "0"
+            - generic [ref=e135]: "-:--"
+        - generic [ref=e137]:
+          - button "Now playing view" [disabled] [ref=e138]:
+            - img [ref=e140]
+          - generic [ref=e143]:
+            - button "Mute" [ref=e144] [cursor=pointer]:
+              - img [ref=e146]
+            - generic [ref=e151]:
+              - text: Change volume
+              - slider "Change volume" [ref=e152]: "1"
+    - generic [ref=e158]:
+      - banner "Top bar and user menu" [ref=e159]
+      - main "Today’s Top Hits | Spotify Playlist" [ref=e167]:
+        - generic [ref=e170]:
+          - generic [ref=e171]: Public Playlist
+          - heading "Today’s Top Hits" [level=1] [ref=e174]
+          - generic [ref=e177]: "The hottest 50. Cover: Justin Bieber"
+          - generic [ref=e178]:
+            - generic [ref=e179]:
+              - figure "Spotify" [ref=e180]:
+                - img "Spotify" [ref=e182]
+              - link "Spotify" [ref=e184] [cursor=pointer]:
+                - /url: /user/spotify
+            - generic [ref=e185]: •
+            - generic [ref=e186]: 34,366,717 saves
+            - generic [ref=e187]: •
+            - generic [ref=e188]:
+              - generic [ref=e189]: 50 songs
+              - generic [ref=e190]: ","
+              - generic [ref=e191]: about 2 hr 30 min
+        - generic [ref=e192]:
+          - generic [ref=e197]:
+            - button "Play Today’s Top Hits" [ref=e199] [cursor=pointer]:
+              - img [ref=e202]
+            - button "Save to Your Library" [ref=e204] [cursor=pointer]:
+              - img [ref=e206]
+            - button "More options for Today’s Top Hits" [ref=e209] [cursor=pointer]:
+              - img [ref=e211]
+            - combobox [ref=e214]:
+              - generic [ref=e215]: List
+              - img [ref=e216]
+          - grid "Today’s Top Hits" [ref=e221]:
+            - row "# Title Resize columns Album Resize columns Date added Resize columns Duration" [ref=e222]:
+              - columnheader "#" [ref=e223]:
+                - generic [ref=e224]: "#"
+              - columnheader "Title Resize columns" [ref=e225]:
+                - generic [ref=e228]: Title
+                - separator "Resize columns" [ref=e229]
+              - columnheader "Album Resize columns" [ref=e230]:
+                - generic [ref=e233]: Album
+                - separator "Resize columns" [ref=e234]
+              - columnheader "Date added Resize columns" [ref=e235]:
+                - generic [ref=e238]: Date added
+                - separator "Resize columns" [ref=e239]
+              - columnheader "Duration" [ref=e240]:
+                - generic "Duration" [ref=e242]:
+                  - img [ref=e243]
+            - button "Change visible columns" [ref=e246] [cursor=pointer]:
+              - img [ref=e248]
+            - row "1 Play DAISIES by Justin Bieber DAISIES Justin Bieber SWAG 11 Jul 2025 Add to Liked Songs 2:56 More options for DAISIES by Justin Bieber" [ref=e250]:
+              - gridcell "1 Play DAISIES by Justin Bieber" [ref=e251]:
+                - generic [ref=e252]:
+                  - generic: "1"
+                  - button "Play DAISIES by Justin Bieber":
+                    - img
+              - gridcell "DAISIES Justin Bieber" [ref=e253]:
+                - img [ref=e254]
+                - generic [ref=e255]:
+                  - link "DAISIES" [ref=e256] [cursor=pointer]:
+                    - /url: /track/5BZsQlgw21vDOAjoqkNgKb
+                    - generic [ref=e257]: DAISIES
+                  - link "Justin Bieber" [ref=e260] [cursor=pointer]:
+                    - /url: /artist/1uNFoZAHBGtllmzznpCI3s
+              - gridcell "SWAG" [ref=e261]:
+                - link "SWAG" [ref=e263] [cursor=pointer]:
+                  - /url: /album/5vD5M5VW62LL78Ko8x0CVZ
+              - gridcell "11 Jul 2025" [ref=e264]:
+                - generic [ref=e265]: 11 Jul 2025
+              - gridcell "Add to Liked Songs 2:56 More options for DAISIES by Justin Bieber" [ref=e266]:
+                - button "Add to Liked Songs" [ref=e267] [cursor=pointer]:
+                  - img [ref=e269]
+                - generic [ref=e272]: 2:56
+                - button "More options for DAISIES by Justin Bieber" [ref=e273] [cursor=pointer]:
+                  - img [ref=e275]
+            - row "2 Play Babydoll by Dominic Fike Babydoll Dominic Fike Don't Forget About Me, Demos 13 Mar 2026 Add to Liked Songs 1:37 More options for Babydoll by Dominic Fike" [ref=e277]:
+              - gridcell "2 Play Babydoll by Dominic Fike" [ref=e278]:
+                - generic [ref=e279]:
+                  - generic: "2"
+                  - button "Play Babydoll by Dominic Fike":
+                    - img
+              - gridcell "Babydoll Dominic Fike" [ref=e280]:
+                - img [ref=e281]
+                - generic [ref=e282]:
+                  - link "Babydoll" [ref=e283] [cursor=pointer]:
+                    - /url: /track/7yNf9YjeO5JXUE3JEBgnYc
+                    - generic [ref=e284]: Babydoll
+                  - link "Dominic Fike" [ref=e287] [cursor=pointer]:
+                    - /url: /artist/6USv9qhCn6zfxlBQIYJ9qs
+              - gridcell "Don't Forget About Me, Demos" [ref=e288]:
+                - link "Don't Forget About Me, Demos" [ref=e290] [cursor=pointer]:
+                  - /url: /album/05jbNkYoEQdjVDHEHtg1gY
+              - gridcell "13 Mar 2026" [ref=e291]:
+                - generic [ref=e292]: 13 Mar 2026
+              - gridcell "Add to Liked Songs 1:37 More options for Babydoll by Dominic Fike" [ref=e293]:
+                - button "Add to Liked Songs" [ref=e294] [cursor=pointer]:
+                  - img [ref=e296]
+                - generic [ref=e299]: 1:37
+                - button "More options for Babydoll by Dominic Fike" [ref=e300] [cursor=pointer]:
+                  - img [ref=e302]
+            - row "3 Play Dracula - JENNIE Remix by Tame Impala, JENNIE Dracula - JENNIE Remix Explicit Tame Impala, JENNIE Dracula (Remix) 20 Feb 2026 Add to Liked Songs 3:29 More options for Dracula - JENNIE Remix by Tame Impala, JENNIE" [ref=e304]:
+              - gridcell "3 Play Dracula - JENNIE Remix by Tame Impala, JENNIE" [ref=e305]:
+                - generic [ref=e306]:
+                  - generic: "3"
+                  - button "Play Dracula - JENNIE Remix by Tame Impala, JENNIE":
+                    - img
+              - gridcell "Dracula - JENNIE Remix Explicit Tame Impala, JENNIE" [ref=e307]:
+                - img [ref=e308]
+                - generic [ref=e309]:
+                  - link "Dracula - JENNIE Remix" [ref=e310] [cursor=pointer]:
+                    - /url: /track/5yvVYFDUpbnjcnRBgjwTzM
+                    - generic [ref=e311]: Dracula - JENNIE Remix
+                  - generic "Explicit" [ref=e313]:
+                    - generic [ref=e314]: E
+                  - generic [ref=e316]:
+                    - link "Tame Impala" [ref=e317] [cursor=pointer]:
+                      - /url: /artist/5INjqkS1o8h1imAzPqGZBb
+                    - text: ","
+                    - link "JENNIE" [ref=e318] [cursor=pointer]:
+                      - /url: /artist/250b0Wlc5Vk0CoUsaCY84M
+              - gridcell "Dracula (Remix)" [ref=e319]:
+                - link "Dracula (Remix)" [ref=e321] [cursor=pointer]:
+                  - /url: /album/6KFq3hJB6JnNvDbEHRvPoK
+              - gridcell "20 Feb 2026" [ref=e322]:
+                - generic [ref=e323]: 20 Feb 2026
+              - gridcell "Add to Liked Songs 3:29 More options for Dracula - JENNIE Remix by Tame Impala, JENNIE" [ref=e324]:
+                - button "Add to Liked Songs" [ref=e325] [cursor=pointer]:
+                  - img [ref=e327]
+                - generic [ref=e330]: 3:29
+                - button "More options for Dracula - JENNIE Remix by Tame Impala, JENNIE" [ref=e331] [cursor=pointer]:
+                  - img [ref=e333]
+            - row "4 Play Stateside + Zara Larsson by PinkPantheress, Zara Larsson Stateside + Zara Larsson PinkPantheress, Zara Larsson Fancy Some More? 2 Jan 2026 Add to Liked Songs 3:04 More options for Stateside + Zara Larsson by PinkPantheress, Zara Larsson" [ref=e335]:
+              - gridcell "4 Play Stateside + Zara Larsson by PinkPantheress, Zara Larsson" [ref=e336]:
+                - generic [ref=e337]:
+                  - generic: "4"
+                  - button "Play Stateside + Zara Larsson by PinkPantheress, Zara Larsson":
+                    - img
+              - gridcell "Stateside + Zara Larsson PinkPantheress, Zara Larsson" [ref=e338]:
+                - img [ref=e339]
+                - generic [ref=e340]:
+                  - link "Stateside + Zara Larsson" [ref=e341] [cursor=pointer]:
+                    - /url: /track/1DwscornXpj8fmOmYVlqZt
+                    - generic [ref=e342]: Stateside + Zara Larsson
+                  - generic [ref=e344]:
+                    - link "PinkPantheress" [ref=e345] [cursor=pointer]:
+                      - /url: /artist/78rUTD7y6Cy67W1RVzYs7t
+                    - text: ","
+                    - link "Zara Larsson" [ref=e346] [cursor=pointer]:
+                      - /url: /artist/1Xylc3o4UrD53lo9CvFvVg
+              - gridcell "Fancy Some More?" [ref=e347]:
+                - link "Fancy Some More?" [ref=e349] [cursor=pointer]:
+                  - /url: /album/12Lig9oAX9nvpWHft5cHgF
+              - gridcell "2 Jan 2026" [ref=e350]:
+                - generic [ref=e351]: 2 Jan 2026
+              - gridcell "Add to Liked Songs 3:04 More options for Stateside + Zara Larsson by PinkPantheress, Zara Larsson" [ref=e352]:
+                - button "Add to Liked Songs" [ref=e353] [cursor=pointer]:
+                  - img [ref=e355]
+                - generic [ref=e358]: 3:04
+                - button "More options for Stateside + Zara Larsson by PinkPantheress, Zara Larsson" [ref=e359] [cursor=pointer]:
+                  - img [ref=e361]
+            - row "5 Play Risk It All by Bruno Mars Risk It All Bruno Mars The Romantic 27 Feb 2026 Add to Liked Songs 3:24 More options for Risk It All by Bruno Mars" [ref=e363]:
+              - gridcell "5 Play Risk It All by Bruno Mars" [ref=e364]:
+                - generic [ref=e365]:
+                  - generic: "5"
+                  - button "Play Risk It All by Bruno Mars":
+                    - img
+              - gridcell "Risk It All Bruno Mars" [ref=e366]:
+                - img [ref=e367]
+                - generic [ref=e368]:
+                  - link "Risk It All" [ref=e369] [cursor=pointer]:
+                    - /url: /track/5y2ijHECwFYWqcAHKTZgzD
+                    - generic [ref=e370]: Risk It All
+                  - link "Bruno Mars" [ref=e373] [cursor=pointer]:
+                    - /url: /artist/0du5cEVh5yTK9QJze8zA0C
+              - gridcell "The Romantic" [ref=e374]:
+                - link "The Romantic" [ref=e376] [cursor=pointer]:
+                  - /url: /album/7vI4iTxDmgEN63liQHPEX1
+              - gridcell "27 Feb 2026" [ref=e377]:
+                - generic [ref=e378]: 27 Feb 2026
+              - gridcell "Add to Liked Songs 3:24 More options for Risk It All by Bruno Mars" [ref=e379]:
+                - button "Add to Liked Songs" [ref=e380] [cursor=pointer]:
+                  - img [ref=e382]
+                - generic [ref=e385]: 3:24
+                - button "More options for Risk It All by Bruno Mars" [ref=e386] [cursor=pointer]:
+                  - img [ref=e388]
+            - row "6 Play Man I Need by Olivia Dean Man I Need Olivia Dean Man I Need 22 Aug 2025 Add to Liked Songs 3:04 More options for Man I Need by Olivia Dean" [ref=e453]:
+              - gridcell "6 Play Man I Need by Olivia Dean" [ref=e454]:
+                - generic [ref=e455]:
+                  - generic: "6"
+                  - button "Play Man I Need by Olivia Dean":
+                    - img
+              - gridcell "Man I Need Olivia Dean" [ref=e456]:
+                - img [ref=e457]
+                - generic [ref=e458]:
+                  - link "Man I Need" [ref=e459] [cursor=pointer]:
+                    - /url: /track/1qbmS6ep2hbBRaEZFpn7BX
+                    - generic [ref=e460]: Man I Need
+                  - link "Olivia Dean" [ref=e463] [cursor=pointer]:
+                    - /url: /artist/00x1fYSGhdqScXBRpSj3DW
+              - gridcell "Man I Need" [ref=e464]:
+                - link "Man I Need" [ref=e466] [cursor=pointer]:
+                  - /url: /album/0Bv6OJO0L5gcf20DMww54a
+              - gridcell "22 Aug 2025" [ref=e467]:
+                - generic [ref=e468]: 22 Aug 2025
+              - gridcell "Add to Liked Songs 3:04 More options for Man I Need by Olivia Dean" [ref=e469]:
+                - button "Add to Liked Songs" [ref=e470] [cursor=pointer]:
+                  - img [ref=e472]
+                - generic [ref=e475]: 3:04
+                - button "More options for Man I Need by Olivia Dean" [ref=e476] [cursor=pointer]:
+                  - img [ref=e478]
+            - row "7 Play drop dead by Olivia Rodrigo drop dead Olivia Rodrigo drop dead 4 days ago Add to Liked Songs 3:44 More options for drop dead by Olivia Rodrigo" [ref=e480]:
+              - gridcell "7 Play drop dead by Olivia Rodrigo" [ref=e481]:
+                - generic [ref=e482]:
+                  - generic: "7"
+                  - button "Play drop dead by Olivia Rodrigo":
+                    - img
+              - gridcell "drop dead Olivia Rodrigo" [ref=e483]:
+                - img [ref=e484]
+                - generic [ref=e485]:
+                  - link "drop dead" [ref=e486] [cursor=pointer]:
+                    - /url: /track/6gkbtMtioHgtyGjrMel6ei
+                    - generic [ref=e487]: drop dead
+                  - link "Olivia Rodrigo" [ref=e490] [cursor=pointer]:
+                    - /url: /artist/1McMsnEElThX1knmY4oliG
+              - gridcell "drop dead" [ref=e491]:
+                - link "drop dead" [ref=e493] [cursor=pointer]:
+                  - /url: /album/4OMvPbXaYlbUm6TnwyXGct
+              - gridcell "4 days ago" [ref=e494]:
+                - generic [ref=e495]: 4 days ago
+              - gridcell "Add to Liked Songs 3:44 More options for drop dead by Olivia Rodrigo" [ref=e496]:
+                - button "Add to Liked Songs" [ref=e497] [cursor=pointer]:
+                  - img [ref=e499]
+                - generic [ref=e502]: 3:44
+                - button "More options for drop dead by Olivia Rodrigo" [ref=e503] [cursor=pointer]:
+                  - img [ref=e505]
+            - row "8 Play Raindance (feat. Tems) by Dave, Tems Raindance (feat. Tems) Dave, Tems The Boy Who Played the Harp 31 Oct 2025 Add to Liked Songs 3:39 More options for Raindance (feat. Tems) by Dave, Tems" [ref=e507]:
+              - gridcell "8 Play Raindance (feat. Tems) by Dave, Tems" [ref=e508]:
+                - generic [ref=e509]:
+                  - generic: "8"
+                  - button "Play Raindance (feat. Tems) by Dave, Tems":
+                    - img
+              - gridcell "Raindance (feat. Tems) Dave, Tems" [ref=e510]:
+                - img [ref=e511]
+                - generic [ref=e512]:
+                  - link "Raindance (feat. Tems)" [ref=e513] [cursor=pointer]:
+                    - /url: /track/3oTuTpF1F3A7rEC6RKsMRz
+                    - generic [ref=e514]: Raindance (feat. Tems)
+                  - generic [ref=e516]:
+                    - link "Dave" [ref=e517] [cursor=pointer]:
+                      - /url: /artist/6Ip8FS7vWT1uKkJSweANQK
+                    - text: ","
+                    - link "Tems" [ref=e518] [cursor=pointer]:
+                      - /url: /artist/687cZJR45JO7jhk1LHIbgq
+              - gridcell "The Boy Who Played the Harp" [ref=e519]:
+                - link "The Boy Who Played the Harp" [ref=e521] [cursor=pointer]:
+                  - /url: /album/24f1GFXCkViGoRpmGqlSSl
+              - gridcell "31 Oct 2025" [ref=e522]:
+                - generic [ref=e523]: 31 Oct 2025
+              - gridcell "Add to Liked Songs 3:39 More options for Raindance (feat. Tems) by Dave, Tems" [ref=e524]:
+                - button "Add to Liked Songs" [ref=e525] [cursor=pointer]:
+                  - img [ref=e527]
+                - generic [ref=e530]: 3:39
+                - button "More options for Raindance (feat. Tems) by Dave, Tems" [ref=e531] [cursor=pointer]:
+                  - img [ref=e533]
+            - row "9 Play Opalite by Taylor Swift Opalite Taylor Swift The Life of a Showgirl 10 Oct 2025 Add to Liked Songs 3:55 More options for Opalite by Taylor Swift" [ref=e535]:
+              - gridcell "9 Play Opalite by Taylor Swift" [ref=e536]:
+                - generic [ref=e537]:
+                  - generic: "9"
+                  - button "Play Opalite by Taylor Swift":
+                    - img
+              - gridcell "Opalite Taylor Swift" [ref=e538]:
+                - img [ref=e539]
+                - generic [ref=e540]:
+                  - link "Opalite" [ref=e541] [cursor=pointer]:
+                    - /url: /track/3yWuTOYDztXjZxdE2cIRUa
+                    - generic [ref=e542]: Opalite
+                  - link "Taylor Swift" [ref=e545] [cursor=pointer]:
+                    - /url: /artist/06HL4z0CvFAxyc27GXpf02
+              - gridcell "The Life of a Showgirl" [ref=e546]:
+                - link "The Life of a Showgirl" [ref=e548] [cursor=pointer]:
+                  - /url: /album/4a6NzYL1YHRUgx9e3YZI6I
+              - gridcell "10 Oct 2025" [ref=e549]:
+                - generic [ref=e550]: 10 Oct 2025
+              - gridcell "Add to Liked Songs 3:55 More options for Opalite by Taylor Swift" [ref=e551]:
+                - button "Add to Liked Songs" [ref=e552] [cursor=pointer]:
+                  - img [ref=e554]
+                - generic [ref=e557]: 3:55
+                - button "More options for Opalite by Taylor Swift" [ref=e558] [cursor=pointer]:
+                  - img [ref=e560]
+            - row "10 Play Choosin' Texas by Ella Langley Choosin' Texas Ella Langley Choosin' Texas 28 Nov 2025 Add to Liked Songs 3:52 More options for Choosin' Texas by Ella Langley" [ref=e562]:
+              - gridcell "10 Play Choosin' Texas by Ella Langley" [ref=e563]:
+                - generic [ref=e564]:
+                  - generic: "10"
+                  - button "Play Choosin' Texas by Ella Langley":
+                    - img
+              - gridcell "Choosin' Texas Ella Langley" [ref=e565]:
+                - img [ref=e566]
+                - generic [ref=e567]:
+                  - link "Choosin' Texas" [ref=e568] [cursor=pointer]:
+                    - /url: /track/65DbTqJKhbwqYbZ1Okr0rc
+                    - generic [ref=e569]: Choosin' Texas
+                  - link "Ella Langley" [ref=e572] [cursor=pointer]:
+                    - /url: /artist/6BRxQ8cD3eqnrVj6WKDok8
+              - gridcell "Choosin' Texas" [ref=e573]:
+                - link "Choosin' Texas" [ref=e575] [cursor=pointer]:
+                  - /url: /album/4ggV0IaczfDFjVSwBM8yvi
+              - gridcell "28 Nov 2025" [ref=e576]:
+                - generic [ref=e577]: 28 Nov 2025
+              - gridcell "Add to Liked Songs 3:52 More options for Choosin' Texas by Ella Langley" [ref=e578]:
+                - button "Add to Liked Songs" [ref=e579] [cursor=pointer]:
+                  - img [ref=e581]
+                - generic [ref=e584]: 3:52
+                - button "More options for Choosin' Texas by Ella Langley" [ref=e585] [cursor=pointer]:
+                  - img [ref=e587]
+            - row "11 Play End of Beginning by Djo End of Beginning Djo DECIDE 9 Jan 2026 Add to Liked Songs 2:39 More options for End of Beginning by Djo" [ref=e589]:
+              - gridcell "11 Play End of Beginning by Djo" [ref=e590]:
+                - generic [ref=e591]:
+                  - generic: "11"
+                  - button "Play End of Beginning by Djo":
+                    - img
+              - gridcell "End of Beginning Djo" [ref=e592]:
+                - img [ref=e593]
+                - generic [ref=e594]:
+                  - link "End of Beginning" [ref=e595] [cursor=pointer]:
+                    - /url: /track/3qhlB30KknSejmIvZZLjOD
+                    - generic [ref=e596]: End of Beginning
+                  - link "Djo" [ref=e599] [cursor=pointer]:
+                    - /url: /artist/5p9HO3XC5P3BLxJs5Mtrhm
+              - gridcell "DECIDE" [ref=e600]:
+                - link "DECIDE" [ref=e602] [cursor=pointer]:
+                  - /url: /album/4JDXBZdRPId4devseaAOKH
+              - gridcell "9 Jan 2026" [ref=e603]:
+                - generic [ref=e604]: 9 Jan 2026
+              - gridcell "Add to Liked Songs 2:39 More options for End of Beginning by Djo" [ref=e605]:
+                - button "Add to Liked Songs" [ref=e606] [cursor=pointer]:
+                  - img [ref=e608]
+                - generic [ref=e611]: 2:39
+                - button "More options for End of Beginning by Djo" [ref=e612] [cursor=pointer]:
+                  - img [ref=e614]
+            - row "12 Play WHERE IS MY HUSBAND! by RAYE WHERE IS MY HUSBAND! RAYE WHERE IS MY HUSBAND! 26 Sept 2025 Add to Liked Songs 3:17 More options for WHERE IS MY HUSBAND! by RAYE" [ref=e616]:
+              - gridcell "12 Play WHERE IS MY HUSBAND! by RAYE" [ref=e617]:
+                - generic [ref=e618]:
+                  - generic: "12"
+                  - button "Play WHERE IS MY HUSBAND! by RAYE":
+                    - img
+              - gridcell "WHERE IS MY HUSBAND! RAYE" [ref=e619]:
+                - img [ref=e620]
+                - generic [ref=e621]:
+                  - link "WHERE IS MY HUSBAND!" [ref=e622] [cursor=pointer]:
+                    - /url: /track/55lijDD6OAjLFFUHU9tcDm
+                    - generic [ref=e623]: WHERE IS MY HUSBAND!
+                  - link "RAYE" [ref=e626] [cursor=pointer]:
+                    - /url: /artist/5KKpBU5eC2tJDzf0wmlRp2
+              - gridcell "WHERE IS MY HUSBAND!" [ref=e627]:
+                - link "WHERE IS MY HUSBAND!" [ref=e629] [cursor=pointer]:
+                  - /url: /album/01sqwTOTrN9gaYQc1rr6Zw
+              - gridcell "26 Sept 2025" [ref=e630]:
+                - generic [ref=e631]: 26 Sept 2025
+              - gridcell "Add to Liked Songs 3:17 More options for WHERE IS MY HUSBAND! by RAYE" [ref=e632]:
+                - button "Add to Liked Songs" [ref=e633] [cursor=pointer]:
+                  - img [ref=e635]
+                - generic [ref=e638]: 3:17
+                - button "More options for WHERE IS MY HUSBAND! by RAYE" [ref=e639] [cursor=pointer]:
+                  - img [ref=e641]
+            - row "13 Play DtMF by Bad Bunny DtMF Explicit Bad Bunny DeBÍ TiRAR MáS FOToS 6 Feb 2026 Add to Liked Songs 3:57 More options for DtMF by Bad Bunny" [ref=e643]:
+              - gridcell "13 Play DtMF by Bad Bunny" [ref=e644]:
+                - generic [ref=e645]:
+                  - generic: "13"
+                  - button "Play DtMF by Bad Bunny":
+                    - img
+              - gridcell "DtMF Explicit Bad Bunny" [ref=e646]:
+                - img [ref=e647]
+                - generic [ref=e648]:
+                  - link "DtMF" [ref=e649] [cursor=pointer]:
+                    - /url: /track/3sK8wGT43QFpWrvNQsrQya
+                    - generic [ref=e650]: DtMF
+                  - generic "Explicit" [ref=e652]:
+                    - generic [ref=e653]: E
+                  - link "Bad Bunny" [ref=e656] [cursor=pointer]:
+                    - /url: /artist/4q3ewBCX7sLwd24euuV69X
+              - gridcell "DeBÍ TiRAR MáS FOToS" [ref=e657]:
+                - link "DeBÍ TiRAR MáS FOToS" [ref=e659] [cursor=pointer]:
+                  - /url: /album/5K79FLRUCSysQnVESLcTdb
+              - gridcell "6 Feb 2026" [ref=e660]:
+                - generic [ref=e661]: 6 Feb 2026
+              - gridcell "Add to Liked Songs 3:57 More options for DtMF by Bad Bunny" [ref=e662]:
+                - button "Add to Liked Songs" [ref=e663] [cursor=pointer]:
+                  - img [ref=e665]
+                - generic [ref=e668]: 3:57
+                - button "More options for DtMF by Bad Bunny" [ref=e669] [cursor=pointer]:
+                  - img [ref=e671]
+            - row "14 Play Homewrecker by sombr Homewrecker sombr Homewrecker 6 Feb 2026 Add to Liked Songs 3:29 More options for Homewrecker by sombr" [ref=e673]:
+              - gridcell "14 Play Homewrecker by sombr" [ref=e674]:
+                - generic [ref=e675]:
+                  - generic: "14"
+                  - button "Play Homewrecker by sombr":
+                    - img
+              - gridcell "Homewrecker sombr" [ref=e676]:
+                - img [ref=e677]
+                - generic [ref=e678]:
+                  - link "Homewrecker" [ref=e679] [cursor=pointer]:
+                    - /url: /track/7tICCrK3CcyRFKza7yrR0z
+                    - generic [ref=e680]: Homewrecker
+                  - link "sombr" [ref=e683] [cursor=pointer]:
+                    - /url: /artist/4G9NDjRyZFDlJKMRL8hx3S
+              - gridcell "Homewrecker" [ref=e684]:
+                - link "Homewrecker" [ref=e686] [cursor=pointer]:
+                  - /url: /album/5KzDGTJ3sGlfuwSryRB4p4
+              - gridcell "6 Feb 2026" [ref=e687]:
+                - generic [ref=e688]: 6 Feb 2026
+              - gridcell "Add to Liked Songs 3:29 More options for Homewrecker by sombr" [ref=e689]:
+                - button "Add to Liked Songs" [ref=e690] [cursor=pointer]:
+                  - img [ref=e692]
+                - generic [ref=e695]: 3:29
+                - button "More options for Homewrecker by sombr" [ref=e696] [cursor=pointer]:
+                  - img [ref=e698]
+            - row "15 Play American Girls by Harry Styles American Girls Harry Styles Kiss All The Time. Disco, Occasionally. 6 Mar 2026 Add to Liked Songs 3:33 More options for American Girls by Harry Styles" [ref=e700]:
+              - gridcell "15 Play American Girls by Harry Styles" [ref=e701]:
+                - generic [ref=e702]:
+                  - generic: "15"
+                  - button "Play American Girls by Harry Styles":
+                    - img
+              - gridcell "American Girls Harry Styles" [ref=e703]:
+                - img [ref=e704]
+                - generic [ref=e705]:
+                  - link "American Girls" [ref=e706] [cursor=pointer]:
+                    - /url: /track/7gtG45ieyQzKtNKobfLd49
+                    - generic [ref=e707]: American Girls
+                  - link "Harry Styles" [ref=e710] [cursor=pointer]:
+                    - /url: /artist/6KImCVD70vtIoJWnq6nGn3
+              - gridcell "Kiss All The Time. Disco, Occasionally." [ref=e711]:
+                - link "Kiss All The Time. Disco, Occasionally." [ref=e713] [cursor=pointer]:
+                  - /url: /album/69BqE1V8Bzb9GCyeP1fFeR
+              - gridcell "6 Mar 2026" [ref=e714]:
+                - generic [ref=e715]: 6 Mar 2026
+              - gridcell "Add to Liked Songs 3:33 More options for American Girls by Harry Styles" [ref=e716]:
+                - button "Add to Liked Songs" [ref=e717] [cursor=pointer]:
+                  - img [ref=e719]
+                - generic [ref=e722]: 3:33
+                - button "More options for American Girls by Harry Styles" [ref=e723] [cursor=pointer]:
+                  - img [ref=e725]
+            - row "16 Play SWIM by BTS SWIM BTS ARIRANG 20 Mar 2026 Add to Liked Songs 2:39 More options for SWIM by BTS" [ref=e727]:
+              - gridcell "16 Play SWIM by BTS" [ref=e728]:
+                - generic [ref=e729]:
+                  - generic: "16"
+                  - button "Play SWIM by BTS":
+                    - img
+              - gridcell "SWIM BTS" [ref=e730]:
+                - img [ref=e731]
+                - generic [ref=e732]:
+                  - link "SWIM" [ref=e733] [cursor=pointer]:
+                    - /url: /track/68lbSrXDORS51pmyjZv712
+                    - generic [ref=e734]: SWIM
+                  - link "BTS" [ref=e737] [cursor=pointer]:
+                    - /url: /artist/3Nrfpe0tUJi4K4DXYWgMUX
+              - gridcell "ARIRANG" [ref=e738]:
+                - link "ARIRANG" [ref=e740] [cursor=pointer]:
+                  - /url: /album/3ukkRHDHbN8tNRPKsGZR1h
+              - gridcell "20 Mar 2026" [ref=e741]:
+                - generic [ref=e742]: 20 Mar 2026
+              - gridcell "Add to Liked Songs 2:39 More options for SWIM by BTS" [ref=e743]:
+                - button "Add to Liked Songs" [ref=e744] [cursor=pointer]:
+                  - img [ref=e746]
+                - generic [ref=e749]: 2:39
+                - button "More options for SWIM by BTS" [ref=e750] [cursor=pointer]:
+                  - img [ref=e752]
+            - row "17 Play PINKY UP by KATSEYE PINKY UP Explicit KATSEYE PINKY UP 2 weeks ago Add to Liked Songs 2:11 More options for PINKY UP by KATSEYE" [ref=e754]:
+              - gridcell "17 Play PINKY UP by KATSEYE" [ref=e755]:
+                - generic [ref=e756]:
+                  - generic: "17"
+                  - button "Play PINKY UP by KATSEYE":
+                    - img
+              - gridcell "PINKY UP Explicit KATSEYE" [ref=e757]:
+                - img [ref=e758]
+                - generic [ref=e759]:
+                  - link "PINKY UP" [ref=e760] [cursor=pointer]:
+                    - /url: /track/4KmkJjHTNlr1jFY56Lyz4E
+                    - generic [ref=e761]: PINKY UP
+                  - generic "Explicit" [ref=e763]:
+                    - generic [ref=e764]: E
+                  - link "KATSEYE" [ref=e767] [cursor=pointer]:
+                    - /url: /artist/3c0gDdb9lhnHGFtP4prQpn
+              - gridcell "PINKY UP" [ref=e768]:
+                - link "PINKY UP" [ref=e770] [cursor=pointer]:
+                  - /url: /album/5tLy0MEMDVqiHKso6B4jnz
+              - gridcell "2 weeks ago" [ref=e771]:
+                - generic [ref=e772]: 2 weeks ago
+              - gridcell "Add to Liked Songs 2:11 More options for PINKY UP by KATSEYE" [ref=e773]:
+                - button "Add to Liked Songs" [ref=e774] [cursor=pointer]:
+                  - img [ref=e776]
+                - generic [ref=e779]: 2:11
+                - button "More options for PINKY UP by KATSEYE" [ref=e780] [cursor=pointer]:
+                  - img [ref=e782]
+            - row "18 Play Midnight Sun by Zara Larsson Midnight Sun Zara Larsson Midnight Sun 9 Jan 2026 Add to Liked Songs 3:09 More options for Midnight Sun by Zara Larsson" [ref=e784]:
+              - gridcell "18 Play Midnight Sun by Zara Larsson" [ref=e785]:
+                - generic [ref=e786]:
+                  - generic: "18"
+                  - button "Play Midnight Sun by Zara Larsson":
+                    - img
+              - gridcell "Midnight Sun Zara Larsson" [ref=e787]:
+                - img [ref=e788]
+                - generic [ref=e789]:
+                  - link "Midnight Sun" [ref=e790] [cursor=pointer]:
+                    - /url: /track/37UCSVSqiPGdR1DijOFyYY
+                    - generic [ref=e791]: Midnight Sun
+                  - link "Zara Larsson" [ref=e794] [cursor=pointer]:
+                    - /url: /artist/1Xylc3o4UrD53lo9CvFvVg
+              - gridcell "Midnight Sun" [ref=e795]:
+                - link "Midnight Sun" [ref=e797] [cursor=pointer]:
+                  - /url: /album/014U2yqVgeCNqykPGzgyki
+              - gridcell "9 Jan 2026" [ref=e798]:
+                - generic [ref=e799]: 9 Jan 2026
+              - gridcell "Add to Liked Songs 3:09 More options for Midnight Sun by Zara Larsson" [ref=e800]:
+                - button "Add to Liked Songs" [ref=e801] [cursor=pointer]:
+                  - img [ref=e803]
+                - generic [ref=e806]: 3:09
+                - button "More options for Midnight Sun by Zara Larsson" [ref=e807] [cursor=pointer]:
+                  - img [ref=e809]
+            - row "19 Play CHANEL by Tyla CHANEL Explicit Tyla CHANEL 14 Nov 2025 Add to Liked Songs 3:08 More options for CHANEL by Tyla" [ref=e811]:
+              - gridcell "19 Play CHANEL by Tyla" [ref=e812]:
+                - generic [ref=e813]:
+                  - generic: "19"
+                  - button "Play CHANEL by Tyla":
+                    - img
+              - gridcell "CHANEL Explicit Tyla" [ref=e814]:
+                - img [ref=e815]
+                - generic [ref=e816]:
+                  - link "CHANEL" [ref=e817] [cursor=pointer]:
+                    - /url: /track/4VxTzYm00mg82MuoT35Ja7
+                    - generic [ref=e818]: CHANEL
+                  - generic "Explicit" [ref=e820]:
+                    - generic [ref=e821]: E
+                  - link "Tyla" [ref=e824] [cursor=pointer]:
+                    - /url: /artist/3SozjO3Lat463tQICI9LcE
+              - gridcell "CHANEL" [ref=e825]:
+                - link "CHANEL" [ref=e827] [cursor=pointer]:
+                  - /url: /album/4u9fJJ2AxC2VzyyeJVyS59
+              - gridcell "14 Nov 2025" [ref=e828]:
+                - generic [ref=e829]: 14 Nov 2025
+              - gridcell "Add to Liked Songs 3:08 More options for CHANEL by Tyla" [ref=e830]:
+                - button "Add to Liked Songs" [ref=e831] [cursor=pointer]:
+                  - img [ref=e833]
+                - generic [ref=e836]: 3:08
+                - button "More options for CHANEL by Tyla" [ref=e837] [cursor=pointer]:
+                  - img [ref=e839]
+            - row "20 Play So Easy (To Fall In Love) by Olivia Dean So Easy (To Fall In Love) Olivia Dean The Art of Loving 17 Oct 2025 Add to Liked Songs 2:49 More options for So Easy (To Fall In Love) by Olivia Dean" [ref=e841]:
+              - gridcell "20 Play So Easy (To Fall In Love) by Olivia Dean" [ref=e842]:
+                - generic [ref=e843]:
+                  - generic: "20"
+                  - button "Play So Easy (To Fall In Love) by Olivia Dean":
+                    - img
+              - gridcell "So Easy (To Fall In Love) Olivia Dean" [ref=e844]:
+                - img [ref=e845]
+                - generic [ref=e846]:
+                  - link "So Easy (To Fall In Love)" [ref=e847] [cursor=pointer]:
+                    - /url: /track/6sGIMrtIzQjdzNndVxe397
+                    - generic [ref=e848]: So Easy (To Fall In Love)
+                  - link "Olivia Dean" [ref=e851] [cursor=pointer]:
+                    - /url: /artist/00x1fYSGhdqScXBRpSj3DW
+              - gridcell "The Art of Loving" [ref=e852]:
+                - link "The Art of Loving" [ref=e854] [cursor=pointer]:
+                  - /url: /album/0l8zYqoUeBYg47Gmevq9HZ
+              - gridcell "17 Oct 2025" [ref=e855]:
+                - generic [ref=e856]: 17 Oct 2025
+              - gridcell "Add to Liked Songs 2:49 More options for So Easy (To Fall In Love) by Olivia Dean" [ref=e857]:
+                - button "Add to Liked Songs" [ref=e858] [cursor=pointer]:
+                  - img [ref=e860]
+                - generic [ref=e863]: 2:49
+                - button "More options for So Easy (To Fall In Love) by Olivia Dean" [ref=e864] [cursor=pointer]:
+                  - img [ref=e866]
+            - row "21 Play Die On This Hill by SIENNA SPIRO Die On This Hill SIENNA SPIRO Die On This Hill 28 Nov 2025 Add to Liked Songs 3:37 More options for Die On This Hill by SIENNA SPIRO" [ref=e868]:
+              - gridcell "21 Play Die On This Hill by SIENNA SPIRO" [ref=e869]:
+                - generic [ref=e870]:
+                  - generic: "21"
+                  - button "Play Die On This Hill by SIENNA SPIRO":
+                    - img
+              - gridcell "Die On This Hill SIENNA SPIRO" [ref=e871]:
+                - img [ref=e872]
+                - generic [ref=e873]:
+                  - link "Die On This Hill" [ref=e874] [cursor=pointer]:
+                    - /url: /track/2gYTC8DsplN3RNdpdBcCOQ
+                    - generic [ref=e875]: Die On This Hill
+                  - link "SIENNA SPIRO" [ref=e878] [cursor=pointer]:
+                    - /url: /artist/02gSuSAWEdWa5UOvqzjX6v
+              - gridcell "Die On This Hill" [ref=e879]:
+                - link "Die On This Hill" [ref=e881] [cursor=pointer]:
+                  - /url: /album/7GS4aKISJ2KgAm4aBhkzng
+              - gridcell "28 Nov 2025" [ref=e882]:
+                - generic [ref=e883]: 28 Nov 2025
+              - gridcell "Add to Liked Songs 3:37 More options for Die On This Hill by SIENNA SPIRO" [ref=e884]:
+                - button "Add to Liked Songs" [ref=e885] [cursor=pointer]:
+                  - img [ref=e887]
+                - generic [ref=e890]: 3:37
+                - button "More options for Die On This Hill by SIENNA SPIRO" [ref=e891] [cursor=pointer]:
+                  - img [ref=e893]
+            - row "22 Play Folded by Kehlani Folded Kehlani Folded 8 Aug 2025 Add to Liked Songs 3:58 More options for Folded by Kehlani" [ref=e895]:
+              - gridcell "22 Play Folded by Kehlani" [ref=e896]:
+                - generic [ref=e897]:
+                  - generic: "22"
+                  - button "Play Folded by Kehlani":
+                    - img
+              - gridcell "Folded Kehlani" [ref=e898]:
+                - img [ref=e899]
+                - generic [ref=e900]:
+                  - link "Folded" [ref=e901] [cursor=pointer]:
+                    - /url: /track/0bxPRWprUVpQK0UFcddkrA
+                    - generic [ref=e902]: Folded
+                  - link "Kehlani" [ref=e905] [cursor=pointer]:
+                    - /url: /artist/0cGUm45nv7Z6M6qdXYQGTX
+              - gridcell "Folded" [ref=e906]:
+                - link "Folded" [ref=e908] [cursor=pointer]:
+                  - /url: /album/5enIvPn8EEPWMGxzBzxvcm
+              - gridcell "8 Aug 2025" [ref=e909]:
+                - generic [ref=e910]: 8 Aug 2025
+              - gridcell "Add to Liked Songs 3:58 More options for Folded by Kehlani" [ref=e911]:
+                - button "Add to Liked Songs" [ref=e912] [cursor=pointer]:
+                  - img [ref=e914]
+                - generic [ref=e917]: 3:58
+                - button "More options for Folded by Kehlani" [ref=e918] [cursor=pointer]:
+                  - img [ref=e920]
+            - row "23 Play iloveitiloveitiloveit by Bella Kay iloveitiloveitiloveit Explicit Bella Kay iloveitiloveitiloveit 20 Feb 2026 Add to Liked Songs 3:03 More options for iloveitiloveitiloveit by Bella Kay" [ref=e922]:
+              - gridcell "23 Play iloveitiloveitiloveit by Bella Kay" [ref=e923]:
+                - generic [ref=e924]:
+                  - generic: "23"
+                  - button "Play iloveitiloveitiloveit by Bella Kay":
+                    - img
+              - gridcell "iloveitiloveitiloveit Explicit Bella Kay" [ref=e925]:
+                - img [ref=e926]
+                - generic [ref=e927]:
+                  - link "iloveitiloveitiloveit" [ref=e928] [cursor=pointer]:
+                    - /url: /track/5IMpnpD0tQVcqWlVIgtAtV
+                    - generic [ref=e929]: iloveitiloveitiloveit
+                  - generic "Explicit" [ref=e931]:
+                    - generic [ref=e932]: E
+                  - link "Bella Kay" [ref=e935] [cursor=pointer]:
+                    - /url: /artist/4Z8MrrKMBHMPa8d04Ivur8
+              - gridcell "iloveitiloveitiloveit" [ref=e936]:
+                - link "iloveitiloveitiloveit" [ref=e938] [cursor=pointer]:
+                  - /url: /album/6XxrC3tz3EuqoW5RMbYzaF
+              - gridcell "20 Feb 2026" [ref=e939]:
+                - generic [ref=e940]: 20 Feb 2026
+              - gridcell "Add to Liked Songs 3:03 More options for iloveitiloveitiloveit by Bella Kay" [ref=e941]:
+                - button "Add to Liked Songs" [ref=e942] [cursor=pointer]:
+                  - img [ref=e944]
+                - generic [ref=e947]: 3:03
+                - button "More options for iloveitiloveitiloveit by Bella Kay" [ref=e948] [cursor=pointer]:
+                  - img [ref=e950]
+            - row "24 Play I Just Might by Bruno Mars I Just Might Bruno Mars I Just Might 9 Jan 2026 Add to Liked Songs 3:32 More options for I Just Might by Bruno Mars" [ref=e952]:
+              - gridcell "24 Play I Just Might by Bruno Mars" [ref=e953]:
+                - generic [ref=e954]:
+                  - generic: "24"
+                  - button "Play I Just Might by Bruno Mars":
+                    - img
+              - gridcell "I Just Might Bruno Mars" [ref=e955]:
+                - img [ref=e956]
+                - generic [ref=e957]:
+                  - link "I Just Might" [ref=e958] [cursor=pointer]:
+                    - /url: /track/12bYYQaLqHliSXvRIYlq8G
+                    - generic [ref=e959]: I Just Might
+                  - link "Bruno Mars" [ref=e962] [cursor=pointer]:
+                    - /url: /artist/0du5cEVh5yTK9QJze8zA0C
+              - gridcell "I Just Might" [ref=e963]:
+                - link "I Just Might" [ref=e965] [cursor=pointer]:
+                  - /url: /album/2YOfpbW6kCd2XHW2Ln2Uih
+              - gridcell "9 Jan 2026" [ref=e966]:
+                - generic [ref=e967]: 9 Jan 2026
+              - gridcell "Add to Liked Songs 3:32 More options for I Just Might by Bruno Mars" [ref=e968]:
+                - button "Add to Liked Songs" [ref=e969] [cursor=pointer]:
+                  - img [ref=e971]
+                - generic [ref=e974]: 3:32
+                - button "More options for I Just Might by Bruno Mars" [ref=e975] [cursor=pointer]:
+                  - img [ref=e977]
+            - row "25 Play The Fate of Ophelia by Taylor Swift The Fate of Ophelia Taylor Swift The Life of a Showgirl 3 Oct 2025 Add to Liked Songs 3:46 More options for The Fate of Ophelia by Taylor Swift" [ref=e979]:
+              - gridcell "25 Play The Fate of Ophelia by Taylor Swift" [ref=e980]:
+                - generic [ref=e981]:
+                  - generic: "25"
+                  - button "Play The Fate of Ophelia by Taylor Swift":
+                    - img
+              - gridcell "The Fate of Ophelia Taylor Swift" [ref=e982]:
+                - img [ref=e983]
+                - generic [ref=e984]:
+                  - link "The Fate of Ophelia" [ref=e985] [cursor=pointer]:
+                    - /url: /track/31TXxq8gfgYyrYClnYY48m
+                    - generic [ref=e986]: The Fate of Ophelia
+                  - link "Taylor Swift" [ref=e989] [cursor=pointer]:
+                    - /url: /artist/06HL4z0CvFAxyc27GXpf02
+              - gridcell "The Life of a Showgirl" [ref=e990]:
+                - link "The Life of a Showgirl" [ref=e992] [cursor=pointer]:
+                  - /url: /album/1W57oNaAkGObOQKBTxg4e9
+              - gridcell "3 Oct 2025" [ref=e993]:
+                - generic [ref=e994]: 3 Oct 2025
+              - gridcell "Add to Liked Songs 3:46 More options for The Fate of Ophelia by Taylor Swift" [ref=e995]:
+                - button "Add to Liked Songs" [ref=e996] [cursor=pointer]:
+                  - img [ref=e998]
+                - generic [ref=e1001]: 3:46
+                - button "More options for The Fate of Ophelia by Taylor Swift" [ref=e1002] [cursor=pointer]:
+                  - img [ref=e1004]
+        - generic [ref=e418]:
+          - separator [ref=e419]
+          - navigation [ref=e1007]:
+            - generic [ref=e1008]:
+              - generic [ref=e1009]:
+                - list [ref=e1011]:
+                  - paragraph [ref=e1012]: Company
+                  - link "About" [ref=e1013] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/about-us/contact/
+                  - link "Jobs" [ref=e1014] [cursor=pointer]:
+                    - /url: https://www.lifeatspotify.com/
+                  - link "For the Record" [ref=e1015] [cursor=pointer]:
+                    - /url: https://newsroom.spotify.com/
+                - list [ref=e1017]:
+                  - paragraph [ref=e1018]: Communities
+                  - link "For Artists" [ref=e1019] [cursor=pointer]:
+                    - /url: https://artists.spotify.com/
+                  - link "Developers" [ref=e1020] [cursor=pointer]:
+                    - /url: https://developer.spotify.com/
+                  - link "Advertising" [ref=e1021] [cursor=pointer]:
+                    - /url: https://ads.spotify.com/
+                  - link "Investors" [ref=e1022] [cursor=pointer]:
+                    - /url: https://investors.spotify.com/
+                  - link "Vendors" [ref=e1023] [cursor=pointer]:
+                    - /url: https://spotifyforvendors.com/
+                - list [ref=e1025]:
+                  - paragraph [ref=e1026]: Useful links
+                  - link "Support" [ref=e1027] [cursor=pointer]:
+                    - /url: https://support.spotify.com/
+                  - link "Free Mobile App" [ref=e1028] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/free/
+                  - link "Popular by Country" [ref=e1029] [cursor=pointer]:
+                    - /url: /popular-in/uk
+                  - link "Import your music" [ref=e1030] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/import-music/
+                - list [ref=e1032]:
+                  - paragraph [ref=e1033]: Spotify Plans
+                  - link "Premium Individual" [ref=e1034] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/premium/#ref=spotifycom_footer_premium_individual
+                  - link "Premium Duo" [ref=e1035] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/duo/#ref=spotifycom_footer_premium_duo
+                  - link "Premium Family" [ref=e1036] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/family/#ref=spotifycom_footer_premium_family
+                  - link "Premium Student" [ref=e1037] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/student/#ref=spotifycom_footer_premium_student
+                  - link "Spotify Free" [ref=e1038] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/free/#ref=spotifycom_footer_free
+              - generic [ref=e1039]:
+                - link "Instagram" [ref=e1041] [cursor=pointer]:
+                  - /url: https://instagram.com/spotify
+                  - img [ref=e1043]
+                - link "Twitter" [ref=e1047] [cursor=pointer]:
+                  - /url: https://twitter.com/spotify
+                  - img [ref=e1049]
+                - link "Facebook" [ref=e1052] [cursor=pointer]:
+                  - /url: https://www.facebook.com/Spotify
+                  - img [ref=e1054]
+            - separator [ref=e1056]
+            - generic [ref=e1059]: © 2026 Spotify AB
+  - dialog "We Care About Your Privacy" [ref=e1061]:
+    - generic [ref=e1063]:
+      - generic [ref=e1065]:
+        - heading "We Care About Your Privacy" [level=2] [ref=e1066]
+        - generic [ref=e1067]: We and our 90 partners store and/or access information on a device, such as unique IDs in cookies to process personal data. You may accept or manage your choices by clicking below, including your right to object where legitimate interest is used, or at any time in the privacy policy page. These choices will be signaled to our partners and will not affect browsing data.
+        - generic [ref=e1068]:
+          - heading "We and our partners process data to provide:" [level=3] [ref=e1069]
+          - paragraph [ref=e1071]:
+            - text: Store and/or access information on a device. Personalised advertising. Personalised content. Advertising and content measurement, audience research, and services development.
+            - button "List of Partners (vendors)" [ref=e1072] [cursor=pointer]
+      - generic [ref=e1074]:
+        - button "Accept Cookies" [ref=e1075] [cursor=pointer]
+        - button "Reject All" [ref=e1076] [cursor=pointer]
+        - button "Cookie Settings, Opens the preference center dialog" [ref=e1077] [cursor=pointer]: Cookie Settings

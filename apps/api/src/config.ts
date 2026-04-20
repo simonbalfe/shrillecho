@@ -10,13 +10,14 @@ const rootEnvPath = resolve(currentDir, '../../../.env')
 loadEnv(existsSync(rootEnvPath) ? { path: rootEnvPath } : undefined)
 
 const serverEnvSchema = z.object({
-  NODE_ENV: z.enum(['development', 'production', 'test']),
-  DATABASE_URL: z.string().min(1),
-  BETTER_AUTH_SECRET: z.string().min(1),
-  APP_URL: z.url(),
-  REDIS_URL: z.string().min(1),
-  SPOTIFY_CLIENT_ID: z.string().min(1),
-  SPOTIFY_CLIENT_SECRET: z.string().min(1),
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  APP_URL: z.string().default('http://localhost:3000'),
+  API_URL: z.string().default('http://localhost:3001'),
+  SP_DC: z.string().optional(),
+  DATABASE_URL: z.string().optional(),
+  BETTER_AUTH_SECRET: z.string().optional(),
+  SPOTIFY_CLIENT_ID: z.string().optional(),
+  SPOTIFY_CLIENT_SECRET: z.string().optional(),
 })
 
 const parsed = serverEnvSchema.safeParse(process.env)
@@ -26,14 +27,4 @@ if (!parsed.success) {
   throw new Error('Invalid environment variables')
 }
 
-const env = parsed.data
-
-export const config = {
-  NODE_ENV: env.NODE_ENV,
-  DATABASE_URL: env.DATABASE_URL,
-  BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET,
-  APP_URL: env.APP_URL,
-  REDIS_URL: env.REDIS_URL,
-  SPOTIFY_CLIENT_ID: env.SPOTIFY_CLIENT_ID,
-  SPOTIFY_CLIENT_SECRET: env.SPOTIFY_CLIENT_SECRET,
-}
+export const config = parsed.data

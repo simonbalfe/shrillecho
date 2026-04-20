@@ -1,6 +1,6 @@
 # Shrillecho
 
-Distributed Spotify artist discovery tool. Input a seed artist, set a crawl depth, and the system traverses Spotify's related artists API using parallel Go workers to build curated artist pools.
+Distributed Spotify artist discovery tool. Input a seed artist, set a crawl depth, and the system traverses Spotify's related artists API to build curated artist pools.
 
 ## Tech Stack
 
@@ -10,7 +10,6 @@ Distributed Spotify artist discovery tool. Input a seed artist, set a crawl dept
 | API | Hono, Better Auth, Drizzle ORM |
 | Database | PostgreSQL (Neon) |
 | Queue | Redis (self-hosted) |
-| Worker | Go 1.23 |
 | Infra | Docker Compose, pnpm workspaces, Turborepo |
 
 ## Architecture
@@ -26,14 +25,7 @@ flowchart TD
         Routes[REST Endpoints]
         SSE[SSE Event Stream]
         RP[Response Processor]
-    end
-
-    subgraph Worker["apps/worker (Go)"]
-        W1[Worker 1]
-        W2[Worker 2]
-        W3[Worker 3]
-        W4[Worker 4]
-        W5[Worker 5]
+        Scraper[Spotify Scraper]
     end
 
     subgraph Data
@@ -47,9 +39,9 @@ flowchart TD
     Auth -->|JWT sessions| UI
 
     Routes -->|enqueue jobs| RD
-    RD -->|dequeue| W1 & W2 & W3 & W4 & W5
-    W1 & W2 & W3 & W4 & W5 -->|related artists| Spotify
-    W1 & W2 & W3 & W4 & W5 -->|push results| RD
+    RD -->|dequeue| Scraper
+    Scraper -->|related artists| Spotify
+    Scraper -->|push results| RD
     RD -->|poll results| RP
     RP -->|persist| PG
     RP -->|notify| SSE
@@ -65,8 +57,8 @@ flowchart TD
 
 1. User signs up via Better Auth (email/password) and submits a seed artist with a crawl depth
 2. The Hono API enqueues a scrape job to a Redis request queue
-3. Five Go worker goroutines poll the queue, call Spotify's related artists endpoint, and traverse the artist graph to the specified depth
-4. Workers push discovered artists to a Redis response queue
+3. The scraper calls Spotify's related artists endpoint and traverses the artist graph to the specified depth
+4. Results are pushed to a Redis response queue
 5. The API's response processor persists results to PostgreSQL (Neon) and pushes an SSE event to the frontend
 
 ## Project Structure
@@ -80,9 +72,10 @@ shrillecho/
         auth.ts          # Better Auth config (Drizzle adapter)
         config.ts        # Zod-validated env vars
         db/              # Drizzle schema + queries
-        middleware/       # requireAuth middleware
-        routes/          # auth, scrapes, users, SSE events
+        middleware/      # requireAuth middleware
+        routes/          # auth, scrapes, users, spotify, SSE events
         services/        # Redis queue, scrape logic, response processor
+        spotify/         # Spotify API client + endpoints
       drizzle.config.ts
 
     web/                 # React SPA
@@ -95,14 +88,8 @@ shrillecho/
           ui/            # Button, Card, Input, Label (shadcn-style)
       vite.config.ts
 
-    worker/              # Go worker service
-      cmd/main.go        # Entry point, 5 worker goroutines
-      internal/
-        services/        # Artist scraper, Redis queue, Spotify ID parsing
-        spotify/         # Spotify API client + endpoints
-
   server.ts              # Production entry (Hono serves API + SPA)
-  docker-compose.yml     # Redis + Worker + App
+  docker-compose.yml     # Redis + App
   Dockerfile             # Multi-stage Node build
   turbo.json             # Turborepo task config
   biome.json             # Linting + formatting
@@ -117,9 +104,6 @@ pnpm install
 # Start Redis
 docker compose up redis -d
 
-# Start Go worker
-cd apps/worker && go run cmd/main.go
-
 # Start API + frontend (from root)
 pnpm dev
 ```
@@ -132,11 +116,11 @@ The Vite dev server proxies `/api` to the Hono API on port 3001. The frontend ru
 # Single container (API + SPA)
 docker compose up app
 
-# Full stack (Redis + Worker + App)
+# Full stack (Redis + App)
 docker compose up
 ```
 
-The Hono production server serves the API at `/api` and the built SPA as a static fallback, all from a single container. The Go worker runs as a separate container.
+The Hono production server serves the API at `/api` and the built SPA as a static fallback, all from a single container.
 
 ## Environment Variables
 

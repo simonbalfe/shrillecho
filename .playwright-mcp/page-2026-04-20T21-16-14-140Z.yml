@@ -1,0 +1,513 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - link "Skip to main content" [ref=e6] [cursor=pointer]:
+        - /url: "#main-view"
+        - generic [ref=e7]: Skip to main content
+      - link "Spotify" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "Spotify" [ref=e10]
+      - generic [ref=e13]:
+        - button "Home" [ref=e14] [cursor=pointer]:
+          - img [ref=e16]
+        - search [ref=e19]:
+          - button "Search" [ref=e21] [cursor=pointer]:
+            - img [ref=e23]
+          - generic [ref=e25]:
+            - combobox "What do you want to play?" [ref=e26]
+            - generic:
+              - generic: ⌘ShiftL
+          - button "Browse" [ref=e29] [cursor=pointer]:
+            - img [ref=e31]
+      - generic [ref=e35]:
+        - button "Premium" [ref=e36] [cursor=pointer]
+        - button "Support" [ref=e37] [cursor=pointer]
+        - button "Download" [ref=e38] [cursor=pointer]
+        - link "Install App" [ref=e40] [cursor=pointer]:
+          - /url: /download
+          - img [ref=e42]
+          - generic [ref=e45]: Install App
+        - generic [ref=e46]:
+          - button "Sign up" [ref=e47] [cursor=pointer]
+          - button "Log in" [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]: Log in
+    - generic [ref=e50]:
+      - navigation "Main" [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e56]:
+              - heading "Your Library" [level=1] [ref=e58]
+              - button "Create" [ref=e60] [cursor=pointer]:
+                - img [ref=e61]
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - generic [ref=e67]:
+                  - generic [ref=e68]: Create your first playlist
+                  - generic [ref=e69]: It’s easy, we’ll help you
+                - button "Create playlist" [ref=e71] [cursor=pointer]:
+                  - generic [ref=e72]: Create playlist
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - generic [ref=e75]: Let’s find some podcasts to follow
+                  - generic [ref=e76]: We’ll keep you updated on new episodes
+                - link "Browse podcasts" [ref=e78] [cursor=pointer]:
+                  - /url: /genre/podcasts-web
+                  - generic [ref=e79]: Browse podcasts
+              - generic:
+                - grid "Your Library":
+                  - generic:
+                    - row
+                    - row
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - generic [ref=e82]:
+                - link "Legal" [ref=e84] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/
+                  - generic [ref=e85]: Legal
+                - link "Safety & Privacy Center" [ref=e87] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/safetyandprivacy/
+                  - generic [ref=e88]: Safety & Privacy Center
+                - link "Privacy Policy" [ref=e90] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/
+                  - generic [ref=e91]: Privacy Policy
+                - button "Cookie Settings" [ref=e93] [cursor=pointer]:
+                  - generic [ref=e94]: Cookie Settings
+                - link "About Ads" [ref=e96] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/#s3
+                  - generic [ref=e97]: About Ads
+                - link "Accessibility" [ref=e99] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/accessibility/
+                  - generic [ref=e100]: Accessibility
+                - link "Modern Slavery Act" [ref=e102] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20Modern%20Slavery%20Statement%202023.pdf
+                  - generic [ref=e103]: Modern Slavery Act
+                - link "UK Tax Policy" [ref=e105] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/UK%20Tax%20Strategy%20Statement%202025.pdf
+                  - generic [ref=e106]: UK Tax Policy
+                - link "UK Gender Pay Report" [ref=e108] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20UK%20Gender%20Pay%20Report%202025.pdf
+                  - generic [ref=e109]: UK Gender Pay Report
+                - link "UK S172 Statement" [ref=e111] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify-UK-S172-Statement.pdf
+                  - generic [ref=e112]: UK S172 Statement
+              - link "Cookies" [ref=e113] [cursor=pointer]:
+                - /url: https://www.spotify.com/legal/cookies-policy/
+            - button "English" [ref=e115] [cursor=pointer]:
+              - img [ref=e117]
+              - text: English
+      - generic [ref=e120]:
+        - text: Resize main navigation
+        - slider "Resize main navigation" [ref=e121]: "280"
+    - complementary "Now playing bar" [ref=e123]:
+      - generic [ref=e124] [cursor=pointer]:
+        - generic [ref=e125]:
+          - paragraph [ref=e126]: Preview of Spotify
+          - paragraph [ref=e127]: Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.
+        - button "Sign up for free" [ref=e128]:
+          - generic [ref=e129]: Sign up for free
+      - generic:
+        - generic "Player controls" [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - switch "Enable shuffle" [disabled] [ref=e134]:
+                - img [ref=e136]
+              - button "Previous" [disabled] [ref=e139]:
+                - img [ref=e141]
+            - button "Pause" [disabled] [ref=e143]:
+              - img [ref=e146]
+            - generic [ref=e148]:
+              - button "Next" [disabled] [ref=e149]:
+                - img [ref=e151]
+              - checkbox "Disable repeat" [disabled] [ref=e153]:
+                - img [ref=e155]
+          - generic [ref=e157]:
+            - generic [ref=e158]: "-:--"
+            - generic [ref=e161]:
+              - text: Change progress
+              - slider "Change progress" [disabled] [ref=e162]: "0"
+            - generic [ref=e168]: "-:--"
+        - generic [ref=e170]:
+          - button "Now playing view" [disabled] [ref=e171]:
+            - img [ref=e173]
+          - generic [ref=e176]:
+            - button "Mute" [ref=e177] [cursor=pointer]:
+              - img [ref=e179]
+            - generic [ref=e184]:
+              - text: Change volume
+              - slider "Change volume" [ref=e185]: "1"
+    - generic [ref=e191]:
+      - banner "Top bar and user menu" [ref=e192]
+      - main "Ben Snow - Discography" [ref=e197]:
+        - generic [ref=e198]:
+          - generic [ref=e199]:
+            - link "Ben Snow" [ref=e201] [cursor=pointer]:
+              - /url: /artist/1kzrBcRjcEC1rBI7mJzuLw
+            - combobox [ref=e202]:
+              - generic [ref=e203]: All
+              - img [ref=e204]
+            - combobox [ref=e206] [cursor=pointer]:
+              - generic [ref=e207]: Release date
+              - img [ref=e209]
+          - generic [ref=e211]:
+            - generic [ref=e212]:
+              - generic [ref=e213]:
+                - img [ref=e215]
+                - generic [ref=e216]:
+                  - link "Corruption / Fire" [ref=e218] [cursor=pointer]:
+                    - /url: /album/5ufTrJ1YgyI8XSaNvGniPz
+                  - generic [ref=e219]:
+                    - generic [ref=e220]: Single
+                    - generic [ref=e221]: •
+                    - generic [ref=e222]: "2023"
+                    - generic [ref=e223]: •
+                    - generic [ref=e224]: 2 songs
+                  - generic [ref=e225]:
+                    - button "Play" [ref=e227] [cursor=pointer]:
+                      - img [ref=e230]
+                    - button "Save to Your Library" [ref=e232] [cursor=pointer]:
+                      - img [ref=e234]
+                    - button "More options for Corruption / Fire" [ref=e237] [cursor=pointer]:
+                      - img [ref=e239]
+              - grid "Corruption / Fire" [ref=e243]:
+                - row "# Title Resize columns Duration" [ref=e244]:
+                  - columnheader "#" [ref=e245]:
+                    - generic [ref=e246]: "#"
+                  - columnheader "Title Resize columns" [ref=e247]:
+                    - generic [ref=e250]: Title
+                    - separator "Resize columns" [ref=e251]
+                  - columnheader "Duration" [ref=e252]:
+                    - generic "Duration" [ref=e254]:
+                      - img [ref=e255]
+                - button "Change visible columns" [ref=e258] [cursor=pointer]:
+                  - img [ref=e260]
+                - row "1 Play Corruption by Ben Snow, Deep Notion Corruption Ben Snow, Deep Notion Add to Liked Songs 3:45 More options for Corruption by Ben Snow, Deep Notion" [ref=e262]:
+                  - gridcell "1 Play Corruption by Ben Snow, Deep Notion" [ref=e263]:
+                    - generic [ref=e264]:
+                      - generic: "1"
+                      - button "Play Corruption by Ben Snow, Deep Notion":
+                        - img
+                  - gridcell "Corruption Ben Snow, Deep Notion" [ref=e265]:
+                    - generic [ref=e266]:
+                      - link "Corruption" [ref=e267] [cursor=pointer]:
+                        - /url: /track/55sZXs3UhxhNFNIr5edDWJ
+                        - generic [ref=e268]: Corruption
+                      - generic [ref=e270]:
+                        - link "Ben Snow" [ref=e271] [cursor=pointer]:
+                          - /url: /artist/1kzrBcRjcEC1rBI7mJzuLw
+                        - text: ","
+                        - link "Deep Notion" [ref=e272] [cursor=pointer]:
+                          - /url: /artist/3Ry6SciEcYjB5OtavNfzXH
+                  - gridcell "Add to Liked Songs 3:45 More options for Corruption by Ben Snow, Deep Notion" [ref=e273]:
+                    - button "Add to Liked Songs" [ref=e274] [cursor=pointer]:
+                      - img [ref=e276]
+                    - generic [ref=e279]: 3:45
+                    - button "More options for Corruption by Ben Snow, Deep Notion" [ref=e280] [cursor=pointer]:
+                      - img [ref=e282]
+                - row "2 Play Fire by Ben Snow, Deep Notion Fire Ben Snow, Deep Notion Add to Liked Songs 3:48 More options for Fire by Ben Snow, Deep Notion" [ref=e284]:
+                  - gridcell "2 Play Fire by Ben Snow, Deep Notion" [ref=e285]:
+                    - generic [ref=e286]:
+                      - generic: "2"
+                      - button "Play Fire by Ben Snow, Deep Notion":
+                        - img
+                  - gridcell "Fire Ben Snow, Deep Notion" [ref=e287]:
+                    - generic [ref=e288]:
+                      - link "Fire" [ref=e289] [cursor=pointer]:
+                        - /url: /track/6wQ5A1Y23TkSjS3KjWK7Tq
+                        - generic [ref=e290]: Fire
+                      - generic [ref=e292]:
+                        - link "Ben Snow" [ref=e293] [cursor=pointer]:
+                          - /url: /artist/1kzrBcRjcEC1rBI7mJzuLw
+                        - text: ","
+                        - link "Deep Notion" [ref=e294] [cursor=pointer]:
+                          - /url: /artist/3Ry6SciEcYjB5OtavNfzXH
+                  - gridcell "Add to Liked Songs 3:48 More options for Fire by Ben Snow, Deep Notion" [ref=e295]:
+                    - button "Add to Liked Songs" [ref=e296] [cursor=pointer]:
+                      - img [ref=e298]
+                    - generic [ref=e301]: 3:48
+                    - button "More options for Fire by Ben Snow, Deep Notion" [ref=e302] [cursor=pointer]:
+                      - img [ref=e304]
+            - generic [ref=e306]:
+              - generic [ref=e307]:
+                - img [ref=e309]
+                - generic [ref=e310]:
+                  - link "Aikido Flows (Ben Snow Remix)" [ref=e312] [cursor=pointer]:
+                    - /url: /album/5lgt411SvSPjY70RGyZoLr
+                  - generic [ref=e313]:
+                    - generic [ref=e314]: Single
+                    - generic [ref=e315]: •
+                    - generic [ref=e316]: "2023"
+                    - generic [ref=e317]: •
+                    - generic [ref=e318]: 1 song
+                  - generic [ref=e319]:
+                    - button "Play" [ref=e321] [cursor=pointer]:
+                      - img [ref=e324]
+                    - button "Save to Your Library" [ref=e326] [cursor=pointer]:
+                      - img [ref=e328]
+                    - button "More options for Aikido Flows (Ben Snow Remix)" [ref=e331] [cursor=pointer]:
+                      - img [ref=e333]
+              - grid "Aikido Flows (Ben Snow Remix)" [ref=e337]:
+                - row "# Title Resize columns Duration" [ref=e338]:
+                  - columnheader "#" [ref=e339]:
+                    - generic [ref=e340]: "#"
+                  - columnheader "Title Resize columns" [ref=e341]:
+                    - generic [ref=e344]: Title
+                    - separator "Resize columns" [ref=e345]
+                  - columnheader "Duration" [ref=e346]:
+                    - generic "Duration" [ref=e348]:
+                      - img [ref=e349]
+                - button "Change visible columns" [ref=e352] [cursor=pointer]:
+                  - img [ref=e354]
+                - row "1 Play Aikido Flows - Ben Snow Remix by Ben Snow, Beluga Ice Aikido Flows - Ben Snow Remix Ben Snow, Beluga Ice Add to Liked Songs 3:46 More options for Aikido Flows - Ben Snow Remix by Ben Snow, Beluga Ice" [ref=e356]:
+                  - gridcell "1 Play Aikido Flows - Ben Snow Remix by Ben Snow, Beluga Ice" [ref=e357]:
+                    - generic [ref=e358]:
+                      - generic: "1"
+                      - button "Play Aikido Flows - Ben Snow Remix by Ben Snow, Beluga Ice":
+                        - img
+                  - gridcell "Aikido Flows - Ben Snow Remix Ben Snow, Beluga Ice" [ref=e359]:
+                    - generic [ref=e360]:
+                      - link "Aikido Flows - Ben Snow Remix" [ref=e361] [cursor=pointer]:
+                        - /url: /track/6qBJouYNbZFl73ZmNEloDP
+                        - generic [ref=e362]: Aikido Flows - Ben Snow Remix
+                      - generic [ref=e364]:
+                        - link "Ben Snow" [ref=e365] [cursor=pointer]:
+                          - /url: /artist/1kzrBcRjcEC1rBI7mJzuLw
+                        - text: ","
+                        - link "Beluga Ice" [ref=e366] [cursor=pointer]:
+                          - /url: /artist/0ETthutL7HldfgluBZKxqm
+                  - gridcell "Add to Liked Songs 3:46 More options for Aikido Flows - Ben Snow Remix by Ben Snow, Beluga Ice" [ref=e367]:
+                    - button "Add to Liked Songs" [ref=e368] [cursor=pointer]:
+                      - img [ref=e370]
+                    - generic [ref=e373]: 3:46
+                    - button "More options for Aikido Flows - Ben Snow Remix by Ben Snow, Beluga Ice" [ref=e374] [cursor=pointer]:
+                      - img [ref=e376]
+            - generic [ref=e378]:
+              - generic [ref=e379]:
+                - img [ref=e381]
+                - generic [ref=e382]:
+                  - link "Judge Rinder" [ref=e384] [cursor=pointer]:
+                    - /url: /album/1cjOVs2pnm9M2jretqw7qK
+                  - generic [ref=e385]:
+                    - generic [ref=e386]: Single
+                    - generic [ref=e387]: •
+                    - generic [ref=e388]: "2022"
+                    - generic [ref=e389]: •
+                    - generic [ref=e390]: 2 songs
+                  - generic [ref=e391]:
+                    - button "Play" [ref=e393] [cursor=pointer]:
+                      - img [ref=e396]
+                    - button "Save to Your Library" [ref=e398] [cursor=pointer]:
+                      - img [ref=e400]
+                    - button "More options for Judge Rinder" [ref=e403] [cursor=pointer]:
+                      - img [ref=e405]
+              - grid "Judge Rinder" [ref=e409]:
+                - row "# Title Resize columns Duration" [ref=e410]:
+                  - columnheader "#" [ref=e411]:
+                    - generic [ref=e412]: "#"
+                  - columnheader "Title Resize columns" [ref=e413]:
+                    - generic [ref=e416]: Title
+                    - separator "Resize columns" [ref=e417]
+                  - columnheader "Duration" [ref=e418]:
+                    - generic "Duration" [ref=e420]:
+                      - img [ref=e421]
+                - button "Change visible columns" [ref=e424] [cursor=pointer]:
+                  - img [ref=e426]
+                - row "1 Play Judge Rinder by Turno, Ben Snow Judge Rinder Turno, Ben Snow Add to Liked Songs 4:06 More options for Judge Rinder by Turno, Ben Snow" [ref=e428]:
+                  - gridcell "1 Play Judge Rinder by Turno, Ben Snow" [ref=e429]:
+                    - generic [ref=e430]:
+                      - generic: "1"
+                      - button "Play Judge Rinder by Turno, Ben Snow":
+                        - img
+                  - gridcell "Judge Rinder Turno, Ben Snow" [ref=e431]:
+                    - generic [ref=e432]:
+                      - link "Judge Rinder" [ref=e433] [cursor=pointer]:
+                        - /url: /track/17e1w9dkVOkMVgUPh2Y9wG
+                        - generic [ref=e434]: Judge Rinder
+                      - generic [ref=e436]:
+                        - link "Turno" [ref=e437] [cursor=pointer]:
+                          - /url: /artist/1TVDml0EOLsjUxBCFzqWes
+                        - text: ","
+                        - link "Ben Snow" [ref=e438] [cursor=pointer]:
+                          - /url: /artist/1kzrBcRjcEC1rBI7mJzuLw
+                  - gridcell "Add to Liked Songs 4:06 More options for Judge Rinder by Turno, Ben Snow" [ref=e439]:
+                    - button "Add to Liked Songs" [ref=e440] [cursor=pointer]:
+                      - img [ref=e442]
+                    - generic [ref=e445]: 4:06
+                    - button "More options for Judge Rinder by Turno, Ben Snow" [ref=e446] [cursor=pointer]:
+                      - img [ref=e448]
+                - row "2 Play Orca by Turno, Ben Snow Orca Turno, Ben Snow Add to Liked Songs 4:06 More options for Orca by Turno, Ben Snow" [ref=e450]:
+                  - gridcell "2 Play Orca by Turno, Ben Snow" [ref=e451]:
+                    - generic [ref=e452]:
+                      - generic: "2"
+                      - button "Play Orca by Turno, Ben Snow":
+                        - img
+                  - gridcell "Orca Turno, Ben Snow" [ref=e453]:
+                    - generic [ref=e454]:
+                      - link "Orca" [ref=e455] [cursor=pointer]:
+                        - /url: /track/2RkYQ2rf8vhnBYJcixRpVv
+                        - generic [ref=e456]: Orca
+                      - generic [ref=e458]:
+                        - link "Turno" [ref=e459] [cursor=pointer]:
+                          - /url: /artist/1TVDml0EOLsjUxBCFzqWes
+                        - text: ","
+                        - link "Ben Snow" [ref=e460] [cursor=pointer]:
+                          - /url: /artist/1kzrBcRjcEC1rBI7mJzuLw
+                  - gridcell "Add to Liked Songs 4:06 More options for Orca by Turno, Ben Snow" [ref=e461]:
+                    - button "Add to Liked Songs" [ref=e462] [cursor=pointer]:
+                      - img [ref=e464]
+                    - generic [ref=e467]: 4:06
+                    - button "More options for Orca by Turno, Ben Snow" [ref=e468] [cursor=pointer]:
+                      - img [ref=e470]
+            - generic [ref=e472]:
+              - generic [ref=e473]:
+                - img [ref=e475]
+                - generic [ref=e476]:
+                  - link "Refugee" [ref=e478] [cursor=pointer]:
+                    - /url: /album/5oeV1zxGRamTN34AKWr0uU
+                  - generic [ref=e479]:
+                    - generic [ref=e480]: Single
+                    - generic [ref=e481]: •
+                    - generic [ref=e482]: "2021"
+                    - generic [ref=e483]: •
+                    - generic [ref=e484]: 1 song
+                  - generic [ref=e485]:
+                    - button "Play" [ref=e487] [cursor=pointer]:
+                      - img [ref=e490]
+                    - button "Save to Your Library" [ref=e492] [cursor=pointer]:
+                      - img [ref=e494]
+                    - button "More options for Refugee" [ref=e497] [cursor=pointer]:
+                      - img [ref=e499]
+              - grid "Refugee" [ref=e503]:
+                - row "# Title Resize columns Duration" [ref=e504]:
+                  - columnheader "#" [ref=e505]:
+                    - generic [ref=e506]: "#"
+                  - columnheader "Title Resize columns" [ref=e507]:
+                    - generic [ref=e510]: Title
+                    - separator "Resize columns" [ref=e511]
+                  - columnheader "Duration" [ref=e512]:
+                    - generic "Duration" [ref=e514]:
+                      - img [ref=e515]
+                - button "Change visible columns" [ref=e518] [cursor=pointer]:
+                  - img [ref=e520]
+                - row "1 Play Refugee by Ben Snow Refugee Ben Snow Add to Liked Songs 4:08 More options for Refugee by Ben Snow" [ref=e522]:
+                  - gridcell "1 Play Refugee by Ben Snow" [ref=e523]:
+                    - generic [ref=e524]:
+                      - generic: "1"
+                      - button "Play Refugee by Ben Snow":
+                        - img
+                  - gridcell "Refugee Ben Snow" [ref=e525]:
+                    - generic [ref=e526]:
+                      - link "Refugee" [ref=e527] [cursor=pointer]:
+                        - /url: /track/5dQJ805V93O9zcyifR7CCF
+                        - generic [ref=e528]: Refugee
+                      - link "Ben Snow" [ref=e531] [cursor=pointer]:
+                        - /url: /artist/1kzrBcRjcEC1rBI7mJzuLw
+                  - gridcell "Add to Liked Songs 4:08 More options for Refugee by Ben Snow" [ref=e532]:
+                    - button "Add to Liked Songs" [ref=e533] [cursor=pointer]:
+                      - img [ref=e535]
+                    - generic [ref=e538]: 4:08
+                    - button "More options for Refugee by Ben Snow" [ref=e539] [cursor=pointer]:
+                      - img [ref=e541]
+            - generic [ref=e543]:
+              - generic [ref=e544]:
+                - img [ref=e546]
+                - generic [ref=e547]:
+                  - link "Fight Club" [ref=e549] [cursor=pointer]:
+                    - /url: /album/1djL5gM3ceD5xnp0VdcCNI
+                  - generic [ref=e550]:
+                    - generic [ref=e551]: Single
+                    - generic [ref=e552]: •
+                    - generic [ref=e553]: "2021"
+                    - generic [ref=e554]: •
+                    - generic [ref=e555]: 2 songs
+                  - generic [ref=e556]:
+                    - button "Play" [ref=e558] [cursor=pointer]:
+                      - img [ref=e561]
+                    - button "Save to Your Library" [ref=e563] [cursor=pointer]:
+                      - img [ref=e565]
+                    - button "More options for Fight Club" [ref=e568] [cursor=pointer]:
+                      - img [ref=e570]
+              - grid "Fight Club" [ref=e574]:
+                - row "# Title Resize columns Duration" [ref=e575]:
+                  - columnheader "#" [ref=e576]:
+                    - generic [ref=e577]: "#"
+                  - columnheader "Title Resize columns" [ref=e578]:
+                    - generic [ref=e581]: Title
+                    - separator "Resize columns" [ref=e582]
+                  - columnheader "Duration" [ref=e583]:
+                    - generic "Duration" [ref=e585]:
+                      - img [ref=e586]
+                - button "Change visible columns" [ref=e589] [cursor=pointer]:
+                  - img [ref=e591]
+        - generic [ref=e595]:
+          - separator [ref=e596]
+          - navigation [ref=e598]:
+            - generic [ref=e599]:
+              - generic [ref=e600]:
+                - list [ref=e602]:
+                  - paragraph [ref=e603]: Company
+                  - link "About" [ref=e604] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/about-us/contact/
+                  - link "Jobs" [ref=e605] [cursor=pointer]:
+                    - /url: https://www.lifeatspotify.com/
+                  - link "For the Record" [ref=e606] [cursor=pointer]:
+                    - /url: https://newsroom.spotify.com/
+                - list [ref=e608]:
+                  - paragraph [ref=e609]: Communities
+                  - link "For Artists" [ref=e610] [cursor=pointer]:
+                    - /url: https://artists.spotify.com/
+                  - link "Developers" [ref=e611] [cursor=pointer]:
+                    - /url: https://developer.spotify.com/
+                  - link "Advertising" [ref=e612] [cursor=pointer]:
+                    - /url: https://ads.spotify.com/
+                  - link "Investors" [ref=e613] [cursor=pointer]:
+                    - /url: https://investors.spotify.com/
+                  - link "Vendors" [ref=e614] [cursor=pointer]:
+                    - /url: https://spotifyforvendors.com/
+                - list [ref=e616]:
+                  - paragraph [ref=e617]: Useful links
+                  - link "Support" [ref=e618] [cursor=pointer]:
+                    - /url: https://support.spotify.com/
+                  - link "Free Mobile App" [ref=e619] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/free/
+                  - link "Popular by Country" [ref=e620] [cursor=pointer]:
+                    - /url: /popular-in/uk
+                  - link "Import your music" [ref=e621] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/import-music/
+                - list [ref=e623]:
+                  - paragraph [ref=e624]: Spotify Plans
+                  - link "Premium Individual" [ref=e625] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/premium/#ref=spotifycom_footer_premium_individual
+                  - link "Premium Duo" [ref=e626] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/duo/#ref=spotifycom_footer_premium_duo
+                  - link "Premium Family" [ref=e627] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/family/#ref=spotifycom_footer_premium_family
+                  - link "Premium Student" [ref=e628] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/student/#ref=spotifycom_footer_premium_student
+                  - link "Spotify Free" [ref=e629] [cursor=pointer]:
+                    - /url: https://www.spotify.com/uk/free/#ref=spotifycom_footer_free
+              - generic [ref=e630]:
+                - link "Instagram" [ref=e632] [cursor=pointer]:
+                  - /url: https://instagram.com/spotify
+                  - img [ref=e634]
+                - link "Twitter" [ref=e638] [cursor=pointer]:
+                  - /url: https://twitter.com/spotify
+                  - img [ref=e640]
+                - link "Facebook" [ref=e643] [cursor=pointer]:
+                  - /url: https://www.facebook.com/Spotify
+                  - img [ref=e645]
+            - separator [ref=e647]
+            - generic [ref=e650]: © 2026 Spotify AB
+  - dialog "We Care About Your Privacy" [ref=e652]:
+    - generic [ref=e654]:
+      - generic [ref=e656]:
+        - heading "We Care About Your Privacy" [level=2] [ref=e657]
+        - generic [ref=e658]: We and our 90 partners store and/or access information on a device, such as unique IDs in cookies to process personal data. You may accept or manage your choices by clicking below, including your right to object where legitimate interest is used, or at any time in the privacy policy page. These choices will be signaled to our partners and will not affect browsing data.
+        - generic [ref=e659]:
+          - heading "We and our partners process data to provide:" [level=3] [ref=e660]
+          - paragraph [ref=e662]:
+            - text: Store and/or access information on a device. Personalised advertising. Personalised content. Advertising and content measurement, audience research, and services development.
+            - button "List of Partners (vendors)" [ref=e663] [cursor=pointer]
+      - generic [ref=e665]:
+        - button "Accept Cookies" [ref=e666] [cursor=pointer]
+        - button "Reject All" [ref=e667] [cursor=pointer]
+        - button "Cookie Settings, Opens the preference center dialog" [ref=e668] [cursor=pointer]: Cookie Settings

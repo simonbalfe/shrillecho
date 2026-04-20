@@ -1,33 +1,30 @@
 services:
-  redis:
-    image: redis:7-alpine
+  postgres:
+    image: postgres:16-alpine
     ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-
-  worker:
-    build: ./apps/worker
-    depends_on:
-      - redis
+      - "5432:5432"
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
-      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
-    restart: unless-stopped
+      POSTGRES_USER: shrillecho
+      POSTGRES_PASSWORD: shrillecho
+      POSTGRES_DB: shrillecho
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shrillecho"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   app:
     build: .
     ports:
       - "3000:3000"
-    depends_on:
-      - redis
     env_file:
       - .env
-    environment:
-      - REDIS_URL=redis://redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
     restart: unless-stopped
 
 volumes:
-  redis-data:
+  postgres-data:

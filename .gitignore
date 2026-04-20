@@ -28,9 +28,6 @@ out/
 *.tfvars
 *.tfstate*
 
-# Go
-apps/worker/bin/
-
 # Secrets
 *.pem
 *.key

@@ -9,8 +9,8 @@ export const auth = betterAuth({
     provider: 'pg',
     schema,
   }),
-  baseURL: config.APP_URL,
-  trustedOrigins: [config.APP_URL],
+  baseURL: config.API_URL,
+  trustedOrigins: [config.APP_URL, config.API_URL],
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
