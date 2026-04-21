@@ -1,6 +1,5 @@
 export const SPOTIFY_ROOT = 'https://open.spotify.com'
 export const API_PARTNER_URL = 'https://api-partner.spotify.com/pathfinder/v2/query'
-export const API_URL = 'https://api.spotify.com/v1'
 export const CLIENT_TOKEN_URL = 'https://clienttoken.spotify.com/v1/clienttoken'
 
 // Persisted-query hashes captured via Playwright from the live web player
@@ -16,6 +15,11 @@ export const PERSISTED_QUERIES = {
   queryArtistDiscographyAll: '5e07d323febb57b4a56a42abbf781490e58764aa45feb6e3dc0591564fc56599',
   queryAlbumTracks: 'b9bfabef66ed756e5e13f68a942deb60bd4125ec1f1be8cc42769dc0259b4b10',
   addToPlaylist: '47b2a1234b17748d332dd0431534f22450e9ecbb3d5ddcdacbd83368636a0990',
+  fetchLibraryTracks: '087278b20b743578a6262c2b0b4bcd20d879c503cc359a2285baf083ef944240',
+  libraryV3: '973e511ca44261fda7eebac8b653155e7caee3675abb4fb110cc1b8c78b091c3',
+  editablePlaylists: 'd5c4b8096437dcc2ac9528c91dfcd299e35b747cda2f8f75d28f41f49c5092ba',
+  getLists: '0f40e72e0f2469e8d6f474161242af3feda7cf1c4d20785fd73cc2cc8c2dee5f',
+  profileAttributes: '53bcb064f6cd18c23f752bc324a791194d20df612d8e1239c735144ab0399ced',
 } as const
 
 // Legacy aliases — prefer PERSISTED_QUERIES above.

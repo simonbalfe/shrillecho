@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { bigserial, boolean, index, pgTable, primaryKey, text, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { bigserial, boolean, index, integer, pgTable, primaryKey, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 
 // Better Auth tables
 export const user = pgTable('user', {
@@ -97,6 +97,48 @@ export const scrape = pgTable(
   (table) => [index('scrape_userId_idx').on(table.userId)],
 )
 
+export const spotifyTrack = pgTable('spotify_track', {
+  trackId: varchar('track_id', { length: 22 }).primaryKey(),
+  name: text('name').notNull(),
+  durationMs: integer('duration_ms'),
+  discNumber: integer('disc_number'),
+  trackNumber: integer('track_number'),
+  explicit: boolean('explicit').default(false).notNull(),
+  albumId: varchar('album_id', { length: 22 }),
+  albumName: text('album_name'),
+  albumImageUrl: text('album_image_url'),
+  updatedAt: timestamp('updated_at', { withTimezone: true })
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+})
+
+export const spotifyTrackArtist = pgTable(
+  'spotify_track_artist',
+  {
+    trackId: varchar('track_id', { length: 22 })
+      .notNull()
+      .references(() => spotifyTrack.trackId, { onDelete: 'cascade' }),
+    artistId: varchar('artist_id', { length: 22 }).notNull(),
+    artistName: text('artist_name'),
+    position: integer('position').notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.trackId, t.artistId] }), index('spotify_track_artist_artist_idx').on(t.artistId)],
+)
+
+export const likedTrack = pgTable(
+  'liked_track',
+  {
+    trackId: varchar('track_id', { length: 22 })
+      .primaryKey()
+      .references(() => spotifyTrack.trackId, { onDelete: 'cascade' }),
+    addedAt: timestamp('added_at', { withTimezone: true }),
+    playable: boolean('playable'),
+    syncedAt: timestamp('synced_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [index('liked_track_added_at_idx').on(t.addedAt)],
+)
+
 export const scrapeArtist = pgTable(
   'scrape_artist',
   {
@@ -135,4 +177,28 @@ export const scrapeArtistRelations = relations(scrapeArtist, ({ one }) => ({
   artist: one(artist, { fields: [scrapeArtist.artistId], references: [artist.id] }),
 }))
 
-export const schema = { user, session, account, verification, artist, scrape, scrapeArtist }
+export const spotifyTrackRelations = relations(spotifyTrack, ({ many, one }) => ({
+  artists: many(spotifyTrackArtist),
+  liked: one(likedTrack, { fields: [spotifyTrack.trackId], references: [likedTrack.trackId] }),
+}))
+
+export const spotifyTrackArtistRelations = relations(spotifyTrackArtist, ({ one }) => ({
+  track: one(spotifyTrack, { fields: [spotifyTrackArtist.trackId], references: [spotifyTrack.trackId] }),
+}))
+
+export const likedTrackRelations = relations(likedTrack, ({ one }) => ({
+  track: one(spotifyTrack, { fields: [likedTrack.trackId], references: [spotifyTrack.trackId] }),
+}))
+
+export const schema = {
+  user,
+  session,
+  account,
+  verification,
+  artist,
+  scrape,
+  scrapeArtist,
+  spotifyTrack,
+  spotifyTrackArtist,
+  likedTrack,
+}

@@ -1,5 +1,5 @@
 import { DEFAULT_HEADERS } from './constants'
-import { getSpotifyDispatcher } from './proxy'
+import { getSpotifyImpit } from './proxy'
 import type { RequestResponse } from './types'
 
 export interface PerformRequestOptions {
@@ -27,13 +27,10 @@ export async function performRequest(
     if (cookieHeader) headers.Cookie = cookieHeader
   }
 
-  const resp = await fetch(url, {
-    method: opts.method ?? 'GET',
-    headers,
-    body: opts.body,
-    // @ts-expect-error — `dispatcher` is supported by Node's undici-backed fetch
-    dispatcher: getSpotifyDispatcher(),
-  })
+  const impit = getSpotifyImpit()
+  const resp = impit
+    ? await impit.fetch(url, { method: opts.method ?? 'GET', headers, body: opts.body })
+    : await fetch(url, { method: opts.method ?? 'GET', headers, body: opts.body })
 
   return { status: resp.status, data: await resp.text() }
 }

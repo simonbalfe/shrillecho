@@ -168,6 +168,58 @@ export const spotifyRoutes = new Hono()
     },
   )
   .get(
+    '/spotify/me/liked-songs',
+    describeRoute({
+      tags: ['Spotify'],
+      summary: 'Fetch the current user\'s liked songs',
+      description:
+        'Wraps the pathfinder `fetchLibraryTracks` persisted query. Paginates at 50/page until `totalCount` is reached. Requires SP_DC env for a user-scoped token.',
+      responses: {
+        200: { description: 'Liked tracks list' },
+        500: { description: 'Upstream failure' },
+      },
+    }),
+    async (c) => {
+      try {
+        const client = await getSpotifyClient()
+        const tracks = await client.users.getAllLikedTracks()
+        return c.json({ success: true, total: tracks.length, tracks })
+      } catch (err) {
+        invalidateSpotifyClient()
+        return c.json(
+          { success: false, error: err instanceof Error ? err.message : 'liked songs failed' },
+          500,
+        )
+      }
+    },
+  )
+  .get(
+    '/spotify/me/library/playlists',
+    describeRoute({
+      tags: ['Spotify'],
+      summary: "Fetch the current user's library playlists (private + public)",
+      description:
+        'Wraps the pathfinder `libraryV3` persisted query with `filters: ["Playlists"]`. Paginates at 50/page until `totalCount` is reached. Returns playlists the user owns (private + public), playlists they follow, folders (when `flatten=false`), and pseudo-playlists like Liked Songs. Requires SP_DC env for a user-scoped token.',
+      responses: {
+        200: { description: 'Library playlist list' },
+        500: { description: 'Upstream failure' },
+      },
+    }),
+    async (c) => {
+      try {
+        const client = await getSpotifyClient()
+        const items = await client.users.getAllLibraryPlaylists()
+        return c.json({ success: true, total: items.length, items })
+      } catch (err) {
+        invalidateSpotifyClient()
+        return c.json(
+          { success: false, error: err instanceof Error ? err.message : 'library playlists failed' },
+          500,
+        )
+      }
+    },
+  )
+  .get(
     '/spotify/artists/:id/tracks',
     describeRoute({
       tags: ['Spotify'],

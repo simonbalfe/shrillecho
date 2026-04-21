@@ -1,5 +1,5 @@
 import { CLIENT_TOKEN_URL, CLIENT_VERSION, SPOTIFY_ROOT } from './constants'
-import { getSpotifyDispatcher } from './proxy'
+import { getSpotifyImpit } from './proxy'
 import { performRequest } from './request'
 import { getLatestSecret } from './secrets'
 import { generateTotp } from './totp'
@@ -28,12 +28,11 @@ const TOKEN_HEADERS: Record<string, string> = {
 }
 
 async function getSpotifyServerTimeSec(): Promise<number> {
-  const resp = await fetch(`${SPOTIFY_ROOT}/`, {
-    method: 'HEAD',
-    headers: { 'User-Agent': TOKEN_HEADERS['User-Agent']! },
-    // @ts-expect-error — `dispatcher` is supported by Node's undici-backed fetch
-    dispatcher: getSpotifyDispatcher(),
-  })
+  const impit = getSpotifyImpit()
+  const headers = { 'User-Agent': TOKEN_HEADERS['User-Agent']! }
+  const resp = impit
+    ? await impit.fetch(`${SPOTIFY_ROOT}/`, { method: 'HEAD', headers })
+    : await fetch(`${SPOTIFY_ROOT}/`, { method: 'HEAD', headers })
   const dateHeader = resp.headers.get('date')
   if (!dateHeader) return Math.floor(Date.now() / 1000)
   return Math.floor(new Date(dateHeader).getTime() / 1000)

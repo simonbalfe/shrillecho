@@ -1,0 +1,1505 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - link "Skip to main content" [ref=e6] [cursor=pointer]:
+        - /url: "#main-view"
+        - generic [ref=e7]: Skip to main content
+      - link "Spotify" [ref=e9] [cursor=pointer]:
+        - /url: /
+        - img "Spotify" [ref=e10]
+      - generic [ref=e13]:
+        - button "Home" [ref=e14] [cursor=pointer]:
+          - img [ref=e16]
+        - search [ref=e19]:
+          - button "Search" [ref=e21] [cursor=pointer]:
+            - img [ref=e23]
+          - generic [ref=e25]:
+            - combobox "What do you want to play?" [ref=e26]
+            - generic:
+              - generic: ⌘ShiftL
+          - button "Browse" [ref=e29] [cursor=pointer]:
+            - img [ref=e31]
+      - generic [ref=e35]:
+        - button "Premium" [ref=e36] [cursor=pointer]
+        - button "Support" [ref=e37] [cursor=pointer]
+        - button "Download" [ref=e38] [cursor=pointer]
+        - link "Install App" [ref=e40] [cursor=pointer]:
+          - /url: /download
+          - img [ref=e42]
+          - generic [ref=e45]: Install App
+        - generic [ref=e46]:
+          - button "Sign up" [ref=e47] [cursor=pointer]
+          - button "Log in" [ref=e48] [cursor=pointer]:
+            - generic [ref=e49]: Log in
+    - generic [ref=e50]:
+      - navigation "Main" [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e56]:
+              - heading "Your Library" [level=1] [ref=e58]
+              - button "Create" [ref=e60] [cursor=pointer]:
+                - img [ref=e61]
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - generic [ref=e67]:
+                  - generic [ref=e68]: Create your first playlist
+                  - generic [ref=e69]: It’s easy, we’ll help you
+                - button "Create playlist" [ref=e71] [cursor=pointer]:
+                  - generic [ref=e72]: Create playlist
+              - generic [ref=e73]:
+                - generic [ref=e74]:
+                  - generic [ref=e75]: Let’s find some podcasts to follow
+                  - generic [ref=e76]: We’ll keep you updated on new episodes
+                - link "Browse podcasts" [ref=e78] [cursor=pointer]:
+                  - /url: /genre/podcasts-web
+                  - generic [ref=e79]: Browse podcasts
+              - generic:
+                - grid "Your Library":
+                  - generic:
+                    - row
+                    - row
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - generic [ref=e82]:
+                - link "Legal" [ref=e84] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/
+                  - generic [ref=e85]: Legal
+                - link "Safety & Privacy Center" [ref=e87] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/safetyandprivacy/
+                  - generic [ref=e88]: Safety & Privacy Center
+                - link "Privacy Policy" [ref=e90] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/
+                  - generic [ref=e91]: Privacy Policy
+                - button "Cookie Settings" [ref=e93] [cursor=pointer]:
+                  - generic [ref=e94]: Cookie Settings
+                - link "About Ads" [ref=e96] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/legal/privacy-policy/#s3
+                  - generic [ref=e97]: About Ads
+                - link "Accessibility" [ref=e99] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/accessibility/
+                  - generic [ref=e100]: Accessibility
+                - link "Modern Slavery Act" [ref=e102] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20Modern%20Slavery%20Statement%202023.pdf
+                  - generic [ref=e103]: Modern Slavery Act
+                - link "UK Tax Policy" [ref=e105] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/UK%20Tax%20Strategy%20Statement%202025.pdf
+                  - generic [ref=e106]: UK Tax Policy
+                - link "UK Gender Pay Report" [ref=e108] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify%20UK%20Gender%20Pay%20Report%202025.pdf
+                  - generic [ref=e109]: UK Gender Pay Report
+                - link "UK S172 Statement" [ref=e111] [cursor=pointer]:
+                  - /url: https://www.scdn.co/pdf/Spotify-UK-S172-Statement.pdf
+                  - generic [ref=e112]: UK S172 Statement
+              - link "Cookies" [ref=e113] [cursor=pointer]:
+                - /url: https://www.spotify.com/legal/cookies-policy/
+            - button "English" [ref=e115] [cursor=pointer]:
+              - img [ref=e117]
+              - text: English
+      - generic [ref=e120]:
+        - text: Resize main navigation
+        - slider "Resize main navigation" [ref=e121]: "280"
+    - complementary "Now playing bar" [ref=e123]:
+      - generic [ref=e124] [cursor=pointer]:
+        - generic [ref=e125]:
+          - paragraph [ref=e126]: Preview of Spotify
+          - paragraph [ref=e127]: Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.
+        - button "Sign up for free" [ref=e128]:
+          - generic [ref=e129]: Sign up for free
+      - generic:
+        - generic "Player controls" [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - switch "Enable shuffle" [disabled] [ref=e134]:
+                - img [ref=e136]
+              - button "Previous" [disabled] [ref=e139]:
+                - img [ref=e141]
+            - button "Pause" [disabled] [ref=e143]:
+              - img [ref=e146]
+            - generic [ref=e148]:
+              - button "Next" [disabled] [ref=e149]:
+                - img [ref=e151]
+              - checkbox "Disable repeat" [disabled] [ref=e153]:
+                - img [ref=e155]
+          - generic [ref=e157]:
+            - generic [ref=e158]: "-:--"
+            - generic [ref=e161]:
+              - text: Change progress
+              - slider "Change progress" [disabled] [ref=e162]: "0"
+            - generic [ref=e168]: "-:--"
+        - generic [ref=e170]:
+          - button "Now playing view" [disabled] [ref=e171]:
+            - img [ref=e173]
+          - generic [ref=e176]:
+            - button "Mute" [ref=e177] [cursor=pointer]:
+              - img [ref=e179]
+            - generic [ref=e184]:
+              - text: Change volume
+              - slider "Change volume" [ref=e185]: "1"
+    - 'main "Spotify - Web Player: Music for everyone" [ref=e196]':
+      - generic [ref=e199]:
+        - heading "Home" [level=1] [ref=e201]
+        - generic [ref=e202]:
+          - region "Trending songs" [ref=e203]:
+            - group [ref=e205]:
+              - generic [ref=e206]:
+                - heading [level=2] [ref=e208]:
+                  - link [ref=e210] [cursor=pointer]:
+                    - /url: /section/0JQ5DB5E8N831KzFzsBBQ2
+                    - text: Trending songs
+                - link "Show all" [ref=e212] [cursor=pointer]:
+                  - /url: /section/0JQ5DB5E8N831KzFzsBBQ2
+                  - generic [ref=e213]: Show all
+            - generic [ref=e214]:
+              - grid "Trending songs" [ref=e215]:
+                - row "drop dead" [ref=e216]:
+                  - gridcell "drop dead" [ref=e217]:
+                    - listitem "drop dead" [ref=e218] [cursor=pointer]:
+                      - button "drop dead Olivia Rodrigo" [ref=e219]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play drop dead":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e222]:
+                        - link "drop dead" [ref=e223]:
+                          - /url: /album/4OMvPbXaYlbUm6TnwyXGct?highlight=spotify:track:6gkbtMtioHgtyGjrMel6ei
+                          - paragraph [ref=e224]:
+                            - generic [ref=e225]: drop dead
+                        - link "Olivia Rodrigo" [ref=e230]:
+                          - /url: /artist/1McMsnEElThX1knmY4oliG
+                - row "Beauty And A Beat" [ref=e231]:
+                  - gridcell "Beauty And A Beat" [ref=e232]:
+                    - listitem "Beauty And A Beat" [ref=e233] [cursor=pointer]:
+                      - button "Beauty And A Beat Justin Bieber, Nicki Minaj" [ref=e234]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Beauty And A Beat":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e237]:
+                        - link "Beauty And A Beat" [ref=e238]:
+                          - /url: /album/5cxMa6oLINJzmZ8lF7wWQN?highlight=spotify:track:6QFCMUUq1T2Vf5sFUXcuQ7
+                          - paragraph [ref=e239]:
+                            - generic [ref=e240]: Beauty And A Beat
+                        - generic [ref=e244]:
+                          - link "Justin Bieber" [ref=e245]:
+                            - /url: /artist/1uNFoZAHBGtllmzznpCI3s
+                          - text: ","
+                          - link "Nicki Minaj" [ref=e246]:
+                            - /url: /artist/0hCNtLu0JehylgoiP8L4Gh
+                - row "Potential" [ref=e247]:
+                  - gridcell "Potential" [ref=e248]:
+                    - listitem "Potential" [ref=e249] [cursor=pointer]:
+                      - button "Potential sombr" [ref=e250]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Potential":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e253]:
+                        - link "Potential" [ref=e254]:
+                          - /url: /album/0qqZfp0bh8BpzRZ5jwBLY5?highlight=spotify:track:4cpHvqL4dvporE8JlQwkec
+                          - paragraph [ref=e255]:
+                            - generic [ref=e256]: Potential
+                        - link "sombr" [ref=e261]:
+                          - /url: /artist/4G9NDjRyZFDlJKMRL8hx3S
+                - row "SHE DID IT AGAIN (feat. Zara Larsson)" [ref=e262]:
+                  - gridcell "SHE DID IT AGAIN (feat. Zara Larsson)" [ref=e263]:
+                    - listitem "SHE DID IT AGAIN (feat. Zara Larsson)" [ref=e264] [cursor=pointer]:
+                      - button "SHE DID IT AGAIN (feat. Zara Larsson) Tyla, Zara Larsson" [ref=e265]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play SHE DID IT AGAIN (feat. Zara Larsson)":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e268]:
+                        - link "SHE DID IT AGAIN (feat. Zara Larsson)" [ref=e269]:
+                          - /url: /album/13DVwg7TPRUC8BnLjblv5B?highlight=spotify:track:3jucj0h0tajme6rUEadmWN
+                          - paragraph [ref=e270]:
+                            - generic [ref=e271]: SHE DID IT AGAIN (feat. Zara Larsson)
+                        - generic [ref=e275]:
+                          - link "Tyla" [ref=e276]:
+                            - /url: /artist/3SozjO3Lat463tQICI9LcE
+                          - text: ","
+                          - link "Zara Larsson" [ref=e277]:
+                            - /url: /artist/1Xylc3o4UrD53lo9CvFvVg
+                - row "I Feel So Free" [ref=e278]:
+                  - gridcell "I Feel So Free" [ref=e279]:
+                    - listitem "I Feel So Free" [ref=e280] [cursor=pointer]:
+                      - button "I Feel So Free Madonna" [ref=e281]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play I Feel So Free":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e284]:
+                        - link "I Feel So Free" [ref=e285]:
+                          - /url: /album/1BpCZSS9KQ3Dd2eb8ADt1y?highlight=spotify:track:04o2ES37jkiK5Qy8PR5XLk
+                          - paragraph [ref=e286]:
+                            - generic [ref=e287]: I Feel So Free
+                        - link "Madonna" [ref=e292]:
+                          - /url: /artist/6tbjWDEIzxoDsBA1FuhfPW
+                - row "damned" [ref=e293]:
+                  - gridcell "damned" [ref=e294]:
+                    - listitem "damned" [ref=e295] [cursor=pointer]:
+                      - button "damned Miguel" [ref=e296]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play damned":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e299]:
+                        - link "damned" [ref=e300]:
+                          - /url: /album/6W8ZsoinSMViZMh9aYK7gQ?highlight=spotify:track:2ZCe5vjgNDAmoWe73C46nc
+                          - paragraph [ref=e301]:
+                            - generic [ref=e302]: damned
+                        - link "Miguel" [ref=e307]:
+                          - /url: /artist/360IAlyVv4PCEVjgyMZrxK
+                - row "PINKY UP" [ref=e308]:
+                  - gridcell "PINKY UP" [ref=e309]:
+                    - listitem "PINKY UP" [ref=e310] [cursor=pointer]:
+                      - button "PINKY UP Explicit KATSEYE" [ref=e311]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play PINKY UP":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e314]:
+                        - link "PINKY UP" [ref=e315]:
+                          - /url: /album/5tLy0MEMDVqiHKso6B4jnz?highlight=spotify:track:4KmkJjHTNlr1jFY56Lyz4E
+                          - paragraph [ref=e316]:
+                            - generic [ref=e317]: PINKY UP
+                        - generic [ref=e320]:
+                          - generic "Explicit" [ref=e321]:
+                            - generic [ref=e322]: E
+                          - link "KATSEYE" [ref=e324]:
+                            - /url: /artist/3c0gDdb9lhnHGFtP4prQpn
+                - row "Eenie Meenie" [ref=e325]:
+                  - gridcell "Eenie Meenie" [ref=e326]:
+                    - listitem "Eenie Meenie" [ref=e327] [cursor=pointer]:
+                      - button "Eenie Meenie Sean Kingston, Justin Bieber" [ref=e328]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Eenie Meenie":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e331]:
+                        - link "Eenie Meenie" [ref=e332]:
+                          - /url: /album/7yCXgxWLZZEAiVsISKN3BF?highlight=spotify:track:4vVTI94F9uJ8lHNDWKv0i2
+                          - paragraph [ref=e333]:
+                            - generic [ref=e334]: Eenie Meenie
+                        - generic [ref=e338]:
+                          - link "Sean Kingston" [ref=e339]:
+                            - /url: /artist/6S0dmVVn4udvppDhZIWxCr
+                          - text: ","
+                          - link "Justin Bieber" [ref=e340]:
+                            - /url: /artist/1uNFoZAHBGtllmzznpCI3s
+                - row "Where Are Ü Now (with Justin Bieber)" [ref=e341]:
+                  - gridcell "Where Are Ü Now (with Justin Bieber)" [ref=e342]:
+                    - listitem "Where Are Ü Now (with Justin Bieber)" [ref=e343] [cursor=pointer]:
+                      - button "Where Are Ü Now (with Justin Bieber) Jack Ü, Skrillex, Diplo, Justin Bieber" [ref=e344]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Where Are Ü Now (with Justin Bieber)":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e347]:
+                        - link "Where Are Ü Now (with Justin Bieber)" [ref=e348]:
+                          - /url: /album/6bfkwBrGYKJFk6Z4QVyjxd?highlight=spotify:track:66hayvUbTotekKU3H4ta1f
+                          - paragraph [ref=e349]:
+                            - generic [ref=e350]: Where Are Ü Now (with Justin Bieber)
+                        - generic [ref=e354]:
+                          - link "Jack Ü" [ref=e355]:
+                            - /url: /artist/1HxJeLhIuegM3KgvPn8sTa
+                          - text: ","
+                          - link "Skrillex" [ref=e356]:
+                            - /url: /artist/5he5w2lnU9x7JFhnwcekXX
+                          - text: ","
+                          - link "Diplo" [ref=e357]:
+                            - /url: /artist/5fMUXHkw8R8eOP2RNVYEZX
+                          - text: ","
+                          - link "Justin Bieber" [ref=e358]:
+                            - /url: /artist/1uNFoZAHBGtllmzznpCI3s
+                - row "STAY (with Justin Bieber)" [ref=e359]:
+                  - gridcell "STAY (with Justin Bieber)" [ref=e360]:
+                    - listitem "STAY (with Justin Bieber)" [ref=e361] [cursor=pointer]:
+                      - button "STAY (with Justin Bieber) Explicit The Kid LAROI, Justin Bieber" [ref=e362]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play STAY (with Justin Bieber)":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e365]:
+                        - link "STAY (with Justin Bieber)" [ref=e366]:
+                          - /url: /album/576UTio7xgY7YUxrHMzxeI?highlight=spotify:track:567e29TDzLwZwfDuEpGTwo
+                          - paragraph [ref=e367]:
+                            - generic [ref=e368]: STAY (with Justin Bieber)
+                        - generic [ref=e371]:
+                          - generic "Explicit" [ref=e372]:
+                            - generic [ref=e373]: E
+                          - generic [ref=e374]:
+                            - link "The Kid LAROI" [ref=e375]:
+                              - /url: /artist/2tIP7SsRs7vjIcLrU85W8J
+                            - text: ","
+                            - link "Justin Bieber" [ref=e376]:
+                              - /url: /artist/1uNFoZAHBGtllmzznpCI3s
+                - row "Earrings" [ref=e377]:
+                  - gridcell "Earrings" [ref=e378]:
+                    - listitem "Earrings" [ref=e379] [cursor=pointer]:
+                      - button "Earrings Malcolm Todd" [ref=e380]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Earrings":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e383]:
+                        - link "Earrings" [ref=e384]:
+                          - /url: /album/2jX6yKrWw9bY7JAYHhhtqZ?highlight=spotify:track:0eAuGrXyGFYwur9ARUe7LJ
+                          - paragraph [ref=e385]:
+                            - generic [ref=e386]: Earrings
+                        - link "Malcolm Todd" [ref=e391]:
+                          - /url: /artist/7eKkW1zo5uzW8kUntiiBvz
+                - row "Written in the Stars (feat. Eric Turner)" [ref=e392]:
+                  - gridcell "Written in the Stars (feat. Eric Turner)" [ref=e393]:
+                    - listitem "Written in the Stars (feat. Eric Turner)" [ref=e394] [cursor=pointer]:
+                      - button "Written in the Stars (feat. Eric Turner) Tinie Tempah, Eric Turner" [ref=e395]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Written in the Stars (feat. Eric Turner)":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e398]:
+                        - link "Written in the Stars (feat. Eric Turner)" [ref=e399]:
+                          - /url: /album/3DywhGLPXp0iukyKHE9xqc?highlight=spotify:track:2chyJjEMYj397jz1QLEGO7
+                          - paragraph [ref=e400]:
+                            - generic [ref=e401]: Written in the Stars (feat. Eric Turner)
+                        - generic [ref=e405]:
+                          - link "Tinie Tempah" [ref=e406]:
+                            - /url: /artist/0Tob4H0FLtEONHU1MjpUEp
+                          - text: ","
+                          - link "Eric Turner" [ref=e407]:
+                            - /url: /artist/79DOwuMzV2h4es3em0t002
+                - row "House Tour" [ref=e408]:
+                  - gridcell "House Tour" [ref=e409]:
+                    - listitem "House Tour" [ref=e410] [cursor=pointer]:
+                      - button "House Tour Sabrina Carpenter" [ref=e411]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play House Tour":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e414]:
+                        - link "House Tour" [ref=e415]:
+                          - /url: /album/1aqg30bNvLSWgShZgX4oop?highlight=spotify:track:25jgQBxuUkGDdCG1WGKKN9
+                          - paragraph [ref=e416]:
+                            - generic [ref=e417]: House Tour
+                        - link "Sabrina Carpenter" [ref=e422]:
+                          - /url: /artist/74KM79TiuVKeVCqs8QtB0B
+                - row "KGB" [ref=e423]:
+                  - gridcell "KGB" [ref=e424]:
+                    - listitem "KGB" [ref=e425] [cursor=pointer]:
+                      - button "KGB Explicit ADÉLA" [ref=e426]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play KGB":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e429]:
+                        - link "KGB" [ref=e430]:
+                          - /url: /album/06wdsqUb4GSuR29Luwiu8n?highlight=spotify:track:7C7vnAW3L8ahsOGsZKY6EP
+                          - paragraph [ref=e431]:
+                            - generic [ref=e432]: KGB
+                        - generic [ref=e435]:
+                          - generic "Explicit" [ref=e436]:
+                            - generic [ref=e437]: E
+                          - link "ADÉLA" [ref=e439]:
+                            - /url: /artist/2qanRMyA5bNuTvz1dK45OP
+                - row "Stay Love" [ref=e440]:
+                  - gridcell "Stay Love" [ref=e441]:
+                    - listitem "Stay Love" [ref=e442] [cursor=pointer]:
+                      - button "Stay Love Lewis Capaldi" [ref=e443]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Stay Love":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e446]:
+                        - link "Stay Love" [ref=e447]:
+                          - /url: /album/4ScfyWincbVs9Ingpb0zw6?highlight=spotify:track:3CyM2SZsivBrwxynIvN2K3
+                          - paragraph [ref=e448]:
+                            - generic [ref=e449]: Stay Love
+                        - link "Lewis Capaldi" [ref=e454]:
+                          - /url: /artist/4GNC7GD6oZMSxPGyXy4MNB
+                - row "Let Me Love You" [ref=e455]:
+                  - gridcell "Let Me Love You" [ref=e456]:
+                    - listitem "Let Me Love You" [ref=e457] [cursor=pointer]:
+                      - button "Let Me Love You DJ Snake, Justin Bieber" [ref=e458]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Let Me Love You":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e461]:
+                        - link "Let Me Love You" [ref=e462]:
+                          - /url: /album/02sEJTj1sye1JaqxqpcSCp?highlight=spotify:track:0lYBSQXN6rCTvUZvg9S0lU
+                          - paragraph [ref=e463]:
+                            - generic [ref=e464]: Let Me Love You
+                        - generic [ref=e468]:
+                          - link "DJ Snake" [ref=e469]:
+                            - /url: /artist/540vIaP2JwjQb9dm3aArA4
+                          - text: ","
+                          - link "Justin Bieber" [ref=e470]:
+                            - /url: /artist/1uNFoZAHBGtllmzznpCI3s
+                - row "Back to the 305" [ref=e471]:
+                  - gridcell "Back to the 305" [ref=e472]:
+                    - listitem "Back to the 305" [ref=e473] [cursor=pointer]:
+                      - button "Back to the 305 Omar+, Luke Dean" [ref=e474]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Back to the 305":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e477]:
+                        - link "Back to the 305" [ref=e478]:
+                          - /url: /album/5bz83EFYjM4ToJVofVL71a?highlight=spotify:track:1tWkiHe2UtNye350uhqwVm
+                          - paragraph [ref=e479]:
+                            - generic [ref=e480]: Back to the 305
+                        - generic [ref=e484]:
+                          - link "Omar+" [ref=e485]:
+                            - /url: /artist/06HO1b1nd4kQzRakdZBTSc
+                          - text: ","
+                          - link "Luke Dean" [ref=e486]:
+                            - /url: /artist/2BhXOZ96YbOdXz8F6HVUw4
+                - row "Night , Blooming Jasmine ." [ref=e487]:
+                  - gridcell "Night , Blooming Jasmine ." [ref=e488]:
+                    - listitem "Night , Blooming Jasmine ." [ref=e489] [cursor=pointer]:
+                      - button "Night , Blooming Jasmine . Explicit fakemink" [ref=e490]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Night , Blooming Jasmine .":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e493]:
+                        - link "Night , Blooming Jasmine ." [ref=e494]:
+                          - /url: /album/5bajUbQGZ7f98jo1gfX0hc?highlight=spotify:track:4WKUmjoUeYkzyoEvTbiVdW
+                          - paragraph [ref=e495]:
+                            - generic [ref=e496]: Night , Blooming Jasmine .
+                        - generic [ref=e499]:
+                          - generic "Explicit" [ref=e500]:
+                            - generic [ref=e501]: E
+                          - link "fakemink" [ref=e503]:
+                            - /url: /artist/0qc4BFxcwRFZfevTck4fOi
+                - row "Wizard Of Oz" [ref=e504]:
+                  - gridcell "Wizard Of Oz" [ref=e505]:
+                    - listitem "Wizard Of Oz" [ref=e506] [cursor=pointer]:
+                      - button "Wizard Of Oz Explicit M Huncho" [ref=e507]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Wizard Of Oz":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e510]:
+                        - link "Wizard Of Oz" [ref=e511]:
+                          - /url: /album/3ogwVPzWAxYZjROwu0MidL?highlight=spotify:track:4WUmgsEZZZx5aJqb5DE9Ta
+                          - paragraph [ref=e512]:
+                            - generic [ref=e513]: Wizard Of Oz
+                        - generic [ref=e516]:
+                          - generic "Explicit" [ref=e517]:
+                            - generic [ref=e518]: E
+                          - link "M Huncho" [ref=e520]:
+                            - /url: /artist/491U1PrV1EoQuhM0aUCn9r
+                - row "VYZEE" [ref=e521]:
+                  - gridcell "VYZEE" [ref=e522]:
+                    - listitem "VYZEE" [ref=e523] [cursor=pointer]:
+                      - button "VYZEE sweetiele" [ref=e524]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play VYZEE":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e527]:
+                        - link "VYZEE" [ref=e528]:
+                          - /url: /album/4EeGO18uyaehwPagWedXiC?highlight=spotify:track:0amVJVFJfwe5htMUF7hhNe
+                          - paragraph [ref=e529]:
+                            - generic [ref=e530]: VYZEE
+                        - link "sweetiele" [ref=e535]:
+                          - /url: /artist/7HW7euBVtNogyNZMxGXFmU
+              - generic:
+                - generic:
+                  - img
+                - img [ref=e537] [cursor=pointer]
+          - region "Popular artists" [ref=e539]:
+            - group [ref=e541]:
+              - generic [ref=e542]:
+                - heading [level=2] [ref=e544]:
+                  - link [ref=e546] [cursor=pointer]:
+                    - /url: /section/0JQ5DAnM3wGh0gz1MXnu3C
+                    - text: Popular artists
+                - link "Show all" [ref=e548] [cursor=pointer]:
+                  - /url: /section/0JQ5DAnM3wGh0gz1MXnu3C
+                  - generic [ref=e549]: Show all
+            - generic [ref=e550]:
+              - grid "Popular artists" [ref=e551]:
+                - row "Rihanna" [ref=e552]:
+                  - gridcell "Rihanna" [ref=e553]:
+                    - listitem "Rihanna" [ref=e554] [cursor=pointer]:
+                      - button "Rihanna Artist" [ref=e555]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Rihanna":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e558]:
+                        - link "Rihanna" [ref=e559]:
+                          - /url: /artist/5pKCCKE2ajJHZ9KAiaK11H
+                          - paragraph [ref=e560]:
+                            - generic [ref=e561]: Rihanna
+                        - generic [ref=e564]: Artist
+                - row "Lady Gaga" [ref=e565]:
+                  - gridcell "Lady Gaga" [ref=e566]:
+                    - listitem "Lady Gaga" [ref=e567] [cursor=pointer]:
+                      - button "Lady Gaga Artist" [ref=e568]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Lady Gaga":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e571]:
+                        - link "Lady Gaga" [ref=e572]:
+                          - /url: /artist/1HY2Jd0NmPuamShAr6KMms
+                          - paragraph [ref=e573]:
+                            - generic [ref=e574]: Lady Gaga
+                        - generic [ref=e577]: Artist
+                - row "Ed Sheeran" [ref=e578]:
+                  - gridcell "Ed Sheeran" [ref=e579]:
+                    - listitem "Ed Sheeran" [ref=e580] [cursor=pointer]:
+                      - button "Ed Sheeran Artist" [ref=e581]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Ed Sheeran":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e584]:
+                        - link "Ed Sheeran" [ref=e585]:
+                          - /url: /artist/6eUKZXaKkcviH0Ku9w2n3V
+                          - paragraph [ref=e586]:
+                            - generic [ref=e587]: Ed Sheeran
+                        - generic [ref=e590]: Artist
+                - row "Coldplay" [ref=e591]:
+                  - gridcell "Coldplay" [ref=e592]:
+                    - listitem "Coldplay" [ref=e593] [cursor=pointer]:
+                      - button "Coldplay Artist" [ref=e594]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Coldplay":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e597]:
+                        - link "Coldplay" [ref=e598]:
+                          - /url: /artist/4gzpq5DPGxSnKTe4SA8HAU
+                          - paragraph [ref=e599]:
+                            - generic [ref=e600]: Coldplay
+                        - generic [ref=e603]: Artist
+                - row "Calvin Harris" [ref=e604]:
+                  - gridcell "Calvin Harris" [ref=e605]:
+                    - listitem "Calvin Harris" [ref=e606] [cursor=pointer]:
+                      - button "Calvin Harris Artist" [ref=e607]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Calvin Harris":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e610]:
+                        - link "Calvin Harris" [ref=e611]:
+                          - /url: /artist/7CajNmpbOovFoOoasH2HaY
+                          - paragraph [ref=e612]:
+                            - generic [ref=e613]: Calvin Harris
+                        - generic [ref=e616]: Artist
+                - row "Billie Eilish" [ref=e617]:
+                  - gridcell "Billie Eilish" [ref=e618]:
+                    - listitem "Billie Eilish" [ref=e619] [cursor=pointer]:
+                      - button "Billie Eilish Artist" [ref=e620]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Billie Eilish":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e623]:
+                        - link "Billie Eilish" [ref=e624]:
+                          - /url: /artist/6qqNVTkY8uBg9cP3Jd7DAH
+                          - paragraph [ref=e625]:
+                            - generic [ref=e626]: Billie Eilish
+                        - generic [ref=e629]: Artist
+                - row "Drake" [ref=e630]:
+                  - gridcell "Drake" [ref=e631]:
+                    - listitem "Drake" [ref=e632] [cursor=pointer]:
+                      - button "Drake Artist" [ref=e633]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Drake":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e636]:
+                        - link "Drake" [ref=e637]:
+                          - /url: /artist/3TVXtAsR1Inumwj472S9r4
+                          - paragraph [ref=e638]:
+                            - generic [ref=e639]: Drake
+                        - generic [ref=e642]: Artist
+                - row "Taylor Swift" [ref=e643]:
+                  - gridcell "Taylor Swift" [ref=e644]:
+                    - listitem "Taylor Swift" [ref=e645] [cursor=pointer]:
+                      - button "Taylor Swift Artist" [ref=e646]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Taylor Swift":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e649]:
+                        - link "Taylor Swift" [ref=e650]:
+                          - /url: /artist/06HL4z0CvFAxyc27GXpf02
+                          - paragraph [ref=e651]:
+                            - generic [ref=e652]: Taylor Swift
+                        - generic [ref=e655]: Artist
+                - row "Fleetwood Mac" [ref=e656]:
+                  - gridcell "Fleetwood Mac" [ref=e657]:
+                    - listitem "Fleetwood Mac" [ref=e658] [cursor=pointer]:
+                      - button "Fleetwood Mac Artist" [ref=e659]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Fleetwood Mac":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e662]:
+                        - link "Fleetwood Mac" [ref=e663]:
+                          - /url: /artist/08GQAI4eElDnROBrJRGE0X
+                          - paragraph [ref=e664]:
+                            - generic [ref=e665]: Fleetwood Mac
+                        - generic [ref=e668]: Artist
+                - row "The Weeknd" [ref=e669]:
+                  - gridcell "The Weeknd" [ref=e670]:
+                    - listitem "The Weeknd" [ref=e671] [cursor=pointer]:
+                      - button "The Weeknd Artist" [ref=e672]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play The Weeknd":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e675]:
+                        - link "The Weeknd" [ref=e676]:
+                          - /url: /artist/1Xyo4u8uXC1ZmMpatF05PJ
+                          - paragraph [ref=e677]:
+                            - generic [ref=e678]: The Weeknd
+                        - generic [ref=e681]: Artist
+              - generic:
+                - generic:
+                  - img
+                - img [ref=e683] [cursor=pointer]
+          - region "Popular albums and singles" [ref=e685]:
+            - group [ref=e687]:
+              - generic [ref=e688]:
+                - heading [level=2] [ref=e690]:
+                  - link [ref=e692] [cursor=pointer]:
+                    - /url: /section/0JQ5DAnM3wGh0gz1MXnu3B
+                    - text: Popular albums and singles
+                - link "Show all" [ref=e694] [cursor=pointer]:
+                  - /url: /section/0JQ5DAnM3wGh0gz1MXnu3B
+                  - generic [ref=e695]: Show all
+            - generic [ref=e696]:
+              - grid "Popular albums and singles" [ref=e697]:
+                - row "Best White Noise For Sleeping Baby" [ref=e698]:
+                  - gridcell "Best White Noise For Sleeping Baby" [ref=e699]:
+                    - listitem "Best White Noise For Sleeping Baby" [ref=e700] [cursor=pointer]:
+                      - button "Best White Noise For Sleeping Baby Dream Supplier" [ref=e701]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Best White Noise For Sleeping Baby by Dream Supplier":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e704]:
+                        - link "Best White Noise For Sleeping Baby" [ref=e705]:
+                          - /url: /album/0NGHR9zjS5eFFlqtClA9VV
+                          - paragraph [ref=e706]:
+                            - generic [ref=e707]: Best White Noise For Sleeping Baby
+                        - link "Dream Supplier" [ref=e711]:
+                          - /url: /artist/6Cqtx9fpxzggIMuKn0RGCp
+                - row "10 Hours of Continuous Rain Sounds for Sleeping" [ref=e712]:
+                  - gridcell "10 Hours of Continuous Rain Sounds for Sleeping" [ref=e713]:
+                    - listitem "10 Hours of Continuous Rain Sounds for Sleeping" [ref=e714] [cursor=pointer]:
+                      - button "10 Hours of Continuous Rain Sounds for Sleeping White Noise Radiance, Rain Sounds" [ref=e715]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play 10 Hours of Continuous Rain Sounds for Sleeping by White Noise Radiance, Rain Sounds":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e718]:
+                        - link "10 Hours of Continuous Rain Sounds for Sleeping" [ref=e719]:
+                          - /url: /album/54vGSK50oe08qxz2xXECEC
+                          - paragraph [ref=e720]:
+                            - generic [ref=e721]: 10 Hours of Continuous Rain Sounds for Sleeping
+                        - generic [ref=e724]:
+                          - link "White Noise Radiance" [ref=e725]:
+                            - /url: /artist/0QUBaF6Rtta4TTmxYYfzux
+                          - text: ","
+                          - link "Rain Sounds" [ref=e726]:
+                            - /url: /artist/5nSGBmlgUdqWNExnOX8VtV
+                - row "HIT ME HARD AND SOFT" [ref=e727]:
+                  - gridcell "HIT ME HARD AND SOFT" [ref=e728]:
+                    - listitem "HIT ME HARD AND SOFT" [ref=e729] [cursor=pointer]:
+                      - button "HIT ME HARD AND SOFT Billie Eilish" [ref=e730]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play HIT ME HARD AND SOFT by Billie Eilish":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e733]:
+                        - link "HIT ME HARD AND SOFT" [ref=e734]:
+                          - /url: /album/7aJuG4TFXa2hmE4z1yxc3n
+                          - paragraph [ref=e735]:
+                            - generic [ref=e736]: HIT ME HARD AND SOFT
+                        - link "Billie Eilish" [ref=e740]:
+                          - /url: /artist/6qqNVTkY8uBg9cP3Jd7DAH
+                - row "Short n' Sweet" [ref=e741]:
+                  - gridcell "Short n' Sweet" [ref=e742]:
+                    - listitem "Short n' Sweet" [ref=e743] [cursor=pointer]:
+                      - button "Short n' Sweet Sabrina Carpenter" [ref=e744]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Short n' Sweet by Sabrina Carpenter":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e747]:
+                        - link "Short n' Sweet" [ref=e748]:
+                          - /url: /album/3iPSVi54hsacKKl1xIR2eH
+                          - paragraph [ref=e749]:
+                            - generic [ref=e750]: Short n' Sweet
+                        - link "Sabrina Carpenter" [ref=e754]:
+                          - /url: /artist/74KM79TiuVKeVCqs8QtB0B
+                - row "You'll Be Alright, Kid (Chapter 1)" [ref=e755]:
+                  - gridcell "You'll Be Alright, Kid (Chapter 1)" [ref=e756]:
+                    - listitem "You'll Be Alright, Kid (Chapter 1)" [ref=e757] [cursor=pointer]:
+                      - button "You'll Be Alright, Kid (Chapter 1) Alex Warren" [ref=e758]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play You'll Be Alright, Kid (Chapter 1) by Alex Warren":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e761]:
+                        - link "You'll Be Alright, Kid (Chapter 1)" [ref=e762]:
+                          - /url: /album/1eCGY9WJpYgtaFh1Lk2KNo
+                          - paragraph [ref=e763]:
+                            - generic [ref=e764]: You'll Be Alright, Kid (Chapter 1)
+                        - link "Alex Warren" [ref=e768]:
+                          - /url: /artist/0fTSzq9jAh4c36UVb4V7CB
+                - row "Hamilton (Original Broadway Cast Recording)" [ref=e769]:
+                  - gridcell "Hamilton (Original Broadway Cast Recording)" [ref=e770]:
+                    - listitem "Hamilton (Original Broadway Cast Recording)" [ref=e771] [cursor=pointer]:
+                      - button "Hamilton (Original Broadway Cast Recording) Lin-Manuel Miranda" [ref=e772]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Hamilton (Original Broadway Cast Recording) by Lin-Manuel Miranda":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e775]:
+                        - link "Hamilton (Original Broadway Cast Recording)" [ref=e776]:
+                          - /url: /album/1kCHru7uhxBUdzkm4gzRQc
+                          - paragraph [ref=e777]:
+                            - generic [ref=e778]: Hamilton (Original Broadway Cast Recording)
+                        - link "Lin-Manuel Miranda" [ref=e782]:
+                          - /url: /artist/4aXXDj9aZnlshx7mzj3W1N
+                - row "AM" [ref=e783]:
+                  - gridcell "AM" [ref=e784]:
+                    - listitem "AM" [ref=e785] [cursor=pointer]:
+                      - button "AM Arctic Monkeys" [ref=e786]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play AM by Arctic Monkeys":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e789]:
+                        - link "AM" [ref=e790]:
+                          - /url: /album/78bpIziExqiI9qztvNFlQu
+                          - paragraph [ref=e791]:
+                            - generic [ref=e792]: AM
+                        - link "Arctic Monkeys" [ref=e796]:
+                          - /url: /artist/7Ln80lUS6He07XvHI8qqHH
+                - row "I’m The Problem" [ref=e797]:
+                  - gridcell "I’m The Problem" [ref=e798]:
+                    - listitem "I’m The Problem" [ref=e799] [cursor=pointer]:
+                      - button "I’m The Problem Morgan Wallen" [ref=e800]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play I’m The Problem by Morgan Wallen":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e803]:
+                        - link "I’m The Problem" [ref=e804]:
+                          - /url: /album/5IZ8sY5FjtL9hloXpv0XbD
+                          - paragraph [ref=e805]:
+                            - generic [ref=e806]: I’m The Problem
+                        - link "Morgan Wallen" [ref=e810]:
+                          - /url: /artist/4oUHIQIBe0LHzYfvXNW4QM
+                - row "The Rise and Fall of a Midwest Princess" [ref=e811]:
+                  - gridcell "The Rise and Fall of a Midwest Princess" [ref=e812]:
+                    - listitem "The Rise and Fall of a Midwest Princess" [ref=e813] [cursor=pointer]:
+                      - button "The Rise and Fall of a Midwest Princess Chappell Roan" [ref=e814]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play The Rise and Fall of a Midwest Princess by Chappell Roan":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e817]:
+                        - link "The Rise and Fall of a Midwest Princess" [ref=e818]:
+                          - /url: /album/0EiI8ylL0FmWWpgHVTsZjZ
+                          - paragraph [ref=e819]:
+                            - generic [ref=e820]: The Rise and Fall of a Midwest Princess
+                        - link "Chappell Roan" [ref=e824]:
+                          - /url: /artist/7GlBOeep6PqTfFi59PTUUN
+                - row "$ome $exy $ongs 4 U" [ref=e825]:
+                  - gridcell "$ome $exy $ongs 4 U" [ref=e826]:
+                    - listitem "$ome $exy $ongs 4 U" [ref=e827] [cursor=pointer]:
+                      - button "$ome $exy $ongs 4 U PARTYNEXTDOOR, Drake" [ref=e828]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play $ome $exy $ongs 4 U by PARTYNEXTDOOR, Drake":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e831]:
+                        - link "$ome $exy $ongs 4 U" [ref=e832]:
+                          - /url: /album/6Rl6YoCarF2GHPSQmmFjuR
+                          - paragraph [ref=e833]:
+                            - generic [ref=e834]: $ome $exy $ongs 4 U
+                        - generic [ref=e837]:
+                          - link "PARTYNEXTDOOR" [ref=e838]:
+                            - /url: /artist/2HPaUgqeutzr3jx5a9WyDV
+                          - text: ","
+                          - link "Drake" [ref=e839]:
+                            - /url: /artist/3TVXtAsR1Inumwj472S9r4
+              - generic:
+                - generic:
+                  - img
+                - img [ref=e841] [cursor=pointer]
+          - region "Popular radio" [ref=e843]:
+            - group [ref=e845]:
+              - generic [ref=e846]:
+                - heading [level=2] [ref=e848]:
+                  - link [ref=e850] [cursor=pointer]:
+                    - /url: /section/0JQ5DAnM3wGh0gz1MXnu4h
+                    - text: Popular radio
+                - link "Show all" [ref=e852] [cursor=pointer]:
+                  - /url: /section/0JQ5DAnM3wGh0gz1MXnu4h
+                  - generic [ref=e853]: Show all
+            - generic [ref=e854]:
+              - grid "Popular radio" [ref=e855]:
+                - row "Drake Radio" [ref=e856]:
+                  - gridcell "Drake Radio" [ref=e857]:
+                    - listitem "Drake Radio" [ref=e858] [cursor=pointer]:
+                      - button "Drake Radio With Bryson Tiller, PARTYNEXTDOOR, Kendrick Lamar and more" [ref=e859]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Drake Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e862]:
+                        - link "Drake Radio":
+                          - /url: /playlist/37i9dQZF1E4qQ00I1Jm1ay
+                          - paragraph:
+                            - generic [ref=e863]: Drake Radio
+                        - generic [ref=e867]: With Bryson Tiller, PARTYNEXTDOOR, Kendrick Lamar and more
+                - row "Arctic Monkeys Radio" [ref=e868]:
+                  - gridcell "Arctic Monkeys Radio" [ref=e869]:
+                    - listitem "Arctic Monkeys Radio" [ref=e870] [cursor=pointer]:
+                      - button "Arctic Monkeys Radio With Cigarettes After Sex, Tame Impala, TV Girl and more" [ref=e871]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Arctic Monkeys Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e874]:
+                        - link "Arctic Monkeys Radio":
+                          - /url: /playlist/37i9dQZF1E4vIIV392R6kP
+                          - paragraph:
+                            - generic [ref=e875]: Arctic Monkeys Radio
+                        - generic [ref=e879]: With Cigarettes After Sex, Tame Impala, TV Girl and more
+                - row "Fleetwood Mac Radio" [ref=e880]:
+                  - gridcell "Fleetwood Mac Radio" [ref=e881]:
+                    - listitem "Fleetwood Mac Radio" [ref=e882] [cursor=pointer]:
+                      - button "Fleetwood Mac Radio With Billy Joel, Elton John, Eagles and more" [ref=e883]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Fleetwood Mac Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e886]:
+                        - link "Fleetwood Mac Radio":
+                          - /url: /playlist/37i9dQZF1E4tZxYcBZfDn9
+                          - paragraph:
+                            - generic [ref=e887]: Fleetwood Mac Radio
+                        - generic [ref=e891]: With Billy Joel, Elton John, Eagles and more
+                - row "Sabrina Carpenter Radio" [ref=e892]:
+                  - gridcell "Sabrina Carpenter Radio" [ref=e893]:
+                    - listitem "Sabrina Carpenter Radio" [ref=e894] [cursor=pointer]:
+                      - button "Sabrina Carpenter Radio With Chappell Roan, Olivia Rodrigo, Tate McRae and more" [ref=e895]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Sabrina Carpenter Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e898]:
+                        - link "Sabrina Carpenter Radio":
+                          - /url: /playlist/37i9dQZF1E4pO1UVRrHO6y
+                          - paragraph:
+                            - generic [ref=e899]: Sabrina Carpenter Radio
+                        - generic [ref=e903]: With Chappell Roan, Olivia Rodrigo, Tate McRae and more
+                - row "Olivia Dean Radio" [ref=e904]:
+                  - gridcell "Olivia Dean Radio" [ref=e905]:
+                    - listitem "Olivia Dean Radio" [ref=e906] [cursor=pointer]:
+                      - button "Olivia Dean Radio By Spotify" [ref=e907]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Olivia Dean Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e910]:
+                        - link "Olivia Dean Radio":
+                          - /url: /playlist/37i9dQZF1E4osfZT46NjxN
+                          - paragraph:
+                            - generic [ref=e911]: Olivia Dean Radio
+                        - generic [ref=e915]: By Spotify
+                - row "Sam Fender Radio" [ref=e916]:
+                  - gridcell "Sam Fender Radio" [ref=e917]:
+                    - listitem "Sam Fender Radio" [ref=e918] [cursor=pointer]:
+                      - button "Sam Fender Radio With Catfish and the Bottlemen, Gerry Cinnamon, Fontaines D.C. and more" [ref=e919]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Sam Fender Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e922]:
+                        - link "Sam Fender Radio":
+                          - /url: /playlist/37i9dQZF1E4lImniEChC7T
+                          - paragraph:
+                            - generic [ref=e923]: Sam Fender Radio
+                        - generic [ref=e927]: With Catfish and the Bottlemen, Gerry Cinnamon, Fontaines D.C. and more
+                - row "Ed Sheeran Radio" [ref=e928]:
+                  - gridcell "Ed Sheeran Radio" [ref=e929]:
+                    - listitem "Ed Sheeran Radio" [ref=e930] [cursor=pointer]:
+                      - button "Ed Sheeran Radio With One Direction, Maroon 5, Justin Bieber and more" [ref=e931]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Ed Sheeran Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e934]:
+                        - link "Ed Sheeran Radio":
+                          - /url: /playlist/37i9dQZF1E4msk0TFgsyTF
+                          - paragraph:
+                            - generic [ref=e935]: Ed Sheeran Radio
+                        - generic [ref=e939]: With One Direction, Maroon 5, Justin Bieber and more
+                - row "Tate McRae Radio" [ref=e940]:
+                  - gridcell "Tate McRae Radio" [ref=e941]:
+                    - listitem "Tate McRae Radio" [ref=e942] [cursor=pointer]:
+                      - button "Tate McRae Radio With Gracie Abrams, Addison Rae, Jade LeMac and more" [ref=e943]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Tate McRae Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e946]:
+                        - link "Tate McRae Radio":
+                          - /url: /playlist/37i9dQZF1E4tYBi3r3xf2o
+                          - paragraph:
+                            - generic [ref=e947]: Tate McRae Radio
+                        - generic [ref=e951]: With Gracie Abrams, Addison Rae, Jade LeMac and more
+                - row "Fred again.. Radio" [ref=e952]:
+                  - gridcell "Fred again.. Radio" [ref=e953]:
+                    - listitem "Fred again.. Radio" [ref=e954] [cursor=pointer]:
+                      - button "Fred again.. Radio With Skepta, Sammy Virji, KETTAMA and more" [ref=e955]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Fred again.. Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e958]:
+                        - link "Fred again.. Radio":
+                          - /url: /playlist/37i9dQZF1E4xvJnIS1AY0m
+                          - paragraph:
+                            - generic [ref=e959]: Fred again.. Radio
+                        - generic [ref=e963]: With Skepta, Sammy Virji, KETTAMA and more
+                - row "Beyoncé Radio" [ref=e964]:
+                  - gridcell "Beyoncé Radio" [ref=e965]:
+                    - listitem "Beyoncé Radio" [ref=e966] [cursor=pointer]:
+                      - button "Beyoncé Radio With Alicia Keys, The Pussycat Dolls, Fergie and more" [ref=e967]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Beyoncé Radio":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e970]:
+                        - link "Beyoncé Radio":
+                          - /url: /playlist/37i9dQZF1E4B0yOyj0F53g
+                          - paragraph:
+                            - generic [ref=e971]: Beyoncé Radio
+                        - generic [ref=e975]: With Alicia Keys, The Pussycat Dolls, Fergie and more
+              - generic:
+                - generic:
+                  - img
+                - img [ref=e977] [cursor=pointer]
+          - region "Featured Charts" [ref=e979]:
+            - group [ref=e981]:
+              - generic [ref=e982]:
+                - heading [level=2] [ref=e984]:
+                  - link [ref=e986] [cursor=pointer]:
+                    - /url: /section/0JQ5DAzQHECxDlYNI6xD1g
+                    - text: Featured Charts
+                - link "Show all" [ref=e988] [cursor=pointer]:
+                  - /url: /section/0JQ5DAzQHECxDlYNI6xD1g
+                  - generic [ref=e989]: Show all
+            - generic [ref=e990]:
+              - grid "Featured Charts" [ref=e991]:
+                - row "Top Songs - Global" [ref=e992]:
+                  - gridcell "Top Songs - Global" [ref=e993]:
+                    - listitem "Top Songs - Global" [ref=e994] [cursor=pointer]:
+                      - button "Top Songs - Global Your weekly update of the most played tracks right now - Global." [ref=e995]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Top Songs - Global":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e998]:
+                        - link "Top Songs - Global":
+                          - /url: /playlist/37i9dQZEVXbNG2KDcFcKOF
+                          - paragraph:
+                            - generic [ref=e999]: Top Songs - Global
+                        - generic [ref=e1003]: Your weekly update of the most played tracks right now - Global.
+                - row "Top Songs - United Kingdom" [ref=e1004]:
+                  - gridcell "Top Songs - United Kingdom" [ref=e1005]:
+                    - listitem "Top Songs - United Kingdom" [ref=e1006] [cursor=pointer]:
+                      - button "Top Songs - United Kingdom Your weekly update of the most played tracks right now - United Kingdom." [ref=e1007]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Top Songs - United Kingdom":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e1010]:
+                        - link "Top Songs - United Kingdom":
+                          - /url: /playlist/37i9dQZEVXbMwmF30ppw50
+                          - paragraph:
+                            - generic [ref=e1011]: Top Songs - United Kingdom
+                        - generic [ref=e1015]: Your weekly update of the most played tracks right now - United Kingdom.
+                - row "Top 50 - Global" [ref=e1016]:
+                  - gridcell "Top 50 - Global" [ref=e1017]:
+                    - listitem "Top 50 - Global" [ref=e1018] [cursor=pointer]:
+                      - button "Top 50 - Global Your daily update of the most played tracks right now - Global." [ref=e1019]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Top 50 - Global":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e1022]:
+                        - link "Top 50 - Global":
+                          - /url: /playlist/37i9dQZEVXbMDoHDwVN2tF
+                          - paragraph:
+                            - generic [ref=e1023]: Top 50 - Global
+                        - generic [ref=e1027]: Your daily update of the most played tracks right now - Global.
+                - row "Top 50 - United Kingdom" [ref=e1028]:
+                  - gridcell "Top 50 - United Kingdom" [ref=e1029]:
+                    - listitem "Top 50 - United Kingdom" [ref=e1030] [cursor=pointer]:
+                      - button "Top 50 - United Kingdom Your daily update of the most played tracks right now - United Kingdom." [ref=e1031]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Top 50 - United Kingdom":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e1034]:
+                        - link "Top 50 - United Kingdom":
+                          - /url: /playlist/37i9dQZEVXbLnolsZ8PSNw
+                          - paragraph:
+                            - generic [ref=e1035]: Top 50 - United Kingdom
+                        - generic [ref=e1039]: Your daily update of the most played tracks right now - United Kingdom.
+                - row "Viral 50 - Global" [ref=e1040]:
+                  - gridcell "Viral 50 - Global" [ref=e1041]:
+                    - listitem "Viral 50 - Global" [ref=e1042] [cursor=pointer]:
+                      - button "Viral 50 - Global Your daily update of the most viral tracks right now - Global." [ref=e1043]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Viral 50 - Global":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e1046]:
+                        - link "Viral 50 - Global":
+                          - /url: /playlist/37i9dQZEVXbLiRSasKsNU9
+                          - paragraph:
+                            - generic [ref=e1047]: Viral 50 - Global
+                        - generic [ref=e1051]: Your daily update of the most viral tracks right now - Global.
+                - row "Viral 50 - United Kingdom" [ref=e1052]:
+                  - gridcell "Viral 50 - United Kingdom" [ref=e1053]:
+                    - listitem "Viral 50 - United Kingdom" [ref=e1054] [cursor=pointer]:
+                      - button "Viral 50 - United Kingdom Your daily update of the most viral tracks right now - United Kingdom." [ref=e1055]
+                      - generic:
+                        - generic:
+                          - generic:
+                            - img
+                        - generic:
+                          - generic:
+                            - button "Play Viral 50 - United Kingdom":
+                              - generic:
+                                - generic:
+                                  - img
+                      - generic [ref=e1058]:
+                        - link "Viral 50 - United Kingdom":
+                          - /url: /playlist/37i9dQZEVXbL3DLHfQeDmV
+                          - paragraph:
+                            - generic [ref=e1059]: Viral 50 - United Kingdom
+                        - generic [ref=e1063]: Your daily update of the most viral tracks right now - United Kingdom.
+              - generic:
+                - generic:
+                  - img
+                - img [ref=e1065] [cursor=pointer]
+      - generic [ref=e1067]:
+        - separator [ref=e1068]
+        - navigation [ref=e1070]:
+          - generic [ref=e1071]:
+            - generic [ref=e1072]:
+              - list [ref=e1074]:
+                - paragraph [ref=e1075]: Company
+                - link "About" [ref=e1076] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/about-us/contact/
+                - link "Jobs" [ref=e1077] [cursor=pointer]:
+                  - /url: https://www.lifeatspotify.com/
+                - link "For the Record" [ref=e1078] [cursor=pointer]:
+                  - /url: https://newsroom.spotify.com/
+              - list [ref=e1080]:
+                - paragraph [ref=e1081]: Communities
+                - link "For Artists" [ref=e1082] [cursor=pointer]:
+                  - /url: https://artists.spotify.com/
+                - link "Developers" [ref=e1083] [cursor=pointer]:
+                  - /url: https://developer.spotify.com/
+                - link "Advertising" [ref=e1084] [cursor=pointer]:
+                  - /url: https://ads.spotify.com/
+                - link "Investors" [ref=e1085] [cursor=pointer]:
+                  - /url: https://investors.spotify.com/
+                - link "Vendors" [ref=e1086] [cursor=pointer]:
+                  - /url: https://spotifyforvendors.com/
+              - list [ref=e1088]:
+                - paragraph [ref=e1089]: Useful links
+                - link "Support" [ref=e1090] [cursor=pointer]:
+                  - /url: https://support.spotify.com/
+                - link "Free Mobile App" [ref=e1091] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/free/
+                - link "Popular by Country" [ref=e1092] [cursor=pointer]:
+                  - /url: /popular-in/uk
+                - link "Import your music" [ref=e1093] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/import-music/
+              - list [ref=e1095]:
+                - paragraph [ref=e1096]: Spotify Plans
+                - link "Premium Individual" [ref=e1097] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/premium/#ref=spotifycom_footer_premium_individual
+                - link "Premium Duo" [ref=e1098] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/duo/#ref=spotifycom_footer_premium_duo
+                - link "Premium Family" [ref=e1099] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/family/#ref=spotifycom_footer_premium_family
+                - link "Premium Student" [ref=e1100] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/student/#ref=spotifycom_footer_premium_student
+                - link "Spotify Free" [ref=e1101] [cursor=pointer]:
+                  - /url: https://www.spotify.com/uk/free/#ref=spotifycom_footer_free
+            - generic [ref=e1102]:
+              - link "Instagram" [ref=e1104] [cursor=pointer]:
+                - /url: https://instagram.com/spotify
+                - img [ref=e1106]
+              - link "Twitter" [ref=e1110] [cursor=pointer]:
+                - /url: https://twitter.com/spotify
+                - img [ref=e1112]
+              - link "Facebook" [ref=e1115] [cursor=pointer]:
+                - /url: https://www.facebook.com/Spotify
+                - img [ref=e1117]
+          - separator [ref=e1119]
+          - generic [ref=e1122]: © 2026 Spotify AB
+  - dialog "We Care About Your Privacy" [ref=e1124]:
+    - generic [ref=e1126]:
+      - generic [ref=e1128]:
+        - heading "We Care About Your Privacy" [level=2] [ref=e1129]
+        - generic [ref=e1130]: We and our 90 partners store and/or access information on a device, such as unique IDs in cookies to process personal data. You may accept or manage your choices by clicking below, including your right to object where legitimate interest is used, or at any time in the privacy policy page. These choices will be signaled to our partners and will not affect browsing data.
+        - generic [ref=e1131]:
+          - heading "We and our partners process data to provide:" [level=3] [ref=e1132]
+          - paragraph [ref=e1134]:
+            - text: Store and/or access information on a device. Personalised advertising. Personalised content. Advertising and content measurement, audience research, and services development.
+            - button "List of Partners (vendors)" [ref=e1135] [cursor=pointer]
+      - generic [ref=e1137]:
+        - button "Accept Cookies" [ref=e1138] [cursor=pointer]
+        - button "Reject All" [ref=e1139] [cursor=pointer]
+        - button "Cookie Settings, Opens the preference center dialog" [ref=e1140] [cursor=pointer]: Cookie Settings

@@ -1,11 +1,13 @@
-import { ProxyAgent } from 'undici'
+import { Impit } from 'impit'
 
-let cached: ProxyAgent | null | undefined
+let cachedImpit: Impit | null | undefined
 
-export function getSpotifyDispatcher(): ProxyAgent | undefined {
-  if (cached !== undefined) return cached ?? undefined
+export function getSpotifyImpit(): Impit | undefined {
+  if (cachedImpit !== undefined) return cachedImpit ?? undefined
 
   const url = process.env.SPOTIFY_PROXY_URL
-  cached = url ? new ProxyAgent({ uri: url }) : null
-  return cached ?? undefined
+  cachedImpit = url
+    ? new Impit({ browser: 'chrome', proxyUrl: url, ignoreTlsErrors: false })
+    : null
+  return cachedImpit ?? undefined
 }

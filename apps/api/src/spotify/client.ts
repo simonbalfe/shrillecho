@@ -59,12 +59,27 @@ export class SpotifyClient {
       reqHeaders['Content-Type'] = 'application/json;charset=UTF-8'
     }
 
-    const resp = await performRequest(url, { method, headers: reqHeaders, body })
+    // Residential proxies occasionally return truncated/non-JSON bodies and transient 5xx.
+    // Retry the low-level fetch a few times before bubbling up. Status-based retries
+    // (429/401) happen below on the resolved response.
+    let resp: RequestResponse
+    let attempt = 0
+    while (true) {
+      try {
+        resp = await performRequest(url, { method, headers: reqHeaders, body })
+        if (resp.status >= 500 && attempt < 4) {
+          await new Promise((r) => setTimeout(r, 500 * 2 ** attempt++))
+          continue
+        }
+        break
+      } catch (err) {
+        if (attempt >= 4) throw err
+        await new Promise((r) => setTimeout(r, 500 * 2 ** attempt++))
+      }
+    }
 
     if (resp.status === 429) {
       if (!retry429) throw new Error('rate limited')
-      // Spotify usually returns a Retry-After seconds value; we don't have
-      // response headers here, so back off a fixed 5s then retry once.
       await new Promise((r) => setTimeout(r, 5_000))
       return this.request(method, url, body, headers, false)
     }
@@ -73,7 +88,7 @@ export class SpotifyClient {
       return this.request(method, url, body, headers, retry429)
     }
     if (resp.status !== 200) {
-      throw new Error(`request failed: status ${resp.status}`)
+      throw new Error(`request failed: status ${resp.status} body=${resp.data.slice(0, 200)}`)
     }
     return resp
   }

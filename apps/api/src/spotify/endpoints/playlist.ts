@@ -1,5 +1,23 @@
 import type { SpotifyClient } from '../client'
-import { API_PARTNER_URL, API_URL, PERSISTED_QUERIES } from '../constants'
+import { API_PARTNER_URL, PERSISTED_QUERIES } from '../constants'
+
+// Residential proxies occasionally return truncated JSON bodies with status 200 on large pathfinder
+// responses. Retry with backoff — the next session usually gets a clean body.
+async function withProxyRetry<T>(fn: () => Promise<T>, attempts = 6): Promise<T> {
+  let last: unknown
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn()
+    } catch (err) {
+      last = err
+      const msg = err instanceof Error ? err.message : String(err)
+      const transient = /JSON Parse|Unexpected|ECONNRESET|ETIMEDOUT|socket hang up|status 5\d\d|truncated/i.test(msg)
+      if (!transient || i === attempts - 1) throw err
+      await new Promise((r) => setTimeout(r, 400 * 2 ** i))
+    }
+  }
+  throw last
+}
 
 export interface PlaylistTracks {
   data: {
@@ -67,53 +85,128 @@ interface OwnerData {
   username: string
 }
 
-interface Playlist {
-  id: string
-}
-
 export class PlaylistService {
   constructor(private client: SpotifyClient) {}
 
-  async get(playlistId: string): Promise<string> {
-    const url = `${API_URL}/playlists/${playlistId}`
-    const resp = await this.client.get(url)
-    return resp.data
-  }
-
   async getFront(playlistId: string): Promise<PlaylistTracks> {
-    const resp = await this.client.post(API_PARTNER_URL, {
-      variables: {
-        uri: `spotify:playlist:${playlistId}`,
-        offset: 0,
-        limit: 4999,
-        enableWatchFeedEntrypoint: false,
-        includeEpisodeContentRatingsV2: true,
-      },
-      operationName: 'fetchPlaylist',
-      extensions: {
-        persistedQuery: {
-          version: 1,
-          sha256Hash: PERSISTED_QUERIES.fetchPlaylist,
-        },
-      },
-    })
-    return JSON.parse(resp.data) as PlaylistTracks
+    return this.getPage(playlistId, 0, 4999)
   }
 
-  async create(
-    trackURIs: string[],
-    user: string,
-    playlistName: string,
-  ): Promise<string> {
-    const createResp = await this.client.post(
-      `${API_URL}/users/${user}/playlists`,
-      { name: playlistName, public: true },
+  async getPage(playlistId: string, offset = 0, limit = 50): Promise<PlaylistTracks> {
+    const resp = await withProxyRetry(() =>
+      this.client.post(API_PARTNER_URL, {
+        variables: {
+          uri: `spotify:playlist:${playlistId}`,
+          offset,
+          limit,
+          enableWatchFeedEntrypoint: false,
+          includeEpisodeContentRatingsV2: true,
+        },
+        operationName: 'fetchPlaylist',
+        extensions: { persistedQuery: { version: 1, sha256Hash: PERSISTED_QUERIES.fetchPlaylist } },
+      }).then((r) => {
+        // Force JSON parse here so truncated-body responses raise inside the retry envelope.
+        return { ...r, parsed: JSON.parse(r.data) as PlaylistTracks }
+      }),
     )
-    const playlist = JSON.parse(createResp.data) as Playlist
-    await this.client.post(`${API_URL}/playlists/${playlist.id}/tracks`, {
-      uris: trackURIs,
+    return resp.parsed
+  }
+
+  async getAllTracks(playlistId: string, pageSize = 50): Promise<PlaylistItem[]> {
+    const out: PlaylistItem[] = []
+    let offset = 0
+    while (true) {
+      const page = await this.getPage(playlistId, offset, pageSize)
+      const content = page.data?.playlistV2?.content
+      const items = content?.items ?? []
+      out.push(...items)
+      offset += items.length
+      if (items.length === 0 || offset >= (content?.totalCount ?? 0)) break
+    }
+    return out
+  }
+
+  async removeFromRootlist(username: string, playlistUri: string): Promise<void> {
+    // Spotify doesn't hard-delete playlists — "Delete" in the UI unfollows + removes from rootlist.
+    // GraphQL removeFromLibrary rejects PLAYLIST URIs, so this goes through the same spclient REST
+    // endpoint as addToRootlist using a REM op.
+    const resp = await this.client.post(
+      `https://spclient.wg.spotify.com/playlist/v2/user/${encodeURIComponent(username)}/rootlist/changes`,
+      {
+        deltas: [
+          {
+            ops: [{ kind: 'REM', rem: { itemsAsKey: true, items: [{ uri: playlistUri }] } }],
+            info: { source: { client: 'WEBPLAYER' } },
+          },
+        ],
+      },
+    )
+    const parsed = JSON.parse(resp.data) as { revision?: string; errorCode?: string }
+    if (parsed.errorCode) {
+      throw new Error(`rootlist rem errorCode=${parsed.errorCode} body=${resp.data.slice(0, 200)}`)
+    }
+  }
+
+  async addToRootlist(
+    username: string,
+    playlistUri: string,
+    position: 'top' | 'bottom' = 'top',
+  ): Promise<void> {
+    // Web-player spclient REST. Body shape captured from live web-player on 2026-04-21.
+    const resp = await this.client.post(
+      `https://spclient.wg.spotify.com/playlist/v2/user/${encodeURIComponent(username)}/rootlist/changes`,
+      {
+        deltas: [
+          {
+            ops: [
+              {
+                kind: 'ADD',
+                add: {
+                  items: [{ uri: playlistUri, attributes: { timestamp: String(Date.now()) } }],
+                  addFirst: position === 'top',
+                  addLast: position === 'bottom',
+                },
+              },
+            ],
+            info: { source: { client: 'WEBPLAYER' } },
+          },
+        ],
+      },
+    )
+    const parsed = JSON.parse(resp.data) as { revision?: string; errorCode?: string }
+    if (parsed.errorCode) {
+      throw new Error(`rootlist add errorCode=${parsed.errorCode} body=${resp.data.slice(0, 200)}`)
+    }
+  }
+
+  async create(name: string): Promise<{ uri: string; id: string; revision: string }> {
+    // Web-player spclient REST (no GraphQL equivalent exists). Captured live 2026-04-21.
+    const resp = await this.client.post('https://spclient.wg.spotify.com/playlist/v2/playlist', {
+      ops: [
+        {
+          kind: 'UPDATE_LIST_ATTRIBUTES',
+          updateListAttributes: { newAttributes: { values: { name } } },
+        },
+      ],
     })
-    return `https://open.spotify.com/playlist/${playlist.id}`
+    const parsed = JSON.parse(resp.data) as { uri?: string; revision?: string }
+    if (!parsed.uri) throw new Error(`createPlaylist missing uri: ${resp.data.slice(0, 200)}`)
+    const id = parsed.uri.split(':').pop() ?? ''
+    return { uri: parsed.uri, id, revision: parsed.revision ?? '' }
+  }
+
+  async removeTracks(playlistId: string, uids: string[]): Promise<{ removed: number }> {
+    if (uids.length === 0) return { removed: 0 }
+    const resp = await this.client.post(API_PARTNER_URL, {
+      variables: { playlistUri: `spotify:playlist:${playlistId}`, uids },
+      operationName: 'removeFromPlaylist',
+      extensions: { persistedQuery: { version: 1, sha256Hash: PERSISTED_QUERIES.addToPlaylist } },
+    })
+    const parsed = JSON.parse(resp.data) as { data?: unknown; errors?: Array<{ message: string }> }
+    if (parsed.errors?.length) {
+      throw new Error(`removeFromPlaylist errors: ${parsed.errors.map((e) => e.message).join('; ')}`)
+    }
+    return { removed: uids.length }
   }
 
   async addTracks(
