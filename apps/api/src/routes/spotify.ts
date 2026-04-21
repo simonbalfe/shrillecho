@@ -1,6 +1,8 @@
+import type { Context } from 'hono'
 import { Hono } from 'hono'
 import { describeRoute } from 'hono-openapi'
 import { SpotifyAuth } from '../spotify'
+import { SpotifyClient } from '../spotify/client'
 import { getSpotifyClient, invalidateSpotifyClient } from '../spotify/singleton'
 
 let cachedAuth: { auth: SpotifyAuth; expiresAt: number } | null = null
@@ -13,6 +15,31 @@ async function getAuth(): Promise<SpotifyAuth> {
   return auth
 }
 
+type ResolvedClient = { client: SpotifyClient; stateless: boolean }
+
+// Resolve the client a route should use. Priority:
+//   1. `Authorization: Bearer <accessToken>` + `x-client-token` → stateless
+//      client using the caller's minted tokens.
+//   2. `x-sp-dc` header → mint fresh per-request with the caller's cookie.
+//   3. Fallback to the server-wide singleton (env tokens).
+async function resolveClient(c: Context): Promise<ResolvedClient> {
+  const authHeader = c.req.header('authorization')
+  const clientToken = c.req.header('x-client-token')
+  if (authHeader && /^bearer /i.test(authHeader) && clientToken) {
+    const accessToken = authHeader.slice(7).trim()
+    if (accessToken) {
+      return { client: SpotifyClient.fromTokens(accessToken, clientToken), stateless: true }
+    }
+  }
+
+  const spDc = c.req.header('x-sp-dc')?.trim()
+  if (spDc) {
+    return { client: await SpotifyClient.mint(spDc), stateless: true }
+  }
+
+  return { client: await getSpotifyClient(), stateless: false }
+}
+
 export const spotifyRoutes = new Hono()
   .get(
     '/spotify/token',
@@ -20,13 +47,34 @@ export const spotifyRoutes = new Hono()
       tags: ['Spotify'],
       summary: 'Mint a web-player access token',
       description:
-        'Generates a fresh TOTP, hits open.spotify.com/api/token, mints a paired client-token. In-memory cache refreshes 60s before expiry. Returns user-scoped token if SP_DC env is set.',
+        'Generates a fresh TOTP, hits open.spotify.com/api/token, mints a paired client-token. Pass your Spotify web-player `sp_dc` cookie as the `x-sp-dc` header to get a user-scoped token; without it, falls back to the server\'s env tokens (in-memory cache, refreshes 60s before expiry). Use the returned `accessToken` + `clientToken` on subsequent calls via `Authorization: Bearer <accessToken>` and `x-client-token: <clientToken>`.',
       responses: {
         200: { description: 'Token pair + expiry' },
         500: { description: 'Token mint failed' },
       },
     }),
     async (c) => {
+      const spDc = c.req.header('x-sp-dc')?.trim()
+      if (spDc) {
+        try {
+          const auth = new SpotifyAuth()
+          await auth.initialize(spDc, { skipEnv: true })
+          return c.json({
+            success: true,
+            accessToken: auth.accessToken,
+            clientToken: auth.clientToken,
+            clientId: auth.clientId,
+            expiresAt: auth.expiresAt,
+            isAnonymous: auth.isAnonymous,
+          })
+        } catch (err) {
+          return c.json(
+            { success: false, error: err instanceof Error ? err.message : 'token failed' },
+            500,
+          )
+        }
+      }
+
       try {
         const auth = await getAuth()
         return c.json({
@@ -64,24 +112,21 @@ export const spotifyRoutes = new Hono()
       if (!/^[A-Za-z0-9]+$/.test(artistId)) {
         return c.json({ success: false, error: 'invalid artist id' }, 400)
       }
+      const { client, stateless } = await resolveClient(c)
       try {
-        const client = await getSpotifyClient()
-        const resp = await client.artists.getRelated(artistId)
-        const au = resp.data?.artistUnion
-        const rel = au?.relatedContent?.relatedArtists
-        if (!rel) return c.json({ success: false, error: 'no related artists in response' }, 502)
+        const { artist, items, totalCount } = await client.artists.getAllRelated(artistId)
         return c.json({
           success: true,
-          artist: { name: au.profile?.name, uri: `spotify:artist:${artistId}` },
-          total: rel.totalCount,
-          items: rel.items.map((r) => ({
+          artist,
+          total: totalCount,
+          items: items.map((r) => ({
             name: r.profile?.name,
             uri: r.uri,
             avatar: r.visuals?.avatarImage?.sources?.[0]?.url ?? null,
           })),
         })
       } catch (err) {
-        invalidateSpotifyClient()
+        if (!stateless) invalidateSpotifyClient()
         return c.json(
           { success: false, error: err instanceof Error ? err.message : 'related failed' },
           500,
@@ -107,8 +152,8 @@ export const spotifyRoutes = new Hono()
       if (!/^[A-Za-z0-9]{22}$/.test(playlistId)) {
         return c.json({ success: false, error: 'invalid playlist id' }, 400)
       }
+      const { client, stateless } = await resolveClient(c)
       try {
-        const client = await getSpotifyClient()
         const resp = await client.playlists.getFront(playlistId)
         const p = resp.data?.playlistV2
         if (!p) return c.json({ success: false, error: 'playlist not found' }, 404)
@@ -159,7 +204,7 @@ export const spotifyRoutes = new Hono()
           },
         })
       } catch (err) {
-        invalidateSpotifyClient()
+        if (!stateless) invalidateSpotifyClient()
         return c.json(
           { success: false, error: err instanceof Error ? err.message : 'playlist fetch failed' },
           500,
@@ -180,12 +225,12 @@ export const spotifyRoutes = new Hono()
       },
     }),
     async (c) => {
+      const { client, stateless } = await resolveClient(c)
       try {
-        const client = await getSpotifyClient()
         const tracks = await client.users.getAllLikedTracks()
         return c.json({ success: true, total: tracks.length, tracks })
       } catch (err) {
-        invalidateSpotifyClient()
+        if (!stateless) invalidateSpotifyClient()
         return c.json(
           { success: false, error: err instanceof Error ? err.message : 'liked songs failed' },
           500,
@@ -206,12 +251,12 @@ export const spotifyRoutes = new Hono()
       },
     }),
     async (c) => {
+      const { client, stateless } = await resolveClient(c)
       try {
-        const client = await getSpotifyClient()
         const items = await client.users.getAllLibraryPlaylists()
         return c.json({ success: true, total: items.length, items })
       } catch (err) {
-        invalidateSpotifyClient()
+        if (!stateless) invalidateSpotifyClient()
         return c.json(
           { success: false, error: err instanceof Error ? err.message : 'library playlists failed' },
           500,
@@ -237,12 +282,12 @@ export const spotifyRoutes = new Hono()
       if (!/^[A-Za-z0-9]{22}$/.test(artistId)) {
         return c.json({ success: false, error: 'invalid artist id' }, 400)
       }
+      const { client, stateless } = await resolveClient(c)
       try {
-        const client = await getSpotifyClient()
         const tracks = await client.artists.getAllTracks(artistId)
         return c.json({ success: true, artistId, total: tracks.length, tracks })
       } catch (err) {
-        invalidateSpotifyClient()
+        if (!stateless) invalidateSpotifyClient()
         return c.json(
           { success: false, error: err instanceof Error ? err.message : 'tracks failed' },
           500,
@@ -284,12 +329,12 @@ export const spotifyRoutes = new Hono()
       }
       const position: 'top' | 'bottom' = body.position === 'top' ? 'top' : 'bottom'
 
+      const { client, stateless } = await resolveClient(c)
       try {
-        const client = await getSpotifyClient()
         const res = await client.playlists.addTracks(playlistId, uris, position)
         return c.json({ success: true, playlistId, added: res.uris, position })
       } catch (err) {
-        invalidateSpotifyClient()
+        if (!stateless) invalidateSpotifyClient()
         return c.json(
           { success: false, error: err instanceof Error ? err.message : 'add failed' },
           500,

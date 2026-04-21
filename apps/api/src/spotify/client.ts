@@ -25,6 +25,26 @@ export class SpotifyClient {
     return client
   }
 
+  // Per-request, caller-supplied tokens. Typical flow: client hits
+  // `/spotify/token` with their sp_dc, we return access/client tokens, the
+  // client sends them back on subsequent calls. No env fallback, no refresh
+  // on 401 (caller must re-mint).
+  static fromTokens(accessToken: string, clientToken: string): SpotifyClient {
+    const client = new SpotifyClient()
+    client.auth.accessToken = accessToken
+    client.auth.clientToken = clientToken
+    client.auth.isAnonymous = false
+    client.auth.stateless = true
+    return client
+  }
+
+  static async mint(spDc: string): Promise<SpotifyClient> {
+    const client = new SpotifyClient()
+    await client.auth.initialize(spDc, { skipEnv: true })
+    client.auth.stateless = true
+    return client
+  }
+
   get(url: string, headers: Record<string, string> = {}): Promise<RequestResponse> {
     return this.request('GET', url, undefined, headers)
   }
@@ -84,6 +104,9 @@ export class SpotifyClient {
       return this.request(method, url, body, headers, false)
     }
     if (resp.status === 401) {
+      if (this.auth.stateless) {
+        throw new Error('spotify auth expired — re-mint via /spotify/token')
+      }
       await this.auth.initialize()
       return this.request(method, url, body, headers, retry429)
     }

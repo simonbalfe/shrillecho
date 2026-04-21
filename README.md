@@ -132,6 +132,52 @@ On every push to `main`:
 
 Manual deploys are available via **Actions -> Deploy -> Run workflow**.
 
+## API
+
+All routes are mounted under `/api`. In dev the API lives on `http://localhost:3001/api`; the web dev server proxies it under `/api`. Interactive docs are at `GET /api/docs` (Scalar UI, backed by `/api/openapi`).
+
+### Spotify (web-player reverse-engineered)
+
+All Spotify routes accept auth in three forms (highest priority wins):
+
+1. `Authorization: Bearer <accessToken>` + `x-client-token: <clientToken>` — per-request tokens minted from `/spotify/token`.
+2. `x-sp-dc: <sp_dc cookie>` — mint user-scoped tokens per-request.
+3. Server `SP_DC` env var fallback (legacy single-user mode).
+
+`none` below means the endpoint works anonymously if no auth is supplied; `user` means you need one of the three forms above.
+
+| Method | Path                                | Description                                                                 | Auth |
+| ------ | ----------------------------------- | --------------------------------------------------------------------------- | ---- |
+| GET    | `/spotify/token`                    | Mint a paired access + client token. Pass `x-sp-dc` to mint user-scoped.    | none / sp_dc |
+| GET    | `/spotify/artists/:id/related`      | "Fans also like" for an artist (via `queryArtistOverview`).                 | none |
+| GET    | `/spotify/artists/:id/tracks`       | All tracks across an artist's discography, deduped, filtered to credits.    | none |
+| GET    | `/spotify/playlists/:id`            | Playlist metadata + up to 4999 tracks (via `fetchPlaylist`).                | none |
+| POST   | `/spotify/playlists/:id/tracks`     | Add tracks to a playlist. Body: `{ uri?, uris?[], position?: 'top'\|'bottom' }`. | user |
+| GET    | `/spotify/me/liked-songs`           | Current user's liked songs.                                                 | user |
+| GET    | `/spotify/me/library/playlists`     | Owned + followed playlists, folders, and pseudo-playlists (e.g. Liked).     | user |
+
+### Scrapes
+
+All scrape routes require a Better Auth session cookie.
+
+| Method | Path                        | Description                                                                   |
+| ------ | --------------------------- | ----------------------------------------------------------------------------- |
+| GET    | `/scrapes`                  | List scrapes owned by the current user.                                       |
+| GET    | `/scrapes/:id/artists`      | Artists discovered in a single scrape run.                                    |
+| POST   | `/scrapes/artists`          | Start a scrape. Body: `{ artist: 'id\|uri\|url', depth: 1..5 }`.              |
+| GET    | `/artists`                  | Every artist discovered across all of the user's scrapes.                     |
+| GET    | `/events/scrapes`           | SSE stream of live scrape progress events for the current user.               |
+
+### Users
+
+| Method | Path             | Description                                         | Auth    |
+| ------ | ---------------- | --------------------------------------------------- | ------- |
+| POST   | `/users/delete`  | Delete a user. Body: `{ userId }`.                  | session |
+
+### Auth
+
+Better Auth handles everything under `/auth/*` (`/auth/sign-up`, `/auth/sign-in`, `/auth/session`, etc.).
+
 ## Scripts
 
 | Command             | Description                             |

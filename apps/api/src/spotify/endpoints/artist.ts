@@ -68,9 +68,9 @@ export interface ArtistResponse {
 export class ArtistService {
   constructor(private client: SpotifyClient) {}
 
-  // "Fans also like" — lives inside queryArtistOverview.relatedContent.relatedArtists
-  // in the current web player. The old dedicated queryArtistRelated operation is
-  // still around but was not observed in 2026-04-20 captures; prefer this path.
+  // Artist overview — includes "Fans also like" inline at
+  // relatedContent.relatedArtists, but capped at 20 even when totalCount is
+  // higher. Use getRelatedOnly / getAllRelated for the full list.
   async getRelated(artistId: string): Promise<ArtistRelated> {
     const body = JSON.stringify({
       variables: { uri: `spotify:artist:${artistId}`, locale: '', preReleaseV2: false },
@@ -88,6 +88,7 @@ export class ArtistService {
         artistUnion: {
           id: string
           profile: Profile
+          visuals?: { avatarImage?: { sources: ImageSource[] } }
           relatedContent: {
             relatedArtists: { items: RelatedArtist[]; totalCount: number }
           }
@@ -95,6 +96,78 @@ export class ArtistService {
       }
     }
     return parsed
+  }
+
+  // Dedicated pathfinder op for the full "Fans also like" list. Returns every
+  // item; queryArtistOverview caps at 20. Separate because it omits the
+  // surrounding artist metadata (profile, visuals, etc).
+  async getRelatedOnly(artistId: string): Promise<RelatedArtist[]> {
+    const resp = await this.client.post(API_PARTNER_URL, {
+      variables: { uri: `spotify:artist:${artistId}` },
+      operationName: 'queryArtistRelated',
+      extensions: {
+        persistedQuery: {
+          version: 1,
+          sha256Hash: PERSISTED_QUERIES.queryArtistRelated,
+        },
+      },
+    })
+    const parsed = JSON.parse(resp.data) as {
+      data?: {
+        artist?: {
+          relatedContent?: {
+            relatedArtists?: { items?: RelatedArtist[] }
+          }
+        }
+        artistUnion?: {
+          relatedContent?: {
+            relatedArtists?: { items?: RelatedArtist[] }
+          }
+        }
+      }
+      errors?: Array<{ message?: string }>
+    }
+    if (parsed.errors?.length) {
+      throw new Error(`queryArtistRelated: ${parsed.errors[0]?.message ?? 'graphql error'}`)
+    }
+    const items =
+      parsed.data?.artistUnion?.relatedContent?.relatedArtists?.items ??
+      parsed.data?.artist?.relatedContent?.relatedArtists?.items
+    if (!items) throw new Error('queryArtistRelated: missing relatedArtists in response')
+    return items
+  }
+
+  // Orchestrator: overview for artist meta + full related list. Falls back to
+  // overview's 20-item slice if the dedicated op ever fails.
+  async getAllRelated(artistId: string): Promise<{
+    artist: { name?: string; uri: string; avatar: string | null }
+    items: RelatedArtist[]
+    totalCount: number
+  }> {
+    const overview = await this.getRelated(artistId)
+    const au = overview.data?.artistUnion
+    const rel = au?.relatedContent?.relatedArtists
+    const overviewItems = rel?.items ?? []
+    const totalCount = rel?.totalCount ?? overviewItems.length
+    const artistMeta = {
+      name: au?.profile?.name,
+      uri: `spotify:artist:${artistId}`,
+      avatar: au?.visuals?.avatarImage?.sources?.[0]?.url ?? null,
+    }
+
+    if (overviewItems.length >= totalCount) {
+      return { artist: artistMeta, items: overviewItems, totalCount }
+    }
+
+    try {
+      const full = await this.getRelatedOnly(artistId)
+      if (full.length >= overviewItems.length) {
+        return { artist: artistMeta, items: full, totalCount: Math.max(totalCount, full.length) }
+      }
+      return { artist: artistMeta, items: overviewItems, totalCount }
+    } catch {
+      return { artist: artistMeta, items: overviewItems, totalCount }
+    }
   }
 
   async getDiscoveredOn(artistId: string): Promise<DiscoveredResponse> {

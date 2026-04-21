@@ -309,7 +309,7 @@ Stored in `apps/api/src/spotify/constants.ts` → `PERSISTED_QUERIES`:
 
 Note that `fetchPlaylist`, `fetchPlaylistMetadata`, and `fetchPlaylistContents` all map to the **same hash** — one persisted query backs all three operation names. Send whichever operation name feels right, the hash is what matters.
 
-**"Fans also like" / related artists** is not a separate operation anymore — it's returned inline inside `queryArtistOverview` at `data.artistUnion.relatedContent.relatedArtists`. The old dedicated `queryArtistRelated` SHA (`3d031d6c...`) was not observed in the 2026-04-20 capture; treat it as stale. `GET /api/spotify/artists/:id/related` in `routes/spotify.ts` wraps this.
+**"Fans also like" / related artists** is returned inline inside `queryArtistOverview` at `data.artistUnion.relatedContent.relatedArtists`, but capped at 20 items regardless of `totalCount`. The current web player no longer emits the dedicated `queryArtistRelated` SHA (`3d031d6c...`), but pathfinder still serves it and it returns the full list — `getRelatedOnly` / `getAllRelated` in `endpoints/artist.ts` use it. `GET /api/spotify/artists/:id/related` orchestrates both: overview for artist meta, dedicated op for the full list.
 
 ### Re-capture recipe (when Spotify rotates)
 

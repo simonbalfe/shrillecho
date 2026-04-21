@@ -42,7 +42,9 @@ Set `SPOTIFY_PROXY_URL=http://user:pass@host:port` to route every Spotify reques
 
 | Method | Upstream | Returns |
 |--------|----------|---------|
-| `getRelated(artistId)` | `api-partner` pathfinder `queryArtistOverview` | `ArtistRelated` |
+| `getRelated(artistId)` | `api-partner` pathfinder `queryArtistOverview` | `ArtistRelated` (first 20 related + artist meta) |
+| `getRelatedOnly(artistId)` | `api-partner` pathfinder `queryArtistRelated` (dedicated op) | `RelatedArtist[]` (full list) |
+| `getAllRelated(artistId)` | orchestrator: overview for meta + `queryArtistRelated` for full list | `{ artist, items, totalCount }` |
 | `getDiscoveredOn(artistId)` | `api-partner` pathfinder `queryArtistDiscoveredOn` | `DiscoveredResponse` |
 | `getDiscographyPage(artistId, offset?, limit?, order?)` | pathfinder `queryArtistDiscographyAll` | `DiscographyPage` |
 | `getAllDiscography(artistId)` | pathfinder `queryArtistDiscographyAll` (paginated) | `DiscographyRelease[]` |

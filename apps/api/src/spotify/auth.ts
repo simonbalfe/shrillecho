@@ -44,9 +44,14 @@ export class SpotifyAuth {
   clientId = ''
   expiresAt = 0
   isAnonymous = true
+  // True when tokens came from an external source (per-request sp_dc or
+  // client-supplied access/client tokens). The request layer must not silently
+  // swap these out for env tokens on 401 — it should surface the error so the
+  // caller can re-mint.
+  stateless = false
 
-  async initialize(spDc?: string): Promise<void> {
-    if (this.loadFromEnv()) return
+  async initialize(spDc?: string, opts: { skipEnv?: boolean } = {}): Promise<void> {
+    if (!opts.skipEnv && this.loadFromEnv()) return
     if (!spDc) {
       throw new Error(
         'no Spotify user auth available. Paste a fresh browser capture into .env (SPOTIFY_ACCESS_TOKEN, SPOTIFY_CLIENT_TOKEN, SPOTIFY_WEB_CLIENT_ID, SPOTIFY_TOKEN_EXPIRES_AT), or set a fresh SP_DC cookie. Anonymous auth is disabled.',
