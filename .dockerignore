@@ -1,0 +1,17 @@
+**/node_modules
+**/dist
+**/.turbo
+**/.next
+**/*.tsbuildinfo
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+.playwright-mcp
+results
+apps/api/drizzle
+*.log
+.DS_Store
+.idea
+.vscode
