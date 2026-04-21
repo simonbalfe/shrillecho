@@ -41,3 +41,6 @@ apps/api/drizzle/
 
 # Spotify scrape outputs
 results/
+
+# Playwright MCP
+.playwright-mcp/
