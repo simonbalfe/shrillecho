@@ -8,12 +8,17 @@ import { app } from '../src/app'
 const ARTIST_ID = '4Z8W4fKeB5YxbusRsdQVPb' // Radiohead
 const PLAYLIST_ID = '37i9dQZF1DXcBWIGoYBM5M' // Today's Top Hits (Spotify-owned)
 
-const userScoped = Boolean(process.env.SP_DC)
+// Every Spotify route requires SP_DC. Without it we can only exercise the
+// input-validation paths that reject before reaching the upstream.
+const SP_DC = process.env.SP_DC
+const hasAuth = Boolean(SP_DC)
 
 type Json = Record<string, unknown>
 
-async function api(path: string, init?: RequestInit): Promise<{ status: number; body: Json }> {
-  const res = await app.request(`/api${path}`, init)
+async function api(path: string, init: RequestInit = {}): Promise<{ status: number; body: Json }> {
+  const headers = new Headers(init.headers)
+  if (SP_DC) headers.set('x-sp-dc', SP_DC)
+  const res = await app.request(`/api${path}`, { ...init, headers })
   let body: Json = {}
   try {
     body = (await res.json()) as Json
@@ -23,7 +28,7 @@ async function api(path: string, init?: RequestInit): Promise<{ status: number; 
   return { status: res.status, body }
 }
 
-describe('spotify: token mint', () => {
+describe('spotify: token mint', { skip: !hasAuth }, () => {
   it('GET /spotify/token returns paired access + client tokens', async () => {
     const { status, body } = await api('/spotify/token')
     assert.equal(status, 200, `unexpected status: ${status} body=${JSON.stringify(body)}`)
@@ -35,7 +40,7 @@ describe('spotify: token mint', () => {
   })
 })
 
-describe('spotify: anonymous endpoints', () => {
+describe('spotify: artists + playlists', { skip: !hasAuth }, () => {
   it('GET /spotify/artists/:id/related returns "Fans also like"', async () => {
     const { status, body } = await api(`/spotify/artists/${ARTIST_ID}/related`)
     assert.equal(status, 200, `unexpected status: ${status} body=${JSON.stringify(body)}`)
@@ -93,6 +98,32 @@ describe('spotify: anonymous endpoints', () => {
   )
 })
 
+describe('spotify: /me endpoints', { skip: !hasAuth }, () => {
+  it(
+    "GET /spotify/me/liked-songs returns the caller's liked tracks",
+    { timeout: 180_000 },
+    async () => {
+      const { status, body } = await api('/spotify/me/liked-songs')
+      assert.equal(status, 200, `unexpected status: ${status} body=${JSON.stringify(body)}`)
+      assert.equal(body.success, true)
+      assert.ok(Array.isArray(body.tracks))
+      assert.equal(body.total, (body.tracks as unknown[]).length)
+    },
+  )
+
+  it(
+    "GET /spotify/me/library/playlists returns the caller's library",
+    { timeout: 60_000 },
+    async () => {
+      const { status, body } = await api('/spotify/me/library/playlists')
+      assert.equal(status, 200, `unexpected status: ${status} body=${JSON.stringify(body)}`)
+      assert.equal(body.success, true)
+      assert.ok(Array.isArray(body.items))
+      assert.equal(body.total, (body.items as unknown[]).length)
+    },
+  )
+})
+
 describe('spotify: input validation', () => {
   it('rejects non-alphanumeric artist ids with 400', async () => {
     const { status } = await api('/spotify/artists/bad!id/related')
@@ -123,32 +154,6 @@ describe('spotify: input validation', () => {
   })
 })
 
-describe('spotify: user-scoped endpoints', { skip: !userScoped }, () => {
-  it(
-    'GET /spotify/me/liked-songs returns the caller\'s liked tracks',
-    { timeout: 180_000 },
-    async () => {
-      const { status, body } = await api('/spotify/me/liked-songs')
-      assert.equal(status, 200, `unexpected status: ${status} body=${JSON.stringify(body)}`)
-      assert.equal(body.success, true)
-      assert.ok(Array.isArray(body.tracks))
-      assert.equal(body.total, (body.tracks as unknown[]).length)
-    },
-  )
-
-  it(
-    'GET /spotify/me/library/playlists returns the caller\'s library',
-    { timeout: 60_000 },
-    async () => {
-      const { status, body } = await api('/spotify/me/library/playlists')
-      assert.equal(status, 200, `unexpected status: ${status} body=${JSON.stringify(body)}`)
-      assert.equal(body.success, true)
-      assert.ok(Array.isArray(body.items))
-      assert.equal(body.total, (body.items as unknown[]).length)
-    },
-  )
-})
-
-if (!userScoped) {
-  console.log('[skip] user-scoped tests: set SP_DC env to enable /me/* and POST /playlists/*/tracks checks')
+if (!hasAuth) {
+  console.log('[skip] live Spotify tests: set SP_DC to enable them. Input-validation tests still run.')
 }

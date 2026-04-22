@@ -105,23 +105,23 @@ Mounted under `/api`. Interactive docs at `GET /api/docs` (Scalar UI, backed by 
 
 ### Spotify (reverse-engineered web-player)
 
-Auth resolution order per request (highest first), implemented in [`apps/api/src/routes/spotify.ts`](./apps/api/src/routes/spotify.ts):
+Every Spotify route is user-scoped. Anonymous auth is disabled. Each request resolves a client in this order (implemented in [`apps/api/src/routes/spotify.ts`](./apps/api/src/routes/spotify.ts)):
 
-1. `Authorization: Bearer <accessToken>` **and** `x-client-token: <clientToken>`: stateless client built from your minted pair.
-2. `x-sp-dc: <sp_dc cookie>`: mints a fresh user-scoped pair per request.
-3. Falls back to the server-wide singleton which uses the `SP_DC` env var.
+1. `Authorization: Bearer <accessToken>` **and** `x-client-token: <clientToken>`: stateless client from a pair you already minted (the pair originally came from an `sp_dc`).
+2. `x-sp-dc: <sp_dc cookie>`: mints a fresh pair per request.
+3. Falls back to the server-wide singleton, which uses the `SP_DC` env var.
 
-If none of the above yields a user-scoped token, `me/*` and `POST /playlists/:id/tracks` will fail with the upstream 401.
+If no form of `sp_dc` is available (no header and no env), the server responds 500 with "no Spotify user auth available".
 
-| Method | Path                             | What it does                                                                                             |
-| ------ | -------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| GET    | `/spotify/token`                 | Mint an access + client token pair. Pass `x-sp-dc` for a user-scoped token, else uses the server's.      |
-| GET    | `/spotify/artists/:id/related`   | "Fans also like" via the `queryArtistOverview` pathfinder op.                                            |
-| GET    | `/spotify/artists/:id/tracks`    | Paginates `queryArtistDiscographyAll` then fans out `queryAlbumTracks`. Deduped, filtered to credits.    |
-| GET    | `/spotify/playlists/:id`         | `fetchPlaylist` persisted query. Returns metadata + up to 4999 tracks.                                   |
-| POST   | `/spotify/playlists/:id/tracks`  | `addToPlaylist` mutation. Body: `{ uri?, uris?[], position?: 'top' \| 'bottom' }`. User-scoped.          |
-| GET    | `/spotify/me/liked-songs`        | `fetchLibraryTracks`, paginated 50/page. User-scoped.                                                    |
-| GET    | `/spotify/me/library/playlists`  | `libraryV3` with `filters: ["Playlists"]`. Owned + followed + folders + pseudo-playlists. User-scoped.   |
+| Method | Path                             | What it does                                                                                          |
+| ------ | -------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| GET    | `/spotify/token`                 | Mint an access + client token pair from an `sp_dc`.                                                   |
+| GET    | `/spotify/artists/:id/related`   | "Fans also like" via the `queryArtistOverview` pathfinder op.                                         |
+| GET    | `/spotify/artists/:id/tracks`    | Paginates `queryArtistDiscographyAll` then fans out `queryAlbumTracks`. Deduped, filtered to credits. |
+| GET    | `/spotify/playlists/:id`         | `fetchPlaylist` persisted query. Returns metadata + up to 4999 tracks.                                |
+| POST   | `/spotify/playlists/:id/tracks`  | `addToPlaylist` mutation. Body: `{ uri?, uris?[], position?: 'top' \| 'bottom' }`.                    |
+| GET    | `/spotify/me/liked-songs`        | `fetchLibraryTracks`, paginated 50/page.                                                              |
+| GET    | `/spotify/me/library/playlists`  | `libraryV3` with `filters: ["Playlists"]`. Owned + followed + folders + pseudo-playlists.             |
 
 See [`docs/spotify-client.md`](./docs/spotify-client.md) for the client internals and [`docs/spotify-web-player-auth.md`](./docs/spotify-web-player-auth.md) for the TOTP / apresolve / client-token dance.
 

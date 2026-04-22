@@ -21,7 +21,9 @@ jobs:
       DATABASE_URL: postgresql://x:x@localhost:5432/x
       BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-tests-xxxxxxxx
       NODE_ENV: test
-      # SP_DC intentionally unset: user-scoped tests auto-skip.
+      # Every Spotify route is sp_dc-scoped. If the SP_DC secret is set in the
+      # repo, CI will run the live tests; otherwise only input-validation runs.
+      SP_DC: ${{ secrets.SP_DC }}
 
     steps:
       - name: Checkout
