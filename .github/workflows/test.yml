@@ -1,0 +1,111 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint + knip + type-check + e2e
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      # postgres-js is lazy-connected. The spotify routes never hit the DB,
+      # so a dummy URL is enough to satisfy module-load wiring in the tests.
+      DATABASE_URL: postgresql://x:x@localhost:5432/x
+      BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-tests-xxxxxxxx
+      NODE_ENV: test
+      # SP_DC intentionally unset: user-scoped tests auto-skip.
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Type-check
+        run: pnpm type-check
+
+      - name: Knip (unused code)
+        run: pnpm knip
+
+      - name: E2E against live Spotify
+        run: pnpm --filter @repo/api test
+
+  docker:
+    name: Docker image builds + boots
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: check
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: shrillecho:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Boot container + smoke-test endpoints
+        run: |
+          docker run -d --name shrillecho-smoke -p 3099:3000 \
+            -e NODE_ENV=production \
+            -e APP_URL=http://localhost:3099 \
+            -e DATABASE_URL=postgresql://x:x@localhost:5432/x \
+            -e BETTER_AUTH_SECRET=ci-dummy-secret-xxxxxxxxxxxxxxxxxxxx \
+            shrillecho:ci
+
+          echo "waiting for container to accept traffic..."
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:3099/api/openapi -o /dev/null 2>/dev/null; then
+              echo "container is up"
+              break
+            fi
+            sleep 1
+          done
+
+          echo "--- endpoint smoke checks ---"
+          code=$(curl -sS -o /dev/null -w "%{http_code}" http://localhost:3099/api/openapi)
+          echo "/api/openapi -> $code"
+          test "$code" = "200" || { docker logs shrillecho-smoke; exit 1; }
+
+          code=$(curl -sS -o /dev/null -w "%{http_code}" http://localhost:3099/api/docs)
+          echo "/api/docs -> $code"
+          test "$code" = "200" || { docker logs shrillecho-smoke; exit 1; }
+
+          code=$(curl -sS -o /dev/null -w "%{http_code}" http://localhost:3099/)
+          echo "/ (SPA) -> $code"
+          test "$code" = "200" || { docker logs shrillecho-smoke; exit 1; }
+
+          echo "--- container log tail ---"
+          docker logs shrillecho-smoke
+
+      - name: Stop container
+        if: always()
+        run: docker rm -f shrillecho-smoke || true

@@ -90,7 +90,9 @@ export const scrapeRoutes = new Hono()
       }
 
       scrapeEvents.on('scrape', handler)
-      stream.onAbort(() => scrapeEvents.off('scrape', handler))
+      stream.onAbort(() => {
+        scrapeEvents.off('scrape', handler)
+      })
 
       while (!stream.aborted && !stream.closed) {
         await stream.sleep(30_000)

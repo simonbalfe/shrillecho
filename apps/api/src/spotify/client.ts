@@ -1,3 +1,4 @@
+import type { HttpMethod } from 'impit'
 import { SpotifyAuth } from './auth'
 import { API_PARTNER_URL, CLIENT_VERSION } from './constants'
 import { ArtistService } from './endpoints/artist'
@@ -58,7 +59,7 @@ export class SpotifyClient {
   }
 
   async request(
-    method: string,
+    method: HttpMethod,
     url: string,
     body: string | undefined,
     headers: Record<string, string> = {},

@@ -1,8 +1,9 @@
+import type { HttpMethod } from 'impit'
 import { getSpotifyImpit } from './proxy'
 import type { RequestResponse } from './types'
 
 interface PerformRequestOptions {
-  method?: string
+  method?: HttpMethod
   headers?: Record<string, string>
   body?: string
   cookies?: Record<string, string>
