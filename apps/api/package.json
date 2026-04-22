@@ -14,6 +14,7 @@
     "sync-liked": "tsx scripts/sync-liked.ts",
     "crawl-artist": "tsx scripts/crawl-artist.ts",
     "prune-playlist": "tsx scripts/prune-playlist.ts",
+    "playback": "tsx scripts/playback.ts",
     "test": "node --import tsx --test tests/spotify.e2e.test.ts",
     "lint": "biome check .",
     "db:generate": "drizzle-kit generate",

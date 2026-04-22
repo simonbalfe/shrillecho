@@ -83,6 +83,40 @@ Already listed above, but worth highlighting the paginated reader we added after
 
 `getFront` remains as a compatibility shim but hardcodes `limit: 4999` and frequently truncates on the residential proxy. New code should call `getPage` or `getAllTracks`.
 
+### `spotify.playback` — `endpoints/playback.ts`
+
+Reverse-engineered Spotify Connect control. Every write targets `gew4-spclient.spotify.com/connect-state/v1/...` from a per-session virtual device_id (random 40-char hex) to a real Connect device the user owns. This is exactly the flow open.spotify.com runs when you click play/pause/next.
+
+| Method | Upstream | Notes |
+|--------|----------|-------|
+| `getCluster()` | `PUT /connect-state/v1/devices/hobs_{virtual}` with `x-spotify-connection-id` | Returns the full `Cluster` snapshot (all devices + `active_device_id` + `player_state`). Opens a dealer WS first if no session cached. |
+| `listDevices()` | `getCluster()` → `Object.values(cluster.devices)` | All active Connect devices (computers, phones, speakers). |
+| `getActiveDeviceId()` | `getCluster().active_device_id` | The device that will receive commands by default. |
+| `pause()` / `resume()` | `POST .../player/command/from/{v}/to/{t}` body `{command: {endpoint: "pause"\|"resume"}}` | |
+| `next()` / `previous()` | same endpoint, `endpoint: "skip_next"\|"skip_prev"` | |
+| `seek(ms)` | `endpoint: "seek_to", value: ms` | |
+| `setShuffle(bool)` | `endpoint: "set_shuffling_context", value: bool` | |
+| `setRepeat("off"\|"context"\|"track")` | `endpoint: "set_options", repeating_context, repeating_track` | `track` implies `context=true` + `track=true`, which is what the web-player sends. |
+| `addToQueue(trackUri)` | `endpoint: "add_to_queue", track: {uri, metadata: {is_queued: "true"}, provider: "queue"}` | |
+| `playContext({contextUri, trackIndex?, positionMs?, deviceId?})` | `endpoint: "play"` with `context.uri`, `context.url: context://<uri>`, `play_origin: {feature_identifier: "harmony", feature_version: "4.11.0-af0ef98"}`, `options.skip_to.track_index` | `contextUri` can be a playlist / album / artist / track URI. The `context://` url is redundant data-wise but the server rejects `play` without it. |
+| `setVolume(percent)` | `PUT /connect-state/v1/connect/volume/from/{v}/to/{t}` body `{volume: pct*65535/100}` | Takes 0-100; Spotify stores 0-65535 internally. |
+| `transfer(deviceId, "restore"\|"pause"\|"play")` | `POST /connect-state/v1/connect/transfer/from/{v}/to/{deviceId}` body `{transfer_options: {restore_paused}}` | Move the playback "lock" to another device. |
+| `close()` | — | Tears down the dealer WS. Call from scripts before exit; sockets hang ~90s otherwise. |
+
+All `deviceId?` args default to `getActiveDeviceId()`. If nothing's playing anywhere, that throws — start playback in any Spotify app first, or pass `--device <id>` on the CLI.
+
+CLI wrapper: `pnpm --filter @repo/api playback <status|devices|play|pause|resume|next|prev|seek|volume|shuffle|repeat|queue|transfer> [args] [--device <id>]`.
+
+#### Dealer handshake — `dealer.ts`
+
+The `hobs_` PUT requires an `x-spotify-connection-id` header that only a live dealer WebSocket can mint. `openDealer(accessToken)`:
+
+1. Opens `wss://gew4-dealer.spotify.com/?access_token=<token>` via Node's native WebSocket (Node 22+).
+2. Waits for the first JSON frame whose `headers["Spotify-Connection-Id"]` is set (usually arrives within 100ms of the handshake).
+3. Returns `{connectionId, virtualDeviceId, close()}`.
+
+We don't register as a playable device (no `POST /track-playback/v1/devices` call) — we just need a "from" id to target commands at other devices. For a bidirectional setup where our process would *receive* playback (like librespot), we'd keep the socket open and consume `cluster_update` push messages instead of closing after the hobs PUT.
+
 ## Mutation surface: GraphQL vs spclient REST
 
 Writes split across two hosts. Easy to mix up, so keep this table in mind:
@@ -95,6 +129,7 @@ Writes split across two hosts. Easy to mix up, so keep this table in mind:
 | **Add** a playlist to the user's sidebar (rootlist) | spclient REST | `POST /playlist/v2/user/{username}/rootlist/changes` with `ADD` op |
 | **Remove** a playlist from the user's library (functional equivalent of "Delete playlist") | spclient REST | same rootlist/changes endpoint with `REM` op |
 | Track library (save / unsave) for tracks, artists, albums, shows, episodes | GraphQL mutation | pathfinder `addToLibrary` / `removeFromLibrary`, hash `7c5a6942…`. **Rejects PLAYLIST URIs** — playlists go through rootlist above. |
+| Playback control (play / pause / seek / volume / transfer / queue) | spclient REST + dealer WS | `POST gew4-spclient.spotify.com/connect-state/v1/player/command/from/{virtual}/to/{target}` + `PUT .../connect-state/v1/connect/volume/...` + `POST .../connect-state/v1/connect/transfer/...`. Requires a `Spotify-Connection-Id` header minted from `wss://gew4-dealer.spotify.com`. |
 
 `api.spotify.com/v1/*` (the public developer API) is **deliberately unused**. It rate-limits aggressively on shared residential IPs and duplicates the web-player surface. If you find yourself reaching for it, there's almost always a pathfinder or spclient equivalent the web-player already uses.
 

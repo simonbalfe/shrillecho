@@ -2,6 +2,7 @@ import type { HttpMethod } from 'impit'
 import { SpotifyAuth } from './auth'
 import { API_PARTNER_URL, CLIENT_VERSION } from './constants'
 import { ArtistService } from './endpoints/artist'
+import { PlaybackService } from './endpoints/playback'
 import { PlaylistService } from './endpoints/playlist'
 import { UserService } from './endpoints/user'
 import { performRequest } from './request'
@@ -12,12 +13,14 @@ export class SpotifyClient {
   artists: ArtistService
   playlists: PlaylistService
   users: UserService
+  playback: PlaybackService
 
   private constructor() {
     this.auth = new SpotifyAuth()
     this.artists = new ArtistService(this)
     this.playlists = new PlaylistService(this)
     this.users = new UserService(this)
+    this.playback = new PlaybackService(this)
   }
 
   static async create(spDc?: string): Promise<SpotifyClient> {
@@ -50,12 +53,13 @@ export class SpotifyClient {
     return this.request('GET', url, undefined, headers)
   }
 
-  post(
-    url: string,
-    data: unknown,
-    headers: Record<string, string> = {},
-  ): Promise<RequestResponse> {
+  post(url: string, data: unknown, headers: Record<string, string> = {}): Promise<RequestResponse> {
     return this.request('POST', url, JSON.stringify(data), headers)
+  }
+
+  put(url: string, data?: unknown, headers: Record<string, string> = {}): Promise<RequestResponse> {
+    const body = data === undefined ? undefined : JSON.stringify(data)
+    return this.request('PUT', url, body, headers)
   }
 
   async request(
@@ -76,7 +80,7 @@ export class SpotifyClient {
       Referer: 'https://open.spotify.com/',
       ...headers,
     }
-    if (method === 'POST' && body != null) {
+    if ((method === 'POST' || method === 'PUT') && body != null) {
       reqHeaders['Content-Type'] = 'application/json;charset=UTF-8'
     }
 
@@ -111,7 +115,7 @@ export class SpotifyClient {
       await this.auth.initialize()
       return this.request(method, url, body, headers, retry429)
     }
-    if (resp.status !== 200) {
+    if (resp.status < 200 || resp.status >= 300) {
       throw new Error(`request failed: status ${resp.status} body=${resp.data.slice(0, 200)}`)
     }
     return resp
