@@ -2,6 +2,43 @@
 
 Reverse-engineered Spotify web-player API plus a BFS crawler over "Fans also like" for building artist pools. Packaged as a single Hono server that mounts the API at `/api` and serves a React SPA as a static fallback.
 
+## What you can do
+
+Everything below works with a single `sp_dc` cookie — no Spotify Developer app, no OAuth client ID, no premium-tier API scopes to request. Same surface the open.spotify.com web player uses.
+
+- **Build playlists from artist graphs.** BFS crawl "Fans also like" from a seed artist, pull top tracks per artist, write a new playlist to your library. Run ad-hoc via CLI or as a background job with live SSE progress.
+  `pnpm --filter @repo/api crawl-artist <artist>`
+- **Control playback on any Spotify Connect device.** Play / pause / next / prev / seek / volume / shuffle / repeat / transfer / queue across your MacBook, phone, speakers — whichever devices are active. Dealer WebSocket + `connect-state` POSTs, not the public Web API.
+  `pnpm --filter @repo/api playback status`
+  `pnpm --filter @repo/api playback play spotify:track:<id>`
+- **Pull your full library offline.** Sync every Liked Song into Postgres, walk `libraryV3` for every playlist / album / podcast / audiobook. No 50-item pagination per call; the worker handles all of it.
+  `pnpm --filter @repo/api sync-liked`
+- **Dedupe a playlist against your Liked Songs.** Dry-run first, then `--apply` to mutate.
+  `pnpm --filter @repo/api prune-playlist <playlist> [--apply]`
+- **Fetch arbitrary Spotify data the public API won't give you without pain.** `queryArtistOverview`, full discography with per-album tracks (deduped, filtered to credits), "Fans also like" with the full uncapped list, playlist contents up to 4999 items, profile / library / editable playlists. Accessible via CLI, the `/api/spotify/*` HTTP routes, or directly via the `SpotifyClient` TS class.
+- **Search / inspect everything through OpenAPI.** `GET /api/docs` gives you Scalar UI for the full route surface.
+
+Full client reference: [`docs/spotify-client.md`](./docs/spotify-client.md).
+
+## Auth
+
+Every Spotify call is user-scoped — there is no anonymous path. You need an `sp_dc` session cookie from a logged-in `open.spotify.com` browser session.
+
+**Grab `sp_dc`:**
+
+1. Log in to [open.spotify.com](https://open.spotify.com) in your browser.
+2. DevTools → Application → Cookies → `https://open.spotify.com` → copy the `sp_dc` value (a long opaque string).
+
+That single cookie is enough. The server mints the full access-token + client-token pair from it using the reverse-engineered TOTP / apresolve / client-token flow ([`docs/spotify-web-player-auth.md`](./docs/spotify-web-player-auth.md)). No Spotify Developer app needed.
+
+**Use it one of three ways:**
+
+1. **Server-side default.** Put `SP_DC=<cookie>` in `.env`. All CLI scripts and any HTTP request without auth headers fall back to this.
+2. **Per-request cookie.** Send `x-sp-dc: <cookie>` on the HTTP request. The server mints a fresh token pair for that call.
+3. **Per-request pre-minted tokens.** Call `GET /api/spotify/token` once with your `sp_dc`, then on every subsequent call send `Authorization: Bearer <accessToken>` + `x-client-token: <clientToken>`. Lets a browser client hold the cookie itself and never pass it server-side.
+
+When the cookie expires (re-login flushes it), mint again. Tokens live ~1 hour; the server auto-refreshes unless you're using mode 3, in which case the client re-mints on 401.
+
 ## Stack
 
 | Layer    | Tech                                                            |
@@ -156,6 +193,9 @@ All run via pnpm filters against `@repo/api`.
 | Command                                                      | What it does                                                           |
 | ------------------------------------------------------------ | ---------------------------------------------------------------------- |
 | `pnpm --filter @repo/api scrape <artist> [depth] [userId]`   | Run a BFS scrape without HTTP. Seeds the first user in the DB if omitted. |
+| `pnpm --filter @repo/api crawl-artist <artist> [--depth N]`  | BFS from a seed artist, pull top tracks per artist, write to a new playlist in your library. |
+| `pnpm --filter @repo/api prune-playlist <playlist> [--apply]`| Remove from a playlist any tracks you've already liked. Dry-runs without `--apply`. |
+| `pnpm --filter @repo/api playback <cmd> [args] [--device id]`| Control Spotify Connect playback: `status`, `devices`, `play <uri>`, `pause`, `resume`, `next`, `prev`, `seek <ms>`, `volume <0-100>`, `shuffle on\|off`, `repeat off\|context\|track`, `queue <track-uri>`, `transfer <device-id>`. |
 | `pnpm --filter @repo/api tracks <artistId>`                  | Dump an artist's full deduped track list.                              |
 | `pnpm --filter @repo/api mint`                               | Mint an access + client token pair (debugging).                        |
 | `pnpm --filter @repo/api sync-liked`                         | Pull the current user's liked songs into Postgres.                     |
