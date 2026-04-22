@@ -1,13 +1,13 @@
 import { createHmac } from 'node:crypto'
 
-export function deriveTotpSecret(cipherBytes: number[]): Buffer {
+function deriveTotpSecret(cipherBytes: number[]): Buffer {
   const transformed = cipherBytes.map((b, i) => b ^ ((i % 33) + 9))
   const joined = transformed.join('')
   const hex = Buffer.from(joined, 'utf8').toString('hex')
   return Buffer.from(hex, 'hex')
 }
 
-export function hotpSha1(secret: Buffer, counter: number, digits = 6): string {
+function hotpSha1(secret: Buffer, counter: number, digits = 6): string {
   const buf = Buffer.alloc(8)
   buf.writeBigUInt64BE(BigInt(counter))
   const hmac = createHmac('sha1', secret).update(buf).digest()

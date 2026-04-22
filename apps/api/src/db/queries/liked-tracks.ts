@@ -7,7 +7,7 @@ const sqlExcluded = (col: string) => sql.raw(`excluded."${col}"`)
 
 const CHUNK = 500
 
-export interface SyncLikedTracksResult {
+interface SyncLikedTracksResult {
   tracks: number
   artists: number
   likes: number

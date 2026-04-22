@@ -1,7 +1,7 @@
 const SECRETS_URL =
   'https://raw.githubusercontent.com/xyloflake/spot-secrets-go/main/secrets/secretDict.json'
 
-export interface SecretEntry {
+interface SecretEntry {
   version: number
   secret: number[]
 }

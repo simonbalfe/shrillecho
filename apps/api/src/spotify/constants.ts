@@ -25,35 +25,9 @@ export const PERSISTED_QUERIES = {
   profileAttributes: '53bcb064f6cd18c23f752bc324a791194d20df612d8e1239c735144ab0399ced',
 } as const
 
-// Legacy aliases — prefer PERSISTED_QUERIES above.
-export const EXTENSIONS_GET_PLAYLIST = JSON.stringify({
-  persistedQuery: { version: 1, sha256Hash: PERSISTED_QUERIES.fetchPlaylist },
-})
-export const EXTENSIONS_GET_ARTIST = JSON.stringify({
-  persistedQuery: { version: 1, sha256Hash: PERSISTED_QUERIES.queryArtistOverview },
-})
-export const EXTENSIONS_RELATED = JSON.stringify({
-  persistedQuery: { version: 1, sha256Hash: PERSISTED_QUERIES.queryArtistRelated },
-})
 export const EXTENSIONS_DISCOVERED =
   '{"persistedQuery":{"version":1,"sha256Hash":"71c2392e4cecf6b48b9ad1311ae08838cbdabcfd189c6bf0c66c2430b8dcfdb1"}}'
-
-export const MAX_ARTISTS_PER_REQUEST = 50
 
 // Matches the real web player as of the latest Playwright capture. Bump when
 // Spotify ships a new bundle (visible as spotify-app-version header in DevTools).
 export const CLIENT_VERSION = '1.2.89.108.g7356e5c1'
-
-export const DEFAULT_HEADERS: Record<string, string> = {
-  'User-Agent':
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0',
-  'Accept-Language': 'en-GB,en;q=0.5',
-  Accept:
-    'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-  Origin: 'https://open.spotify.com',
-  'Sec-Fetch-Dest': 'document',
-  'Sec-Fetch-Mode': 'navigate',
-  'Sec-Fetch-Site': 'none',
-  'Sec-Fetch-User': '?1',
-  'Upgrade-Insecure-Requests': '1',
-}

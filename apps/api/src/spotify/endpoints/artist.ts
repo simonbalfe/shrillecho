@@ -48,23 +48,6 @@ export interface DiscoveredResponse {
   extensions?: Record<string, unknown>
 }
 
-export interface ArtistData {
-  external_urls: ExternalURLs
-  followers: Followers
-  genres: string[]
-  href: string
-  id: string
-  images: Image[]
-  name: string
-  popularity: number
-  type: string
-  uri: string
-}
-
-export interface ArtistResponse {
-  artists: ArtistData[]
-}
-
 export class ArtistService {
   constructor(private client: SpotifyClient) {}
 

@@ -1,8 +1,7 @@
-import { DEFAULT_HEADERS } from './constants'
 import { getSpotifyImpit } from './proxy'
 import type { RequestResponse } from './types'
 
-export interface PerformRequestOptions {
+interface PerformRequestOptions {
   method?: string
   headers?: Record<string, string>
   body?: string
@@ -33,10 +32,4 @@ export async function performRequest(
     : await fetch(url, { method: opts.method ?? 'GET', headers, body: opts.body })
 
   return { status: resp.status, data: await resp.text() }
-}
-
-export function withDefaultBrowserHeaders(
-  headers: Record<string, string> = {},
-): Record<string, string> {
-  return { ...DEFAULT_HEADERS, ...headers }
 }
