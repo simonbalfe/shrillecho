@@ -44,3 +44,6 @@ results/
 
 # Playwright MCP
 .playwright-mcp/
+
+# Claude Code (share .claude/, keep personal settings local)
+.claude/settings.local.json
