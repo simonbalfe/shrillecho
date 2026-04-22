@@ -1,191 +1,208 @@
 # Shrillecho
 
-Distributed Spotify artist discovery tool. Seed an artist, set a crawl depth, and the system traverses Spotify's related artists graph to build curated artist pools.
+Reverse-engineered Spotify web-player API plus a BFS crawler over "Fans also like" for building artist pools. Packaged as a single Hono server that mounts the API at `/api` and serves a React SPA as a static fallback.
 
-## Tech Stack
+## Stack
 
-| Layer    | Technology                                              |
-| -------- | ------------------------------------------------------- |
-| Frontend | React 19, Vite, TanStack Router + Query, Tailwind CSS 4 |
-| API      | Hono, Better Auth, Drizzle ORM                          |
-| Database | PostgreSQL (Neon)                                       |
-| Queue    | Redis                                                   |
-| Infra    | Docker, pnpm workspaces, Turborepo                      |
+| Layer    | Tech                                                            |
+| -------- | --------------------------------------------------------------- |
+| API      | Hono, Better Auth, Drizzle ORM, hono-openapi + Scalar docs UI   |
+| Spotify  | Pathfinder GraphQL + `open.spotify.com` token mint (TOTP-based) |
+| Frontend | React 19, Vite, TanStack Router + Query, Tailwind v4, shadcn    |
+| Database | PostgreSQL (Neon in prod, local via docker-compose)             |
+| Build    | pnpm workspaces + Turborepo + Biome                             |
+| Deploy   | Single-image Docker to GHCR, Dokploy pulls via webhook          |
 
-## Project Structure
+## Layout
 
 ```
 shrillecho/
   apps/
-    api/                 # Hono API (auth, routes, SSE, Spotify client, queue)
-    web/                 # React SPA (TanStack Router + Query)
-  server.ts              # Prod entry: Hono serves /api and the built SPA
-  Dockerfile             # Multi-stage image for the combined server
-  docker-compose.yml     # Local stack (Postgres + app)
-  .github/workflows/     # Build, push to GHCR, trigger Dokploy deploy
+    api/      Hono API (routes, services, db, Spotify client, scripts)
+    web/      React SPA (TanStack Router + Query)
+  docs/       Notes on the Spotify client + scrape service
+  server.ts   Prod entry: mounts the API and serves apps/web/dist
+  Dockerfile
+  docker-compose.yml
+  .github/workflows/deploy.yml
 ```
+
+See [`CLAUDE.md`](./CLAUDE.md) for a file-by-file tour.
 
 ## Prerequisites
 
 - Node.js 20+
-- pnpm 9.15+ (`corepack enable` picks it up automatically)
-- Docker (for local Postgres / container builds)
-- A Spotify app ([developer.spotify.com](https://developer.spotify.com/dashboard)) for client id/secret
-- A Postgres database (Neon works out of the box)
+- pnpm 9.15 (`corepack enable` picks it up)
+- Postgres (Neon, or the docker-compose service)
+- A Spotify account. Grab your `sp_dc` cookie from an authenticated `open.spotify.com` session for user-scoped endpoints. Anonymous endpoints work without it.
 
 ## Setup
 
-1. **Clone and install**
+```bash
+git clone <this repo>
+cd shrillecho
+pnpm install
+cp .env.example .env  # fill in values
+pnpm db:push          # push the Drizzle schema
+pnpm dev              # starts api (3001) and web (3000) together
+```
 
-   ```bash
-   git clone https://github.com/<you>/shrillecho.git
-   cd shrillecho
-   pnpm install
-   ```
+- Web: http://localhost:3000
+- API: http://localhost:3001/api
+- API docs (Scalar): http://localhost:3001/api/docs
+- OpenAPI JSON: http://localhost:3001/api/openapi
 
-2. **Configure environment**
+### Environment
 
-   ```bash
-   cp .env.example .env
-   ```
+All parsing is in [`apps/api/src/config.ts`](./apps/api/src/config.ts). All fields are optional at the schema level, but you will need the ones relevant to the features you use.
 
-   Fill in the required values:
+| Var                     | Used for                                                                     |
+| ----------------------- | ---------------------------------------------------------------------------- |
+| `NODE_ENV`              | `development` or `production`                                                |
+| `APP_URL`               | Public app URL. Drives CORS origin and Better Auth cookies.                  |
+| `API_URL`               | API base, defaults to `http://localhost:3001`.                               |
+| `DATABASE_URL`          | Postgres connection string. Needed for scrapes, users, liked-songs sync.     |
+| `BETTER_AUTH_SECRET`    | 32+ char secret. Required for sign-up / sign-in flows.                       |
+| `SP_DC`                 | Server-side `sp_dc` cookie used as a fallback when a request has no auth.    |
+| `SPOTIFY_CLIENT_ID`     | Reserved (not currently used by any runtime path).                           |
+| `SPOTIFY_CLIENT_SECRET` | Reserved.                                                                    |
 
-   | Variable                | Description                                     |
-   | ----------------------- | ----------------------------------------------- |
-   | `NODE_ENV`              | `development` or `production`                   |
-   | `DATABASE_URL`          | Postgres connection string (Neon or local)      |
-   | `BETTER_AUTH_SECRET`    | Random string, 32+ chars                        |
-   | `APP_URL`               | Public URL of the app (e.g. `http://localhost:3000`) |
-   | `REDIS_URL`             | Redis connection URL                            |
-   | `SPOTIFY_CLIENT_ID`     | Spotify app client id                           |
-   | `SPOTIFY_CLIENT_SECRET` | Spotify app client secret                       |
+## Running locally
 
-3. **Run the database migrations**
+### Dev mode
 
-   ```bash
-   pnpm db:push
-   ```
+```bash
+pnpm dev
+```
 
-4. **Start dev servers**
+Turbo runs `@repo/api dev` (`tsx watch src/dev.ts`) and `@repo/web dev` (Vite) in parallel. Vite proxies `/api` to the API on port 3001.
 
-   ```bash
-   pnpm dev
-   ```
+### Prod-style run (single server)
 
-   - Web: http://localhost:3000
-   - API: http://localhost:3001 (proxied under `/api` from the web dev server)
+```bash
+pnpm build      # builds the web app
+pnpm start      # node --import tsx server.ts on port 3000
+```
 
-## Docker
+This mirrors the Docker image: `server.ts` mounts `@repo/api` and serves `apps/web/dist` as a static fallback.
 
-### Build the image locally
+### Docker
 
 ```bash
 docker build -t shrillecho:local .
-```
-
-### Run the container
-
-```bash
 docker run --rm -p 3000:3000 --env-file .env shrillecho:local
 ```
 
-### Full local stack (Postgres + app)
+Full local stack with Postgres:
 
 ```bash
 docker compose up --build
 ```
 
-The production server serves the Hono API at `/api` and the built SPA as a static fallback, all from a single container on port `3000`.
-
-## Deployment (Dokploy)
-
-Shrillecho deploys as a single Docker image pulled from GHCR by Dokploy.
-
-### One-time setup in Dokploy
-
-1. Create a new **Application**, type **Docker Image**.
-2. Point it at the GHCR image: `ghcr.io/<owner>/<repo>:latest`.
-3. If the repo is private, add GHCR credentials in Dokploy (username = GitHub username, password = a GitHub PAT with `read:packages`).
-4. Set the environment variables from the table above.
-5. Expose port **3000** and attach your domain.
-6. Copy the application's **Deploy webhook URL** from Dokploy's settings; you will use it in the next step.
-
-### GitHub secrets
-
-Add these in **Settings -> Secrets and variables -> Actions**:
-
-| Secret                 | Value                                     |
-| ---------------------- | ----------------------------------------- |
-| `DOKPLOY_WEBHOOK_URL`  | The webhook URL copied from Dokploy       |
-
-`GITHUB_TOKEN` is provided automatically and is used to push to GHCR.
-
-### The flow
-
-On every push to `main`:
-
-1. `.github/workflows/deploy.yml` builds the Docker image.
-2. The image is pushed to `ghcr.io/<owner>/<repo>` tagged with `latest` and the commit SHA.
-3. The workflow calls the Dokploy webhook.
-4. Dokploy pulls the new image and restarts the app.
-
-Manual deploys are available via **Actions -> Deploy -> Run workflow**.
-
 ## API
 
-All routes are mounted under `/api`. In dev the API lives on `http://localhost:3001/api`; the web dev server proxies it under `/api`. Interactive docs are at `GET /api/docs` (Scalar UI, backed by `/api/openapi`).
+Mounted under `/api`. Interactive docs at `GET /api/docs` (Scalar UI, backed by `/api/openapi`).
 
-### Spotify (web-player reverse-engineered)
+### Spotify (reverse-engineered web-player)
 
-All Spotify routes accept auth in three forms (highest priority wins):
+Auth resolution order per request (highest first), implemented in [`apps/api/src/routes/spotify.ts`](./apps/api/src/routes/spotify.ts):
 
-1. `Authorization: Bearer <accessToken>` + `x-client-token: <clientToken>` — per-request tokens minted from `/spotify/token`.
-2. `x-sp-dc: <sp_dc cookie>` — mint user-scoped tokens per-request.
-3. Server `SP_DC` env var fallback (legacy single-user mode).
+1. `Authorization: Bearer <accessToken>` **and** `x-client-token: <clientToken>`: stateless client built from your minted pair.
+2. `x-sp-dc: <sp_dc cookie>`: mints a fresh user-scoped pair per request.
+3. Falls back to the server-wide singleton which uses the `SP_DC` env var.
 
-`none` below means the endpoint works anonymously if no auth is supplied; `user` means you need one of the three forms above.
+If none of the above yields a user-scoped token, `me/*` and `POST /playlists/:id/tracks` will fail with the upstream 401.
 
-| Method | Path                                | Description                                                                 | Auth |
-| ------ | ----------------------------------- | --------------------------------------------------------------------------- | ---- |
-| GET    | `/spotify/token`                    | Mint a paired access + client token. Pass `x-sp-dc` to mint user-scoped.    | none / sp_dc |
-| GET    | `/spotify/artists/:id/related`      | "Fans also like" for an artist (via `queryArtistOverview`).                 | none |
-| GET    | `/spotify/artists/:id/tracks`       | All tracks across an artist's discography, deduped, filtered to credits.    | none |
-| GET    | `/spotify/playlists/:id`            | Playlist metadata + up to 4999 tracks (via `fetchPlaylist`).                | none |
-| POST   | `/spotify/playlists/:id/tracks`     | Add tracks to a playlist. Body: `{ uri?, uris?[], position?: 'top'\|'bottom' }`. | user |
-| GET    | `/spotify/me/liked-songs`           | Current user's liked songs.                                                 | user |
-| GET    | `/spotify/me/library/playlists`     | Owned + followed playlists, folders, and pseudo-playlists (e.g. Liked).     | user |
+| Method | Path                             | What it does                                                                                             |
+| ------ | -------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| GET    | `/spotify/token`                 | Mint an access + client token pair. Pass `x-sp-dc` for a user-scoped token, else uses the server's.      |
+| GET    | `/spotify/artists/:id/related`   | "Fans also like" via the `queryArtistOverview` pathfinder op.                                            |
+| GET    | `/spotify/artists/:id/tracks`    | Paginates `queryArtistDiscographyAll` then fans out `queryAlbumTracks`. Deduped, filtered to credits.    |
+| GET    | `/spotify/playlists/:id`         | `fetchPlaylist` persisted query. Returns metadata + up to 4999 tracks.                                   |
+| POST   | `/spotify/playlists/:id/tracks`  | `addToPlaylist` mutation. Body: `{ uri?, uris?[], position?: 'top' \| 'bottom' }`. User-scoped.          |
+| GET    | `/spotify/me/liked-songs`        | `fetchLibraryTracks`, paginated 50/page. User-scoped.                                                    |
+| GET    | `/spotify/me/library/playlists`  | `libraryV3` with `filters: ["Playlists"]`. Owned + followed + folders + pseudo-playlists. User-scoped.   |
+
+See [`docs/spotify-client.md`](./docs/spotify-client.md) for the client internals and [`docs/spotify-web-player-auth.md`](./docs/spotify-web-player-auth.md) for the TOTP / apresolve / client-token dance.
 
 ### Scrapes
 
-All scrape routes require a Better Auth session cookie.
+Every scrape route requires a Better Auth session cookie.
 
-| Method | Path                        | Description                                                                   |
-| ------ | --------------------------- | ----------------------------------------------------------------------------- |
-| GET    | `/scrapes`                  | List scrapes owned by the current user.                                       |
-| GET    | `/scrapes/:id/artists`      | Artists discovered in a single scrape run.                                    |
-| POST   | `/scrapes/artists`          | Start a scrape. Body: `{ artist: 'id\|uri\|url', depth: 1..5 }`.              |
-| GET    | `/artists`                  | Every artist discovered across all of the user's scrapes.                     |
-| GET    | `/events/scrapes`           | SSE stream of live scrape progress events for the current user.               |
+| Method | Path                    | What it does                                                                                  |
+| ------ | ----------------------- | --------------------------------------------------------------------------------------------- |
+| GET    | `/scrapes`              | List the caller's scrapes.                                                                    |
+| GET    | `/scrapes/:id/artists`  | Artists linked to a specific scrape.                                                          |
+| POST   | `/scrapes/artists`      | Body `{ artist, depth }`. Kicks off a BFS in the background, returns `{ scrapeId }` instantly.|
+| GET    | `/artists`              | Every artist discovered across all of the caller's scrapes.                                   |
+| GET    | `/events/scrapes`       | SSE stream of live scrape progress for the caller. 30s keep-alive `ping` frames.              |
+
+BFS implementation and event shape: [`docs/scrape-service.md`](./docs/scrape-service.md).
 
 ### Users
 
-| Method | Path             | Description                                         | Auth    |
-| ------ | ---------------- | --------------------------------------------------- | ------- |
-| POST   | `/users/delete`  | Delete a user. Body: `{ userId }`.                  | session |
+| Method | Path             | What it does                                                     |
+| ------ | ---------------- | ---------------------------------------------------------------- |
+| POST   | `/users/delete`  | Deletes a user (and their scrapes). Body: `{ userId }`. Session. |
 
 ### Auth
 
-Better Auth handles everything under `/auth/*` (`/auth/sign-up`, `/auth/sign-in`, `/auth/session`, etc.).
+Better Auth handles everything under `/auth/*` (`/auth/sign-up`, `/auth/sign-in`, `/auth/session`, ...). Drizzle adapter, session cookies.
 
-## Scripts
+## CLI scripts
 
-| Command             | Description                             |
-| ------------------- | --------------------------------------- |
-| `pnpm dev`          | Start API + web in watch mode           |
-| `pnpm build`        | Build all workspaces via Turborepo      |
-| `pnpm start`        | Run the production server locally       |
-| `pnpm lint`         | Biome lint across the repo              |
-| `pnpm type-check`   | TypeScript type checks                  |
-| `pnpm db:generate`  | Generate a Drizzle migration            |
-| `pnpm db:push`      | Push the Drizzle schema to the database |
+All run via pnpm filters against `@repo/api`.
+
+| Command                                                      | What it does                                                           |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `pnpm --filter @repo/api scrape <artist> [depth] [userId]`   | Run a BFS scrape without HTTP. Seeds the first user in the DB if omitted. |
+| `pnpm --filter @repo/api tracks <artistId>`                  | Dump an artist's full deduped track list.                              |
+| `pnpm --filter @repo/api mint`                               | Mint an access + client token pair (debugging).                        |
+| `pnpm --filter @repo/api sync-liked`                         | Pull the current user's liked songs into Postgres.                     |
+
+## Repo scripts
+
+| Command             | What it does                                    |
+| ------------------- | ----------------------------------------------- |
+| `pnpm dev`          | Turbo: api watch + web dev server               |
+| `pnpm build`        | Turbo build across all workspaces               |
+| `pnpm start`        | Production server on port 3000                  |
+| `pnpm lint`         | Biome across the repo                           |
+| `pnpm type-check`   | TypeScript across all workspaces                |
+| `pnpm db:generate`  | Drizzle migration generation                    |
+| `pnpm db:push`      | Push the Drizzle schema to `DATABASE_URL`       |
+
+## Deployment
+
+Deploys as a single Docker image built by GitHub Actions and pulled by Dokploy.
+
+### Flow on push to `main`
+
+1. [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml) builds the image.
+2. Tags it `latest` + `sha-<commit>` and pushes to `ghcr.io/<owner>/<repo>`.
+3. Calls `DOKPLOY_WEBHOOK_URL` to trigger a redeploy.
+
+### One-time Dokploy setup
+
+1. Create an **Application** of type **Docker Image**, pointed at `ghcr.io/<owner>/<repo>:latest`.
+2. If the repo is private, add GHCR creds (GitHub username + PAT with `read:packages`).
+3. Set env vars (see the table above).
+4. Expose port **3000** and attach the domain.
+5. Copy the app's **Deploy webhook URL**.
+
+### GitHub secrets
+
+| Secret                | Value                                 |
+| --------------------- | ------------------------------------- |
+| `DOKPLOY_WEBHOOK_URL` | Webhook URL from the Dokploy app.     |
+
+`GITHUB_TOKEN` is auto-provided and used to push to GHCR.
+
+Manual redeploys: **Actions -> Deploy -> Run workflow**.
+
+## Docs
+
+- [`docs/spotify-client.md`](./docs/spotify-client.md): TS Spotify client API surface.
+- [`docs/spotify-web-player-auth.md`](./docs/spotify-web-player-auth.md): how `open.spotify.com` bootstraps a token (TOTP, client token, apresolve).
+- [`docs/scrape-service.md`](./docs/scrape-service.md): BFS scraper HTTP, SSE, CLI, event shape, known gaps.
+- [`CLAUDE.md`](./CLAUDE.md): full file/folder map of the repo.

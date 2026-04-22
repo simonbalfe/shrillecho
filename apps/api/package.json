@@ -12,6 +12,7 @@
     "tracks": "tsx scripts/tracks.ts",
     "mint": "tsx scripts/mint-tokens.ts",
     "sync-liked": "tsx scripts/sync-liked.ts",
+    "test": "node --import tsx --test tests/spotify.e2e.test.ts",
     "lint": "biome check .",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
@@ -33,7 +34,6 @@
   "devDependencies": {
     "@types/node": "^25.6.0",
     "drizzle-kit": "^0.31.8",
-    "playwright-core": "^1.59.1",
     "tsx": "^4.21.0"
   }
 }
