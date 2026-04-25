@@ -3,17 +3,17 @@ import { authClient } from '@shared/lib/auth-client'
 import { Button } from '@ui/components/button'
 import { cn } from '@ui/lib/utils'
 import { Link, Outlet, useLocation } from '@tanstack/react-router'
-import { Disc3, LogOut, Music, Settings, Users } from 'lucide-react'
+import { Disc3, LogOut, Settings, Sparkles, Users } from 'lucide-react'
 
 const navItems = [
-  { title: 'Discover', to: '/dashboard' as const, icon: Music },
+  { title: 'Find gems', to: '/dashboard' as const, icon: Sparkles },
   { title: 'Artists', to: '/artists' as const, icon: Users },
   { title: 'Settings', to: '/settings' as const, icon: Settings },
 ]
 
 const PAGE_TITLES: Record<string, string> = {
-  '/dashboard': 'Discover Artists',
-  '/artists': 'Scraped Artists',
+  '/dashboard': 'Find hidden gems',
+  '/artists': 'Scraped artists',
   '/settings': 'Settings',
 }
 

@@ -1,6 +1,13 @@
 import type { Context } from 'hono'
 import { Hono } from 'hono'
 import { describeRoute } from 'hono-openapi'
+import { requireAuth } from '../middleware/auth'
+import {
+  type FindGemsOptions,
+  GEM_DEFAULTS,
+  findGems,
+  parsePlaylistId,
+} from '../services/gems'
 import { SpotifyAuth } from '../spotify'
 import { SpotifyClient } from '../spotify/client'
 import { getSpotifyClient, invalidateSpotifyClient } from '../spotify/singleton'
@@ -290,6 +297,90 @@ export const spotifyRoutes = new Hono()
         if (!stateless) invalidateSpotifyClient()
         return c.json(
           { success: false, error: err instanceof Error ? err.message : 'tracks failed' },
+          500,
+        )
+      }
+    },
+  )
+  .post(
+    '/spotify/gems',
+    requireAuth,
+    describeRoute({
+      tags: ['Spotify'],
+      summary: 'Find hidden-gem artists exactly in your taste',
+      description:
+        'Pulls FAL ("Fans also like") for every seed artist (from a playlist or your liked songs), tallies overlap, filters by monthly-listener cap, scores by overlap/log10(listeners), picks top N, drops tracks above a lifetime playcount cap, optionally creates a playlist on the server-side Spotify account. Synchronous; cap inputs to keep it under 30s. Requires a Better Auth session.',
+      responses: {
+        200: { description: 'Gems + stats + playlist link' },
+        400: { description: 'Invalid body' },
+        401: { description: 'Unauthorized' },
+        500: { description: 'Upstream failure' },
+      },
+    }),
+    async (c) => {
+      let body: Record<string, unknown>
+      try {
+        body = (await c.req.json()) as Record<string, unknown>
+      } catch {
+        return c.json({ success: false, error: 'invalid json body' }, 400)
+      }
+
+      const fromRaw = typeof body.from === 'string' ? body.from.trim() : ''
+      let fromPlaylistId: string | null = null
+      if (fromRaw && fromRaw.toLowerCase() !== 'liked') {
+        fromPlaylistId = parsePlaylistId(fromRaw)
+        if (!fromPlaylistId) {
+          return c.json({ success: false, error: 'invalid `from` (expected playlist id/uri/url, "liked", or omitted)' }, 400)
+        }
+      }
+
+      const num = (v: unknown, d: number, max?: number) => {
+        if (v === undefined || v === null) return d
+        const n = Number(v)
+        if (!Number.isFinite(n)) return d
+        const floored = Math.floor(n)
+        return max !== undefined ? Math.min(floored, max) : floored
+      }
+
+      const depth = num(body.depth, GEM_DEFAULTS.depth) as 1 | 2
+      if (depth !== 1 && depth !== 2) {
+        return c.json({ success: false, error: '`depth` must be 1 or 2' }, 400)
+      }
+
+      const trackRank =
+        body.trackRank === 'top' || body.trackRank === 'bottom' || body.trackRank === 'mid'
+          ? body.trackRank
+          : GEM_DEFAULTS.trackRank
+
+      const playlistName =
+        typeof body.playlistName === 'string' && body.playlistName.trim().length > 0
+          ? body.playlistName.trim().slice(0, 100)
+          : null
+
+      const opts: FindGemsOptions = {
+        fromPlaylistId,
+        playlistName,
+        depth,
+        top: num(body.top, GEM_DEFAULTS.top, 100),
+        maxListeners: num(body.maxListeners, GEM_DEFAULTS.maxListeners, 1_000_000),
+        minOverlap: num(body.minOverlap, GEM_DEFAULTS.minOverlap, 50),
+        tracksPerArtist: num(body.tracksPerArtist, GEM_DEFAULTS.tracksPerArtist, 10),
+        limitTaste: body.limitTaste != null ? num(body.limitTaste, 0, 500) : null,
+        maxChecks: num(body.maxChecks, GEM_DEFAULTS.maxChecks, 500),
+        concurrency: num(body.concurrency, GEM_DEFAULTS.concurrency, 12),
+        expandTopK: num(body.expandTopK, GEM_DEFAULTS.expandTopK, 200),
+        maxTrackPlays: num(body.maxTrackPlays, GEM_DEFAULTS.maxTrackPlays, 100_000_000),
+        trackRank,
+      }
+
+      const { client, stateless } = await resolveClient(c)
+      try {
+        const result = await findGems(client, opts)
+        return c.json({ success: true, ...result })
+      } catch (err) {
+        if (!stateless) invalidateSpotifyClient()
+        return c.json(
+          { success: false, error: err instanceof Error ? err.message : 'gems failed' },
           500,
         )
       }
