@@ -4,9 +4,9 @@ import { describeRoute } from 'hono-openapi'
 import { requireAuth } from '../middleware/auth'
 import {
   createGemJob,
+  enqueueGemJob,
   getGemJob,
   listGemJobs,
-  runGemJobInBackground,
 } from '../services/gem-jobs'
 import { type FindGemsOptions, GEM_DEFAULTS, parsePlaylistId } from '../services/gems'
 import { SpotifyAuth } from '../spotify'
@@ -388,8 +388,7 @@ export const spotifyRoutes = new Hono()
           `playlistName=${playlistName ?? '(none)'}`,
       )
 
-      const { client, stateless } = await resolveClient(c)
-      runGemJobInBackground({ client, jobId, reqId, options: opts, stateless })
+      await enqueueGemJob(jobId, reqId)
       return c.json({ success: true, jobId })
     },
   )

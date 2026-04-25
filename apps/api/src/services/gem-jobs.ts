@@ -2,11 +2,16 @@ import { randomBytes } from 'crypto'
 import { and, desc, eq } from 'drizzle-orm'
 import { db } from '../db'
 import { gemJob } from '../db/schema'
-import { invalidateSpotifyClient } from '../spotify/singleton'
+import { GEMS_QUEUE, getBoss } from '../queue'
+import { getSpotifyClient, invalidateSpotifyClient } from '../spotify/singleton'
 import { type FindGemsOptions, findGems } from './gems'
-import type { SpotifyClient } from '../spotify'
 
 export type JobStatus = 'queued' | 'running' | 'done' | 'error'
+
+interface GemJobPayload {
+  jobId: string
+  reqId: string
+}
 
 export async function createGemJob(userId: string, opts: FindGemsOptions): Promise<string> {
   const id = randomBytes(8).toString('hex')
@@ -20,6 +25,21 @@ export async function createGemJob(userId: string, opts: FindGemsOptions): Promi
     params: opts as unknown as Record<string, unknown>,
   })
   return id
+}
+
+export async function enqueueGemJob(jobId: string, reqId: string) {
+  const boss = await getBoss()
+  await boss.send(
+    GEMS_QUEUE,
+    { jobId, reqId } satisfies GemJobPayload,
+    {
+      // Gems jobs run 30s to ~3min in practice; cap at 10min so a stuck run
+      // doesn't sit forever. pg-boss will retry once on expiry/failure.
+      expireInSeconds: 600,
+      retryLimit: 1,
+      retryDelay: 30,
+    },
+  )
 }
 
 export async function getGemJob(userId: string, id: string) {
@@ -54,24 +74,7 @@ export async function listGemJobs(userId: string, limit = 25) {
     .limit(limit)
 }
 
-// Mark dangling running jobs as errored on container start. Without this they
-// stay 'running' forever after a redeploy.
-export async function reapInflightJobs() {
-  await db
-    .update(gemJob)
-    .set({ status: 'error', error: 'interrupted by server restart', finishedAt: new Date() })
-    .where(eq(gemJob.status, 'running'))
-}
-
-interface RunOpts {
-  client: SpotifyClient
-  jobId: string
-  reqId: string
-  options: FindGemsOptions
-  stateless: boolean
-}
-
-// Throttle progress writes to one per ~750ms per stage to keep load low.
+// Throttle progress writes to ~1/750ms per stage so DB writes stay sane.
 function makeThrottledProgressWriter(jobId: string) {
   let lastWriteAt = 0
   let lastStage: string | null = null
@@ -88,52 +91,62 @@ function makeThrottledProgressWriter(jobId: string) {
   }
 }
 
-export function runGemJobInBackground({ client, jobId, reqId, options, stateless }: RunOpts) {
+export async function runGemJobHandler(payload: GemJobPayload) {
+  const { jobId, reqId } = payload
   const tag = `[gems ${reqId}]`
-  setImmediate(async () => {
-    const t0 = Date.now()
+  const t0 = Date.now()
+
+  const rows = await db.select().from(gemJob).where(eq(gemJob.id, jobId)).limit(1)
+  const row = rows[0]
+  if (!row) {
+    console.warn(`${tag} job row missing — was it deleted?`)
+    return
+  }
+
+  const opts = row.params as unknown as FindGemsOptions
+
+  await db
+    .update(gemJob)
+    .set({ status: 'running', startedAt: new Date(), progressStage: 'starting' })
+    .where(eq(gemJob.id, jobId))
+
+  const writeProgress = makeThrottledProgressWriter(jobId)
+
+  try {
+    const client = await getSpotifyClient()
+    const result = await findGems(client, opts, {
+      log: (line) => console.log(`${tag} ${line}`),
+      progress: (stage, done, total) => {
+        // Don't await inside the hook — throttled writer dedupes anyway.
+        void writeProgress(stage, done, total)
+      },
+    })
+    const ms = Date.now() - t0
+    console.log(
+      `${tag} done in ${ms}ms — gems=${result.totals.gemsFound} tracks=${result.totals.tracksSelected} playlist=${result.playlist?.url ?? '(none)'}`,
+    )
     await db
       .update(gemJob)
-      .set({ status: 'running', startedAt: new Date(), progressStage: 'starting' })
-      .where(eq(gemJob.id, jobId))
-
-    const writeProgress = makeThrottledProgressWriter(jobId)
-
-    try {
-      const result = await findGems(client, options, {
-        log: (line) => console.log(`${tag} ${line}`),
-        progress: (stage, done, total) => {
-          // Best-effort write; don't await inside the hook to avoid stalling the
-          // algorithm. Throttled internally so this never floods the DB.
-          void writeProgress(stage, done, total)
-        },
+      .set({
+        status: 'done',
+        totals: result.totals,
+        gems: result.gems,
+        createdPlaylistId: result.playlist?.id ?? null,
+        createdPlaylistUrl: result.playlist?.url ?? null,
+        progressStage: 'done',
+        progressDone: result.totals.tracksSelected,
+        progressTotal: result.totals.tracksSelected,
+        finishedAt: new Date(),
       })
-      const ms = Date.now() - t0
-      console.log(
-        `${tag} done in ${ms}ms — gems=${result.totals.gemsFound} tracks=${result.totals.tracksSelected} playlist=${result.playlist?.url ?? '(none)'}`,
-      )
-      await db
-        .update(gemJob)
-        .set({
-          status: 'done',
-          totals: result.totals,
-          gems: result.gems,
-          createdPlaylistId: result.playlist?.id ?? null,
-          createdPlaylistUrl: result.playlist?.url ?? null,
-          progressStage: 'done',
-          progressDone: result.totals.tracksSelected,
-          progressTotal: result.totals.tracksSelected,
-          finishedAt: new Date(),
-        })
-        .where(eq(gemJob.id, jobId))
-    } catch (err) {
-      const message = err instanceof Error ? err.message : String(err)
-      console.error(`${tag} failed:`, message)
-      if (!stateless) invalidateSpotifyClient()
-      await db
-        .update(gemJob)
-        .set({ status: 'error', error: message, finishedAt: new Date() })
-        .where(eq(gemJob.id, jobId))
-    }
-  })
+      .where(eq(gemJob.id, jobId))
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err)
+    console.error(`${tag} failed:`, message)
+    invalidateSpotifyClient()
+    await db
+      .update(gemJob)
+      .set({ status: 'error', error: message, finishedAt: new Date() })
+      .where(eq(gemJob.id, jobId))
+    throw err
+  }
 }

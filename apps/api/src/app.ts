@@ -8,11 +8,11 @@ import { keyRoutes } from './routes/keys'
 import { scrapeRoutes } from './routes/scrapes'
 import { spotifyRoutes } from './routes/spotify'
 import { userRoutes } from './routes/users'
-import { reapInflightJobs } from './services/gem-jobs'
+import { registerGemsWorker } from './workers/gems-worker'
 
-// Mark any jobs left in `running` from a previous container as errored.
-// Fire-and-forget on import.
-void reapInflightJobs().catch((err) => console.error('[gems] reap failed:', err))
+// Boot pg-boss + register the gems worker. pg-boss handles abandoned jobs
+// (expireInSeconds + retryLimit on enqueue), so no manual reaping needed.
+void registerGemsWorker().catch((err) => console.error('[pg-boss] worker register failed:', err))
 
 const app = new Hono()
   .basePath('/api')

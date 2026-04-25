@@ -47,13 +47,13 @@ importers:
         version: 0.10.9(hono@4.12.14)
       better-auth:
         specifier: ^1.4.18
-        version: 1.6.5(@opentelemetry/api@1.9.1)(drizzle-kit@0.31.10)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 1.6.5(@opentelemetry/api@1.9.1)(drizzle-kit@0.31.10)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9))(pg@8.20.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       dotenv:
         specifier: ^17.2.3
         version: 17.4.2
       drizzle-orm:
         specifier: ^0.44.7
-        version: 0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9)
+        version: 0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9)
       hono:
         specifier: ^4.7.0
         version: 4.12.14
@@ -63,6 +63,9 @@ importers:
       impit:
         specifier: ^0.13.0
         version: 0.13.0
+      pg-boss:
+        specifier: ^12.18.0
+        version: 12.18.0
       postgres:
         specifier: ^3.4.5
         version: 3.4.9
@@ -73,6 +76,9 @@ importers:
       '@types/node':
         specifier: ^25.6.0
         version: 25.6.0
+      '@types/pg':
+        specifier: ^8.20.0
+        version: 8.20.0
       drizzle-kit:
         specifier: ^0.31.8
         version: 0.31.10
@@ -93,7 +99,7 @@ importers:
         version: 1.168.23(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       better-auth:
         specifier: ^1.4.18
-        version: 1.6.5(@opentelemetry/api@1.9.1)(drizzle-kit@0.31.10)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        version: 1.6.5(@opentelemetry/api@1.9.1)(drizzle-kit@0.31.10)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9))(pg@8.20.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -2190,6 +2196,9 @@ packages:
   '@types/node@25.6.0':
     resolution: {integrity: sha512-+qIYRKdNYJwY3vRCZMdJbPLJAtGjQBudzZzdzwQYkEPQd+PJGixUL5QfvCLDaULoLv+RhT3LDkwEfKaAkgSmNQ==}
 
+  '@types/pg@8.20.0':
+    resolution: {integrity: sha512-bEPFOaMAHTEP1EzpvHTbmwR8UsFyHSKsRisLIHVMXnpNefSbGA1bD6CVy+qKjGSqmZqNqBDV2azOBo8TgkcVow==}
+
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
@@ -2306,6 +2315,10 @@ packages:
 
   cookie-es@3.1.1:
     resolution: {integrity: sha512-UaXxwISYJPTr9hwQxMFYZ7kNhSXboMXP+Z3TRX6f1/NyaGPfuNUZOWP1pUEb75B2HjfklIYLVRfWiFZJyC6Npg==}
+
+  cron-parser@5.5.0:
+    resolution: {integrity: sha512-oML4lKUXxizYswqmxuOCpgFS8BNUJpIu6k/2HVHyaL8Ynnf3wdf9tkns0yRdJLSIjkJ+b0DXHMZEHGpMwjnPww==}
+    engines: {node: '>=18'}
 
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
@@ -2676,6 +2689,10 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  luxon@3.7.2:
+    resolution: {integrity: sha512-vtEhXh/gNjI9Yg1u4jX/0YVPMvxzHuGgCm6tC5kZyb08yjGWGnqAjGJvcXbqQR2P3MyMEFnRbpcdFS6PBcLqew==}
+    engines: {node: '>=12'}
+
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -2702,6 +2719,10 @@ packages:
   node-releases@2.0.37:
     resolution: {integrity: sha512-1h5gKZCF+pO/o3Iqt5Jp7wc9rH3eJJ0+nh/CIoiRwjRxde/hAHyLPXYN4V3CqKAbiZPSeJFSWHmJsbkicta0Eg==}
 
+  non-error@0.1.0:
+    resolution: {integrity: sha512-TMB1uHiGsHRGv1uYclfhivcnf0/PdFp2pNqRxXjncaAsjYMoisaQJI+SSZCqRq+VliwRTC8tsMQfmrWjDMhkPQ==}
+    engines: {node: '>=20'}
+
   openapi-types@12.1.3:
     resolution: {integrity: sha512-N4YtSYJqghVu4iek2ZUvcN/0aqH1kRDuNqzcycDxhOUpg7GdvLa2F3DgS6yBNhInhv2r/6I0Flkn7CqL8+nIcw==}
 
@@ -2711,6 +2732,45 @@ packages:
 
   oxc-resolver@11.19.1:
     resolution: {integrity: sha512-qE/CIg/spwrTBFt5aKmwe3ifeDdLfA2NESN30E42X/lII5ClF8V7Wt6WIJhcGZjp0/Q+nQ+9vgxGk//xZNX2hg==}
+
+  pg-boss@12.18.0:
+    resolution: {integrity: sha512-h+5LKmKVQpZd5KPbHFAcscRoAtBhXe3pJvNnG4N3gaF1cBRSr8FF1aHnd+GEG6CORsRNYIVJtWzEhleB88AR0A==}
+    engines: {node: '>=22.12.0'}
+    hasBin: true
+
+  pg-cloudflare@1.3.0:
+    resolution: {integrity: sha512-6lswVVSztmHiRtD6I8hw4qP/nDm1EJbKMRhf3HCYaqud7frGysPv7FYJ5noZQdhQtN2xJnimfMtvQq21pdbzyQ==}
+
+  pg-connection-string@2.12.0:
+    resolution: {integrity: sha512-U7qg+bpswf3Cs5xLzRqbXbQl85ng0mfSV/J0nnA31MCLgvEaAo7CIhmeyrmJpOr7o+zm0rXK+hNnT5l9RHkCkQ==}
+
+  pg-int8@1.0.1:
+    resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
+    engines: {node: '>=4.0.0'}
+
+  pg-pool@3.13.0:
+    resolution: {integrity: sha512-gB+R+Xud1gLFuRD/QgOIgGOBE2KCQPaPwkzBBGC9oG69pHTkhQeIuejVIk3/cnDyX39av2AxomQiyPT13WKHQA==}
+    peerDependencies:
+      pg: '>=8.0'
+
+  pg-protocol@1.13.0:
+    resolution: {integrity: sha512-zzdvXfS6v89r6v7OcFCHfHlyG/wvry1ALxZo4LqgUoy7W9xhBDMaqOuMiF3qEV45VqsN6rdlcehHrfDtlCPc8w==}
+
+  pg-types@2.2.0:
+    resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
+    engines: {node: '>=4'}
+
+  pg@8.20.0:
+    resolution: {integrity: sha512-ldhMxz2r8fl/6QkXnBD3CR9/xg694oT6DZQ2s6c/RI28OjtSOpxnPrUCGOBJ46RCUxcWdx3p6kw/xnDHjKvaRA==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      pg-native: '>=3.0.1'
+    peerDependenciesMeta:
+      pg-native:
+        optional: true
+
+  pgpass@1.0.5:
+    resolution: {integrity: sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -2722,6 +2782,22 @@ packages:
   postcss@8.5.10:
     resolution: {integrity: sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==}
     engines: {node: ^10 || ^12 || >=14}
+
+  postgres-array@2.0.0:
+    resolution: {integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==}
+    engines: {node: '>=4'}
+
+  postgres-bytea@1.0.1:
+    resolution: {integrity: sha512-5+5HqXnsZPE65IJZSMkZtURARZelel2oXUEO8rH83VS/hxH5vv1uHquPg5wZs8yMAfdv971IU+kcPUczi7NVBQ==}
+    engines: {node: '>=0.10.0'}
+
+  postgres-date@1.0.7:
+    resolution: {integrity: sha512-suDmjLVQg78nMK2UZ454hAG+OAW+HQPZ6n++TNDUX+L0+uUlLywnoxJKDou51Zm+zTCjrCl0Nq6J9C5hP9vK/Q==}
+    engines: {node: '>=0.10.0'}
+
+  postgres-interval@1.2.0:
+    resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
+    engines: {node: '>=0.10.0'}
 
   postgres@3.4.9:
     resolution: {integrity: sha512-GD3qdB0x1z9xgFI6cdRD6xu2Sp2WCOEoe3mtnyB5Ee0XrrL5Pe+e4CCnJrRMnL1zYtRDZmQQVbvOttLnKDLnaw==}
@@ -2804,6 +2880,10 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
+  serialize-error@13.0.1:
+    resolution: {integrity: sha512-bBZaRwLH9PN5HbLCjPId4dP5bNGEtumcErgOX952IsvOhVPrm3/AeK1y0UHA/QaPG701eg0yEnOKsCOC6X/kaA==}
+    engines: {node: '>=20'}
+
   seroval-plugins@1.5.2:
     resolution: {integrity: sha512-qpY0Cl+fKYFn4GOf3cMiq6l72CpuVaawb6ILjubOQ+diJ54LfOWaSSPsaswN8DRPIPW4Yq+tE1k5aKd7ILyaFg==}
     engines: {node: '>=10'}
@@ -2837,6 +2917,10 @@ packages:
   source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
+
+  split2@4.2.0:
+    resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
+    engines: {node: '>= 10.x'}
 
   strip-json-comments@5.0.3:
     resolution: {integrity: sha512-1tB5mhVo7U+ETBKNf92xT4hrQa3pm0MZ0PQvuDnWgAAGHDsfp4lPSpiS6psrSiet87wyGPh9ft6wmhOMQ0hDiw==}
@@ -2978,6 +3062,10 @@ packages:
     resolution: {integrity: sha512-3hu+tD8YzSLGuFYtPRb48vdhKMi0KQV5sn+uWr8+7dMEq/2G/dtLrdDinkLjqq5TIbIBjYJ4Ax/n3YiaW7QM8A==}
     engines: {node: 20 || >=22}
 
+  xtend@4.0.2:
+    resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
+    engines: {node: '>=0.4'}
+
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
@@ -3116,12 +3204,12 @@ snapshots:
       nanostores: 1.3.0
       zod: 4.3.6
 
-  '@better-auth/drizzle-adapter@1.6.5(@better-auth/core@1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9))':
+  '@better-auth/drizzle-adapter@1.6.5(@better-auth/core@1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9))':
     dependencies:
       '@better-auth/core': 1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0)
       '@better-auth/utils': 0.4.0
     optionalDependencies:
-      drizzle-orm: 0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9)
+      drizzle-orm: 0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9)
 
   '@better-auth/kysely-adapter@1.6.5(@better-auth/core@1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(kysely@0.28.16)':
     dependencies:
@@ -4647,6 +4735,12 @@ snapshots:
     dependencies:
       undici-types: 7.19.2
 
+  '@types/pg@8.20.0':
+    dependencies:
+      '@types/node': 25.6.0
+      pg-protocol: 1.13.0
+      pg-types: 2.2.0
+
   '@types/react-dom@19.2.3(@types/react@19.2.7)':
     dependencies:
       '@types/react': 19.2.7
@@ -4673,10 +4767,10 @@ snapshots:
 
   baseline-browser-mapping@2.10.20: {}
 
-  better-auth@1.6.5(@opentelemetry/api@1.9.1)(drizzle-kit@0.31.10)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9))(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+  better-auth@1.6.5(@opentelemetry/api@1.9.1)(drizzle-kit@0.31.10)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9))(pg@8.20.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@better-auth/core': 1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0)
-      '@better-auth/drizzle-adapter': 1.6.5(@better-auth/core@1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9))
+      '@better-auth/drizzle-adapter': 1.6.5(@better-auth/core@1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9))
       '@better-auth/kysely-adapter': 1.6.5(@better-auth/core@1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0))(@better-auth/utils@0.4.0)(kysely@0.28.16)
       '@better-auth/memory-adapter': 1.6.5(@better-auth/core@1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0))(@better-auth/utils@0.4.0)
       '@better-auth/mongo-adapter': 1.6.5(@better-auth/core@1.6.5(@better-auth/utils@0.4.0)(@better-fetch/fetch@1.1.21)(@opentelemetry/api@1.9.1)(better-call@1.3.5(zod@4.3.6))(jose@6.2.2)(kysely@0.28.16)(nanostores@1.3.0))(@better-auth/utils@0.4.0)
@@ -4694,7 +4788,8 @@ snapshots:
       zod: 4.3.6
     optionalDependencies:
       drizzle-kit: 0.31.10
-      drizzle-orm: 0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9)
+      drizzle-orm: 0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9)
+      pg: 8.20.0
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
     transitivePeerDependencies:
@@ -4732,6 +4827,10 @@ snapshots:
 
   cookie-es@3.1.1: {}
 
+  cron-parser@5.5.0:
+    dependencies:
+      luxon: 3.7.2
+
   csstype@3.2.3: {}
 
   debug@4.4.3:
@@ -4753,10 +4852,12 @@ snapshots:
       esbuild: 0.25.12
       tsx: 4.21.0
 
-  drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(kysely@0.28.16)(postgres@3.4.9):
+  drizzle-orm@0.44.7(@opentelemetry/api@1.9.1)(@types/pg@8.20.0)(kysely@0.28.16)(pg@8.20.0)(postgres@3.4.9):
     optionalDependencies:
       '@opentelemetry/api': 1.9.1
+      '@types/pg': 8.20.0
       kysely: 0.28.16
+      pg: 8.20.0
       postgres: 3.4.9
 
   electron-to-chromium@1.5.340: {}
@@ -5016,6 +5117,8 @@ snapshots:
     dependencies:
       react: 19.2.0
 
+  luxon@3.7.2: {}
+
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -5031,6 +5134,8 @@ snapshots:
   nanostores@1.3.0: {}
 
   node-releases@2.0.37: {}
+
+  non-error@0.1.0: {}
 
   openapi-types@12.1.3: {}
 
@@ -5085,6 +5190,49 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
+  pg-boss@12.18.0:
+    dependencies:
+      cron-parser: 5.5.0
+      pg: 8.20.0
+      serialize-error: 13.0.1
+    transitivePeerDependencies:
+      - pg-native
+
+  pg-cloudflare@1.3.0:
+    optional: true
+
+  pg-connection-string@2.12.0: {}
+
+  pg-int8@1.0.1: {}
+
+  pg-pool@3.13.0(pg@8.20.0):
+    dependencies:
+      pg: 8.20.0
+
+  pg-protocol@1.13.0: {}
+
+  pg-types@2.2.0:
+    dependencies:
+      pg-int8: 1.0.1
+      postgres-array: 2.0.0
+      postgres-bytea: 1.0.1
+      postgres-date: 1.0.7
+      postgres-interval: 1.2.0
+
+  pg@8.20.0:
+    dependencies:
+      pg-connection-string: 2.12.0
+      pg-pool: 3.13.0(pg@8.20.0)
+      pg-protocol: 1.13.0
+      pg-types: 2.2.0
+      pgpass: 1.0.5
+    optionalDependencies:
+      pg-cloudflare: 1.3.0
+
+  pgpass@1.0.5:
+    dependencies:
+      split2: 4.2.0
+
   picocolors@1.1.1: {}
 
   picomatch@4.0.4: {}
@@ -5094,6 +5242,16 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  postgres-array@2.0.0: {}
+
+  postgres-bytea@1.0.1: {}
+
+  postgres-date@1.0.7: {}
+
+  postgres-interval@1.2.0:
+    dependencies:
+      xtend: 4.0.2
 
   postgres@3.4.9: {}
 
@@ -5237,6 +5395,11 @@ snapshots:
 
   semver@6.3.1: {}
 
+  serialize-error@13.0.1:
+    dependencies:
+      non-error: 0.1.0
+      type-fest: 5.6.0
+
   seroval-plugins@1.5.2(seroval@1.5.2):
     dependencies:
       seroval: 1.5.2
@@ -5260,6 +5423,8 @@ snapshots:
       source-map: 0.6.1
 
   source-map@0.6.1: {}
+
+  split2@4.2.0: {}
 
   strip-json-comments@5.0.3: {}
 
@@ -5360,6 +5525,8 @@ snapshots:
       yaml: 2.8.3
 
   walk-up-path@4.0.0: {}
+
+  xtend@4.0.2: {}
 
   yallist@3.1.1: {}
 
