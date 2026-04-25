@@ -374,10 +374,36 @@ export const spotifyRoutes = new Hono()
       }
 
       const { client, stateless } = await resolveClient(c)
+      // Tag every line so concurrent runs don't blur together in `docker logs`.
+      const reqId = Math.random().toString(36).slice(2, 8)
+      const tag = `[gems ${reqId}]`
+      const t0 = Date.now()
+      console.log(
+        `${tag} start from=${opts.fromPlaylistId ?? 'liked'} depth=${opts.depth} ` +
+          `top=${opts.top} maxListeners=${opts.maxListeners} minOverlap=${opts.minOverlap} ` +
+          `tracksPerArtist=${opts.tracksPerArtist} maxTrackPlays=${opts.maxTrackPlays} ` +
+          `playlistName=${playlistName ?? '(none)'}`,
+      )
+
       try {
-        const result = await findGems(client, opts)
+        const result = await findGems(client, opts, {
+          log: (line) => console.log(`${tag} ${line}`),
+          progress: (stage, done, total) => {
+            // Emit at every 10% boundary or on the final tick — keeps logs readable.
+            if (done === total || done === 1 || done % Math.max(1, Math.floor(total / 10)) === 0) {
+              console.log(`${tag} ${stage} ${done}/${total}`)
+            }
+          },
+        })
+        const ms = Date.now() - t0
+        console.log(
+          `${tag} done in ${ms}ms — gems=${result.totals.gemsFound} tracks=${result.totals.tracksSelected} ` +
+            `playlist=${result.playlist?.url ?? '(none)'}`,
+        )
         return c.json({ success: true, ...result })
       } catch (err) {
+        const ms = Date.now() - t0
+        console.error(`${tag} failed after ${ms}ms:`, err instanceof Error ? err.message : err)
         if (!stateless) invalidateSpotifyClient()
         return c.json(
           { success: false, error: err instanceof Error ? err.message : 'gems failed' },
