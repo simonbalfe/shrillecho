@@ -74,6 +74,26 @@ export const verification = pgTable(
   (table) => [index('verification_identifier_idx').on(table.identifier)],
 )
 
+export const apiKey = pgTable(
+  'api_key',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    name: text('name').notNull(),
+    prefix: text('prefix').notNull(),
+    keyHash: text('key_hash').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    lastUsedAt: timestamp('last_used_at', { withTimezone: true }),
+    revokedAt: timestamp('revoked_at', { withTimezone: true }),
+  },
+  (table) => [
+    index('api_key_userId_idx').on(table.userId),
+    index('api_key_keyHash_idx').on(table.keyHash),
+  ],
+)
+
 // Shrillecho domain tables
 export const artist = pgTable('artist', {
   id: bigserial('id', { mode: 'number' }).primaryKey(),
@@ -195,6 +215,7 @@ export const schema = {
   session,
   account,
   verification,
+  apiKey,
   artist,
   scrape,
   scrapeArtist,

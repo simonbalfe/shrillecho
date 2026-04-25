@@ -4,6 +4,7 @@ import { openAPIRouteHandler } from 'hono-openapi'
 import { cors } from 'hono/cors'
 import { config } from './config'
 import { authRoutes } from './routes/auth'
+import { keyRoutes } from './routes/keys'
 import { scrapeRoutes } from './routes/scrapes'
 import { spotifyRoutes } from './routes/spotify'
 import { userRoutes } from './routes/users'
@@ -22,6 +23,7 @@ const app = new Hono()
     console.log(`[HONO] ${c.req.method} ${c.req.path} -> ${c.res.status}`)
   })
   .route('/', authRoutes)
+  .route('/', keyRoutes)
   .route('/', scrapeRoutes)
   .route('/', spotifyRoutes)
   .route('/', userRoutes)
