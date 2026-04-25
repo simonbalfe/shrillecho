@@ -191,17 +191,23 @@ export async function findGems(
   const profile = await client.users.getProfile()
   log(`authed as ${profile.username} (${profile.name})`)
 
-  log('→ pulling liked songs (for output exclusion)...')
-  const liked = await client.users.getAllLikedTracks()
+  // Only pull liked songs when they are the seed source. When seeding from a
+  // playlist, the SP_DC owner's liked songs are irrelevant — they belong to
+  // the server account, not the API caller — so skip the cost entirely.
+  let liked: Awaited<ReturnType<typeof client.users.getAllLikedTracks>> = []
   const likedTrackUris = new Set<string>()
   const likedArtistMap = new Map<string, string>()
-  for (const t of liked) {
-    if (t.uri) likedTrackUris.add(t.uri)
-    for (const a of t.artists ?? []) {
-      if (a.uri && !likedArtistMap.has(a.uri)) likedArtistMap.set(a.uri, a.name ?? '')
+  if (!opts.fromPlaylistId) {
+    log('→ pulling liked songs (seed source)...')
+    liked = await client.users.getAllLikedTracks()
+    for (const t of liked) {
+      if (t.uri) likedTrackUris.add(t.uri)
+      for (const a of t.artists ?? []) {
+        if (a.uri && !likedArtistMap.has(a.uri)) likedArtistMap.set(a.uri, a.name ?? '')
+      }
     }
+    log(`  ${liked.length} tracks, ${likedArtistMap.size} unique artists`)
   }
-  log(`  ${liked.length} tracks, ${likedArtistMap.size} unique artists`)
 
   let tasteArtists: string[]
   if (opts.fromPlaylistId) {
@@ -227,6 +233,8 @@ export async function findGems(
   }
 
   const seedSet = new Set(tasteArtists)
+  // Excludes candidates the caller already has. In playlist mode we only know
+  // the seed playlist's artists, so that's all we exclude from the gem pool.
   const alreadyHaveSet = new Set<string>([...seedSet, ...likedArtistMap.keys()])
 
   log(`→ fetching FAL for ${tasteArtists.length} taste artists...`)
