@@ -2,7 +2,7 @@ import { Button } from '@ui/components/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/components/card'
 import { Input } from '@ui/components/input'
 import { Label } from '@ui/components/label'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ChevronDown, ExternalLink, Loader2, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -32,18 +32,56 @@ interface GemTotals {
   viralSkipped: number
 }
 
-interface GemsResponse {
-  success: boolean
-  source: { type: 'liked' | 'playlist'; playlistId: string | null }
-  gems: Gem[]
-  totals: GemTotals
-  playlist: { id: string; uri: string; url: string; name: string } | null
-  error?: string
+type JobStatus = 'queued' | 'running' | 'done' | 'error'
+
+interface JobState {
+  id: string
+  userId: string
+  status: JobStatus
+  sourceType: 'liked' | 'playlist'
+  sourcePlaylistId: string | null
+  playlistName: string | null
+  progressStage: string | null
+  progressDone: number
+  progressTotal: number
+  totals: GemTotals | null
+  gems: Gem[] | null
+  createdPlaylistUrl: string | null
+  error: string | null
+  createdAt: string
+  finishedAt: string | null
+}
+
+interface JobSummary {
+  id: string
+  status: JobStatus
+  sourceType: 'liked' | 'playlist'
+  sourcePlaylistId: string | null
+  playlistName: string | null
+  progressStage: string | null
+  progressDone: number
+  progressTotal: number
+  totals: GemTotals | null
+  createdPlaylistUrl: string | null
+  error: string | null
+  createdAt: string
+  finishedAt: string | null
+}
+
+const STAGE_LABELS: Record<string, string> = {
+  starting: 'starting',
+  fal: 'fetching related artists',
+  depth2: 'expanding depth-2',
+  check: 'fetching candidate stats',
+  add: 'adding tracks to playlist',
+  done: 'done',
 }
 
 export function DashboardPage() {
+  const queryClient = useQueryClient()
   const [from, setFrom] = useState('')
   const [playlistName, setPlaylistName] = useState('')
+  const [activeJobId, setActiveJobId] = useState<string | null>(null)
   const [advancedOpen, setAdvancedOpen] = useState(false)
 
   const [depth, setDepth] = useState(1)
@@ -54,15 +92,15 @@ export function DashboardPage() {
   const [maxTrackPlays, setMaxTrackPlays] = useState(500_000)
   const [trackRank, setTrackRank] = useState<'top' | 'mid' | 'bottom'>('mid')
 
-  const mutation = useMutation({
-    mutationFn: async (): Promise<GemsResponse> => {
+  const submit = useMutation({
+    mutationFn: async () => {
       const res = await fetch('/api/spotify/gems', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           from: from.trim() || undefined,
-          playlistName: playlistName.trim() || defaultPlaylistName(from),
+          playlistName: playlistName.trim() || 'Hidden gems',
           depth,
           top,
           maxListeners,
@@ -72,27 +110,48 @@ export function DashboardPage() {
           trackRank,
         }),
       })
-      const data = (await res.json()) as GemsResponse
-      if (!res.ok || !data.success) throw new Error(data.error ?? 'request failed')
-      return data
+      const data = (await res.json()) as { success: boolean; jobId?: string; error?: string }
+      if (!res.ok || !data.success || !data.jobId) throw new Error(data.error ?? 'submit failed')
+      return data.jobId
     },
-    onSuccess: (data) => {
-      if (data.gems.length === 0) {
-        toast.error('No gems found. Try a higher --max-listeners or lower --min-overlap.')
-      } else {
-        toast.success(`Found ${data.gems.length} gems → ${data.totals.tracksSelected} tracks`)
-      }
+    onSuccess: (jobId) => {
+      setActiveJobId(jobId)
+      queryClient.invalidateQueries({ queryKey: ['gem-jobs'] })
     },
     onError: (e: Error) => toast.error(e.message),
   })
 
-  const result = mutation.data
-  const isLoading = mutation.isPending
+  const { data: activeJob } = useQuery({
+    queryKey: ['gem-job', activeJobId],
+    enabled: !!activeJobId,
+    refetchInterval: (q) => {
+      const status = (q.state.data as { job?: JobState } | undefined)?.job?.status
+      return status === 'done' || status === 'error' ? false : 1500
+    },
+    queryFn: async () => {
+      const res = await fetch(`/api/spotify/gems/${activeJobId}`, { credentials: 'include' })
+      if (!res.ok) throw new Error('not found')
+      return (await res.json()) as { success: boolean; job: JobState }
+    },
+  })
+
+  const { data: jobs } = useQuery({
+    queryKey: ['gem-jobs'],
+    refetchInterval: activeJobId ? 4000 : 30000,
+    queryFn: async () => {
+      const res = await fetch('/api/spotify/gems', { credentials: 'include' })
+      const data = (await res.json()) as { success: boolean; jobs: JobSummary[] }
+      return data.jobs ?? []
+    },
+  })
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    mutation.mutate()
+    submit.mutate()
   }
+
+  const job = activeJob?.job ?? null
+  const isRunning = job?.status === 'queued' || job?.status === 'running'
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
@@ -115,7 +174,7 @@ export function DashboardPage() {
                 placeholder="https://open.spotify.com/playlist/..."
                 value={from}
                 onChange={(e) => setFrom(e.target.value)}
-                disabled={isLoading}
+                disabled={isRunning || submit.isPending}
               />
               <p className="text-xs text-muted-foreground">
                 Leave blank to seed from the server's liked songs.
@@ -129,7 +188,7 @@ export function DashboardPage() {
                 placeholder="Hidden gems"
                 value={playlistName}
                 onChange={(e) => setPlaylistName(e.target.value)}
-                disabled={isLoading}
+                disabled={isRunning || submit.isPending}
               />
             </div>
 
@@ -143,64 +202,12 @@ export function DashboardPage() {
                 <ChevronDown className={`size-4 transition-transform ${advancedOpen ? 'rotate-180' : ''}`} />
               </summary>
               <div className="grid grid-cols-1 gap-4 border-t px-4 py-4 sm:grid-cols-2">
-                <SmallField
-                  id="depth"
-                  label="Depth (1 or 2)"
-                  hint="2 = expand top candidates one more hop. Slower, wider net."
-                  value={depth}
-                  onChange={setDepth}
-                  type="number"
-                  min={1}
-                  max={2}
-                />
-                <SmallField
-                  id="top"
-                  label="Gems to keep"
-                  value={top}
-                  onChange={setTop}
-                  type="number"
-                  min={1}
-                  max={100}
-                />
-                <SmallField
-                  id="ml"
-                  label="Max monthly listeners"
-                  hint="Upper popularity cap on artists."
-                  value={maxListeners}
-                  onChange={setMaxListeners}
-                  type="number"
-                  min={100}
-                  max={1_000_000}
-                />
-                <SmallField
-                  id="ovl"
-                  label="Min overlap"
-                  hint="How many seeds must point at a candidate."
-                  value={minOverlap}
-                  onChange={setMinOverlap}
-                  type="number"
-                  min={1}
-                  max={20}
-                />
-                <SmallField
-                  id="tpa"
-                  label="Tracks per artist"
-                  value={tracksPerArtist}
-                  onChange={setTracksPerArtist}
-                  type="number"
-                  min={1}
-                  max={10}
-                />
-                <SmallField
-                  id="mtp"
-                  label="Max track plays"
-                  hint="Drops viral hits even from small artists."
-                  value={maxTrackPlays}
-                  onChange={setMaxTrackPlays}
-                  type="number"
-                  min={1000}
-                  max={100_000_000}
-                />
+                <SmallField id="depth" label="Depth (1 or 2)" value={depth} onChange={setDepth} min={1} max={2} hint="2 = also expand top candidates one more hop." />
+                <SmallField id="top" label="Gems to keep" value={top} onChange={setTop} min={1} max={100} />
+                <SmallField id="ml" label="Max monthly listeners" value={maxListeners} onChange={setMaxListeners} min={100} max={1_000_000} hint="Upper popularity cap on artists." />
+                <SmallField id="ovl" label="Min overlap" value={minOverlap} onChange={setMinOverlap} min={1} max={20} hint="How many seeds must point at a candidate." />
+                <SmallField id="tpa" label="Tracks per artist" value={tracksPerArtist} onChange={setTracksPerArtist} min={1} max={10} />
+                <SmallField id="mtp" label="Max track plays" value={maxTrackPlays} onChange={setMaxTrackPlays} min={1000} max={100_000_000} hint="Drops viral hits even from small artists." />
                 <div className="flex flex-col gap-2 sm:col-span-2">
                   <Label htmlFor="rank">Track rank</Label>
                   <select
@@ -217,25 +224,121 @@ export function DashboardPage() {
               </div>
             </details>
 
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
-              {isLoading ? 'Searching… (10–60s)' : 'Find gems'}
+            <Button type="submit" disabled={isRunning || submit.isPending}>
+              {submit.isPending || isRunning ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Sparkles className="size-4" />
+              )}
+              {submit.isPending ? 'Submitting…' : isRunning ? 'Running… check progress below' : 'Find gems'}
             </Button>
           </form>
         </CardContent>
       </Card>
 
-      {result && result.playlist && (
+      {job && <ActiveJob job={job} />}
+
+      {jobs && jobs.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>{result.playlist.name}</CardTitle>
+            <CardTitle>History</CardTitle>
+            <CardDescription>Your last {jobs.length} runs.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-2">
+              {jobs.map((j) => (
+                <li
+                  key={j.id}
+                  className="flex items-center gap-3 rounded-md border px-3 py-2 text-sm hover:bg-accent"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setActiveJobId(j.id)}
+                    className="flex flex-1 min-w-0 items-center gap-3 text-left"
+                  >
+                    <StatusBadge status={j.status} />
+                    <div className="flex-1 min-w-0">
+                      <p className="truncate font-medium">{j.playlistName ?? '(no playlist)'}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {j.sourceType === 'playlist' ? `from playlist ${j.sourcePlaylistId}` : 'from liked songs'}
+                        {' · '}
+                        {new Date(j.createdAt).toLocaleString()}
+                        {j.totals && ` · ${j.totals.gemsFound} gems · ${j.totals.tracksSelected} tracks`}
+                      </p>
+                    </div>
+                  </button>
+                  {j.createdPlaylistUrl && (
+                    <a
+                      href={j.createdPlaylistUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-md border px-2 py-1 text-xs hover:bg-background"
+                    >
+                      <ExternalLink className="size-3" />
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  )
+}
+
+function ActiveJob({ job }: { job: JobState }) {
+  const stageLabel = job.progressStage ? STAGE_LABELS[job.progressStage] ?? job.progressStage : 'preparing…'
+  const pct =
+    job.progressTotal > 0 ? Math.min(100, Math.round((job.progressDone / job.progressTotal) * 100)) : 0
+
+  return (
+    <>
+      {job.status !== 'done' && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              {job.status === 'error' ? (
+                <span className="text-destructive">Failed</span>
+              ) : (
+                <>
+                  <Loader2 className="size-5 animate-spin" />
+                  <span>{stageLabel}</span>
+                </>
+              )}
+            </CardTitle>
+            {job.status !== 'error' && (
+              <CardDescription>
+                {job.progressTotal > 0 ? `${job.progressDone} / ${job.progressTotal}` : 'starting…'}
+              </CardDescription>
+            )}
+          </CardHeader>
+          <CardContent>
+            {job.status === 'error' ? (
+              <p className="text-sm text-destructive">{job.error}</p>
+            ) : (
+              <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                <div
+                  className="h-full bg-primary transition-[width] duration-300"
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {job.status === 'done' && job.createdPlaylistUrl && (
+        <Card>
+          <CardHeader>
+            <CardTitle>{job.playlistName ?? 'Hidden gems'}</CardTitle>
             <CardDescription>
-              {result.totals.gemsFound} gems → {result.totals.tracksSelected} tracks
+              {job.totals && `${job.totals.gemsFound} gems → ${job.totals.tracksSelected} tracks`}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <a
-              href={result.playlist.url}
+              href={job.createdPlaylistUrl}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm hover:bg-accent"
@@ -247,19 +350,19 @@ export function DashboardPage() {
         </Card>
       )}
 
-      {result && (
+      {job.status === 'done' && job.totals && (
         <Card>
           <CardHeader>
             <CardTitle>Search statistics</CardTitle>
             <CardDescription>What the algorithm did under the hood.</CardDescription>
           </CardHeader>
           <CardContent>
-            <Stats totals={result.totals} />
+            <Stats totals={job.totals} />
           </CardContent>
         </Card>
       )}
 
-      {result && result.gems.length > 0 && (
+      {job.status === 'done' && job.gems && job.gems.length > 0 && (
         <Card>
           <CardHeader>
             <CardTitle>Gems</CardTitle>
@@ -278,7 +381,7 @@ export function DashboardPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {result.gems.map((g, i) => {
+                  {job.gems.map((g, i) => {
                     const id = g.uri.split(':').pop() ?? ''
                     return (
                       <tr key={g.uri} className="border-b last:border-0">
@@ -293,9 +396,7 @@ export function DashboardPage() {
                             {g.name || '(unknown)'}
                           </a>
                         </td>
-                        <td className="px-2 py-2 text-right tabular-nums">
-                          {g.monthlyListeners.toLocaleString()}
-                        </td>
+                        <td className="px-2 py-2 text-right tabular-nums">{g.monthlyListeners.toLocaleString()}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{g.overlap}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{g.score.toFixed(2)}</td>
                       </tr>
@@ -307,13 +408,8 @@ export function DashboardPage() {
           </CardContent>
         </Card>
       )}
-    </div>
+    </>
   )
-}
-
-function defaultPlaylistName(from: string): string {
-  if (!from.trim()) return 'Hidden gems'
-  return 'Hidden gems'
 }
 
 function Stats({ totals }: { totals: GemTotals }) {
@@ -342,13 +438,26 @@ function Stats({ totals }: { totals: GemTotals }) {
   )
 }
 
+function StatusBadge({ status }: { status: JobStatus }) {
+  const styles: Record<JobStatus, string> = {
+    queued: 'bg-muted text-muted-foreground',
+    running: 'bg-primary/10 text-primary',
+    done: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400',
+    error: 'bg-destructive/10 text-destructive',
+  }
+  return (
+    <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${styles[status]}`}>
+      {status}
+    </span>
+  )
+}
+
 function SmallField({
   id,
   label,
   hint,
   value,
   onChange,
-  type = 'number',
   min,
   max,
 }: {
@@ -357,21 +466,13 @@ function SmallField({
   hint?: string
   value: number
   onChange: (n: number) => void
-  type?: 'number'
   min?: number
   max?: number
 }) {
   return (
     <div className="flex flex-col gap-1.5">
       <Label htmlFor={id}>{label}</Label>
-      <Input
-        id={id}
-        type={type}
-        min={min}
-        max={max}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-      />
+      <Input id={id} type="number" min={min} max={max} value={value} onChange={(e) => onChange(Number(e.target.value))} />
       {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
     </div>
   )

@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { bigserial, boolean, index, integer, pgTable, primaryKey, text, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { bigserial, boolean, index, integer, jsonb, pgTable, primaryKey, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 
 // Better Auth tables
 export const user = pgTable('user', {
@@ -91,6 +91,36 @@ export const apiKey = pgTable(
   (table) => [
     index('api_key_userId_idx').on(table.userId),
     index('api_key_keyHash_idx').on(table.keyHash),
+  ],
+)
+
+export const gemJob = pgTable(
+  'gem_job',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    status: text('status').notNull(),
+    sourceType: text('source_type').notNull(),
+    sourcePlaylistId: text('source_playlist_id'),
+    playlistName: text('playlist_name'),
+    params: jsonb('params').notNull(),
+    progressStage: text('progress_stage'),
+    progressDone: integer('progress_done').default(0).notNull(),
+    progressTotal: integer('progress_total').default(0).notNull(),
+    totals: jsonb('totals'),
+    gems: jsonb('gems'),
+    createdPlaylistId: text('created_playlist_id'),
+    createdPlaylistUrl: text('created_playlist_url'),
+    error: text('error'),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+    startedAt: timestamp('started_at', { withTimezone: true }),
+    finishedAt: timestamp('finished_at', { withTimezone: true }),
+  },
+  (table) => [
+    index('gem_job_user_idx').on(table.userId, table.createdAt),
+    index('gem_job_status_idx').on(table.status),
   ],
 )
 
@@ -216,6 +246,7 @@ export const schema = {
   account,
   verification,
   apiKey,
+  gemJob,
   artist,
   scrape,
   scrapeArtist,

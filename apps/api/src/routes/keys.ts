@@ -8,6 +8,7 @@ export const keyRoutes = new Hono()
     '/keys',
     requireAuth,
     describeRoute({
+      hide: true,
       tags: ['Keys'],
       summary: 'List API keys for the current user',
       responses: { 200: { description: 'API key list (no plaintext keys)' } },
@@ -22,6 +23,7 @@ export const keyRoutes = new Hono()
     '/keys',
     requireAuth,
     describeRoute({
+      hide: true,
       tags: ['Keys'],
       summary: 'Create a new API key',
       description:
@@ -51,6 +53,7 @@ export const keyRoutes = new Hono()
     '/keys/:id',
     requireAuth,
     describeRoute({
+      hide: true,
       tags: ['Keys'],
       summary: 'Revoke an API key',
       responses: {

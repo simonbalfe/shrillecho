@@ -3,11 +3,12 @@ import { Hono } from 'hono'
 import { describeRoute } from 'hono-openapi'
 import { requireAuth } from '../middleware/auth'
 import {
-  type FindGemsOptions,
-  GEM_DEFAULTS,
-  findGems,
-  parsePlaylistId,
-} from '../services/gems'
+  createGemJob,
+  getGemJob,
+  listGemJobs,
+  runGemJobInBackground,
+} from '../services/gem-jobs'
+import { type FindGemsOptions, GEM_DEFAULTS, parsePlaylistId } from '../services/gems'
 import { SpotifyAuth } from '../spotify'
 import { SpotifyClient } from '../spotify/client'
 import { getSpotifyClient, invalidateSpotifyClient } from '../spotify/singleton'
@@ -51,6 +52,7 @@ export const spotifyRoutes = new Hono()
   .get(
     '/spotify/token',
     describeRoute({
+      hide: true,
       tags: ['Spotify'],
       summary: 'Mint a web-player access token',
       description:
@@ -104,6 +106,7 @@ export const spotifyRoutes = new Hono()
   .get(
     '/spotify/artists/:id/related',
     describeRoute({
+      hide: true,
       tags: ['Spotify'],
       summary: 'Get "Fans also like" for an artist',
       description:
@@ -144,6 +147,7 @@ export const spotifyRoutes = new Hono()
   .get(
     '/spotify/playlists/:id',
     describeRoute({
+      hide: true,
       tags: ['Spotify'],
       summary: 'Fetch a playlist with tracks',
       description:
@@ -222,6 +226,7 @@ export const spotifyRoutes = new Hono()
   .get(
     '/spotify/me/liked-songs',
     describeRoute({
+      hide: true,
       tags: ['Spotify'],
       summary: 'Fetch the current user\'s liked songs',
       description:
@@ -248,6 +253,7 @@ export const spotifyRoutes = new Hono()
   .get(
     '/spotify/me/library/playlists',
     describeRoute({
+      hide: true,
       tags: ['Spotify'],
       summary: "Fetch the current user's library playlists (private + public)",
       description:
@@ -274,6 +280,7 @@ export const spotifyRoutes = new Hono()
   .get(
     '/spotify/artists/:id/tracks',
     describeRoute({
+      hide: true,
       tags: ['Spotify'],
       summary: 'All tracks for an artist',
       description:
@@ -307,22 +314,22 @@ export const spotifyRoutes = new Hono()
     requireAuth,
     describeRoute({
       tags: ['Spotify'],
-      summary: 'Find hidden-gem artists exactly in your taste',
+      summary: 'Start a hidden-gems search (async)',
       description:
-        'Pulls FAL ("Fans also like") for every seed artist (from a playlist or your liked songs), tallies overlap, filters by monthly-listener cap, scores by overlap/log10(listeners), picks top N, drops tracks above a lifetime playcount cap, optionally creates a playlist on the server-side Spotify account. Synchronous; cap inputs to keep it under 30s. Requires a Better Auth session.',
+        'Kicks off a hidden-gems search in the background. Returns a `jobId` immediately; poll `GET /api/spotify/gems/:jobId` to watch progress and pick up the result when `status` is `done`. Each job is owned by the authenticated user.',
       responses: {
-        200: { description: 'Gems + stats + playlist link' },
+        200: { description: 'Job queued; returns `{ jobId }`' },
         400: { description: 'Invalid body' },
         401: { description: 'Unauthorized' },
-        500: { description: 'Upstream failure' },
       },
     }),
     async (c) => {
+      const session = c.get('session')
       let body: Record<string, unknown>
       try {
         body = (await c.req.json()) as Record<string, unknown>
       } catch {
-        return c.json({ success: false, error: 'invalid json body' }, 400)
+        body = {}
       }
 
       const fromRaw = typeof body.from === 'string' ? body.from.trim() : ''
@@ -373,48 +380,62 @@ export const spotifyRoutes = new Hono()
         trackRank,
       }
 
-      const { client, stateless } = await resolveClient(c)
-      // Tag every line so concurrent runs don't blur together in `docker logs`.
+      const jobId = await createGemJob(session.user.id, opts)
       const reqId = Math.random().toString(36).slice(2, 8)
-      const tag = `[gems ${reqId}]`
-      const t0 = Date.now()
       console.log(
-        `${tag} start from=${opts.fromPlaylistId ?? 'liked'} depth=${opts.depth} ` +
-          `top=${opts.top} maxListeners=${opts.maxListeners} minOverlap=${opts.minOverlap} ` +
-          `tracksPerArtist=${opts.tracksPerArtist} maxTrackPlays=${opts.maxTrackPlays} ` +
+        `[gems ${reqId}] queued job=${jobId} user=${session.user.id} from=${opts.fromPlaylistId ?? 'liked'} ` +
+          `depth=${opts.depth} top=${opts.top} maxListeners=${opts.maxListeners} ` +
           `playlistName=${playlistName ?? '(none)'}`,
       )
 
-      try {
-        const result = await findGems(client, opts, {
-          log: (line) => console.log(`${tag} ${line}`),
-          progress: (stage, done, total) => {
-            // Emit at every 10% boundary or on the final tick — keeps logs readable.
-            if (done === total || done === 1 || done % Math.max(1, Math.floor(total / 10)) === 0) {
-              console.log(`${tag} ${stage} ${done}/${total}`)
-            }
-          },
-        })
-        const ms = Date.now() - t0
-        console.log(
-          `${tag} done in ${ms}ms — gems=${result.totals.gemsFound} tracks=${result.totals.tracksSelected} ` +
-            `playlist=${result.playlist?.url ?? '(none)'}`,
-        )
-        return c.json({ success: true, ...result })
-      } catch (err) {
-        const ms = Date.now() - t0
-        console.error(`${tag} failed after ${ms}ms:`, err instanceof Error ? err.message : err)
-        if (!stateless) invalidateSpotifyClient()
-        return c.json(
-          { success: false, error: err instanceof Error ? err.message : 'gems failed' },
-          500,
-        )
-      }
+      const { client, stateless } = await resolveClient(c)
+      runGemJobInBackground({ client, jobId, reqId, options: opts, stateless })
+      return c.json({ success: true, jobId })
+    },
+  )
+  .get(
+    '/spotify/gems/:jobId',
+    requireAuth,
+    describeRoute({
+      tags: ['Spotify'],
+      summary: 'Check progress of a gems search',
+      description:
+        'Returns the live state of a gems job. Poll this every 1–2s until `status` is `done` or `error`. Only returns jobs owned by the authenticated user.',
+      responses: {
+        200: { description: 'Job state' },
+        401: { description: 'Unauthorized' },
+        404: { description: 'Job not found / not yours' },
+      },
+    }),
+    async (c) => {
+      const session = c.get('session')
+      const jobId = c.req.param('jobId')
+      const job = await getGemJob(session.user.id, jobId)
+      if (!job) return c.json({ success: false, error: 'not found' }, 404)
+      return c.json({ success: true, job })
+    },
+  )
+  .get(
+    '/spotify/gems',
+    requireAuth,
+    describeRoute({
+      tags: ['Spotify'],
+      summary: 'List your recent gems jobs',
+      responses: {
+        200: { description: 'Job list (newest first, capped at 25)' },
+        401: { description: 'Unauthorized' },
+      },
+    }),
+    async (c) => {
+      const session = c.get('session')
+      const jobs = await listGemJobs(session.user.id)
+      return c.json({ success: true, jobs })
     },
   )
   .post(
     '/spotify/playlists/:id/tracks',
     describeRoute({
+      hide: true,
       tags: ['Spotify'],
       summary: 'Add tracks to a playlist',
       description:
