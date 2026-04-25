@@ -150,3 +150,88 @@ biome.json            # Lint + format config (replaces eslint + prettier)
 - **No em dashes** or double hyphens in prose (docs, commit messages, comments).
 - **Comments explain WHY**, never WHAT. Default is no comment.
 - **Keep `docs/spotify-client.md` in sync** whenever you add, rename, or remove a Spotify endpoint wrapper.
+
+## Deployment runbook
+
+Live at **https://shrillecho.app**.
+
+### Where it lives
+
+| | |
+|---|---|
+| **Public URL** | https://shrillecho.app (apex, Let's Encrypt via Dokploy) |
+| **Server** | Simon's Dokploy box at `178.104.44.34:3000` |
+| **Container** | Compose service `shrillecho-app-0c65tb`, composeId `9spa9vu90xBsTm1YseIaB`, in Dokploy project `shrillecho` (id `-1KuEv7UpSxZdB7CkDnQs`) |
+| **Image** | `ghcr.io/simonbalfe/shrillecho:latest` (private; Dokploy auths via existing `my ghcr` registry cred) |
+| **Database** | Neon project `shrillecho` (id `aged-water-82702263`, AWS us-east-1) |
+| **DNS** | Cloudflare zone `shrillecho.app`, apex A record → `178.104.44.34`, **unproxied** (so Dokploy's Let's Encrypt http-01 challenge reaches the origin). Don't flip to proxied unless you also configure CF Full SSL mode. |
+
+### Auto-deploy flow
+
+`git push origin main` → GitHub Actions (`.github/workflows/deploy.yml`) builds Docker image, pushes `latest` + `sha-<commit>` to GHCR, then `curl -X POST $DOKPLOY_WEBHOOK_URL`. Dokploy receives the webhook and runs `docker compose pull && docker compose up`.
+
+The webhook URL stored in the GH secret `DOKPLOY_WEBHOOK_URL` is `http://178.104.44.34:3000/api/deploy/compose/kYmSZRLdXQjlP409iTgGu` (the trailing token is the compose's `refreshToken`; rotates if you recreate the compose).
+
+### Critical compose gotcha
+
+The compose file MUST have `pull_policy: always` on the app service, or Docker Compose will keep using the cached `:latest` image even after Dokploy receives the webhook. Symptom: webhook fires, deployment shows `done`, but the running container is still the old one (no new routes, no UI changes). Already set; don't remove.
+
+### Environment variables (in Dokploy compose, not in repo)
+
+Set via `compose.update { env: "K=V\n..." }`. Current vars:
+
+- `NODE_ENV=production`
+- `APP_URL=https://shrillecho.app`
+- `DATABASE_URL` — Neon connection string
+- `BETTER_AUTH_SECRET` — 32-byte hex, never rotated unless sessions need to be invalidated
+- `SP_DC` — Simon's open.spotify.com cookie. Refresh from a fresh browser login when the app starts 401ing on Spotify calls
+- `SPOTIFY_PROXY_URL` — Evomi residential proxy; rate-limit evasion
+
+To rotate any of these without redeploying code:
+
+```bash
+# Pull current env, edit, push back via compose.update
+DOKPLOY=http://178.104.44.34:3000/api/trpc
+KEY=$DOKPLOY_API_KEY
+curl -s -X POST "$DOKPLOY/compose.update" -H "x-api-key: $KEY" -H "Content-Type: application/json" \
+  -d '{"json":{"composeId":"9spa9vu90xBsTm1YseIaB","env":"NODE_ENV=production\nAPP_URL=...\n..."}}'
+# then trigger a redeploy
+curl -s -X POST "$DOKPLOY/compose.deploy" -H "x-api-key: $KEY" -H "Content-Type: application/json" \
+  -d '{"json":{"composeId":"9spa9vu90xBsTm1YseIaB"}}'
+```
+
+### Manual redeploy (no code change)
+
+```bash
+curl -s -X POST "http://178.104.44.34:3000/api/trpc/compose.deploy" \
+  -H "x-api-key: $DOKPLOY_API_KEY" -H "Content-Type: application/json" \
+  -d '{"json":{"composeId":"9spa9vu90xBsTm1YseIaB"}}'
+```
+
+### Verifying a deploy is actually live
+
+The webhook returning 200 only means Dokploy *queued* a deploy. Check that the new container is running by hitting an endpoint that exists only in the new code:
+
+```bash
+curl -sk https://shrillecho.app/api/openapi | python3 -c "
+import sys,json
+paths=json.load(sys.stdin).get('paths',{})
+print('routes:', len(paths))
+for p in sorted(paths): print(' ',p)"
+```
+
+If the route count or route names don't match what you just shipped, the cached image is still running. Force `pull_policy: always` is set, then redeploy.
+
+### Schema migrations
+
+`pnpm db:push` against the production Neon `DATABASE_URL` from local. Do this *before* the deploy that needs the new tables:
+
+```bash
+DATABASE_URL='postgresql://neondb_owner:...@...neon.tech/neondb?sslmode=require' \
+  pnpm db:push
+```
+
+### Skills relevant to deploy
+
+- `dokploy` (`~/.claude/skills/dokploy/SKILL.md`) — full Dokploy tRPC surface (project / compose / domain / logs / registry).
+- The Cloudflare API zoneId for `shrillecho.app` is `4ddc92364e37eeae58a8a9aaf43ba29c`. Auth via `$CLOUDFLARE_EMAIL` + `$CLOUDFLARE_API_KEY` (already exported in `~/.zshrc`).
